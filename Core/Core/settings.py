@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'appeal',
     'city',
     'estate',
-    'estate_page',
 ]
 
 # JAZZMIN
@@ -162,7 +161,7 @@ USE_TZ = True
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 MODELTRANSLATION_LANGUAGES = ('en', 'ar', 'tr', 'ru')
-MODELTRANSLATION_TRANSLATION_REGISTRY = 'backend.translation'
+MODELTRANSLATION_TRANSLATION_REGISTRY = 'Core.translation'
 
 # STATIC (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

@@ -1,4 +1,5 @@
 from django.db import models
+from city.models import City
 
 
 class EstateType(models.Model):
@@ -13,21 +14,6 @@ class EstateType(models.Model):
 
     def __str__(self):
         return self.type
-
-
-class City(models.Model):
-    """
-    CityModel(MultilanguageModel):
-    collection of cities where real estate properties are located
-    exp: en: ['Antalia', 'Resort town in Turkey', 'preview_image.jpeg']
-    add/edit/delete by administrator
-    """
-    city_name = models.CharField(max_length=255)
-    city_description = models.TextField()
-    city_img = models.ImageField(upload_to=f'media/city/')
-
-    def __str__(self):
-        return self.city_name
 
 
 class Estate(models.Model):
@@ -45,7 +31,16 @@ class Estate(models.Model):
     estate_type = models.ForeignKey(to=EstateType, on_delete=models.DO_NOTHING, related_name='estate')
     city = models.ForeignKey(to=City, on_delete=models.DO_NOTHING, related_name='estate')
     is_secondary = models.BooleanField(default=True, verbose_name='estate_is_secondary')
+    price = models.FloatField()
+    currency = models.CharField(max_length=4)
+
+    def upload_to(self, filename):
+        return f'cataloge/{self.estate.city.city_name_en}/{filename}'
+
+    pdf_cataloge = models.FileField(upload_to=upload_to)
     create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+    vizits = models.IntegerField(default=1)
 
     def __str__(self):
         return f'{self.pk}: {self.name}'
