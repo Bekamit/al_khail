@@ -37,13 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # External Packages
     'rest_framework',
+    'django_filters',
     'drf_spectacular',
     # applications
     'admin_app',
     'appeal',
     'city',
+    'solo.apps.SoloAppConfig',
+    'company',
     'estate',
-    'estate_page',
 ]
 
 # JAZZMIN
@@ -62,8 +64,6 @@ JAZZMIN_SETTINGS = {
 # REST_FRAMEWORK
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         "rest_framework.permissions.AllowAny",
     ],
@@ -71,6 +71,10 @@ REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DATETIME_FORMAT': '%d.%m.%Y %H:%M:%S',
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
     ],
 }
 
@@ -162,7 +166,7 @@ USE_TZ = True
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 MODELTRANSLATION_LANGUAGES = ('en', 'ar', 'tr', 'ru')
-MODELTRANSLATION_TRANSLATION_REGISTRY = 'backend.translation'
+MODELTRANSLATION_TRANSLATION_REGISTRY = 'Core.translation'
 
 # STATIC (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

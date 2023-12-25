@@ -12,10 +12,10 @@ urlpatterns = [
     path("api/redoc/", SpectacularRedocView.as_view(), name="redoc"),
     path("api/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
     # Views
-    path("api/v1/", include("appeal.urls")),
+    # path("api/v1/", include("appeal.urls")),
     path("api/v1/", include("city.urls")),
+    path("api/v1/", include("company.urls")),
     path("api/v1/", include("estate.urls")),
-    path("api/v1/", include("estate_page.urls")),
 ]
 
 if settings.DEBUG:
