@@ -1,7 +1,5 @@
 from rest_framework.mixins import ListModelMixin
 from rest_framework.response import Response
-from city.models import City
-from estate.models import Estate
 
 
 class CustomListModelMixin(ListModelMixin):
