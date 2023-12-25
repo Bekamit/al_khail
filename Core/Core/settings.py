@@ -37,11 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # External Packages
     'rest_framework',
+    'django_filters',
     'drf_spectacular',
     # applications
     'admin_app',
     'appeal',
     'city',
+    'solo.apps.SoloAppConfig',
+    'company',
     'estate',
 ]
 
@@ -61,8 +64,6 @@ JAZZMIN_SETTINGS = {
 # REST_FRAMEWORK
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         "rest_framework.permissions.AllowAny",
     ],
@@ -70,6 +71,10 @@ REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DATETIME_FORMAT': '%d.%m.%Y %H:%M:%S',
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
     ],
 }
 

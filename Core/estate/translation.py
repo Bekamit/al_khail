@@ -6,9 +6,9 @@ class EstateTranslationOptions(TranslationOptions):
     fields = ('name',
               'developer',
               'district',
-              'description',
-              'price',
-              'currency')
+              'description',)
+              # 'price',
+              # 'currency')
 
 
 class EstateTypeTranslationOptions(TranslationOptions):

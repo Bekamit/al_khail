@@ -1,7 +1,9 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from .models import Estate, EstateType, City, EstateImage
+from .models import Estate, EstateType, EstateImage
+from city.models import City
+
 
 # ------------------------- ESTATE IMAGES -----------------------
 class EstateImageSerializer(serializers.ModelSerializer):
@@ -41,6 +43,48 @@ class EstateImageValidateSerializer(serializers.Serializer):
                            "img": data}
 
         return response_images
+
+
+# ------------------------ ESTATE TYPE -------------------
+
+
+class EstateTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EstateType
+        fields = ['type']
+
+
+class EstateTypeValidateSerializer(serializers.Serializer):
+    type = serializers.CharField(max_length=30, required=True)
+    type_ar = serializers.CharField(max_length=30, required=True)
+    type_tr = serializers.CharField(max_length=30, required=True)
+    type_ru = serializers.CharField(max_length=30, required=True)
+
+    class Meta:
+        model = EstateType
+
+    def validate_type(self, estate_type):
+        if self.Meta.model.in_collection(estate_type=estate_type):
+            raise ValidationError(f'{estate_type} already exist')
+        return estate_type
+
+    def validate_type_ar(self, estate_type):
+        if self.Meta.model.in_collection(estate_type=estate_type):
+            raise ValidationError(f'{estate_type} already exist')
+        return estate_type
+
+    def validate_type_tr(self, estate_type):
+        if self.Meta.model.in_collection(estate_type=estate_type):
+            raise ValidationError(f'{estate_type} already exist')
+        return estate_type
+
+    def validate_type_ru(self, estate_type):
+        if self.Meta.model.in_collection(estate_type=estate_type):
+            raise ValidationError(f'{estate_type} already exist')
+        return estate_type
+
+    def create(self, validated_data):
+        return self.Meta.model.objects.create(**validated_data)
 
 
 # ------------------------- ESTATE -----------------------
@@ -133,17 +177,13 @@ class EstateValidateSerializer(serializers.Serializer):
         return data
 
     def validate_city_id(self, city_id):
-        try:
-            City.objects.get(id=city_id)
-        except City.DoesNotExist:
-            raise ValidationError('city_id does not exist')
+        if not self.Meta.model.city_id_is_valid(city_id=city_id):
+            raise ValidationError(f'city_id: {city_id} does not exist')
         return city_id
 
     def validate_estate_type_id(self, estate_type_id):
-        try:
-            EstateType.objects.get(id=estate_type_id)
-        except City.DoesNotExist:
-            raise ValidationError('estate_type does not exist')
+        if not self.Meta.model.estate_type_id_is_valid(estate_type_id=estate_type_id):
+            raise ValidationError(f'estate_type: {estate_type_id} does not exist')
         return estate_type_id
 
     def create(self, validated_data):

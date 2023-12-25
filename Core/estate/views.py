@@ -1,9 +1,11 @@
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, RetrieveUpdateDestroyAPIView
-from .models import Estate, EstateImage
+from .models import Estate, EstateImage, EstateType
 from .serializers import (EstateSerializer,
                           EstateValidateSerializer,
                           EstateImageValidateSerializer,
-                          EstateImageSerializer)
+                          EstateImageSerializer,
+                          EstateTypeValidateSerializer,
+                          EstateTypeSerializer)
 
 
 class EstateListAPIView(ListAPIView):
@@ -24,3 +26,13 @@ class EstateRetrieveAPIView(RetrieveAPIView):
 
 class EstateRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     ...
+
+
+class EstateTypeListAPIView(ListAPIView):
+    queryset = EstateType.objects.all()
+    serializer_class = EstateTypeSerializer
+
+
+class EstateTypeCreateAPIView(CreateAPIView):
+    queryset = EstateType.objects.all()
+    serializer_class = EstateTypeValidateSerializer

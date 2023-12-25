@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class City(models.Model):
     """
     CityModel(MultilanguageModel):
@@ -17,3 +18,7 @@ class City(models.Model):
 
     def __str__(self):
         return self.city_name
+
+    def get_estates_by_city(self):
+        estates = Estate.objects.filter(city_id=self.pk)
+        return estates.count()
