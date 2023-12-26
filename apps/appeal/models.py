@@ -9,7 +9,7 @@ class Appeal(models.Model):
     """
 
     is_for_purchase = models.BooleanField(default=True)
-    estate_id = models.ForeignKey(Estate, on_delete=models.CASCADE, related_name='appel')
+    estate_id = models.ForeignKey(Estate, on_delete=models.CASCADE, related_name='estate')
     name = models.CharField(max_length=70)
     phone = models.CharField(max_length=70)
     lang = models.CharField(max_length=30)
