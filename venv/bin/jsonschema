@@ -1,4 +1,4 @@
-#!/Users/sayan/Desktop/al_khail-backend/Core/venv/bin/python3.12
+#!/Users/sayan/Desktop/al_khail-backend/venv/bin/python3.12
 # -*- coding: utf-8 -*-
 import re
 import sys
