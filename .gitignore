@@ -13,15 +13,17 @@ apps/admin_app/__pycache__
 apps/admin_app/migrations/__pycache__
 apps/appeal/__pycache__
 apps/appeal/migrations/__pycache__
+apps/appeal/templates/__pycache__
 apps/city/__pycache__
 apps/city/migrations/__pycache__
 apps/estate/__pycache__
 apps/estate/migrations/__pycache__
-apps/estate_page/__pycache__
-apps/estate_page/migrations/__pycache__
+#apps/estate_page/__pycache__
+#apps/estate_page/migrations/__pycache__
 apps/company/__pycache__
 apps/company/migrations/__pycach
-shema.yaml
+apps/staticdata/__pycache__
+apps/staticdata/migrations/__pycach
 
 ### Django ###
 *.log
