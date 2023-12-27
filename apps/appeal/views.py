@@ -11,4 +11,3 @@ class AppealBuyCreateAPIView(CreateAPIView):
 class AppealSellCreateAPIView(CreateAPIView):
     queryset = Appeal.objects.all()
     serializer_class = AppealSellValidateSerializer
-
