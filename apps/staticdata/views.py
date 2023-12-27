@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework import generics
+from .models import StaticData
+from .serializers import StaticDataSerializer
 
-# Create your views here.
+
+class StaticDataView(generics.RetrieveUpdateAPIView):
+    queryset = StaticData.objects.all()
+    serializer_class = StaticDataSerializer
