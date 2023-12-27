@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'apps.city',
     'apps.company',
     'apps.estate',
+    'apps.staticdata',
 ]
 
 # JAZZMIN

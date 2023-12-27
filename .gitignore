@@ -1,8 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/python,django,pycharm
-# Edit at https://www.toptal.com/developers/gitignore?templates=python,django,pycharm
-
 .gitignore
-.env
+#.env
 .idea
 .DS_Store
 venv
@@ -29,7 +26,6 @@ apps/staticdata/migrations/__pycach
 *.log
 *.pot
 *.pyc
-__pycache__/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
