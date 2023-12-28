@@ -26,7 +26,6 @@ class EstateAdmin(admin.ModelAdmin):
                 'estate_type',
                 'city',
                 'is_secondary',
-                # 'create_at'
             ],
         }),
         ('Russian', {
