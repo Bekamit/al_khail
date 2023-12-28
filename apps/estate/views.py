@@ -13,9 +13,9 @@ class EstateListAPIView(ListAPIView):
     serializer_class = EstateSerializer
 
 
-class EstateCreateAPIView(CreateAPIView):
-    queryset = Estate.objects.all()
-    serializer_class = EstateValidateSerializer
+# class EstateCreateAPIView(CreateAPIView):
+#     queryset = Estate.objects.all()
+#     serializer_class = EstateValidateSerializer
 
 
 class EstateRetrieveAPIView(RetrieveAPIView):
@@ -33,6 +33,6 @@ class EstateTypeListAPIView(ListAPIView):
     serializer_class = EstateTypeSerializer
 
 
-class EstateTypeCreateAPIView(CreateAPIView):
-    queryset = EstateType.objects.all()
-    serializer_class = EstateTypeValidateSerializer
+# class EstateTypeCreateAPIView(CreateAPIView):
+#     queryset = EstateType.objects.all()
+#     serializer_class = EstateTypeValidateSerializer
