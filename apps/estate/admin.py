@@ -1,9 +1,6 @@
 from django.contrib import admin
 from .models import EstateType, Estate, EstateImage
 
-# class EstateTypeInline(admin.TabularInline):
-#     model = EstateType
-#     extra = 1
 
 class EstateImageInline(admin.TabularInline):
     model = EstateImage
@@ -52,7 +49,7 @@ class EstateAdmin(admin.ModelAdmin):
                 'description_ar',
             ]
         }),
-        ('Turkic', {
+        ('Turkish', {
             'fields': [
                 'name_tr',
                 'developer_tr',
