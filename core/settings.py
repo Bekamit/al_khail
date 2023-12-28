@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 import config
 
@@ -22,7 +22,13 @@ SECRET_KEY = config.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config.DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    '*',
+]
+
+
 
 # Application definition
 
@@ -40,13 +46,13 @@ INSTALLED_APPS = [
     'django_filters',
     'drf_spectacular',
     'solo.apps.SoloAppConfig',
+    'corsheaders',
     # applications
     'apps.admin_app',
     'apps.appeal',
     'apps.city',
     'apps.company',
     'apps.estate',
-    'apps.staticdata',
 ]
 
 # JAZZMIN
@@ -61,6 +67,31 @@ JAZZMIN_SETTINGS = {
     'custom_css': None,
     'custom_js': None,
 }
+
+# Cors
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000',
+    'http://127.0.0.1',
+]
+
+CORS_ALLOW_METHODS = (
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+)
+
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+)
 
 # REST_FRAMEWORK
 
@@ -88,6 +119,7 @@ SPECTACULAR_SETTINGS = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -125,14 +157,14 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
-    # 'default': {
-    #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #         'NAME': config('PG_NAME'),
-    #         'USER': config.PG_USER('PG_USER'),
-    #         'PASSWORD': config.PG_PASSWORD('PG_PASSWORD'),
-    #         'HOST': config.PG_HOST('PG_HOST', 'localhost'),
-    #         'PORT': config.PG_PORT('PG_PORT', '5432'),
-    #     }
+   # 'default': {
+   #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+   #     'NAME': config.PG_NAME,
+   #     'USER': config.PG_USER,
+   #     'PASSWORD': config.PG_PASSWORD,
+   #     'HOST': config.PG_HOST,
+   #     'PORT': config.PG_PORT,
+   #  }
 
 }
 
@@ -157,7 +189,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Asia/Bishkek'
 
@@ -173,7 +205,8 @@ MODELTRANSLATION_TRANSLATION_REGISTRY = 'core.translation'
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = f'{BASE_DIR}/static'
 # MEDIA (Images, PDF)
 
 MEDIA_ROOT = f'{BASE_DIR}/media'
@@ -189,10 +222,14 @@ EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
 DEFAULT_FROM_EMAIL = config.DEFAULT_FROM_EMAIL
 SERVER_EMAIL = config.SERVER_EMAIL
 
+# Redis
+REDIS_HOST = 'redis'
+REDIS_PORT = 6379
+
 # CELERY
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+CELERY_BROKER_URL = 'redis://redis:6379'
 CELERY_BROKER_TRANSPORT_OPTIONS = {'visible_timeout': 3600}
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
@@ -202,3 +239,7 @@ CELERY_RESULT_SERIALIZER = 'json'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'admin_app.CustomUser'
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
