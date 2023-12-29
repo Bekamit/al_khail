@@ -4,7 +4,7 @@ from rest_framework import filters
 from service.views import CustomListAPIView
 from .serializers import CitySerializer, CityValidateSerializer
 from .models import City
-from core import settings
+from core.settings import base
 
 
 class CityListAPIView(CustomListAPIView):
@@ -33,5 +33,7 @@ class CityListAPIView(CustomListAPIView):
 class CityCreateAPIView(CreateAPIView):
     queryset = City.objects.all()
     serializer_class = CityValidateSerializer
-    permission_classes = [AllowAny] if settings.DEBUG else [IsAuthenticated]
+    permission_classes = [AllowAny] if base.DEBUG else [IsAuthenticated]
+
+
 
