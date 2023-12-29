@@ -5,7 +5,6 @@ from rest_framework.response import Response
 class CustomListModelMixin(ListModelMixin):
     """
     List a queryset with custom Response.
-
     {
         language: 'EN',
         response_key: [serialize.data]

@@ -1,8 +1,7 @@
-
 from django.contrib import admin
 from .models import *
 
-# admin.site.register(City)
+
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
     list_display = ('city_name', 'city_description', 'city_img')
@@ -10,7 +9,7 @@ class CityAdmin(admin.ModelAdmin):
     list_filter = ('city_name', 'city_description')
 
     fieldsets = [
-        ('General', {
+        ('English', {
             'fields': [
                 'city_name',
                 'city_description',

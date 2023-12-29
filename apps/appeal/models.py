@@ -4,7 +4,7 @@ from apps.estate.models import Estate
 
 class Appeal(models.Model):
     """
-        Модель для админа, для оформления заявки на звонок на покупку/продажу обьекта недвижимости
+        Модель для оформления заявки на звонок на покупку/продажу обьекта недвижимости
     """
 
     is_for_purchase = models.BooleanField(default=True)

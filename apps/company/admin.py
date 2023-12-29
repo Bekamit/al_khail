@@ -1,9 +1,5 @@
-
 from django.contrib import admin
-
 from .models import *
-
-# admin.site.register(Company)
 
 
 @admin.register(Company)
@@ -13,26 +9,14 @@ class CompanyAdmin(admin.ModelAdmin):
     list_filter = ('company_name', 'about', 'phone', 'email')
 
     fieldsets = [
-        ('General', {
+        ('English', {
             'fields': [
                 'company_name',
                 'about',
                 'company_img'
             ]
         }),
-         ('Russian', {
-            'fields': [
-                'company_name_ru',
-                'about_ru',
-            ]
-        }),
-        ('English', {
-            'fields': [
-                'company_name_en',
-                'about_en',
-            ]
-        }),
-        ('Arabic',{
+        ('Arabic', {
             'fields': [
                 'company_name_ar',
                 'about_ar',
@@ -43,6 +27,11 @@ class CompanyAdmin(admin.ModelAdmin):
                 'company_name_tr',
                 'about_tr',
             ]
+        }),
+        ('Russian', {
+            'fields': [
+                'company_name_ru',
+                'about_ru',
+            ]
         })
-
     ]
