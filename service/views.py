@@ -1,4 +1,4 @@
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, RetrieveAPIView
 from django.utils.translation import get_language_from_request
 from core import settings
 
@@ -20,9 +20,20 @@ class CustomGenericAPIView(GenericAPIView):
         if language := get_language_from_request(self.request):
             return language.upper()
         else:
-            return settings.MODELTRANSLATION_DEFAULT_LANGUAGE.upper()
+            return settings.base.MODELTRANSLATION_DEFAULT_LANGUAGE.upper()
 
 
 class CustomListAPIView(mixin.CustomListModelMixin, CustomGenericAPIView):
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
+
+class CustomRetrieveAPIView(mixin.CustomRetrieveModelMixin, CustomGenericAPIView):
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+
+class CustomRetrieveImagesAPIView(mixin.CustomRetrieveEstateImageMixin, GenericAPIView):
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+

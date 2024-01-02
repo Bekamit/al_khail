@@ -1,11 +1,11 @@
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
+from service.views import CustomRetrieveImagesAPIView
+
 from .models import Estate, EstateImage, EstateType
 from .serializers import (EstateSerializer,
-                          EstateValidateSerializer,
-                          EstateImageValidateSerializer,
-                          EstateImageSerializer,
-                          EstateTypeValidateSerializer,
-                          EstateTypeSerializer)
+                          EstateRetrieveSerializer,
+                          EstateTypeSerializer,
+                          EstateImageListSerializer)
 
 
 class EstateListAPIView(ListAPIView):
@@ -13,19 +13,10 @@ class EstateListAPIView(ListAPIView):
     serializer_class = EstateSerializer
 
 
-# class EstateCreateAPIView(CreateAPIView):
-#     queryset = Estate.objects.all()
-#     serializer_class = EstateValidateSerializer
-
-
 class EstateRetrieveAPIView(RetrieveAPIView):
     queryset = Estate.objects.all()
-    serializer_class = EstateSerializer
+    serializer_class = EstateRetrieveSerializer
     lookup_field = 'id'
-
-
-class EstateRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
-    ...
 
 
 class EstateTypeListAPIView(ListAPIView):
@@ -33,6 +24,10 @@ class EstateTypeListAPIView(ListAPIView):
     serializer_class = EstateTypeSerializer
 
 
-# class EstateTypeCreateAPIView(CreateAPIView):
-#     queryset = EstateType.objects.all()
-#     serializer_class = EstateTypeValidateSerializer
+class EstateImageRetrieveAPIView(CustomRetrieveImagesAPIView):
+    serializer_class = EstateImageListSerializer
+
+    def get_queryset(self):
+        estate_id = self.kwargs.get('id')
+        queryset = EstateImage.objects.filter(estate_id=estate_id)
+        return queryset

@@ -1,7 +1,6 @@
+from django.utils.safestring import mark_safe
 from django.contrib import admin
 from .models import EstateType, Estate, EstateImage
-
-
 
 
 class EstateImageInline(admin.TabularInline):
@@ -14,22 +13,20 @@ class EstateAdmin(admin.ModelAdmin):
     list_display = ('name',
                     'developer',
                     'area',
-                    'district',
-                    'description',
                     'estate_type',
                     'city',
                     'is_secondary',
-                    'create_at')
-    search_fields = ('name', 'developer', 'district', 'estate_type__type', 'city__city_name_en')
-    list_filter = ('estate_type', 'city', 'is_secondary')
+                    'preview')
+    search_fields = ('name', 'developer', 'district', 'estate_type__type_en', 'city__city_name_en')
+    list_filter = ('city__city_name', 'estate_type__type', 'create_at',  'is_secondary')
     fieldsets = [
         ('English', {
             'fields': [
-                'name',
-                'developer',
+                'name_en',
+                'developer_en',
                 'area',
-                'district',
-                'description',
+                'district_en',
+                'description_en',
                 'estate_type',
                 'city',
                 'is_secondary',
@@ -62,16 +59,23 @@ class EstateAdmin(admin.ModelAdmin):
     ]
     inlines = [EstateImageInline]
 
+    class Media:
+        css = {
+            'all': ('css/admin.css',),
+        }
+
+    def preview(self, obj):
+        return mark_safe(f'<button class="btn btn-primary" style=margin-left: 15px;">look up</button>')
+
 
 @admin.register(EstateType)
 class EstateTypeAdmin(admin.ModelAdmin):
     list_display = ('type',)
-    search_fields = ('type',)
-    # list_filter = ('estate_type', 'city', 'is_secondary')
+    search_fields = ('type', 'type_ar', 'type_tr', 'type_ru')
     fieldsets = [
         ('English', {
             'fields': [
-                'type',
+                'type_en',
             ],
         }),
         ('Arabic', {
@@ -90,3 +94,8 @@ class EstateTypeAdmin(admin.ModelAdmin):
             ],
         })
     ]
+
+    class Media:
+        css = {
+            'all': ('css/admin.css',),
+        }

@@ -1,19 +1,23 @@
+from django.utils.safestring import mark_safe
 from django.contrib import admin
 from .models import *
 
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ('company_name', 'about', 'phone', 'email', 'company_img')
-    search_fields = ('company_name', 'about', 'phone', 'email')
-    list_filter = ('company_name', 'about', 'phone', 'email')
+    list_display = ('company_name', 'phone', 'email', 'company_img')
+    readonly_fields = ['preview']
 
     fieldsets = [
         ('English', {
             'fields': [
-                'company_name',
-                'about',
-                'company_img'
+                'company_name_en',
+                'about_en',
+                'email',
+                'phone',
+                'company_img',
+                'preview'
+
             ]
         }),
         ('Arabic', {
@@ -35,3 +39,11 @@ class CompanyAdmin(admin.ModelAdmin):
             ]
         })
     ]
+
+    class Media:
+        css = {
+            'all': ('css/admin.css',),
+        }
+
+    def preview(self, obj):
+        return mark_safe(f'<img src="{obj.company_img.url}", style="max-height: 200px;">')

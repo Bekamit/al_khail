@@ -4,8 +4,8 @@ from .models import StaticData
 
 @admin.register(StaticData)
 class StaticDataAdmin(admin.ModelAdmin):
-    list_display = ['field1', 'field2']
-    fields = ['field1', 'field2']
+    list_display = ('field1', 'field2',)
+    fields = ('field1', 'field2')
 
     def has_add_permission(self, request):
         # Отключает кнопку "Добавить" для объекта Singleton
