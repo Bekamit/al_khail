@@ -23,8 +23,8 @@ class AppealBuyValidateSerializer(serializers.Serializer):
         return value
 
     def validate_at_time(self, value):
-        if value <= timezone.now():
-            raise serializers.ValidationError("at_time must be in the future")
+        # if value <= timezone.now():
+        #     raise serializers.ValidationError("at_time must be in the future")
         return value
 
     def create(self, validated_data):
@@ -34,7 +34,6 @@ class AppealBuyValidateSerializer(serializers.Serializer):
             name=validated_data['name'],
             phone=validated_data['phone'],
             lang=validated_data['lang'],
-            at_time=validated_data['at_time']
         )
 
 
@@ -43,7 +42,7 @@ class AppealSellValidateSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=70, required=True)
     phone = serializers.CharField(max_length=70, required=True)
     lang = serializers.CharField(max_length=30, required=True)
-    at_time = serializers.DateTimeField(required=True)
+    at_time = serializers.DateTimeField(required=False)
     estate_id = serializers.PrimaryKeyRelatedField(queryset=Appeal.objects.all(), required=False)
 
     def validate_name(self, value):
@@ -57,15 +56,10 @@ class AppealSellValidateSerializer(serializers.Serializer):
         return value
 
     def validate_at_time(self, value):
-        if value <= timezone.now():
-            raise serializers.ValidationError("at_time must be in the future")
+        # if value <= timezone.now():
+        #     raise serializers.ValidationError("at_time must be in the future")
         return value
 
     def create(self, validated_data):
-        return Appeal.objects.create(
-            is_for_purchase=validated_data['is_for_purchase'],
-            name=validated_data['name'],
-            phone=validated_data['phone'],
-            lang=validated_data['lang'],
-            at_time=validated_data['at_time']
-        )
+        instance = Appeal.objects.create(**validated_data)
+        return instance

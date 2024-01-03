@@ -1,13 +1,9 @@
-
 from django.contrib import admin
-from django.contrib.admin.options import TabularInline
+from service.admin import ReadDeleteModelAdmin
 from .models import *
 
 
-# class AppealAdminInline(TabularInline):
-#     extra = 1
-#     model = Appeal
-
 @admin.register(Appeal)
-class AppealAdmin(admin.ModelAdmin):
+class ReadDeleteAppealAdmin(ReadDeleteModelAdmin):
     fields = ('name', 'phone', 'lang', 'is_for_purchase')
+    list_filter = ('created_at', 'lang', 'is_for_purchase')

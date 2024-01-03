@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import Q
 from apps.city.models import City
 
 
@@ -10,18 +9,14 @@ class EstateType(models.Model):
     exp: en: ['apartment', 'commercial', 'stead', 'residents']
     add/edit/delete by administrator
     """
-    type = models.CharField(max_length=30)
+    type = models.CharField(max_length=30, verbose_name='Estate Type')
+
+    class Meta:
+        verbose_name = 'Estate Type'
+        verbose_name_plural = 'Estate Types'
 
     def __str__(self):
         return self.type
-
-    @staticmethod
-    def in_collection(estate_type: str) -> bool:
-        query = (Q(type_en__icontains=estate_type) |
-                 Q(type_ar__icontains=estate_type) |
-                 Q(type_tr__icontains=estate_type) |
-                 Q(type_ru__icontains=estate_type))
-        return EstateType.objects.filter(query).exists()
 
 
 class Estate(models.Model):
@@ -32,13 +27,13 @@ class Estate(models.Model):
     add/edit/delete by administrator
     """
     name = models.CharField(max_length=100, verbose_name='estate_name')
-    developer = models.CharField(max_length=100, verbose_name='estate_developer')
+    developer = models.CharField(max_length=100, verbose_name='Developer')
     area = models.FloatField(verbose_name='estate_area')
-    district = models.CharField(max_length=100, verbose_name='estate_district')
-    description = models.TextField(max_length=500, verbose_name='estate_description')
+    district = models.CharField(max_length=100, verbose_name='District')
+    description = models.TextField(max_length=500, verbose_name='Description')
     estate_type = models.ForeignKey(to=EstateType, on_delete=models.DO_NOTHING, related_name='estate')
     city = models.ForeignKey(to=City, on_delete=models.DO_NOTHING, related_name='estate')
-    is_secondary = models.BooleanField(default=True, verbose_name='estate_is_secondary')
+    is_secondary = models.BooleanField(default=True, verbose_name='Secondary estate')
 
     # price = models.FloatField()
     # currency = models.CharField(max_length=4)
@@ -47,7 +42,7 @@ class Estate(models.Model):
         return f'catalog/{self.estate.city.city_name_en}/{filename}'
 
     # pdf_catalog = models.FileField(upload_to=upload_to)
-    create_at = models.DateTimeField(auto_now_add=True)
+    create_at = models.DateTimeField(auto_now_add=True, verbose_name='Create date')
 
     # update_at = models.DateTimeField(auto_now=True)
     # visits = models.IntegerField(default=1)
@@ -56,12 +51,8 @@ class Estate(models.Model):
         return f'{self.pk}: {self.name}'
 
     @staticmethod
-    def city_id_is_valid(city_id):
-        return City.objects.filter(id=city_id).exists()
-
-    @staticmethod
-    def estate_type_id_is_valid(estate_type_id):
-        return EstateType.objects.filter(id=estate_type_id).exists()
+    def get_estate_id(estate_id):
+        return Estate.objects.filter(estate_id=estate_id).exists()
 
 
 class EstateImage(models.Model):
