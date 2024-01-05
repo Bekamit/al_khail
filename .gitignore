@@ -21,7 +21,9 @@ apps/company/__pycache__
 apps/company/migrations/__pycach
 apps/staticdata/__pycache__
 apps/staticdata/migrations/__pycach
-
+service/__pycache__
+back_media/__pycache__
+back_static/__pycache__
 ### Django ###
 *.log
 *.pot
@@ -29,9 +31,10 @@ apps/staticdata/migrations/__pycach
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-media
-core/static
-core/media
+
+back_media/company
+back_media/cities
+back_media/estate
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
