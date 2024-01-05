@@ -15,7 +15,7 @@ import config
 from .env_reader import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 PRODUCTION = env('PRODUCTION', default=False, cast=bool)
 
@@ -183,17 +183,17 @@ MODELTRANSLATION_TRANSLATION_REGISTRY = 'core.translation'
 # STATIC (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_URL = '/back_static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'back_static')]
 
 # MEDIA (Images, PDF)
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/back_media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'back_media')
 
 
 # EMAIL
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = config.EMAIL_BACKEND
 EMAIL_HOST = config.EMAIL_HOST
 EMAIL_PORT = config.EMAIL_PORT
 EMAIL_USE_TLS = config.EMAIL_USE_TLS

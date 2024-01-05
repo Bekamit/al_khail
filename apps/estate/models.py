@@ -59,7 +59,7 @@ class EstateImage(models.Model):
     """
     EstateImageModel:
     collection of photographs and previews of Real Estate objects
-    exp: ru/en/ar/tr: ['/media/estate/Antalia/6/photo1701607231.jpeg']
+    exp: ru/en/ar/tr: ['/back_media/estate/Antalia/6/photo1701607231.jpeg']
     add/edit/delete by administrator
     """
     estate = models.ForeignKey(to=Estate, on_delete=models.CASCADE, related_name='image')

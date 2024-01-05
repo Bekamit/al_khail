@@ -1,0 +1,9 @@
+input[id$='_ar'] {
+    direction: rtl;
+    text-align: right;
+}
+
+textarea[id$='_ar'] {
+    direction: rtl;
+    text-align: right;
+}
