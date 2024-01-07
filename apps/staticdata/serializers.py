@@ -5,4 +5,5 @@ from .models import StaticData
 class StaticDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = StaticData
-        fields = '__all__'
+        fields = ('field1',
+                  'field2',)

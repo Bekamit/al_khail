@@ -1,19 +1,25 @@
-from rest_framework import serializers
-from rest_framework.exceptions import ValidationError
+from rest_framework import serializers, exceptions
+from django.db import models
 
 from .models import Estate, EstateType, EstateImage
 
 
 # ------------------------- ESTATE IMAGES -----------------------
-class EstateImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = EstateImage
-        fields = ['img']
+# class EstateImageSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = EstateImage
+#         fields = ['img']
 
 
 class EstateImageListSerializer(serializers.Serializer):
-    estate_id = serializers.CharField()
+    estate_id = serializers.SerializerMethodField()
     images = serializers.ListField(child=serializers.CharField())
+
+    def get_estate_id(self, data):
+        estate_id = data.get('estate_id')
+        if not Estate.get_estate_id(estate_id):
+            raise exceptions.ValidationError('estate_id does not exist')
+        return estate_id
 
     class Meta:
         model = EstateImage
@@ -27,7 +33,8 @@ class EstateImageListSerializer(serializers.Serializer):
 class EstateTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = EstateType
-        fields = ['type']
+        fields = ['id',
+                  'type']
 
 
 # ------------------------- ESTATE -----------------------
@@ -54,19 +61,22 @@ class EstateRetrieveSerializer(serializers.ModelSerializer):
 class EstateSerializer(EstateRetrieveSerializer):
     preview = serializers.SerializerMethodField()
 
-    def get_preview(self, estate):
-        images = estate.image
-        try_preview = images.filter(img__icontains='preview')
+    def absolute_image_url(self, instance):
+        if isinstance(instance.field, models.ImageField):
+            return self.context['request'].build_absolute_uri(instance.url)
+        return None
 
-        if images:
-            if try_preview:
-                ser = EstateImageSerializer(try_preview.first())
-                return ser.data
-            else:
-                ser = EstateImageSerializer(images.first())
-                return ser.data
-        else:
-            return None # написать выдачу дефолтного изображения, хранения дефолта скорее всего в StaticData
+    def get_preview(self, estate):
+        images = estate.image.all()
+        preview_images = images.filter(img__icontains='preview')
+
+        if preview_images.exists():
+            return {'img': self.absolute_image_url(preview_images.first().img)}
+
+        if images.exists():
+            return {'img': self.absolute_image_url(images.first().img)}
+
+        return {'img': self.absolute_image_url(estate.default_img)} if estate.default_img else None
 
     class Meta:
         model = Estate

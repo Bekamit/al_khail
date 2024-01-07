@@ -1,18 +1,20 @@
 from rest_framework import serializers
+
 from .models import Appeal
+from apps.estate.models import Estate
 from django.utils import timezone
 
 
 class AppealBuyValidateSerializer(serializers.Serializer):
-    estate_id = serializers.PrimaryKeyRelatedField(queryset=Appeal.objects.all())
-    name = serializers.CharField(max_length=70, required=True)
-    last_name = serializers.CharField(max_length=70)
+    estate_id = serializers.PrimaryKeyRelatedField(queryset=Estate.objects.all())
+    first_name = serializers.CharField(max_length=70, required=True)
+    last_name = serializers.CharField(max_length=70, required=True)
     phone = serializers.CharField(max_length=70, required=True)
-    lang = serializers.CharField(max_length=30, required=True)
-    at_time = serializers.DateTimeField(required=True)
-    is_for_purchase = serializers.BooleanField(default=False)
+    lang = serializers.CharField(max_length=30)
+    at_time = serializers.DateTimeField(required=False)
+    is_for_purchase = serializers.BooleanField(default=True)
 
-    def validate_name(self, value):
+    def validate_first_name(self, value):
         if any(char.isdigit() for char in value):
             raise serializers.ValidationError('Name should not contain numbers')
         return value
@@ -38,14 +40,14 @@ class AppealBuyValidateSerializer(serializers.Serializer):
 
 
 class AppealSellValidateSerializer(serializers.Serializer):
-    is_for_purchase = serializers.BooleanField(default=False)
-    name = serializers.CharField(max_length=70, required=True)
+    first_name = serializers.CharField(max_length=70, required=True)
+    last_name = serializers.CharField(max_length=70, required=True)
     phone = serializers.CharField(max_length=70, required=True)
     lang = serializers.CharField(max_length=30, required=True)
     at_time = serializers.DateTimeField(required=False)
-    estate_id = serializers.PrimaryKeyRelatedField(queryset=Appeal.objects.all(), required=False)
+    is_for_purchase = serializers.BooleanField(default=False)
 
-    def validate_name(self, value):
+    def validate_first_name(self, value):
         if any(char.isdigit() for char in value):
             raise serializers.ValidationError('Name should not contain numbers')
         return value

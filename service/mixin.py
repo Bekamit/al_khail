@@ -1,6 +1,7 @@
 from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
 from rest_framework.response import Response
-from apps.estate.serializers import EstateImageSerializer
+
+from apps.staticdata.models import StaticData
 
 
 class CustomListModelMixin(ListModelMixin):
@@ -41,6 +42,7 @@ class CustomRetrieveModelMixin(RetrieveModelMixin):
             response_key: [serialize.data]
         }
         """
+
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
@@ -62,9 +64,10 @@ class CustomRetrieveEstateImageMixin(ListModelMixin):
         List a image queryset with custom Response.
         {
             "estate_id": estate_id,
-            "images": [estate_id.image1, estate_id.image2, ...]
+            "images": [absolute_url/image1.jpg, absolute_url/image2.jpg, ...]
         }
     """
+
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
 
@@ -72,8 +75,14 @@ class CustomRetrieveEstateImageMixin(ListModelMixin):
         current_host = request.get_host()
 
         data = []
-        for image in queryset:
-            data.append(f"{request.scheme}://{current_host}{image.img.url}")
+        if queryset:
+            for image in queryset:
+                data.append(f"{request.scheme}://{current_host}{image.img.url}")
+        else:
+            try:
+                data.append(f"{request.scheme}://{current_host}{StaticData.default_img().url}")
+            except:
+                data.append('No Image')
         response["images"] = data
 
         serializer = self.get_serializer(response)
