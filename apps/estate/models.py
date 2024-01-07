@@ -1,5 +1,7 @@
 from django.db import models
+
 from apps.city.models import City
+from apps.staticdata.models import StaticData
 
 
 class EstateType(models.Model):
@@ -52,7 +54,12 @@ class Estate(models.Model):
 
     @staticmethod
     def get_estate_id(estate_id):
-        return Estate.objects.filter(estate_id=estate_id).exists()
+        return Estate.objects.filter(id=estate_id).exists()
+
+    @property
+    def default_img(self):
+        img = StaticData.default_img()
+        return img
 
 
 class EstateImage(models.Model):

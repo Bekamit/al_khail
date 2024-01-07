@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import StaticDataView
+from .views import StaticDataListAPIView
 
 urlpatterns = [
-    path('staticdata/<int:pk>/', StaticDataView.as_view(), name='staticdata'),
+    path('staticdata/', StaticDataListAPIView.as_view()),
 ]
