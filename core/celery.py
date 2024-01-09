@@ -5,7 +5,7 @@ from celery.beat import crontab
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings.base')
 
 app = Celery('config')
-app.config_from_object('django.conf:settings.base', namespace='CELERY')
+app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {

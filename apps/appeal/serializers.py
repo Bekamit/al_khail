@@ -1,32 +1,49 @@
-from rest_framework import serializers
-
-from .models import Appeal
-from apps.estate.models import Estate
+import phonenumbers
 from django.utils import timezone
+from django.utils.translation import get_language_from_request
+from rest_framework import serializers
+from .models import Appeal
+
+from apps.estate.models import Estate
+
+
+class PhoneNumberField(serializers.CharField):
+    def to_internal_value(self, data):
+        try:
+            parsed_number = phonenumbers.parse(data, None)
+            if not phonenumbers.is_valid_number(parsed_number):
+                raise serializers.ValidationError('Invalid phone number')
+            return phonenumbers.format_number(parsed_number, phonenumbers.PhoneNumberFormat.E164)
+        except phonenumbers.NumberParseException:
+            raise serializers.ValidationError('Invalid phone number format')
+
+
+class LanguageField(serializers.CharField):
+    def to_representation(self, value):
+        request = self.context.get('request')
+        lang = get_language_from_request(request)
+        return lang or super(LanguageField, self).to_representation(value)
 
 
 class AppealBuyValidateSerializer(serializers.Serializer):
     estate_id = serializers.PrimaryKeyRelatedField(queryset=Estate.objects.all())
-    first_name = serializers.CharField(max_length=70, required=True)
-    last_name = serializers.CharField(max_length=70, required=True)
-    phone = serializers.CharField(max_length=70, required=True)
-    lang = serializers.CharField(max_length=30)
-    at_time = serializers.DateTimeField(required=False)
-    is_for_purchase = serializers.BooleanField(default=True)
+    name = serializers.CharField(max_length=70, required=True)
+    last_name = serializers.CharField(max_length=70, required=False, allow_null=True)
+    phone = PhoneNumberField()
+    lang = LanguageField(max_length=30)
+    at_time = serializers.DateTimeField(required=True)
+    is_for_purchase = serializers.BooleanField(default=False)
 
-    def validate_first_name(self, value):
-        if any(char.isdigit() for char in value):
+    def validate_name(self, name):
+        if any(char.isdigit() for char in name):
             raise serializers.ValidationError('Name should not contain numbers')
-        return value
-
-    def validate_phone(self, value):
-        if not value.startswith('+'):
-            raise serializers.ValidationError('Phone number should start with \'+\'')
-        return value
+        if not name.isalpha():
+            raise serializers.ValidationError('Name should not contain signs')
+        return name
 
     def validate_at_time(self, value):
-        # if value <= timezone.now():
-        #     raise serializers.ValidationError("at_time must be in the future")
+        if value <= timezone.now():
+            raise serializers.ValidationError("at_time must be in the future")
         return value
 
     def create(self, validated_data):
@@ -36,32 +53,35 @@ class AppealBuyValidateSerializer(serializers.Serializer):
             name=validated_data['name'],
             phone=validated_data['phone'],
             lang=validated_data['lang'],
+            at_time=validated_data['at_time']
         )
 
 
 class AppealSellValidateSerializer(serializers.Serializer):
-    first_name = serializers.CharField(max_length=70, required=True)
-    last_name = serializers.CharField(max_length=70, required=True)
-    phone = serializers.CharField(max_length=70, required=True)
-    lang = serializers.CharField(max_length=30, required=True)
-    at_time = serializers.DateTimeField(required=False)
     is_for_purchase = serializers.BooleanField(default=False)
+    name = serializers.CharField(max_length=70, required=True)
+    phone = PhoneNumberField()
+    lang = LanguageField(max_length=30)
+    at_time = serializers.DateTimeField(required=True)
+    estate_id = serializers.PrimaryKeyRelatedField(queryset=Estate.objects.all(), required=False)
 
-    def validate_first_name(self, value):
-        if any(char.isdigit() for char in value):
+    def validate_name(self, name):
+        if any(char.isdigit() for char in name):
             raise serializers.ValidationError('Name should not contain numbers')
-        return value
+        if not name.isalpha():
+            raise serializers.ValidationError('Name should not contain signs')
+        return name
 
-    def validate_phone(self, value):
-        if not value.startswith('+'):
-            raise serializers.ValidationError('Phone number should start with \'+\'')
-        return value
-
-    def validate_at_time(self, value):
-        # if value <= timezone.now():
-        #     raise serializers.ValidationError("at_time must be in the future")
-        return value
+    def validate_at_time(self, time):
+        if time <= timezone.now():
+            raise serializers.ValidationError("at_time must be in the future")
+        return time
 
     def create(self, validated_data):
-        instance = Appeal.objects.create(**validated_data)
-        return instance
+        return Appeal.objects.create(
+            is_for_purchase=validated_data['is_for_purchase'],
+            name=validated_data['name'],
+            phone=validated_data['phone'],
+            lang=validated_data['lang'],
+            at_time=validated_data['at_time']
+        )

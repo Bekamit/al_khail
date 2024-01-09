@@ -184,7 +184,8 @@ MODELTRANSLATION_TRANSLATION_REGISTRY = 'core.translation'
 # STATIC (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/back_static/'
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(f'{BASE_DIR}', 'static')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'back_static')]
 
 # MEDIA (Images, PDF)
@@ -225,7 +226,7 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-if not PRODUCTION:
+if PRODUCTION:
     from .local import *
 else:
     from .prod import *
