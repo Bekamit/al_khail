@@ -97,6 +97,7 @@ cover/
 *.mo
 
 # Django stuff:
+nginx
 
 # Flask stuff:
 instance/
