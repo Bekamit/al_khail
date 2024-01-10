@@ -16,6 +16,9 @@ services:
       - .:/app
       - static_volume:/usr/src/app/static
       - media_volume:/usr/src/app/back_media
+    environment:
+      - VIRTUAL_HOST=alkhail.pp.ua
+      - LETSENCRYPT_HOST=alkhail.pp.ua
 
   postgres:
     image: postgres
@@ -42,8 +45,13 @@ services:
       - "80:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+#      - ./nginx/alt.conf:/etc/nginx/conf.d/default.conf
       - static_volume:/usr/src/app/static
       - media_volume:/usr/src/app/back_media
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - html:/usr/share/nginx/html
+      - vhost:/etc/nginx/vhost.d
+      - certs:/etc/nginx/certs
     depends_on:
       - api
 
@@ -62,7 +70,20 @@ services:
       - api
       - redis
 
+  acme_companion:
+    image: nginxproxy/acme-companion:2.2
+    container_name: acme_companion
+    volumes_from:
+    - nginx
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - acme:/etc/acme.sh
+
 volumes:
   postgres_data:
   static_volume:
   media_volume:
+  certs:
+  acme:
+  vhost:
+  html:
