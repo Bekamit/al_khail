@@ -25,6 +25,8 @@ ALLOWED_HOSTS = [
     "http://localhost:8000",
     "http://16.171.129.40/",
     "http://172",
+    "https://gulsdem.pp.ua/",
+    "http://gulsdem.pp.ua/",
 ]
 
 # Application definition
