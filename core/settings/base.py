@@ -19,6 +19,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 PRODUCTION = env('PRODUCTION', default=False, cast=bool)
 
+ALLOWED_HOSTS = ["*"]
+
 # Application definition
 THEME_PARTY_APPS = [
     'rest_framework',
@@ -68,8 +70,9 @@ JAZZMIN_SETTINGS = {
 # Cors
 
 CORS_ALLOWED_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_PRIVATE_NETWORK = True
 
-# SECURE_SSL_REDIRECT = True
 
 # CORS_ALLOW_METHODS = (
 #     "DELETE",
