@@ -1,9 +1,11 @@
+
 version: '3'
 
 services:
   api:
     build: .
-    command: sh -c "gunicorn core.wsgi:application --bind 0.0.0.0:8000"
+    command: >
+      sh -c "gunicorn core.wsgi:application --bind 0.0.0.0:8000"
     ports:
       - '8000:8000'
     restart: always
@@ -12,21 +14,19 @@ services:
       - migration
     volumes:
       - .:/app
-      - static_volume:/usr/src/app/back_static
-      - media_volume:/usr/src/app/back_media
-    environment:
-      - VIRTUAL_HOST=gulsdem.pp.ua
-      - LETSENCRYPT_HOST=gulsdem.pp.ua
+      - static_volume:/usr/src/app/static
 
   postgres:
     image: postgres
     restart: always
     environment:
       POSTGRES_DB: db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: alkhail_user
+      POSTGRES_PASSWORD: 1
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - '5432:5432'
 
   migration:
     build: .
@@ -37,18 +37,14 @@ services:
       - postgres
 
   nginx:
-    image: jwilder/nginx-proxy:1.2
+    image: nginx:latest
     container_name: docker_nginx-1
     ports:
       - "80:80"
-      - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-#      - ./nginx/default_location:/etc/nginx/vhost.d/default_location
       - static_volume:/usr/src/app/back_static
-      - media_volume:/usr/src/app/back_media
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - certs:/etc/nginx/certs:ro
+      - media_volume:/usr/src/app/media_static
     depends_on:
       - api
 
@@ -60,24 +56,13 @@ services:
   celery:
     build: .
     command: celery -A core worker -l INFO
+
     volumes:
       - .:/usr/src/app/
     depends_on:
       - api
       - redis
 
-#  acme_companion:
-#    image: nginxproxy/acme-companion:2.2
-#    container_name: acme_companion
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock
-#      - acme:/etc/acme.sh
-#    depends_on:
-#      - nginx
-
 volumes:
   postgres_data:
   static_volume:
-  media_volume:
-  certs:
-  acme:
