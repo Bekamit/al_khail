@@ -14,7 +14,8 @@ services:
       - migration
     volumes:
       - .:/app
-      - static_volume:/usr/src/app/static
+      - static_volume:/usr/src/app/back_static
+      - media_volume:/usr/src/app/back_media
 
   postgres:
     image: postgres
@@ -44,7 +45,7 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - static_volume:/usr/src/app/back_static
-      - media_volume:/usr/src/app/media_static
+      - media_volume:/usr/src/app/back_media
     depends_on:
       - api
 
@@ -66,3 +67,4 @@ services:
 volumes:
   postgres_data:
   static_volume:
+  media_volume:
