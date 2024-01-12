@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     *APPS
 ]
 
-
 # JAZZMIN
 
 JAZZMIN_SETTINGS = {
@@ -93,18 +92,21 @@ CORS_ALLOW_HEADERS = (
 # REST_FRAMEWORK
 
 REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
     'DEFAULT_PERMISSION_CLASSES': [
         "rest_framework.permissions.AllowAny",
     ],
+    'DEFAULT_PAGINATION_CLASS': "service.pagination.CustomPagination",
+    'PAGE_SIZE': 9,
+
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DATETIME_FORMAT': '%d.%m.%Y %H:%M:%S',
-    'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend'
-    ],
 }
 
 SPECTACULAR_SETTINGS = {
@@ -146,7 +148,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -192,7 +193,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'back_static')]
 MEDIA_URL = '/back_media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'back_media')
 
-
 # EMAIL
 EMAIL_BACKEND = config.EMAIL_BACKEND
 EMAIL_HOST = config.EMAIL_HOST
@@ -214,7 +214,6 @@ CELERY_RESULT_BACKEND = 'redis://redis:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

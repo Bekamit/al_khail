@@ -25,10 +25,16 @@ class CustomListModelMixin(ListModelMixin):
         response_key = self.get_response_key()
         if response_key:
             language = self.get_response_language()
-            data = {
-                "language": language,
-                response_key: serializer.data
-            }
+            if len(serializer.data) == 1:
+                data = {
+                    "language": language,
+                    response_key: serializer.data[0]
+                }
+            else:
+                data = {
+                    "language": language,
+                    response_key: serializer.data
+                }
         else:
             data = serializer.data
         return Response(data)
