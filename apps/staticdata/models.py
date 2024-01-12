@@ -17,3 +17,4 @@ class StaticData(SingletonModel):
     class Meta:
         verbose_name = 'Static Data'
         verbose_name_plural = 'Static Data'
+        app_label = 'staticdata'

@@ -37,7 +37,6 @@ APPS = [
     'apps.city',
     'apps.company',
     'apps.estate',
-    'apps.staticdata',
 ]
 INSTALLED_APPS = [
     *THEME,
@@ -169,7 +168,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Asia/Bishkek'
 
@@ -208,9 +207,9 @@ REDIS_HOST = 'redis'
 REDIS_PORT = 6379
 
 # CELERY
-CELERY_BROKER_URL = 'redis://redis:6379'
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
 CELERY_BROKER_TRANSPORT_OPTIONS = {'visible_timeout': 3600}
-CELERY_RESULT_BACKEND = 'redis://redis:6379'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
