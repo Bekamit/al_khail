@@ -13,11 +13,9 @@ from .serializers import AppealSellValidateSerializer, AppealBuyValidateSerializ
     methods=["POST"],
     tags=["Appeal"],
 )
-
 class AppealBuyCreateAPIView(CreateAPIView):
     queryset = Appeal.objects.all()
     serializer_class = AppealBuyValidateSerializer
-
 
     def perform_create(self, serializer):
         lang = get_language_from_request(self.request)
@@ -43,4 +41,3 @@ class AppealSellCreateAPIView(CreateAPIView):
 class AppealSellCreateAPIView(CreateAPIView):
     queryset = Appeal.objects.all()
     serializer_class = AppealSellValidateSerializer
-
