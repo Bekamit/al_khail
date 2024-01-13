@@ -97,6 +97,7 @@ cover/
 *.mo
 
 # Django stuff:
+nginx
 
 # Flask stuff:
 instance/
@@ -166,8 +167,8 @@ env.bak/
 venv.bak/
 
 # docker
-docker-compose.yaml
-Dockerfile
+#docker-compose.yaml
+#Dockerfile
 
 # Spyder project settings
 .spyderproject

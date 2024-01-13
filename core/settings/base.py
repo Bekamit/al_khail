@@ -19,6 +19,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 PRODUCTION = env('PRODUCTION', default=False, cast=bool)
 
+ALLOWED_HOSTS = [
+    "*",
+    "http://localhost:5173/",
+    "http://localhost:8000",
+    "http://16.171.129.40/",
+    "http://172",
+    "https://gulsdem.pp.ua/",
+    "http://gulsdem.pp.ua/",
+]
+
 # Application definition
 THEME_PARTY_APPS = [
     'rest_framework',
@@ -65,28 +75,28 @@ JAZZMIN_SETTINGS = {
 
 # Cors
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8000',
-    'http://127.0.0.1',
-]
+CORS_ALLOWED_ALL_ORIGINS = True
+# CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_PRIVATE_NETWORK = True
 
-CORS_ALLOW_METHODS = (
-    "DELETE",
-    "GET",
-    "OPTIONS",
-    "PATCH",
-    "POST",
-    "PUT",
-)
 
-CORS_ALLOW_HEADERS = (
-    "accept",
-    "authorization",
-    "content-type",
-    "user-agent",
-    "x-csrftoken",
-    "x-requested-with",
-)
+# CORS_ALLOW_METHODS = (
+#     "DELETE",
+#     "GET",
+#     "OPTIONS",
+#     "PATCH",
+#     "POST",
+#     "PUT",
+# )
+#
+# CORS_ALLOW_HEADERS = (
+#     "accept",
+#     "authorization",
+#     "content-type",
+#     "user-agent",
+#     "x-csrftoken",
+#     "x-requested-with",
+# )
 
 # REST_FRAMEWORK
 
@@ -118,10 +128,10 @@ SPECTACULAR_SETTINGS = {
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -184,8 +194,9 @@ MODELTRANSLATION_TRANSLATION_REGISTRY = 'core.translation'
 # STATIC (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/back_static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'back_static')]
+STATIC_URL = 'back_static/'
+STATIC_ROOT = os.path.join(f'{BASE_DIR}', 'back_static')
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'back_static')]
 
 # MEDIA (Images, PDF)
 
