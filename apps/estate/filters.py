@@ -2,7 +2,7 @@ from django_filters import rest_framework as filters
 from .models import Estate
 
 
-class EstateFilter(filters.FilterSet):
+class EstateFilterSet(filters.FilterSet):
     ordering = filters.OrderingFilter(
         fields=(
             ('-create_at', '-create_at'),  # Сортировка по дате создания (возрастание)

@@ -1,9 +1,7 @@
 .gitignore
 #.env
 .idea
-.DS_Store
 venv
-db.sqlite3
 __pycache__
 сore/__pycache__
 apps/admin_app/__pycache__
@@ -15,8 +13,6 @@ apps/city/__pycache__
 apps/city/migrations/__pycache__
 apps/estate/__pycache__
 apps/estate/migrations/__pycache__
-#apps/estate_page/__pycache__
-#apps/estate_page/migrations/__pycache__
 apps/company/__pycache__
 apps/company/migrations/__pycach
 apps/staticdata/__pycache__
@@ -33,6 +29,8 @@ db.sqlite3
 db.sqlite3-journal
 work.txt
 Makefile
+Dockerfile
+docker-compose.yaml
 
 back_media/
 
