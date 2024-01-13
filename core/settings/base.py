@@ -47,7 +47,6 @@ APPS = [
     'apps.city',
     'apps.company',
     'apps.estate',
-    'apps.staticdata',
 ]
 INSTALLED_APPS = [
     *THEME,
@@ -60,7 +59,6 @@ INSTALLED_APPS = [
     *THEME_PARTY_APPS,
     *APPS
 ]
-
 
 # JAZZMIN
 
@@ -103,18 +101,21 @@ CORS_ALLOWED_ALL_ORIGINS = True
 # REST_FRAMEWORK
 
 REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
     'DEFAULT_PERMISSION_CLASSES': [
         "rest_framework.permissions.AllowAny",
     ],
+    'DEFAULT_PAGINATION_CLASS': "service.pagination.CustomPagination",
+    'PAGE_SIZE': 9,
+
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DATETIME_FORMAT': '%d.%m.%Y %H:%M:%S',
-    'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend'
-    ],
 }
 
 SPECTACULAR_SETTINGS = {
@@ -157,7 +158,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -179,7 +179,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Asia/Bishkek'
 
@@ -203,7 +203,6 @@ STATIC_ROOT = os.path.join(f'{BASE_DIR}', 'back_static')
 MEDIA_URL = '/back_media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'back_media')
 
-
 # EMAIL
 EMAIL_BACKEND = config.EMAIL_BACKEND
 EMAIL_HOST = config.EMAIL_HOST
@@ -219,13 +218,12 @@ REDIS_HOST = 'redis'
 REDIS_PORT = 6379
 
 # CELERY
-CELERY_BROKER_URL = 'redis://redis:6379'
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
 CELERY_BROKER_TRANSPORT_OPTIONS = {'visible_timeout': 3600}
-CELERY_RESULT_BACKEND = 'redis://redis:6379'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

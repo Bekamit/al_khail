@@ -1,6 +1,6 @@
 from django.utils.safestring import mark_safe
 from django.contrib import admin
-from .models import EstateType, Estate, EstateImage
+from .models import EstateType, Estate, EstateImage, Project
 
 
 class EstateImageInline(admin.TabularInline):
@@ -10,19 +10,20 @@ class EstateImageInline(admin.TabularInline):
 
 @admin.register(Estate)
 class EstateAdmin(admin.ModelAdmin):
-    list_display = ('name',
-                    'developer',
+    list_display = ('title',
+                    'project',
                     'area',
                     'estate_type',
                     'city',
                     'is_secondary',
                     'preview')
-    search_fields = ('name', 'developer', 'district', 'estate_type__type_en', 'city__city_name_en')
-    list_filter = ('city__city_name', 'estate_type__type', 'create_at',  'is_secondary')
+    search_fields = ('project__name', 'title', 'developer', 'district', 'estate_type__type_en', 'city__city_name_en')
+    list_filter = ('city__city_name', 'project__name', 'estate_type__type', 'is_secondary')
     fieldsets = [
         ('English', {
             'fields': [
-                'name_en',
+                'project',
+                'title_en',
                 'developer_en',
                 'area',
                 'district_en',
@@ -34,7 +35,7 @@ class EstateAdmin(admin.ModelAdmin):
         }),
         ('Arabic', {
             'fields': [
-                'name_ar',
+                'title_ar',
                 'developer_ar',
                 'district_ar',
                 'description_ar',
@@ -42,7 +43,7 @@ class EstateAdmin(admin.ModelAdmin):
         }),
         ('Turkish', {
             'fields': [
-                'name_tr',
+                'title_tr',
                 'developer_tr',
                 'district_tr',
                 'description_tr',
@@ -50,7 +51,7 @@ class EstateAdmin(admin.ModelAdmin):
         }),
         ('Russian', {
             'fields': [
-                'name_ru',
+                'title_ru',
                 'developer_ru',
                 'district_ru',
                 'description_ru',
@@ -99,3 +100,13 @@ class EstateTypeAdmin(admin.ModelAdmin):
         css = {
             'all': ('css/admin.css',),
         }
+
+
+@admin.register(Project)
+class ProjectTypeAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
+    fields = (
+            'name',
+            'pdf_catalog',
+    )

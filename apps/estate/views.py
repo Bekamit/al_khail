@@ -1,8 +1,12 @@
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework.generics import RetrieveAPIView
+from rest_framework.filters import SearchFilter
+from django_filters.rest_framework import DjangoFilterBackend
 
 from service.views import CustomRetrieveImagesAPIView, CustomListAPIView
+from service.pagination import CustomPagination
 
+from .filters import EstateFilter
 from .models import Estate, EstateImage, EstateType
 from .serializers import (EstateSerializer,
                           EstateRetrieveSerializer,
@@ -24,7 +28,7 @@ from .serializers import (EstateSerializer,
             name='ACCEPT-LANGUAGE',
             type=str,
             location=OpenApiParameter.HEADER,
-            description='Язык, на котором должны возвращаться данные (опционально).'
+            description='Язык, на котором должны возвращаться данные (en, ar, tr, ru).'
         ),
     ],
 )
@@ -47,7 +51,46 @@ class EstateTypeListAPIView(CustomListAPIView):
             name='ACCEPT-LANGUAGE',
             type=str,
             location=OpenApiParameter.HEADER,
-            description='Язык, на котором должны возвращаться данные (опционально).'
+            description='Язык, на котором должны возвращаться данные (en, ar, tr, ru).'
+        ),
+        OpenApiParameter(
+            name='city_id',
+            type=int,
+            location=OpenApiParameter.QUERY,
+            description='Фильтр по городу'
+        ),
+        OpenApiParameter(
+            name='estate_type_id',
+            type=int,
+            location=OpenApiParameter.QUERY,
+            description='Фильтр по типу недвижимости'
+        ),
+        OpenApiParameter(
+            name='is_secondary',
+            type=bool,
+            location=OpenApiParameter.QUERY,
+            description='Фильтр первичное/вторичное (true=вторичное)\n\n'
+                        'Wikipedia: Жилье, которое уже сдано в эксплуатацию и на которое есть оформленное свидетельство'
+                        ' о регистрации права собственности, называется вторичным. Под первичным же подразумевается '
+                        'такое жилье, на которое еще нет права собственности или которое еще находится на стадии строительства.'
+        ),
+        OpenApiParameter(
+            name='search',
+            type=str,
+            location=OpenApiParameter.QUERY,
+            description='Поиск по description на всех языках'
+        ),
+        OpenApiParameter(
+            name='page',
+            type=int,
+            location=OpenApiParameter.QUERY,
+            description='Номер страницы со списком данных'
+        ),
+        OpenApiParameter(
+            name='project_id',
+            type=int,
+            location=OpenApiParameter.QUERY,
+            description='Фильтр по проекту(возвращает все обьекты, который принадлежат одному проекту)'
         ),
     ],
 )
@@ -55,6 +98,10 @@ class EstateListAPIView(CustomListAPIView):
     queryset = Estate.objects.prefetch_related('image').all()
     serializer_class = EstateSerializer
     response_key = 'estates'
+    pagination_class = CustomPagination
+    filter_backends = [SearchFilter, DjangoFilterBackend]
+    search_fields = ['description_en', 'description_ar', 'description_tr', 'description_ru']
+    filterset_class = EstateFilter
 
 
 @extend_schema(
@@ -70,7 +117,7 @@ class EstateListAPIView(CustomListAPIView):
             name='ACCEPT-LANGUAGE',
             type=str,
             location=OpenApiParameter.HEADER,
-            description='Язык, на котором должны возвращаться данные (опционально).'
+            description='Язык, на котором должны возвращаться данные (en, ar, tr, ru).'
         ),
     ],
 )
