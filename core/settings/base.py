@@ -22,6 +22,7 @@ PRODUCTION = env('PRODUCTION', default=False, cast=bool)
 ALLOWED_HOSTS = [
     "*",
     "http://localhost:5173/",
+    "http://localhost:6379/"
     "http://localhost:8000",
     "http://16.171.129.40/",
     "http://172",
