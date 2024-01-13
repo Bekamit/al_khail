@@ -65,7 +65,9 @@ class EstateRetrieveSerializer(serializers.ModelSerializer):
                   'create_at']
 
 
-class EstateSerializer(EstateRetrieveSerializer):
+class EstateSerializer(serializers.ModelSerializer):
+    estate_type = serializers.StringRelatedField()
+    city = serializers.StringRelatedField()
     preview = serializers.SerializerMethodField()
 
     def absolute_url(self, instance):

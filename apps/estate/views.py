@@ -6,7 +6,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from service.views import CustomRetrieveImagesAPIView, CustomListAPIView
 from service.pagination import CustomPagination
 
-from .filters import EstateFilter
+from .filters import EstateFilterSet
 from .models import Estate, EstateImage, EstateType
 from .serializers import (EstateSerializer,
                           EstateRetrieveSerializer,
@@ -101,7 +101,7 @@ class EstateListAPIView(CustomListAPIView):
     pagination_class = CustomPagination
     filter_backends = [SearchFilter, DjangoFilterBackend]
     search_fields = ['description_en', 'description_ar', 'description_tr', 'description_ru']
-    filterset_class = EstateFilter
+    filterset_class = EstateFilterSet
 
 
 @extend_schema(
@@ -122,7 +122,7 @@ class EstateListAPIView(CustomListAPIView):
     ],
 )
 class EstateRetrieveAPIView(RetrieveAPIView):
-    queryset = Estate.objects.all()
+    queryset = Estate.objects.select_related('project').all()
     serializer_class = EstateRetrieveSerializer
     lookup_field = 'id'
 
