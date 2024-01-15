@@ -103,7 +103,7 @@ CORS_ALLOWED_ALL_ORIGINS = True
 
 # CSRF
 CSRF_USE_SESSIONS = True
-CSRF_TRUSTED_ORIGINS = ['https://eventic.pp.ua']
+CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua']
 
 # REST_FRAMEWORK
 
