@@ -101,6 +101,10 @@ CORS_ALLOWED_ALL_ORIGINS = True
 #     "x-requested-with",
 # )
 
+# CSRF
+CSRF_USE_SESSIONS = True
+CSRF_TRUSTED_ORIGINS = ['https://eventic.pp.ua']
+
 # REST_FRAMEWORK
 
 REST_FRAMEWORK = {
