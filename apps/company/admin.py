@@ -5,7 +5,7 @@ from .models import *
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ('company_name', 'phone', 'email', 'company_img')
+    list_display = ('company_name', 'phone', 'email', 'preview')
     readonly_fields = ['preview']
 
     fieldsets = [

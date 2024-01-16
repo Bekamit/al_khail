@@ -12,14 +12,14 @@ class EstateType(models.Model):
     exp: en: ['apartment', 'commercial', 'residents', ...]
     add/edit/delete by administrator
     """
-    type = models.CharField(max_length=30, verbose_name='Estate Type')
+    type = models.CharField(max_length=30, verbose_name='Estate Type', unique=True)
 
     class Meta:
         verbose_name = 'Estate Type'
         verbose_name_plural = 'Estate Types'
 
     def __str__(self):
-        return self.type
+        return self.type_en
 
 
 class Project(models.Model):
@@ -28,7 +28,7 @@ class Project(models.Model):
     collection of Estate Projects objects
     add/edit/delete by administrator
     """
-    name = models.CharField(max_length=100, verbose_name='Project')
+    name = models.CharField(max_length=100, verbose_name='Project', unique=True)
 
     def project_upload(self, filename):
         return f'catalog/{self.name}/{filename}'
@@ -58,10 +58,10 @@ class Estate(models.Model):
     visits = models.IntegerField(default=0, verbose_name='Visits')
 
     def __str__(self):
-        return f'{self.pk}: {self.title}'
+        return f'{self.pk}: {self.title_en}'
 
     @staticmethod
-    def get_estate_id(estate_id):
+    def is_valid(estate_id):
         return Estate.objects.filter(id=estate_id).exists()
 
     @property

@@ -22,8 +22,8 @@ class EstateImageListSerializer(serializers.Serializer):
 
     def get_estate_id(self, data):
         estate_id = data.get('estate_id')
-        if not Estate.get_estate_id(estate_id):
-            raise exceptions.ValidationError('estate_id does not exist')
+        if not Estate.is_valid(estate_id):
+            raise exceptions.ValidationError('estate id does not exist')
         return estate_id
 
     class Meta:

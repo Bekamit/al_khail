@@ -8,7 +8,7 @@ class StaticData(SingletonModel):
     field2 = models.TextField()
 
     def __str__(self):
-        return 'static data'
+        return 'static content'
 
     @staticmethod
     def default_img():

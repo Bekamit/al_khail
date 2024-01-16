@@ -14,4 +14,4 @@ class Company(SingletonModel):
         verbose_name_plural = 'About company'
 
     def __str__(self):
-        return self.company_name
+        return self.company_name_en
