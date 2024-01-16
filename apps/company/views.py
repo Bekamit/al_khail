@@ -1,6 +1,6 @@
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 
-from service.views import CustomListAPIView
+from service.views import CustomSingletonListAPIView
 
 from .serializers import CompanySerializer
 from .models import Company
@@ -24,7 +24,7 @@ from .models import Company
         ),
     ],
 )
-class AboutCompanyListAPIView(CustomListAPIView):
+class AboutCompanyListAPIView(CustomSingletonListAPIView):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
     response_key = 'about_company'

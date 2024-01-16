@@ -1,4 +1,8 @@
 from django.utils.safestring import mark_safe
+from django import forms
+from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
+
 from django.contrib import admin
 from .models import EstateType, Estate, EstateImage, Project
 
@@ -102,11 +106,24 @@ class EstateTypeAdmin(admin.ModelAdmin):
         }
 
 
+class ProjectAdminForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = '__all__'
+
+    def clean_pdf_catalog(self):
+        pdf = self.cleaned_data.get('pdf_catalog')
+        validator = FileExtensionValidator(allowed_extensions=['pdf'])
+        validator(pdf)
+        return pdf
+
+
 @admin.register(Project)
 class ProjectTypeAdmin(admin.ModelAdmin):
+    form = ProjectAdminForm
     list_display = ('name',)
     search_fields = ('name',)
     fields = (
-            'name',
-            'pdf_catalog',
+        'name',
+        'pdf_catalog',
     )

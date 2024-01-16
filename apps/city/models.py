@@ -20,4 +20,4 @@ class City(models.Model):
         verbose_name_plural = 'Cities'
 
     def __str__(self):
-        return self.city_name
+        return self.city_name_en
