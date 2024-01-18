@@ -70,7 +70,7 @@ class AppealBuyValidateSerializer(serializers.Serializer):
 
         return Appeal.objects.create(
             is_for_purchase=validated_data['is_for_purchase'],
-            estate_id=estate_instance,  # Используйте экземпляр Estate, а не estate_id
+            estate_id=estate_instance,
             name=validated_data['name'],
             last_name=last_name,
             phone=validated_data['phone'],
