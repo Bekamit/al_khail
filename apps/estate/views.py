@@ -4,10 +4,10 @@ from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 
 from service.views import CustomRetrieveImagesAPIView, CustomListAPIView
-from service.pagination import CustomPagination
 
 from .filters import EstateFilterSet
 from .models import Estate, EstateImage, EstateType
+from service.pagination import LimitOffsetCustomPagination
 from .serializers import (EstateSerializer,
                           EstateRetrieveSerializer,
                           EstateTypeSerializer,
@@ -78,13 +78,21 @@ class EstateTypeListAPIView(CustomListAPIView):
             name='search',
             type=str,
             location=OpenApiParameter.QUERY,
-            description='Поиск по description на всех языках'
+            description='Поиск по location, developer & project.name на английском языке только!'
         ),
         OpenApiParameter(
-            name='page',
+            name='limit',
             type=int,
             location=OpenApiParameter.QUERY,
-            description='Номер страницы со списком данных'
+            description='Количество результатов, возвращаемых на страницу \n\n'
+                        'Example: http://127.0.0.1:8000/api/v1/estate/?limit=10&offset=21'
+        ),
+        OpenApiParameter(
+            name='offset',
+            type=int,
+            location=OpenApiParameter.QUERY,
+            description='Начальный индекс, от которого идет отсчет.\n\n'
+                        'Example: http://127.0.0.1:8000/api/v1/estate/?limit=10&offset=21'
         ),
         OpenApiParameter(
             name='project_id',
@@ -98,9 +106,9 @@ class EstateListAPIView(CustomListAPIView):
     queryset = Estate.objects.prefetch_related('image').all()
     serializer_class = EstateSerializer
     response_key = 'estates'
-    pagination_class = CustomPagination
+    pagination_class = LimitOffsetCustomPagination
     filter_backends = [SearchFilter, DjangoFilterBackend]
-    search_fields = ['description_en', 'description_ar', 'description_tr', 'description_ru']
+    search_fields = ['project__name', 'project__location', 'project__developer', ]
     filterset_class = EstateFilterSet
 
 

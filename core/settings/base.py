@@ -48,6 +48,7 @@ APPS = [
     'apps.company',
     'apps.estate',
     'apps.staticdata',
+    'apps.project',
 ]
 INSTALLED_APPS = [
     *THEME,

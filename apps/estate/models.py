@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import F
 
 from apps.city.models import City
+from apps.project.models import Project
 from apps.staticdata.models import StaticData
 
 
@@ -22,23 +23,6 @@ class EstateType(models.Model):
         return self.type_en
 
 
-class Project(models.Model):
-    """
-    ProjectModel():
-    collection of Estate Projects objects
-    add/edit/delete by administrator
-    """
-    name = models.CharField(max_length=100, verbose_name='Project', unique=True)
-
-    def project_upload(self, filename):
-        return f'catalog/{self.name}/{filename}'
-
-    pdf_catalog = models.FileField(upload_to=project_upload, verbose_name='PDF catalog path')
-
-    def __str__(self):
-        return self.name
-
-
 class Estate(models.Model):
     """
     EstateModel(MultilanguageModel):
@@ -47,13 +31,12 @@ class Estate(models.Model):
     """
     project = models.ForeignKey(to=Project, on_delete=models.CASCADE, related_name='estate', verbose_name='Project')
     title = models.CharField(max_length=100, verbose_name='Title')
-    developer = models.CharField(max_length=100, verbose_name='Developer')
-    district = models.CharField(max_length=100, verbose_name='District')
     area = models.FloatField(verbose_name='Area (m2)')
-    description = models.TextField(max_length=500, verbose_name='Description')
+    description = models.TextField(max_length=1000, verbose_name='Description')
+    price_usd = models.FloatField(verbose_name='Price ($)')
     estate_type = models.ForeignKey(to=EstateType, on_delete=models.DO_NOTHING, related_name='estate')
     city = models.ForeignKey(to=City, on_delete=models.DO_NOTHING, related_name='estate')
-    is_secondary = models.BooleanField(default=True, verbose_name='Secondary estate')
+    is_secondary = models.BooleanField(default=False, verbose_name='Secondary estate')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='Create date')
     visits = models.IntegerField(default=0, verbose_name='Visits')
 

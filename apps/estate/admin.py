@@ -1,10 +1,9 @@
 from django.utils.safestring import mark_safe
-from django import forms
-from django.core.exceptions import ValidationError
-from django.core.validators import FileExtensionValidator
 
 from django.contrib import admin
-from .models import EstateType, Estate, EstateImage, Project
+
+from service.admin import CustomModelAdmin
+from .models import EstateType, Estate, EstateImage
 
 
 class EstateImageInline(admin.TabularInline):
@@ -13,7 +12,7 @@ class EstateImageInline(admin.TabularInline):
 
 
 @admin.register(Estate)
-class EstateAdmin(admin.ModelAdmin):
+class EstateAdmin(CustomModelAdmin):
     list_display = ('title',
                     'project',
                     'area',
@@ -28,10 +27,9 @@ class EstateAdmin(admin.ModelAdmin):
             'fields': [
                 'project',
                 'title_en',
-                'developer_en',
                 'area',
-                'district_en',
                 'description_en',
+                'price_usd',
                 'estate_type',
                 'city',
                 'is_secondary',
@@ -40,41 +38,30 @@ class EstateAdmin(admin.ModelAdmin):
         ('Arabic', {
             'fields': [
                 'title_ar',
-                'developer_ar',
-                'district_ar',
                 'description_ar',
             ]
         }),
         ('Turkish', {
             'fields': [
                 'title_tr',
-                'developer_tr',
-                'district_tr',
                 'description_tr',
             ]
         }),
         ('Russian', {
             'fields': [
                 'title_ru',
-                'developer_ru',
-                'district_ru',
                 'description_ru',
             ],
         })
     ]
     inlines = [EstateImageInline]
 
-    class Media:
-        css = {
-            'all': ('css/admin.css',),
-        }
-
     def preview(self, obj):
         return mark_safe(f'<button class="btn btn-primary" style=margin-left: 15px;">look up</button>')
 
 
 @admin.register(EstateType)
-class EstateTypeAdmin(admin.ModelAdmin):
+class EstateTypeAdmin(CustomModelAdmin):
     list_display = ('type',)
     search_fields = ('type', 'type_ar', 'type_tr', 'type_ru')
     fieldsets = [
@@ -99,31 +86,3 @@ class EstateTypeAdmin(admin.ModelAdmin):
             ],
         })
     ]
-
-    class Media:
-        css = {
-            'all': ('css/admin.css',),
-        }
-
-
-class ProjectAdminForm(forms.ModelForm):
-    class Meta:
-        model = Project
-        fields = '__all__'
-
-    def clean_pdf_catalog(self):
-        pdf = self.cleaned_data.get('pdf_catalog')
-        validator = FileExtensionValidator(allowed_extensions=['pdf'])
-        validator(pdf)
-        return pdf
-
-
-@admin.register(Project)
-class ProjectTypeAdmin(admin.ModelAdmin):
-    form = ProjectAdminForm
-    list_display = ('name',)
-    search_fields = ('name',)
-    fields = (
-        'name',
-        'pdf_catalog',
-    )
