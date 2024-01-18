@@ -29,4 +29,5 @@ class Appeal(models.Model):
         return Appeal.objects.create(**data)
 
     def send_error(self):
-        ...
+        self.is_send = False
+        self.save()
