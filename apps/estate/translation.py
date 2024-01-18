@@ -1,11 +1,9 @@
 from modeltranslation.translator import translator, TranslationOptions
-from .models import Estate, EstateType, Project
+from .models import Estate, EstateType
 
 
 class EstateTranslationOptions(TranslationOptions):
     fields = ('title',
-              'developer',
-              'district',
               'description',)
     required_languages = ('en',)
 

@@ -47,6 +47,8 @@ APPS = [
     'apps.city',
     'apps.company',
     'apps.estate',
+    'apps.staticdata',
+    'apps.project',
 ]
 INSTALLED_APPS = [
     *THEME,
@@ -192,8 +194,8 @@ MODELTRANSLATION_TRANSLATION_REGISTRY = 'core.translation'
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'back_static/'
-STATIC_ROOT = os.path.join(f'{BASE_DIR}', 'back_static')
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'back_static')]
+# STATIC_ROOT = os.path.join(f'{BASE_DIR}', 'back_static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'back_static')]
 
 # MEDIA (Images, PDF)
 

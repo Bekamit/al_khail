@@ -6,7 +6,7 @@ from service import mixin
 
 
 class CustomGenericAPIView(GenericAPIView):
-    response_key: str = None
+    response_key: str | None = None
 
     def get_response_key(self):
         if key := self.response_key:
@@ -28,6 +28,11 @@ class CustomListAPIView(mixin.CustomListModelMixin, CustomGenericAPIView):
         return self.list(request, *args, **kwargs)
 
 
+class CustomSingletonListAPIView(mixin.CustomSingletonListModelMixin, CustomGenericAPIView):
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
 class CustomRetrieveAPIView(mixin.CustomRetrieveModelMixin, CustomGenericAPIView):
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
@@ -36,4 +41,3 @@ class CustomRetrieveAPIView(mixin.CustomRetrieveModelMixin, CustomGenericAPIView
 class CustomRetrieveImagesAPIView(mixin.CustomRetrieveEstateImageMixin, GenericAPIView):
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
-

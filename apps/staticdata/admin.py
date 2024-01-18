@@ -1,9 +1,11 @@
 from django.contrib import admin
+from service.admin import CustomModelAdmin
+
 from .models import StaticData
 
 
 @admin.register(StaticData)
-class StaticDataAdmin(admin.ModelAdmin):
+class StaticDataAdmin(CustomModelAdmin):
     fieldsets = [
         ('English', {
             'fields': [
@@ -32,8 +34,3 @@ class StaticDataAdmin(admin.ModelAdmin):
             ]
         })
     ]
-
-    class Media:
-        css = {
-            'all': ('css/admin.css',),
-        }

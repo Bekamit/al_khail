@@ -78,26 +78,20 @@ class AppealBuyValidateSerializer(serializers.Serializer):
             at_time=validated_data['at_time']
         )
 
-
 class AppealSellValidateSerializer(serializers.Serializer):
     is_for_purchase = serializers.BooleanField(default=False)
     name = serializers.CharField(max_length=70, required=True)
-    last_name = serializers.CharField(max_length=70, required=False)
+    last_name = serializers.CharField(max_length=70, required=True, allow_blank=True, write_only=True)
     phone = PhoneNumberField()
-    lang = LanguageField(max_length=30)
     at_time = serializers.DateTimeField(required=True)
-    estate_id = serializers.PrimaryKeyRelatedField(queryset=Estate.objects.all(), required=False)
 
-    def validate_name(self, name):
-        if any(char.isdigit() for char in name):
-            raise serializers.ValidationError('Name should not contain numbers')
-        if not name.isalpha():
-            raise serializers.ValidationError('Name should not contain signs')
-        return name
+    def get_language(self):
+        request = self.context['request']
+        return get_language_from_request(request)
 
     def validate_last_name(self, last_name):
         if last_name:
-            raise serializers.ValidationError('Last name must be empty')
+            raise serializers.ValidationError('Wrong format')
         return last_name
 
     def validate_at_time(self, time):
@@ -106,16 +100,40 @@ class AppealSellValidateSerializer(serializers.Serializer):
         return time
 
     def create(self, validated_data):
-        last_name = validated_data.get('last_name', None)
+        validated_data.pop('last_name')
+        validated_data['lang'] = self.get_language()
+        print(validated_data)
+        return Appeal.create_appeal(validated_data)
 
+
+class AppealBuyValidateSerializer(serializers.Serializer):
+    is_for_purchase = serializers.BooleanField(default=True)
+    estate_id = serializers.CharField()
+    name = serializers.CharField(max_length=70, required=True)
+    last_name = serializers.CharField(max_length=70, required=True, allow_blank=True, write_only=True)
+    phone = PhoneNumberField()
+    at_time = serializers.DateTimeField(required=True)
+
+    def validate_estate_id(self, estate_id):
+        if not Estate.is_valid(estate_id):
+            raise serializers.ValidationError('estate id does not exist')
+        return estate_id
+
+    def get_language(self):
+        request = self.context['request']
+        return get_language_from_request(request)
+
+    def validate_last_name(self, last_name):
         if last_name:
-            raise serializers.ValidationError('Last name must be empty')
+            raise serializers.ValidationError('Wrong format')
+        return last_name
 
-        return Appeal.objects.create(
-            is_for_purchase=validated_data['is_for_purchase'],
-            name=validated_data['name'],
-            last_name=last_name,
-            phone=validated_data['phone'],
-            lang=validated_data['lang'],
-            at_time=validated_data['at_time']
-        )
+    def validate_at_time(self, time):
+        if time <= timezone.now():
+            raise serializers.ValidationError("at_time must be in the future")
+        return time
+
+    def create(self, validated_data):
+        validated_data.pop('last_name')
+        validated_data['lang'] = self.get_language()
+        return Appeal.create_appeal(validated_data)

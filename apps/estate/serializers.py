@@ -1,18 +1,8 @@
 from rest_framework import serializers, exceptions
 from django.db import models
 
-from .models import Estate, EstateType, EstateImage, Project
-
-
-# ------------------------ PROJECT ------------------------
-
-class ProjectSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Project
-        fields = [
-            'name',
-            'pdf_catalog',
-        ]
+from .models import Estate, EstateType, EstateImage
+from ..project.serializers import ProjectSerializer
 
 
 # ------------------------ ESTATE IMAGE -------------------
@@ -22,8 +12,8 @@ class EstateImageListSerializer(serializers.Serializer):
 
     def get_estate_id(self, data):
         estate_id = data.get('estate_id')
-        if not Estate.get_estate_id(estate_id):
-            raise exceptions.ValidationError('estate_id does not exist')
+        if not Estate.is_valid(estate_id):
+            raise exceptions.ValidationError('estate id does not exist')
         return estate_id
 
     class Meta:
@@ -52,17 +42,15 @@ class EstateRetrieveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Estate
-        fields = ['id',
-                  'project',
+        fields = ['project',
+                  'id',
                   'title',
-                  'developer',
                   'area',
-                  'district',
                   'description',
+                  'price_usd',
                   'estate_type',
                   'city',
-                  'is_secondary',
-                  'create_at']
+                  'is_secondary']
 
 
 class EstateSerializer(serializers.ModelSerializer):
@@ -92,10 +80,9 @@ class EstateSerializer(serializers.ModelSerializer):
         model = Estate
         fields = ['id',
                   'title',
-                  'developer',
                   'area',
-                  'district',
                   'description',
+                  'price_usd',
                   'estate_type',
                   'city',
                   'is_secondary',
