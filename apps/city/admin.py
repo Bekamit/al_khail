@@ -1,10 +1,13 @@
 from django.utils.safestring import mark_safe
+
 from django.contrib import admin
+from service.admin import CustomModelAdmin
+
 from .models import *
 
 
 @admin.register(City)
-class CityAdmin(admin.ModelAdmin):
+class CityAdmin(CustomModelAdmin):
     list_display = ('city_name', 'city_description', 'preview')
     search_fields = ('city_name', 'city_name_ar', 'city_tr', 'city_ru')
     list_filter = ('city_name',)
@@ -38,11 +41,6 @@ class CityAdmin(admin.ModelAdmin):
             ],
         }),
     ]
-
-    class Media:
-        css = {
-            'all': ('css/admin.css',),
-        }
 
     def preview(self, obj):
         return mark_safe(f'<img src="{obj.city_img.url}", style="max-height: 200px;">')

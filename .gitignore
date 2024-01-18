@@ -14,10 +14,12 @@ apps/city/migrations/__pycache__
 apps/estate/__pycache__
 apps/estate/migrations/__pycache__
 apps/company/__pycache__
-apps/company/migrations/__pycach
+apps/company/migrations/__pycach__
 apps/staticdata/__pycache__
-apps/staticdata/migrations/__pycach
+apps/staticdata/migrations/__pycach__
 service/__pycache__
+apps/project/__pycache__
+apps/project/migrations/__pycach
 back_media/__pycache__
 back_static/__pycache__
 ### Django ###
