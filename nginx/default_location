@@ -1,7 +1,7 @@
 location /back_static/ {
-    root /usr/src/app;
+    alias /usr/src/app;
 }
 
 location /back_media/ {
-    root /usr/src/app;
+    alias /usr/src/app;
 }

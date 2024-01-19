@@ -19,17 +19,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 PRODUCTION = env('PRODUCTION', default=False, cast=bool)
 
-ALLOWED_HOSTS = [
-    "*",
-    "http://localhost:5173/",
-    "http://localhost:6379/"
-    "http://localhost:8000",
-    "http://16.171.129.40/",
-    "http://172",
-    "https://gulsdem.pp.ua/",
-    "http://gulsdem.pp.ua/",
-]
-
 # Application definition
 THEME_PARTY_APPS = [
     'rest_framework',
@@ -37,6 +26,7 @@ THEME_PARTY_APPS = [
     'drf_spectacular',
     'solo.apps.SoloAppConfig',
     'corsheaders',
+    'debug_toolbar',
 ]
 THEME = [
     'modeltranslation',
@@ -49,7 +39,7 @@ APPS = [
     'apps.company',
     'apps.estate',
     'apps.staticdata',
-    'apps.project',
+    'apps.project'
 ]
 INSTALLED_APPS = [
     *THEME,
@@ -63,43 +53,19 @@ INSTALLED_APPS = [
     *APPS
 ]
 
+
 # JAZZMIN
 
 JAZZMIN_SETTINGS = {
-    'site_title': 'Al Khail Admin panel',
-    'site_header': 'Al Khail Admin panel',
-    'site_brand': 'Al Khail Admin panel',
+    'site_title': 'Gulsdem Admin panel',
+    'site_header': 'Gulsdem Admin panel',
+    'site_brand': 'Gulsdem Admin panel',
     'show_sidebar': True,
     'navigation_expanded': False,
     'hide_models': [],
     'custom_css': None,
     'custom_js': None,
 }
-
-# Cors
-
-CORS_ALLOWED_ALL_ORIGINS = True
-# CORS_ALLOW_CREDENTIALS = True
-# CORS_ALLOW_PRIVATE_NETWORK = True
-
-
-# CORS_ALLOW_METHODS = (
-#     "DELETE",
-#     "GET",
-#     "OPTIONS",
-#     "PATCH",
-#     "POST",
-#     "PUT",
-# )
-#
-# CORS_ALLOW_HEADERS = (
-#     "accept",
-#     "authorization",
-#     "content-type",
-#     "user-agent",
-#     "x-csrftoken",
-#     "x-requested-with",
-# )
 
 # CSRF
 CSRF_USE_SESSIONS = True
@@ -108,9 +74,6 @@ CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua']
 # REST_FRAMEWORK
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend'
-    ],
     'DEFAULT_PERMISSION_CLASSES': [
         "rest_framework.permissions.AllowAny",
     ],
@@ -120,6 +83,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DATETIME_FORMAT': '%d.%m.%Y %H:%M:%S',
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
 }
 
 SPECTACULAR_SETTINGS = {
@@ -132,6 +98,7 @@ SPECTACULAR_SETTINGS = {
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -162,6 +129,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -183,7 +151,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'Asia/Bishkek'
 
@@ -199,13 +167,13 @@ MODELTRANSLATION_TRANSLATION_REGISTRY = 'core.translation'
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'back_static/'
-# STATIC_ROOT = os.path.join(f'{BASE_DIR}', 'back_static')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'back_static')]
+STATIC_ROOT = os.path.join(f'{BASE_DIR}', 'back_static')
 
 # MEDIA (Images, PDF)
 
 MEDIA_URL = '/back_media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'back_media')
+
 
 # EMAIL
 EMAIL_BACKEND = config.EMAIL_BACKEND
@@ -221,13 +189,7 @@ SERVER_EMAIL = config.SERVER_EMAIL
 REDIS_HOST = 'redis'
 REDIS_PORT = 6379
 
-# CELERY
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
-CELERY_BROKER_TRANSPORT_OPTIONS = {'visible_timeout': 3600}
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
