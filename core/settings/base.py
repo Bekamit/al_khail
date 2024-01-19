@@ -196,9 +196,9 @@ REDIS_PORT = 6379
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'admin_app.CustomUser'
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+# INTERNAL_IPS = [
+#     "127.0.0.1",
+# ]
 
 if PRODUCTION:
     import socket  # only if you haven't already imported this
