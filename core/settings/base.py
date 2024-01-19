@@ -166,7 +166,7 @@ MODELTRANSLATION_TRANSLATION_REGISTRY = 'core.translation'
 # STATIC (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'back_static/'
+STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(f'{BASE_DIR}', 'back_static')
 
 # MEDIA (Images, PDF)
