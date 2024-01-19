@@ -29,10 +29,28 @@
     </style>
 </head>
 <body>
-    <h1>New Appeal Received!</h1>
+    <h1>New message from site!</h1>
+    {% if instance.is_for_purchase == True %}
+        <p>Appeal id: <strong>{{ instance.id }}</strong></p>
+        <p>is for purcahse: <strong>{{ instance.is_for_purchase }}</strong></p>
+        <p>Name: <strong>{{ instance.name }}</strong></p>
+        <p>Phone: <strong>{{ instance.phone }}</strong></p>
+        <p>Language: <strong>{{ instance.lang }}</strong></p>
+        <p>At time: <strong>{{ instance.at_time }}</strong></p>
+        <p>Created at: <strong>{{ instance.created_at }}</strong></p>
+    {% else %}
+        <p>Appeal id: <strong>{{ instance.id }}</strong></p>
+        <p>Name: <strong>{{ instance.name }}</strong></p>
+        <p>Phone: <strong>{{ instance.phone }}</strong></p>
+        <p>Language: <strong>{{ instance.lang }}</strong></p>
+        <p>At time: <strong>{{ instance.at_time }}</strong></p>
+        <p>Created at: <strong>{{ instance.created_at }}</strong></p>
+    {% endif %}
+
     <p>Name: <strong>{{ instance.name }}</strong></p>
     <p>Phone: <strong>{{ instance.phone }}</strong></p>
     <p>Language: <strong>{{ instance.lang }}</strong></p>
-    <p>At time: <strong>{{ instance.at_time }}, {{ instance.more_about_time }}</strong></p>
+    <p>At time: <strong>{{ instance.at_time }}</strong></p>
+
 </body>
 </html>

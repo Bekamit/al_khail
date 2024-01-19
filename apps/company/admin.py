@@ -1,11 +1,14 @@
 from django.utils.safestring import mark_safe
+
 from django.contrib import admin
+from service.admin import CustomModelAdmin
+
 from .models import *
 
 
 @admin.register(Company)
-class CompanyAdmin(admin.ModelAdmin):
-    list_display = ('company_name', 'phone', 'email', 'company_img')
+class CompanyAdmin(CustomModelAdmin):
+    list_display = ('company_name', 'phone', 'email', 'preview')
     readonly_fields = ['preview']
 
     fieldsets = [
@@ -39,11 +42,6 @@ class CompanyAdmin(admin.ModelAdmin):
             ]
         })
     ]
-
-    class Media:
-        css = {
-            'all': ('css/admin.css',),
-        }
 
     def preview(self, obj):
         return mark_safe(f'<img src="{obj.company_img.url}", style="max-height: 200px;">')

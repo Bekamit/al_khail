@@ -3,16 +3,14 @@ from .models import Estate, EstateType
 
 
 class EstateTranslationOptions(TranslationOptions):
-    fields = ('name',
-              'developer',
-              'district',
+    fields = ('title',
               'description',)
-              # 'price',
-              # 'currency')
+    required_languages = ('en',)
 
 
 class EstateTypeTranslationOptions(TranslationOptions):
     fields = ('type',)
+    required_languages = ('en',)
 
 
 translator.register(Estate, EstateTranslationOptions)

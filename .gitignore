@@ -1,9 +1,7 @@
 .gitignore
 #.env
 .idea
-.DS_Store
 venv
-db.sqlite3
 __pycache__
 сore/__pycache__
 apps/admin_app/__pycache__
@@ -15,13 +13,13 @@ apps/city/__pycache__
 apps/city/migrations/__pycache__
 apps/estate/__pycache__
 apps/estate/migrations/__pycache__
-#apps/estate_page/__pycache__
-#apps/estate_page/migrations/__pycache__
 apps/company/__pycache__
-apps/company/migrations/__pycach
+apps/company/migrations/__pycach__
 apps/staticdata/__pycache__
-apps/staticdata/migrations/__pycach
+apps/staticdata/migrations/__pycach__
 service/__pycache__
+apps/project/__pycache__
+apps/project/migrations/__pycach
 back_media/__pycache__
 back_static/__pycache__
 ### Django ###
@@ -31,10 +29,12 @@ back_static/__pycache__
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+work.txt
+Makefile
+Dockerfile
+docker-compose.yaml
 
-back_media/company
-back_media/cities
-back_media/estate
+back_media/
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.

@@ -1,6 +1,6 @@
 from drf_spectacular.utils import OpenApiParameter, extend_schema
 
-from service.views import CustomListAPIView
+from service.views import CustomSingletonListAPIView
 from .serializers import StaticDataSerializer
 
 from .models import StaticData
@@ -19,11 +19,11 @@ from .models import StaticData
             name='ACCEPT-LANGUAGE',
             type=str,
             location=OpenApiParameter.HEADER,
-            description='Язык, на котором должны возвращаться данные (опционально).'
+            description='Язык, на котором должны возвращаться данные (en, ar, tr, ru).'
         ),
     ]
 )
-class StaticDataListAPIView(CustomListAPIView):
+class StaticDataListAPIView(CustomSingletonListAPIView):
     queryset = StaticData.objects.all()
     serializer_class = StaticDataSerializer
     response_key = 'static data'
