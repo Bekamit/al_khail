@@ -30,7 +30,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports:
-      - '5433:5432'
+      - '5432:5432'
 
   migration:
     build: .
@@ -47,10 +47,10 @@ services:
 #      - "80:80"
 #    volumes:
 #      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-#      - static_volume:/usr/src/app/static
+#      - static_volume:/usr/src/app/back_static
+#      - media_volume:/usr/src/app/back_media
 #    depends_on:
 #      - api
-
   nginx:
     image: jwilder/nginx-proxy:1.2
     container_name: docker_nginx
