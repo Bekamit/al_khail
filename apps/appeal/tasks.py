@@ -7,7 +7,7 @@ from .models import Appeal
 import config
 
 
-@celery_app.task
+# @celery_app.task
 def send_appeal_email_task(appeal_id):
     try:
         instance = Appeal.objects.get(pk=appeal_id)
