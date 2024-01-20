@@ -57,14 +57,14 @@ services:
     depends_on:
       - api
 
-  acme_companion:
-    image: nginxproxy/acme-companion:2.2
-    container_name: acme_companion
-    volumes_from:
-      - nginx
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - acme:/etc/acme.sh
+#  acme_companion:
+#    image: nginxproxy/acme-companion:2.2
+#    container_name: acme_companion
+#    volumes_from:
+#      - nginx
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - acme:/etc/acme.sh
 
   redis:
     image: redis
