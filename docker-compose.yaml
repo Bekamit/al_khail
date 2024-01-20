@@ -17,8 +17,8 @@ services:
       - static_volume:/usr/src/app/back_static
       - media_volume:/usr/src/app/back_media
     environment:
-#      - VIRTUAL_HOST=alkhail.pp.ua
-      - LETSENCRYPT_HOST=alkhail.pp.ua
+      - VIRTUAL_HOST=gulsdem.pp.ua
+      - LETSENCRYPT_HOST=gulsdem.pp.ua
 
   postgres:
     image: postgres
