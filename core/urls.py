@@ -17,6 +17,7 @@ urlpatterns = [
     path("api/v1/", include("apps.company.urls")),
     path("api/v1/", include("apps.estate.urls")),
     path("api/v1/", include("apps.staticdata.urls")),
+    path("api/v1/", include("apps.analytics.urls")),
 ]
 
 if base.DEBUG:

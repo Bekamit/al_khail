@@ -18,13 +18,6 @@ class PhoneNumberField(serializers.CharField):
             raise serializers.ValidationError('Invalid phone number format')
 
 
-class LanguageField(serializers.CharField):
-    def to_representation(self, value):
-        request = self.context.get('request')
-        lang = get_language_from_request(request)
-        return lang or super(LanguageField, self).to_representation(value)
-
-
 class AppealSellValidateSerializer(serializers.Serializer):
     is_for_purchase = serializers.BooleanField(default=False)
     name = serializers.CharField(max_length=70, required=True)
@@ -49,7 +42,6 @@ class AppealSellValidateSerializer(serializers.Serializer):
     def create(self, validated_data):
         validated_data.pop('last_name')
         validated_data['lang'] = self.get_language()
-        print(validated_data)
         return Appeal.create_appeal(validated_data)
 
 
