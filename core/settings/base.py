@@ -19,6 +19,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 PRODUCTION = env('PRODUCTION', default=False, cast=bool)
 
+# Cors
+
+CORS_ALLOWED_ALL_ORIGINS = True
+
 # Application definition
 THEME_PARTY_APPS = [
     'rest_framework',
