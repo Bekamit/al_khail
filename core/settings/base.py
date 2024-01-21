@@ -185,6 +185,14 @@ EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
 DEFAULT_FROM_EMAIL = config.DEFAULT_FROM_EMAIL
 SERVER_EMAIL = config.SERVER_EMAIL
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+
+# EMAIL_HOST_USER = 'tolomushev33@gmail.com'
+# EMAIL_HOST_PASSWORD = 'ymiaghfkrwoelcgl'
+
 # Redis
 REDIS_HOST = 'redis'
 REDIS_PORT = 6379

@@ -14,4 +14,4 @@ def send_appeal_email1(sender, instance, **kwargs):
         sender_email = 'sayansenedwne@gmail.com'
         recipient_email = 'ramzhan8@gmail.com'
 
-        send_mail(subject, message, sender_email, [recipient_email], fail_silently=False)
+        send_mail(subject, message, sender_email, [recipient_email], fail_silently=True)
