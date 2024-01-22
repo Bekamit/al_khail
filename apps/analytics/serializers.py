@@ -1,19 +1,12 @@
 from rest_framework import serializers
 
-from apps.analytics.models import Analytics, Role
+from apps.analytics.models import DownloadCatalog
 from apps.appeal.serializers import PhoneNumberField
 
 
-class RoleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Role
-        fields = '__all__'
-
-
-class AnalyticsSerializer(serializers.ModelSerializer):
-    phone_number = PhoneNumberField()
-    message = serializers.CharField(allow_blank=True, required=False, allow_null=True)
+class DownloadCatalogSerializer(serializers.ModelSerializer):
+    phone_number = PhoneNumberField(required=False)
 
     class Meta:
-        model = Analytics
+        model = DownloadCatalog
         fields = '__all__'

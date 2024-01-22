@@ -24,6 +24,7 @@ class AppealSellValidateSerializer(serializers.Serializer):
     last_name = serializers.CharField(max_length=70, required=True, allow_blank=True, write_only=True)
     phone = PhoneNumberField()
     at_time = serializers.DateTimeField(required=True)
+    city = serializers.CharField(max_length=70, required=True)
 
     def get_language(self):
         request = self.context['request']
@@ -42,6 +43,7 @@ class AppealSellValidateSerializer(serializers.Serializer):
     def create(self, validated_data):
         validated_data.pop('last_name')
         validated_data['lang'] = self.get_language()
+        validated_data['city'] = validated_data['city'].capitalize()
         return Appeal.create_appeal(validated_data)
 
 
@@ -52,6 +54,7 @@ class AppealBuyValidateSerializer(serializers.Serializer):
     last_name = serializers.CharField(max_length=70, required=True, allow_blank=True, write_only=True)
     phone = PhoneNumberField()
     at_time = serializers.DateTimeField(required=True)
+    city = serializers.CharField(max_length=70, required=True)
 
     def validate_estate_id(self, estate_id):
         if not Estate.is_valid(estate_id):
@@ -75,4 +78,5 @@ class AppealBuyValidateSerializer(serializers.Serializer):
     def create(self, validated_data):
         validated_data.pop('last_name')
         validated_data['lang'] = self.get_language()
+        validated_data['city'] = validated_data['city'].capitalize()
         return Appeal.create_appeal(validated_data)

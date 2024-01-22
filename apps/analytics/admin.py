@@ -1,6 +1,5 @@
 from django.contrib import admin
-from apps.analytics.models import Analytics, Role
+from apps.analytics.models import DownloadCatalog
 
 
-admin.site.register(Role)
-admin.site.register(Analytics)
+admin.site.register(DownloadCatalog)
