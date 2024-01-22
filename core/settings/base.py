@@ -54,12 +54,12 @@ THEME = [
 ]
 APPS = [
     'apps.admin_app',
-    # 'apps.appeal',
+    'apps.appeal',
     'apps.city',
     'apps.company',
     'apps.estate',
-    'apps.staticdata',
     'apps.project',
+    'apps.staticdata',
 ]
 INSTALLED_APPS = [
     *THEME,
