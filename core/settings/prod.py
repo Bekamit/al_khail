@@ -6,11 +6,10 @@ SECRET_KEY = config.SECRET_KEY
 DEBUG = config.DEBUG
 
 ALLOWED_HOSTS = [
-    "*",
-    "http://localhost/"
     "http://localhost:5173/",
     "http://localhost:6379/"
     "http://localhost:8000",
+    "http://localhost:654"
     "http://16.171.129.40/",
     "https://gulsdem.pp.ua/",
     "http://gulsdem.pp.ua/",

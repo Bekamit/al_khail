@@ -22,7 +22,7 @@ services:
 
   postgres:
     image: postgres
-    restart: always
+#    restart: always
     environment:
       POSTGRES_DB: db
       POSTGRES_USER: postgres
