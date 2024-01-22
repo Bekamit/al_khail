@@ -5,15 +5,15 @@ SECRET_KEY = config.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config.DEBUG
 
-ALLOWED_HOSTS = [
-    "http://localhost:5173/",
-    "http://localhost:6379/"
-    "http://localhost:8000",
-    "http://localhost:654"
-    "http://16.171.129.40/",
-    "https://gulsdem.pp.ua/",
-    "http://gulsdem.pp.ua/",
-]
+# ALLOWED_HOSTS = [
+#     "http://localhost:5173/",
+#     "http://localhost:6379/"
+#     "http://localhost:8000",
+#     "http://localhost:654"
+#     "http://16.171.129.40/",
+#     "https://gulsdem.pp.ua/",
+#     "http://gulsdem.pp.ua/",
+# ]
 
 DATABASES = {
    'default': {
@@ -39,8 +39,8 @@ CELERY_RESULT_SERIALIZER = 'json'
 # Cors
 
 CORS_ALLOWED_ALL_ORIGINS = True
-# CORS_ALLOW_CREDENTIALS = True
-# CORS_ALLOW_PRIVATE_NETWORK = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_PRIVATE_NETWORK = True
 
 
 # CORS_ALLOW_METHODS = (
