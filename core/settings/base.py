@@ -28,8 +28,8 @@ ALLOWED_HOSTS = [
     # "https://gulsdem.pp.ua",
     # "http://gulsdem.pp.ua",
     # "*",
-    "localhost",
-    "gulsdem.pp.ua"
+    'gulsdem.pp.ua',
+    'localhost',
 ]
 
 # Cors
