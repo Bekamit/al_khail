@@ -21,14 +21,13 @@ PRODUCTION = env('PRODUCTION', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
     '*',
-    "http://localhost:5173/",
-    "http://localhost:6379/",
-    "http://localhost:8000/",
-    "http://localhost:654",
-    "http://16.171.129.40",
-    "https://gulsdem.pp.ua/",
-    "http://gulsdem.pp.ua/",
-
+    # "http://localhost:5173/",
+    # "http://localhost:6379/",
+    # "http://localhost:8000/",
+    # "http://localhost:654",
+    # "http://16.171.129.40",
+    # "https://gulsdem.pp.ua/",
+    "gulsdem.pp.ua",
     # 'gulsdem.pp.ua',
     # 'localhost',
 ]
@@ -36,8 +35,8 @@ ALLOWED_HOSTS = [
 # Cors
 
 CORS_ALLOWED_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_PRIVATE_NETWORK = True
+# CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_PRIVATE_NETWORK = True
 CORS_ALLOWED_ALL_CREDENTIALS = True
 
 # Application definition
@@ -90,7 +89,7 @@ JAZZMIN_SETTINGS = {
 
 # CSRF
 CSRF_USE_SESSIONS = True
-CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua',"http://localhost:6379/", "http://localhost:5173",]
+CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua',"http://localhost:6379", "http://localhost:5173",]
 
 # REST_FRAMEWORK
 

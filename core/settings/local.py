@@ -6,13 +6,6 @@ SECRET_KEY = config.SECRET_KEY
 
 DEBUG = config.DEBUG
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost',
-    '*',
-]
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
