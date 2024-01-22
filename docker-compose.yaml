@@ -8,7 +8,7 @@ services:
       sh -c "gunicorn core.wsgi:application --bind 0.0.0.0:8000"
     ports:
       - '8000:8000'
-    restart: always
+#    restart: always
     depends_on:
       - postgres
       - migration
@@ -22,7 +22,7 @@ services:
 
   postgres:
     image: postgres
-#    restart: always
+    restart: always
     environment:
       POSTGRES_DB: db
       POSTGRES_USER: postgres
