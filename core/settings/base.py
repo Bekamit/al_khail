@@ -57,7 +57,7 @@ APPS = [
     'apps.company',
     'apps.estate',
     'apps.staticdata',
-    'apps.project'
+    'apps.project',
 ]
 INSTALLED_APPS = [
     *THEME,
@@ -68,7 +68,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     *THEME_PARTY_APPS,
-    *APPS
+    *APPS,
 ]
 
 
@@ -87,7 +87,7 @@ JAZZMIN_SETTINGS = {
 
 # CSRF
 CSRF_USE_SESSIONS = True
-CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua',"http://localhost:6379/"]
+CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua',"http://localhost:6379/", "http://localhost:5173",]
 
 # REST_FRAMEWORK
 
