@@ -1,13 +1,12 @@
 from core.celery import celery_app
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
-from core.settings.env_reader import env
 
 from .models import Appeal
 import config
 
 
-# @celery_app.task
+@celery_app.task
 def send_appeal_email_task(appeal_id):
     try:
         instance = Appeal.objects.get(pk=appeal_id)
@@ -16,7 +15,7 @@ def send_appeal_email_task(appeal_id):
         # Исправленный путь к шаблону
         html_message = render_to_string('appeal_template.html', {'instance': instance})
 
-        from_email = env.DEFAULT_FROM_EMAIL
+        from_email = config.DEFAULT_FROM_EMAIL
         recipient_list = [str(config.ADMIN_EMAIL)]
 
         email = EmailMessage(

@@ -19,25 +19,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 PRODUCTION = env('PRODUCTION', default=False, cast=bool)
 
-ALLOWED_HOSTS = [
-    '*',
-    # "http://localhost:5173/",
-    # "http://localhost:6379/",
-    # "http://localhost:8000/",
-    # "http://localhost:654",
-    # "http://16.171.129.40",
-    # "https://gulsdem.pp.ua/",
-    "gulsdem.pp.ua",
-    # 'gulsdem.pp.ua',
-    # 'localhost',
-]
+ALLOWED_HOSTS = ['*']
 
-# Cors
-
-CORS_ALLOWED_ALL_ORIGINS = True
-# CORS_ALLOW_CREDENTIALS = True
-# CORS_ALLOW_PRIVATE_NETWORK = True
-CORS_ALLOWED_ALL_CREDENTIALS = True
 
 # Application definition
 THEME_PARTY_APPS = [
@@ -117,8 +100,8 @@ SPECTACULAR_SETTINGS = {
 }
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -196,14 +179,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'back_media')
 
 
 # EMAIL
-# EMAIL_BACKEND = config.EMAIL_BACKEND
-# EMAIL_HOST = config.EMAIL_HOST
-# EMAIL_PORT = config.EMAIL_PORT
-# EMAIL_USE_TLS = config.EMAIL_USE_TLS
-# EMAIL_HOST_USER = config.EMAIL_HOST_USER
-# EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
-# DEFAULT_FROM_EMAIL = config.DEFAULT_FROM_EMAIL
-# SERVER_EMAIL = config.SERVER_EMAIL
+EMAIL_BACKEND = config.EMAIL_BACKEND
+EMAIL_HOST = config.EMAIL_HOST
+EMAIL_PORT = config.EMAIL_PORT
+EMAIL_USE_TLS = config.EMAIL_USE_TLS
+EMAIL_USE_SSL = config.EMAIL_USE_SSL
+EMAIL_HOST_USER = config.EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
+DEFAULT_FROM_EMAIL = config.DEFAULT_FROM_EMAIL
+SERVER_EMAIL = config.SERVER_EMAIL
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp.gmail.com'
@@ -230,3 +214,32 @@ if not PRODUCTION:
     from .local import *
 else:
     from .prod import *
+
+# Cors
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_PRIVATE_NETWORK = True
+CORS_ALLOWED_ALL_CREDENTIALS = True
+
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
