@@ -21,6 +21,7 @@ PRODUCTION = env('PRODUCTION', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
     "localhost",
+    "gulsdem.pp.ua",
     "http://localhost:5173",
     "http://localhost:6379",
     "http://localhost:8000",
