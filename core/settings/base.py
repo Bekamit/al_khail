@@ -27,8 +27,8 @@ ALLOWED_HOSTS = [
     # "http://16.171.129.40",
     # "https://gulsdem.pp.ua",
     # "http://gulsdem.pp.ua",
-    "*",
-    # 'gulsdem.pp.ua',
+    '*',
+    'gulsdem.pp.ua',
     # 'localhost',
 ]
 
