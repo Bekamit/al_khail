@@ -21,13 +21,13 @@ PRODUCTION = env('PRODUCTION', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
     '*',
-    "http://localhost:5173",
-    "http://localhost:6379",
-    "http://localhost:8000",
+    "http://localhost:5173/",
+    "http://localhost:6379/",
+    "http://localhost:8000/",
     "http://localhost:654",
     "http://16.171.129.40",
-    "https://gulsdem.pp.ua",
-    "http://gulsdem.pp.ua",
+    "https://gulsdem.pp.ua/",
+    "http://gulsdem.pp.ua/",
 
     # 'gulsdem.pp.ua',
     # 'localhost',
