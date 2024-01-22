@@ -83,7 +83,7 @@ JAZZMIN_SETTINGS = {
 
 # CSRF
 CSRF_USE_SESSIONS = True
-CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua']
+CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua',"http://localhost:6379/"]
 
 # REST_FRAMEWORK
 
