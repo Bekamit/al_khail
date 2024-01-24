@@ -10,4 +10,10 @@ rm:
 # 	&& sudo rm -rf pgdata/
 
 up:
+    docker-compose up -d --build
+
+down:
+    docker-compose down -v
+
+recreate:
 	docker-compose up -d --force-recreate

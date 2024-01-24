@@ -13,7 +13,7 @@ class Appeal(models.Model):
     phone = models.CharField(max_length=70, verbose_name='Phone number')
     lang = models.CharField(max_length=30, verbose_name='Message Language')
     at_time = models.DateTimeField(verbose_name='Call at time', null=True)
-    # city = models.CharField()
+    city = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Send date')
     is_send = models.BooleanField(default=True, verbose_name='Send letter')
 
@@ -29,4 +29,5 @@ class Appeal(models.Model):
         return Appeal.objects.create(**data)
 
     def send_error(self):
-        ...
+        self.is_send = False
+        self.save()
