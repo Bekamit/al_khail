@@ -14,7 +14,7 @@ class CompanyAdmin(CustomModelAdmin):
     fieldsets = [
         ('English', {
             'fields': [
-                'company_name_en',
+                'company_name',
                 'about_en',
                 'email',
                 'phone',
@@ -25,19 +25,16 @@ class CompanyAdmin(CustomModelAdmin):
         }),
         ('Arabic', {
             'fields': [
-                'company_name_ar',
                 'about_ar',
             ]
         }),
         ('Turkish', {
             'fields': [
-                'company_name_tr',
                 'about_tr',
             ]
         }),
         ('Russian', {
             'fields': [
-                'company_name_ru',
                 'about_ru',
             ]
         })

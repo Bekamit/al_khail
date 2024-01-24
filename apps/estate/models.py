@@ -1,9 +1,8 @@
 from django.db import models
-from django.db.models import F
+from django.db.models import F, Q, Case, When, Value
 
 from apps.city.models import City
 from apps.project.models import Project
-from apps.staticdata.models import StaticData
 
 
 class EstateType(models.Model):
@@ -31,7 +30,7 @@ class Estate(models.Model):
     """
     project = models.ForeignKey(to=Project, on_delete=models.CASCADE, related_name='estate', verbose_name='Project')
     title = models.CharField(max_length=100, verbose_name='Title')
-    area = models.FloatField(verbose_name='Area (m2)')
+    area = models.FloatField(verbose_name='Area (m²)')
     description = models.TextField(max_length=1000, verbose_name='Description')
     price_usd = models.FloatField(verbose_name='Price ($)')
     estate_type = models.ForeignKey(to=EstateType, on_delete=models.DO_NOTHING, related_name='estate')
@@ -46,11 +45,6 @@ class Estate(models.Model):
     @staticmethod
     def is_valid(estate_id):
         return Estate.objects.filter(id=estate_id).exists()
-
-    @property
-    def default_img(self):
-        img = StaticData.default_img()
-        return img
 
     def visits_counter(self):
         self.visits = F('visits') + 1

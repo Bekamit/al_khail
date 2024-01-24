@@ -3,8 +3,7 @@ from .models import Company
 
 
 class CompanyTranslationOptions(TranslationOptions):
-    fields = ('company_name',
-              'about',)
+    fields = ('about',)
 
 
 translator.register(Company, CompanyTranslationOptions)

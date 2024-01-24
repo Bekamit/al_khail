@@ -40,6 +40,7 @@ THEME_PARTY_APPS = [
 THEME = [
     'modeltranslation',
     'jazzmin',
+    'debug_toolbar',
 ]
 APPS = [
     'apps.admin_app',
@@ -49,6 +50,7 @@ APPS = [
     'apps.estate',
     'apps.staticdata',
     'apps.project',
+    'apps.analytics',
 ]
 INSTALLED_APPS = [
     *THEME,
@@ -135,6 +137,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -194,8 +197,7 @@ MODELTRANSLATION_TRANSLATION_REGISTRY = 'core.translation'
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'back_static/'
-# STATIC_ROOT = os.path.join(f'{BASE_DIR}', 'back_static')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'back_static')]
+STATIC_ROOT = os.path.join(f'{BASE_DIR}', 'back_static')
 
 # MEDIA (Images, PDF)
 
@@ -219,7 +221,8 @@ REDIS_PORT = 6379
 # CELERY
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
 CELERY_BROKER_TRANSPORT_OPTIONS = {'visible_timeout': 3600}
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
+result_backend = 'redis://127.0.0.1:6379/0'
+# = 'redis://127.0.0.1:6379/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'

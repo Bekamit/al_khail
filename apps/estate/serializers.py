@@ -2,7 +2,8 @@ from rest_framework import serializers, exceptions
 from django.db import models
 
 from .models import Estate, EstateType, EstateImage
-from ..project.serializers import ProjectSerializer
+from apps.staticdata.models import DefaultValue
+from apps.project.serializers import ProjectSerializer
 
 
 # ------------------------ ESTATE IMAGE -------------------
@@ -42,15 +43,15 @@ class EstateRetrieveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Estate
-        fields = ['project',
-                  'id',
+        fields = ['id',
                   'title',
                   'area',
                   'description',
                   'price_usd',
                   'estate_type',
                   'city',
-                  'is_secondary']
+                  'is_secondary',
+                  'project', ]
 
 
 class EstateSerializer(serializers.ModelSerializer):
@@ -61,20 +62,13 @@ class EstateSerializer(serializers.ModelSerializer):
     def absolute_url(self, instance):
         if isinstance(instance.field, models.ImageField):
             return self.context['request'].build_absolute_uri(instance.url)
-        return None
+        return instance.url
 
     def get_preview(self, estate):
-
-        images = estate.image.all()
-        preview_images = images.filter(img__icontains='preview')
-
-        if preview_images.exists():
-            return {'img': self.absolute_url(preview_images.first().img)}
-
-        if images.exists():
-            return {'img': self.absolute_url(images.first().img)}
-
-        return {'img': self.absolute_url(estate.default_img)} if estate.default_img else None
+        if image := estate.image.first():
+            return {'img': self.absolute_url(image.img)}
+        else:
+            return {'img': self.absolute_url(DefaultValue.default_img())}
 
     class Meta:
         model = Estate

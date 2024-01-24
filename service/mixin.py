@@ -2,7 +2,8 @@ from rest_framework import status
 from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, CreateModelMixin
 from rest_framework.response import Response
 
-from apps.staticdata.models import StaticData
+from apps.staticdata.models import DefaultValue
+from apps.estate.models import Estate
 
 
 class CustomListModelMixin(ListModelMixin):
@@ -64,17 +65,20 @@ class CustomSingletonListModelMixin(ListModelMixin):
         return Response(data)
 
 
-class CustomRetrieveModelMixin(RetrieveModelMixin):
+class CustomRetrieveMixin(RetrieveModelMixin):
     """
         Retrieve a queryset with custom Response.
         {
-            language: 'EN',
+            "language": "EN",
             response_key: [serialize.data]
         }
-        """
+    """
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
+        if isinstance(instance, Estate):
+            instance.visits_counter()
+
         serializer = self.get_serializer(instance)
 
         response_key = self.get_response_key()
@@ -110,10 +114,19 @@ class CustomRetrieveEstateImageMixin(ListModelMixin):
                 data.append(f"{request.scheme}://{current_host}{image.img.url}")
         else:
             try:
-                data.append(f"{request.scheme}://{current_host}{StaticData.default_img().url}")
+                data.append(f"{request.scheme}://{current_host}{DefaultValue.default_img().url}")
             except:
                 data.append('No Image')
         response["images"] = data
 
         serializer = self.get_serializer(response)
         return Response(serializer.data)
+
+
+class CustomCreateEstateMixin(CreateModelMixin):
+    def create(self, request, *args, **kwargs):
+        return Response({
+            "status": "ok",
+            "estate": "created",
+            "count": Estate.objects.all().count()
+        }, status=status.HTTP_201_CREATED)
