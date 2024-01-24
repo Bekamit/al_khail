@@ -43,6 +43,7 @@ APPS = [
     'apps.estate',
     'apps.project',
     'apps.staticdata',
+    'apps.analytics',
 ]
 INSTALLED_APPS = [
     *THEME,
@@ -72,7 +73,11 @@ JAZZMIN_SETTINGS = {
 
 # CSRF
 CSRF_USE_SESSIONS = True
-CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua',"http://localhost:6379", "http://localhost:5173",]
+CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua',
+                        "http://localhost:6379",
+                        "http://localhost:5173",
+                        'https://alkhail.pp.ua',
+                        'http://localhost:8000']
 
 # REST_FRAMEWORK
 
@@ -94,9 +99,9 @@ REST_FRAMEWORK = {
 SPECTACULAR_SETTINGS = {
     # set 'COMPONENT_SPLIT_REQUEST' to 'True' will enable POST execute in swagger ui
     'COMPONENT_SPLIT_REQUEST': True,
-    "TITLE": "Al-Khail API",
-    "DESCRIPTION": "API for Al-Khail web service",
-    "VERSION": "v1",
+    "TITLE": "Golden House API",
+    "DESCRIPTION": "API for Golden House web service",
+    "VERSION": "v1.SSL-off",
 }
 
 MIDDLEWARE = [
@@ -189,13 +194,6 @@ EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
 DEFAULT_FROM_EMAIL = config.DEFAULT_FROM_EMAIL
 SERVER_EMAIL = config.SERVER_EMAIL
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-
-# EMAIL_HOST_USER = 'tolomushev33@gmail.com'
-# EMAIL_HOST_PASSWORD = 'ymiaghfkrwoelcgl'
 
 # Redis
 REDIS_HOST = 'redis'
