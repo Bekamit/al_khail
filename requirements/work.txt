@@ -45,3 +45,4 @@ gunicorn==21.2.0
 redis==5.0.1
 phonenumbers==8.12.16
 django-debug-toolbar==4.1.0
+django-summernote==0.8.20.0

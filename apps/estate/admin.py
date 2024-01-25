@@ -1,5 +1,5 @@
 from django.utils.safestring import mark_safe
-
+from django_summernote.admin import SummernoteModelAdmin
 from django.contrib import admin
 
 from service.admin import CustomModelAdmin
@@ -12,7 +12,7 @@ class EstateImageInline(admin.TabularInline):
 
 
 @admin.register(Estate)
-class EstateAdmin(CustomModelAdmin):
+class EstateAdmin(SummernoteModelAdmin, CustomModelAdmin):
     list_display = ('title',
                     'project',
                     'area',
@@ -22,6 +22,7 @@ class EstateAdmin(CustomModelAdmin):
                     'preview')
     search_fields = ('project__name', 'title', 'developer', 'district', 'estate_type__type_en', 'city__city_name_en')
     list_filter = ('city__city_name', 'project__name', 'estate_type__type', 'is_secondary')
+    summernote_fields = '__all__'
     fieldsets = [
         ('English', {
             'fields': [

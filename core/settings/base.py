@@ -30,6 +30,7 @@ THEME_PARTY_APPS = [
     'solo.apps.SoloAppConfig',
     'corsheaders',
     'debug_toolbar',
+    'django_summernote',
 ]
 THEME = [
     'modeltranslation',
