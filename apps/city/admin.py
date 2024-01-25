@@ -1,5 +1,5 @@
 from django.utils.safestring import mark_safe
-
+from django_summernote.admin import SummernoteModelAdmin
 from django.contrib import admin
 from service.admin import CustomModelAdmin
 
@@ -7,11 +7,12 @@ from .models import *
 
 
 @admin.register(City)
-class CityAdmin(CustomModelAdmin):
+class CityAdmin(SummernoteModelAdmin, CustomModelAdmin):
     list_display = ('city_name', 'city_description', 'preview')
     search_fields = ('city_name', 'city_name_ar', 'city_tr', 'city_ru')
     list_filter = ('city_name',)
     readonly_fields = ['preview']
+    summernote_fields = '__all__'
 
     fieldsets = [
         ('English', {
