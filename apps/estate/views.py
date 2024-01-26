@@ -110,7 +110,7 @@ class EstateListAPIView(CustomListAPIView):
     response_key = 'estates'
     pagination_class = LimitOffsetCustomPagination
     filter_backends = [SearchFilter, DjangoFilterBackend]
-    search_fields = ['project__name', 'project__location', 'project__developer', ]
+    search_fields = ['project__name', 'project__location', 'project__developer', 'description', ]
     filterset_class = EstateFilterSet
 
 

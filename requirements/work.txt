@@ -10,26 +10,27 @@ click-repl==0.3.0
 colorama==0.4.6
 defusedxml==0.7.1
 Django==4.2.8
+<<<<<<< HEAD
 django-cors-headers==4.3.1
 django-debug-toolbar==4.2.0
+=======
+>>>>>>> 71b687ae68dcb55546a7801df6cd96cd8db7421a
 django-filter==23.5
 django-jazzmin==2.6.0
 django-modeltranslation==0.18.11
 django-solo==2.1.0
 djangorestframework==3.14.0
+django-cors-headers==4.3.1
 drf-spectacular==0.26.1
 fonttools==4.46.0
 fpdf2==2.7.7
-gunicorn==21.2.0
 inflection==0.5.1
 jsonschema==4.20.0
 jsonschema-specifications==2023.11.2
 kombu==5.3.4
 packaging==23.2
-phonenumbers==8.13.27
 Pillow==10.1.0
 prompt-toolkit==3.0.43
-psycopg2==2.9.6
 psycopg2-binary==2.9.9
 PyJWT==2.8.0
 python-dateutil==2.8.2
@@ -45,4 +46,7 @@ tzdata==2023.3
 uritemplate==4.1.1
 vine==5.1.0
 wcwidth==0.2.12
+gunicorn==21.2.0
 redis==5.0.1
+phonenumbers==8.12.16
+django-debug-toolbar==4.1.0

@@ -19,15 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 PRODUCTION = env('PRODUCTION', default=False, cast=bool)
 
-ALLOWED_HOSTS = [
-    "*",
-    "http://localhost:5173/",
-    "http://localhost:8000",
-    "http://16.171.129.40/",
-    "http://172",
-    "https://gulsdem.pp.ua/",
-    "http://gulsdem.pp.ua/",
-]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 THEME_PARTY_APPS = [
@@ -36,11 +28,11 @@ THEME_PARTY_APPS = [
     'drf_spectacular',
     'solo.apps.SoloAppConfig',
     'corsheaders',
+    'debug_toolbar',
 ]
 THEME = [
     'modeltranslation',
     'jazzmin',
-    'debug_toolbar',
 ]
 APPS = [
     'apps.admin_app',
@@ -48,8 +40,8 @@ APPS = [
     'apps.city',
     'apps.company',
     'apps.estate',
-    'apps.staticdata',
     'apps.project',
+    'apps.staticdata',
     'apps.analytics',
 ]
 INSTALLED_APPS = [
@@ -61,15 +53,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     *THEME_PARTY_APPS,
-    *APPS
+    *APPS,
 ]
 
 # JAZZMIN
 
 JAZZMIN_SETTINGS = {
-    'site_title': 'Al Khail Admin panel',
-    'site_header': 'Al Khail Admin panel',
-    'site_brand': 'Al Khail Admin panel',
+    'site_title': 'Gulsdem Admin panel',
+    'site_header': 'Gulsdem Admin panel',
+    'site_brand': 'Gulsdem Admin panel',
     'show_sidebar': True,
     'navigation_expanded': False,
     'hide_models': [],
@@ -77,37 +69,17 @@ JAZZMIN_SETTINGS = {
     'custom_js': None,
 }
 
-# Cors
-
-CORS_ALLOWED_ALL_ORIGINS = True
-# CORS_ALLOW_CREDENTIALS = True
-# CORS_ALLOW_PRIVATE_NETWORK = True
-
-
-# CORS_ALLOW_METHODS = (
-#     "DELETE",
-#     "GET",
-#     "OPTIONS",
-#     "PATCH",
-#     "POST",
-#     "PUT",
-# )
-#
-# CORS_ALLOW_HEADERS = (
-#     "accept",
-#     "authorization",
-#     "content-type",
-#     "user-agent",
-#     "x-csrftoken",
-#     "x-requested-with",
-# )
+# CSRF
+CSRF_USE_SESSIONS = True
+CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua',
+                        "http://localhost:6379",
+                        "http://localhost:5173",
+                        'https://alkhail.pp.ua',
+                        'http://localhost:8000']
 
 # REST_FRAMEWORK
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend'
-    ],
     'DEFAULT_PERMISSION_CLASSES': [
         "rest_framework.permissions.AllowAny",
     ],
@@ -117,21 +89,25 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DATETIME_FORMAT': '%d.%m.%Y %H:%M:%S',
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
 }
 
 SPECTACULAR_SETTINGS = {
     # set 'COMPONENT_SPLIT_REQUEST' to 'True' will enable POST execute in swagger ui
     'COMPONENT_SPLIT_REQUEST': True,
-    "TITLE": "Al-Khail API",
-    "DESCRIPTION": "API for Al-Khail web service",
-    "VERSION": "v1",
+    "TITLE": "Golden House API",
+    "DESCRIPTION": "API for Golden House web service",
+    "VERSION": "v1.SSL-off",
 }
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'apps.admin_app.middleware.custom_middleware.AdminPanelLanguageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -181,7 +157,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'Asia/Bishkek'
 
@@ -209,6 +185,7 @@ EMAIL_BACKEND = config.EMAIL_BACKEND
 EMAIL_HOST = config.EMAIL_HOST
 EMAIL_PORT = config.EMAIL_PORT
 EMAIL_USE_TLS = config.EMAIL_USE_TLS
+EMAIL_USE_SSL = config.EMAIL_USE_SSL
 EMAIL_HOST_USER = config.EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
 DEFAULT_FROM_EMAIL = config.DEFAULT_FROM_EMAIL
@@ -218,25 +195,42 @@ SERVER_EMAIL = config.SERVER_EMAIL
 REDIS_HOST = 'redis'
 REDIS_PORT = 6379
 
-# CELERY
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
-CELERY_BROKER_TRANSPORT_OPTIONS = {'visible_timeout': 3600}
-result_backend = 'redis://127.0.0.1:6379/0'
-# = 'redis://127.0.0.1:6379/0'
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'admin_app.CustomUser'
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+INTERNAL_IPS = ["127.0.0.1"]
 
 if not PRODUCTION:
     from .local import *
 else:
     from .prod import *
+
+# Cors
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_PRIVATE_NETWORK = True
+CORS_ALLOWED_ALL_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]

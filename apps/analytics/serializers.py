@@ -23,3 +23,4 @@ class CatalogDownloaderSerializer(serializers.ModelSerializer):
                   'phone',
                   'email',
                   'role']
+

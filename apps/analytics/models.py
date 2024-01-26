@@ -1,19 +1,11 @@
 from django.db import models
-from apps.staticdata.models import Form
 
 
 class CatalogDownloader(models.Model):
-    form = Form.objects.first()
-    ROLES = (
-        ('', form.role),
-        ('agent', form.agent),
-        ('buyer', form.buyer),
-        ('explorer', form.exploring)
-    )
-    name = models.CharField(max_length=50)
-    email = models.EmailField()
-    phone = models.CharField(max_length=100, verbose_name='E-mail')
-    role = models.CharField(max_length=30, choices=ROLES)
+    name = models.CharField(max_length=50, verbose_name='Name')
+    email = models.EmailField(verbose_name='E-mail')
+    phone = models.CharField(max_length=100, verbose_name='Phone number')
+    role = models.CharField(max_length=30, verbose_name='Role')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
