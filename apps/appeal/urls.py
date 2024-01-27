@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import *
+from ..analytics.views import AppealBuyCreateAPIView, AppealSellCreateAPIView
 
 urlpatterns = [
     path('appeal/buy/', AppealBuyCreateAPIView.as_view()),

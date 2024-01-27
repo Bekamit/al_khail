@@ -6,4 +6,4 @@ class AppealConfig(AppConfig):
     name = 'apps.appeal'
 
     def ready(self):
-        from . import signals
+        pass

@@ -30,20 +30,22 @@ THEME_PARTY_APPS = [
     'corsheaders',
     'debug_toolbar',
 ]
+
 THEME = [
     'modeltranslation',
     'jazzmin',
 ]
+
 APPS = [
     'apps.admin_app',
-    'apps.appeal',
+    'apps.analytics',
     'apps.city',
     'apps.company',
     'apps.estate',
     'apps.project',
     'apps.staticdata',
-    'apps.analytics',
 ]
+
 INSTALLED_APPS = [
     *THEME,
     'django.contrib.admin',

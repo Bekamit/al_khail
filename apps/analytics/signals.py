@@ -19,7 +19,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from .models import Appeal
+from apps.analytics.models import Appeal
 from .tasks import send_appeal_email_task
 
 

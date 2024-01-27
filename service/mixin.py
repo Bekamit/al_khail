@@ -125,8 +125,14 @@ class CustomRetrieveEstateImageMixin(ListModelMixin):
 
 class CustomCreateEstateMixin(CreateModelMixin):
     def create(self, request, *args, **kwargs):
-        return Response({
-            "status": "ok",
-            "estate": "created",
-            "count": Estate.objects.all().count()
-        }, status=status.HTTP_201_CREATED)
+        if kwargs.get('password') == 12345:
+            return Response({
+                "status": "ok",
+                "estate": "created",
+                "count": Estate.objects.all().count()
+            }, status=status.HTTP_201_CREATED)
+        else:
+            return Response({
+                "status": "error",
+                "password": "is wrong",
+            }, status=status.HTTP_400_BAD_REQUEST)

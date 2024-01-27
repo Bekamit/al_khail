@@ -1,6 +1,6 @@
 from django.utils.safestring import mark_safe
-
 from django.contrib import admin
+
 from service.admin import CustomModelAdmin
 
 from .models import *

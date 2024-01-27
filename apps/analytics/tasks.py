@@ -3,7 +3,7 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.contrib import messages
 
-from .models import Appeal
+from apps.analytics.models import Appeal
 import config
 
 

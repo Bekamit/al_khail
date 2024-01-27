@@ -175,7 +175,7 @@ class CustomEstateCreateAPIView(mixin.CustomCreateEstateMixin, CustomGenericAPIV
                       "price_usd": round(estate_data.get("price") * 0.27),
                       "estate_type": self.create_estate_type(estate_data.get("property_type")),
                       "city": choice(self.cities),
-                      "is_secondary": False,
+                      "is_secondary": choice((False, True)),
                       "visits": randint(10, 100)}
 
         estate = Estate.objects.create(**estate_obj)
@@ -186,25 +186,28 @@ class CustomEstateCreateAPIView(mixin.CustomCreateEstateMixin, CustomGenericAPIV
         return estate
 
     def post(self, request, *args, **kwargs):
-        self.get_start_data()
-        self.cities = self.get_cities()
+        if self.kwargs.get('password') == 12345:
 
-        # villas = self.get_fake_estate_villa()
-        # for villa in villas:
-        #     self.save_data(villa)
+            self.get_start_data()
+            self.cities = self.get_cities()
 
-        # duplexes = self.get_fake_estate_duplex()
-        # for duplex in duplexes:
-        #     self.save_data(duplex)
+            if Estate.objects.all().count() < 1200:
+                villas = self.get_fake_estate_villa()
+                for villa in villas:
+                    self.save_data(villa)
 
-        penthouses = self.get_fake_estate_penthouse()
-        for penthouse in penthouses:
-            self.save_data(penthouse)
-        #
-        # for page in range(1, 11):
-        #     apartments = self.get_fake_estate_apartment(page)
-        #     for apartment in apartments:
-        #         self.save_data(apartment)
-        print("[FAKE NEWS]: All fake data created successfully")
+                duplexes = self.get_fake_estate_duplex()
+                for duplex in duplexes:
+                    self.save_data(duplex)
+
+                penthouses = self.get_fake_estate_penthouse()
+                for penthouse in penthouses:
+                    self.save_data(penthouse)
+
+                for page in range(1, 11):
+                    apartments = self.get_fake_estate_apartment(page)
+                    for apartment in apartments:
+                        self.save_data(apartment)
+                print("[FAKE NEWS]: All fake data created successfully")
 
         return self.create(request, *args, **kwargs)

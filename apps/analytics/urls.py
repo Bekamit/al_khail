@@ -3,5 +3,7 @@ from .views import *
 
 urlpatterns = [
     path('download_catalog/', CatalogDownloaderCreateAPIView.as_view()),
-    ]
 
+    path('appeal/buy/', AppealBuyCreateAPIView.as_view()),
+    path('appeal/sell/', AppealSellCreateAPIView.as_view()),
+]
