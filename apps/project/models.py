@@ -13,6 +13,7 @@ class Facilities(models.Model):
         return self.type
 
     class Meta:
+        app_label = 'project'
         verbose_name = 'Facilities Type'
         verbose_name_plural = 'Facilities Types'
 

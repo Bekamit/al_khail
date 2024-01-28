@@ -11,3 +11,6 @@ celery_app = Celery('core')
 celery_app.config_from_object('core.settings.base', namespace='CELERY')
 
 celery_app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
+
+
+
