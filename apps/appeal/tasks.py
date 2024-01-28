@@ -5,7 +5,6 @@ from django.template.loader import render_to_string
 from django.contrib import messages
 
 from .models import Appeal
-import config
 
 
 @celery_app.task
@@ -16,14 +15,14 @@ def send_appeal_email_task(appeal_id):
 
         html_message = render_to_string('appeal_template.html', {'instance': instance})
 
-        from_email = config('DEFAULT_FROM_EMAIL')
+        from_email = config.DEFAULT_FROM_EMAIL
         recipient_list = [str(config.ADMIN_EMAIL)]
 
         email = EmailMessage(
             subject,
             html_message,
             from_email,
-            recipient_list
+            recipient_list,
         )
         email.content_subtype = 'html'
 

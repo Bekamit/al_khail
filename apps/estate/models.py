@@ -5,6 +5,12 @@ from apps.city.models import City
 from apps.project.models import Project
 from apps.staticdata.models import StaticData
 
+from django.db import models
+from django.db.models import F
+from django.utils.translation import gettext_lazy as _
+
+import random
+
 
 class EstateType(models.Model):
     """

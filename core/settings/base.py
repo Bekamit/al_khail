@@ -31,6 +31,7 @@ THEME_PARTY_APPS = [
     'corsheaders',
     'debug_toolbar',
     'django_summernote',
+    'celery',
 ]
 THEME = [
     'modeltranslation',
@@ -188,13 +189,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'back_media')
 EMAIL_BACKEND = config.EMAIL_BACKEND
 EMAIL_HOST = config.EMAIL_HOST
 EMAIL_PORT = config.EMAIL_PORT
-EMAIL_USE_TLS = config.EMAIL_USE_TLS
 EMAIL_USE_SSL = config.EMAIL_USE_SSL
 EMAIL_HOST_USER = config.EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
 DEFAULT_FROM_EMAIL = config.DEFAULT_FROM_EMAIL
 SERVER_EMAIL = config.SERVER_EMAIL
 
+# Summernote
+SUMMERNOTE_THEME = 'bs4'  # Show summernote with Bootstrap4
 
 # Redis
 REDIS_HOST = 'redis'
