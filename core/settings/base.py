@@ -198,6 +198,18 @@ SERVER_EMAIL = config.SERVER_EMAIL
 # Summernote
 SUMMERNOTE_THEME = 'bs4'  # Show summernote with Bootstrap4
 
+SUMMERNOTE_CONFIG = {
+    'theme': SUMMERNOTE_THEME,
+    'toolbar' :[
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['strikethrough', 'superscript', 'subscript']],
+        ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']]
+    ]
+}
+
 # Redis
 REDIS_HOST = 'redis'
 REDIS_PORT = 6379
