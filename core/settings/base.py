@@ -68,7 +68,7 @@ JAZZMIN_SETTINGS = {
     'site_brand': 'Gulsdem Admin panel',
     'show_sidebar': True,
     'navigation_expanded': False,
-    'hide_models': [],
+    'hide_models': ['django_summernote',],
     'custom_css': None,
     'custom_js': None,
 }
