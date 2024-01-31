@@ -68,7 +68,7 @@ JAZZMIN_SETTINGS = {
     'site_brand': 'Admin panel',
     'show_sidebar': True,
     'navigation_expanded': False,
-    'hide_models': ['summernote',],
+    'hide_models': ['summernote', ],
     'custom_css': None,
     'custom_js': None,
 }
@@ -98,7 +98,6 @@ REST_FRAMEWORK = {
 }
 
 SPECTACULAR_SETTINGS = {
-    # set 'COMPONENT_SPLIT_REQUEST' to 'True' will enable POST execute in swagger ui
     'COMPONENT_SPLIT_REQUEST': True,
     "TITLE": "Golden House API",
     "DESCRIPTION": "API for Golden House web service",
@@ -108,7 +107,7 @@ SPECTACULAR_SETTINGS = {
 # Summernote
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 SUMMERNOTE_CONFIG = {
-    'disable_attachment': True,
+    # 'disable_attachment': True,
     'theme': 'bs4',
     'width': '100%',
     'toolbar': [
@@ -218,24 +217,6 @@ EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
 DEFAULT_FROM_EMAIL = config.DEFAULT_FROM_EMAIL
 SERVER_EMAIL = config.SERVER_EMAIL
 
-<<<<<<< HEAD
-=======
-# Summernote
-SUMMERNOTE_THEME = 'bs4'  # Show summernote with Bootstrap4
-
-SUMMERNOTE_CONFIG = {
-    'theme': SUMMERNOTE_THEME,
-    'toolbar' :[
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['font', ['strikethrough', 'superscript', 'subscript']],
-        ['fontname', ['fontname']],
-        ['fontsize', ['fontsize']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['height', ['height']]
-    ]
-}
-
->>>>>>> 7d9ce64e9e04985381be1d2bea3e7e9cc73a4594
 # Redis
 REDIS_HOST = 'redis'
 REDIS_PORT = 6379
