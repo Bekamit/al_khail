@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from apps.estate.models import Estate
 
@@ -9,6 +10,10 @@ class CatalogDownloader(models.Model):
     phone = models.CharField(max_length=100, verbose_name='Phone number')
     role = models.CharField(max_length=30, verbose_name='Role')
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = _('Catalog downloader')
+        verbose_name_plural = _('Catalog downloaders')
 
     def __str__(self):
         return self.name
@@ -34,8 +39,8 @@ class Appeal(models.Model):
     is_send = models.BooleanField(default=True, verbose_name='Send letter')
 
     class Meta:
-        verbose_name = 'Message from site'
-        verbose_name_plural = 'Messages from site'
+        verbose_name = _('Message from site')
+        verbose_name_plural = _('Messages from site')
 
     def __str__(self):
         return f'{self.pk}'

@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 import config
 from .env_reader import env
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -29,6 +30,8 @@ THEME_PARTY_APPS = [
     'solo.apps.SoloAppConfig',
     'corsheaders',
     'debug_toolbar',
+    'django_summernote',
+    'celery',
 ]
 
 THEME = [
@@ -59,7 +62,6 @@ INSTALLED_APPS = [
 ]
 
 # JAZZMIN
-
 JAZZMIN_SETTINGS = {
     'site_title': 'Gulsdem Admin panel',
     'site_header': 'Gulsdem Admin panel',
@@ -80,7 +82,6 @@ CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua',
                         'http://localhost:8000']
 
 # REST_FRAMEWORK
-
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         "rest_framework.permissions.AllowAny",
@@ -102,6 +103,20 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "Golden House API",
     "DESCRIPTION": "API for Golden House web service",
     "VERSION": "v1.SSL-off",
+}
+
+# Summernote
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+SUMMERNOTE_CONFIG = {
+    'disable_attachment': True,
+    'theme': 'bs4',
+    'width': '100%',
+    'toolbar': [
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['strikethrough', 'superscript', ]],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']]
+    ]
 }
 
 MIDDLEWARE = [
@@ -170,6 +185,17 @@ USE_TZ = True
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 MODELTRANSLATION_LANGUAGES = ('en', 'ar', 'tr', 'ru')
 MODELTRANSLATION_TRANSLATION_REGISTRY = 'core.translation'
+
+LANGUAGES = [
+    ('en', _('English')),
+    ('ar', _('Arabic')),
+    ('tr', _('Turkish')),
+    ('ru', _('Russian')),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 
 # STATIC (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

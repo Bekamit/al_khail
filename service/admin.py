@@ -1,9 +1,11 @@
 from django.contrib import admin
-from django.db import models
+from django_summernote.admin import SummernoteModelAdmin
 
 
-class CustomModelAdmin(admin.ModelAdmin):
-       class Media:
+class CustomModelAdmin(SummernoteModelAdmin, admin.ModelAdmin):
+    summernote_fields = '__all__'
+
+    class Media:
         css = {
             'all': ('css/admin.css',),
         }

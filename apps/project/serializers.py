@@ -18,3 +18,13 @@ class ProjectSerializer(serializers.ModelSerializer):
             'is_furnished',
             'pdf_catalog',
         ]
+
+
+class ProjectListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Project
+        fields = [
+            'name',
+            'location',
+            'pdf_catalog',
+        ]

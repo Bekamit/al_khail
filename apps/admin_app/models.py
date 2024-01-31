@@ -3,14 +3,13 @@ from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 
 from .managers import CustomUserManager
-from core.settings import base
 
 
 class CustomUser(AbstractUser, PermissionsMixin):
     CHOICES = (
-        ('en', 'English'),
-        ('tr', 'Turkish'),
-        ('ru', 'Russian'),
+        ('en', _('English')),
+        ('tr', _('Turkish')),
+        ('ru', _('Russian')),
     )
     email = models.EmailField(_('email address'), unique=True)
     username = models.CharField(_('username'), max_length=30, default='manager')

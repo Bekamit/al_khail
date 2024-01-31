@@ -4,7 +4,9 @@ from django.utils.translation import get_language_from_request
 from rest_framework import serializers
 from .models import CatalogDownloader, Appeal
 from apps.staticdata.models import Form
-from ..estate.models import Estate
+from apps.estate.models import Estate
+
+from django.utils.translation import gettext_lazy as _
 
 
 class ChoiceRoleSerializer(serializers.ModelSerializer):
@@ -34,10 +36,10 @@ class PhoneNumberField(serializers.CharField):
         try:
             parsed_number = phonenumbers.parse(data, None)
             if not phonenumbers.is_valid_number(parsed_number):
-                raise serializers.ValidationError('Invalid phone number')
+                raise serializers.ValidationError(_('Invalid phone number'))
             return phonenumbers.format_number(parsed_number, phonenumbers.PhoneNumberFormat.E164)
         except phonenumbers.NumberParseException:
-            raise serializers.ValidationError('Invalid phone number format')
+            raise serializers.ValidationError(_('Invalid phone number format'))
 
 
 class AppealSellValidateSerializer(serializers.Serializer):
@@ -54,12 +56,12 @@ class AppealSellValidateSerializer(serializers.Serializer):
 
     def validate_last_name(self, last_name):
         if last_name:
-            raise serializers.ValidationError('Wrong format')
+            raise serializers.ValidationError(_('Wrong format'))
         return last_name
 
     def validate_at_time(self, time):
         if time <= timezone.now():
-            raise serializers.ValidationError("at_time must be in the future")
+            raise serializers.ValidationError(_("at_time must be in the future"))
         return time
 
     def create(self, validated_data):
@@ -80,7 +82,7 @@ class AppealBuyValidateSerializer(serializers.Serializer):
 
     def validate_estate_id(self, estate_id):
         if not Estate.is_valid(estate_id):
-            raise serializers.ValidationError('estate id does not exist')
+            raise serializers.ValidationError(_('estate id does not exist'))
         return estate_id
 
     def get_language(self):
@@ -89,12 +91,12 @@ class AppealBuyValidateSerializer(serializers.Serializer):
 
     def validate_last_name(self, last_name):
         if last_name:
-            raise serializers.ValidationError('Wrong format')
+            raise serializers.ValidationError(_('Wrong format'))
         return last_name
 
     def validate_at_time(self, time):
         if time <= timezone.now():
-            raise serializers.ValidationError("at_time must be in the future")
+            raise serializers.ValidationError(_("at_time must be in the future"))
         return time
 
     def create(self, validated_data):

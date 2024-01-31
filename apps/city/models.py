@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class City(models.Model):
@@ -17,7 +18,7 @@ class City(models.Model):
     city_img = models.ImageField(upload_to=upload_to, verbose_name='City photo path')
 
     class Meta:
-        verbose_name_plural = 'Cities'
+        verbose_name_plural = _('Cities')
 
     def __str__(self):
-        return self.city_name_en
+        return self.city_name

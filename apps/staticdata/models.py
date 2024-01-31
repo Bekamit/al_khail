@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+
 from solo.models import SingletonModel
 
 
@@ -21,8 +23,8 @@ class Header(SingletonModel):
         return 'header'
 
     class Meta:
-        verbose_name = 'Header'
-        verbose_name_plural = 'Header static content'
+        verbose_name = _('Header')
+        verbose_name_plural = _('Header static content')
 
 
 class Body(SingletonModel):
@@ -48,8 +50,8 @@ class Body(SingletonModel):
         return 'body'
 
     class Meta:
-        verbose_name = 'Body'
-        verbose_name_plural = 'Body static content'
+        verbose_name = _('Body')
+        verbose_name_plural = _('Body static content')
 
 
 class Footer(SingletonModel):
@@ -59,8 +61,8 @@ class Footer(SingletonModel):
         return 'footer'
 
     class Meta:
-        verbose_name = 'Footer'
-        verbose_name_plural = 'Footer static content'
+        verbose_name = _('Footer')
+        verbose_name_plural = _('Footer static content')
 
 
 class Form(SingletonModel):
@@ -85,8 +87,8 @@ class Form(SingletonModel):
         return 'form'
 
     class Meta:
-        verbose_name = 'Form'
-        verbose_name_plural = 'Forms static content'
+        verbose_name = _('Form')
+        verbose_name_plural = _('Forms static content')
 
 
 class DefaultValue(SingletonModel):
@@ -100,5 +102,5 @@ class DefaultValue(SingletonModel):
         return DefaultValue.objects.first().default_image
 
     class Meta:
-        verbose_name = 'Default Value'
-        verbose_name_plural = 'Default Values'
+        verbose_name = _('Default Value')
+        verbose_name_plural = _('Default Values')

@@ -11,8 +11,9 @@ urlpatterns = [
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/redoc/", SpectacularRedocView.as_view(), name="redoc"),
     path("api/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
+    # Third apps
+    path('summernote/', include('django_summernote.urls')),
     # Views
-    path("api/v1/", include("apps.appeal.urls")),
     path("api/v1/", include("apps.city.urls")),
     path("api/v1/", include("apps.company.urls")),
     path("api/v1/", include("apps.estate.urls")),
@@ -21,7 +22,6 @@ urlpatterns = [
 ]
 
 if base.DEBUG:
-
     urlpatterns = [
                       path("__debug__/", include("debug_toolbar.urls")),
                   ] + urlpatterns

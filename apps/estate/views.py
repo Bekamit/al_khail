@@ -12,8 +12,7 @@ from .models import Estate, EstateImage, EstateType
 from service.pagination import LimitOffsetCustomPagination
 from .serializers import (EstateSerializer,
                           EstateRetrieveSerializer,
-                          EstateTypeSerializer,
-                          EstateImageListSerializer)
+                          EstateTypeSerializer)
 
 
 @extend_schema(
@@ -105,7 +104,7 @@ class EstateTypeListAPIView(CustomListAPIView):
     ],
 )
 class EstateListAPIView(CustomListAPIView):
-    queryset = Estate.objects.select_related('city', 'estate_type').order_by('price_usd')
+    queryset = Estate.objects.select_related('city', 'project').all()
     serializer_class = EstateSerializer
     response_key = 'estates'
     pagination_class = LimitOffsetCustomPagination
@@ -145,14 +144,13 @@ class EstateRetrieveAPIView(CustomRetrieveAPIView):
     methods=["GET"],
     tags=["Estate"],
 )
-class EstateImageRetrieveAPIView(CustomRetrieveImagesAPIView):
-    serializer_class = EstateImageListSerializer
-
-    def get_queryset(self):
-        estate_id = self.kwargs.get('id')
-        queryset = EstateImage.objects.filter(estate_id=estate_id)
-        return queryset
-
+# class EstateImageRetrieveAPIView(CustomRetrieveImagesAPIView):
+#     serializer_class = EstateImageListSerializer
+#
+#     def get_queryset(self):
+#         estate_id = self.kwargs.get('id')
+#         queryset = EstateImage.objects.filter(estate_id=estate_id)
+#         return queryset
 
 
 @extend_schema(
