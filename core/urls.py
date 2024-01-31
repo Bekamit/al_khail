@@ -11,7 +11,10 @@ urlpatterns = [
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/redoc/", SpectacularRedocView.as_view(), name="redoc"),
     path("api/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
+<<<<<<< HEAD
     # Third apps
+=======
+>>>>>>> 7d9ce64e9e04985381be1d2bea3e7e9cc73a4594
     path('summernote/', include('django_summernote.urls')),
     # Views
     path("api/v1/", include("apps.city.urls")),
@@ -22,7 +25,16 @@ urlpatterns = [
 ]
 
 if base.DEBUG:
+<<<<<<< HEAD
     urlpatterns = [
                       path("__debug__/", include("debug_toolbar.urls")),
                   ] + urlpatterns
     urlpatterns += static(base.MEDIA_URL, document_root=base.MEDIA_ROOT)
+=======
+    import debug_toolbar
+    urlpatterns += [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ]
+    urlpatterns += static(base.MEDIA_URL, document_root=base.MEDIA_ROOT)
+    urlpatterns += static(base.STATIC_URL, document_root=base.STATIC_ROOT)
+>>>>>>> 7d9ce64e9e04985381be1d2bea3e7e9cc73a4594

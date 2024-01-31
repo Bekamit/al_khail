@@ -51,4 +51,13 @@ tzdata==2023.3
 uritemplate==4.1.1
 vine==5.1.0
 wcwidth==0.2.12
+<<<<<<< HEAD
 
+=======
+gunicorn==21.2.0
+redis==5.0.1
+phonenumbers==8.12.16
+django-debug-toolbar==4.1.0
+django-summernote==0.8.20.0
+faker
+>>>>>>> 7d9ce64e9e04985381be1d2bea3e7e9cc73a4594

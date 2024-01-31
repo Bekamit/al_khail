@@ -63,12 +63,12 @@ INSTALLED_APPS = [
 
 # JAZZMIN
 JAZZMIN_SETTINGS = {
-    'site_title': 'Gulsdem Admin panel',
-    'site_header': 'Gulsdem Admin panel',
-    'site_brand': 'Gulsdem Admin panel',
+    'site_title': 'Bekhan Admin panel',
+    'site_header': 'Admin panel',
+    'site_brand': 'Admin panel',
     'show_sidebar': True,
     'navigation_expanded': False,
-    'hide_models': [],
+    'hide_models': ['summernote',],
     'custom_css': None,
     'custom_js': None,
 }
@@ -212,13 +212,30 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'back_media')
 EMAIL_BACKEND = config.EMAIL_BACKEND
 EMAIL_HOST = config.EMAIL_HOST
 EMAIL_PORT = config.EMAIL_PORT
-EMAIL_USE_TLS = config.EMAIL_USE_TLS
 EMAIL_USE_SSL = config.EMAIL_USE_SSL
 EMAIL_HOST_USER = config.EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
 DEFAULT_FROM_EMAIL = config.DEFAULT_FROM_EMAIL
 SERVER_EMAIL = config.SERVER_EMAIL
 
+<<<<<<< HEAD
+=======
+# Summernote
+SUMMERNOTE_THEME = 'bs4'  # Show summernote with Bootstrap4
+
+SUMMERNOTE_CONFIG = {
+    'theme': SUMMERNOTE_THEME,
+    'toolbar' :[
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['strikethrough', 'superscript', 'subscript']],
+        ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']]
+    ]
+}
+
+>>>>>>> 7d9ce64e9e04985381be1d2bea3e7e9cc73a4594
 # Redis
 REDIS_HOST = 'redis'
 REDIS_PORT = 6379
