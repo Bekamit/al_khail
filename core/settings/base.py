@@ -31,6 +31,7 @@ THEME_PARTY_APPS = [
     'corsheaders',
     'debug_toolbar',
     'django_summernote',
+    'celery',
 ]
 THEME = [
     'modeltranslation',
@@ -67,7 +68,7 @@ JAZZMIN_SETTINGS = {
     'site_brand': 'Gulsdem Admin panel',
     'show_sidebar': True,
     'navigation_expanded': False,
-    'hide_models': [],
+    'hide_models': ['django_summernote',],
     'custom_css': None,
     'custom_js': None,
 }
@@ -188,13 +189,26 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'back_media')
 EMAIL_BACKEND = config.EMAIL_BACKEND
 EMAIL_HOST = config.EMAIL_HOST
 EMAIL_PORT = config.EMAIL_PORT
-EMAIL_USE_TLS = config.EMAIL_USE_TLS
 EMAIL_USE_SSL = config.EMAIL_USE_SSL
 EMAIL_HOST_USER = config.EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
 DEFAULT_FROM_EMAIL = config.DEFAULT_FROM_EMAIL
 SERVER_EMAIL = config.SERVER_EMAIL
 
+# Summernote
+SUMMERNOTE_THEME = 'bs4'  # Show summernote with Bootstrap4
+
+SUMMERNOTE_CONFIG = {
+    'theme': SUMMERNOTE_THEME,
+    'toolbar' :[
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['strikethrough', 'superscript', 'subscript']],
+        ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']]
+    ]
+}
 
 # Redis
 REDIS_HOST = 'redis'

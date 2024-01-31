@@ -7,12 +7,11 @@ from .models import *
 
 
 @admin.register(City)
-class CityAdmin(SummernoteModelAdmin, CustomModelAdmin):
+class CityAdmin(CustomModelAdmin):
     list_display = ('city_name', 'city_description', 'preview')
     search_fields = ('city_name', 'city_name_ar', 'city_tr', 'city_ru')
     list_filter = ('city_name',)
     readonly_fields = ['preview']
-    summernote_fields = '__all__'
 
     fieldsets = [
         ('English', {
