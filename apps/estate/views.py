@@ -1,17 +1,18 @@
 from drf_spectacular.utils import extend_schema, OpenApiParameter
-from rest_framework.generics import RetrieveAPIView
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 
-from service.views import CustomRetrieveImagesAPIView, CustomListAPIView
+from service.views import (CustomRetrieveImagesAPIView,
+                           CustomListAPIView,
+                           CustomEstateCreateAPIView,
+                           CustomRetrieveAPIView)
 
 from .filters import EstateFilterSet
 from .models import Estate, EstateImage, EstateType
 from service.pagination import LimitOffsetCustomPagination
 from .serializers import (EstateSerializer,
                           EstateRetrieveSerializer,
-                          EstateTypeSerializer,
-                          EstateImageListSerializer)
+                          EstateTypeSerializer)
 
 
 @extend_schema(
@@ -103,7 +104,7 @@ class EstateTypeListAPIView(CustomListAPIView):
     ],
 )
 class EstateListAPIView(CustomListAPIView):
-    queryset = Estate.objects.prefetch_related('image').all()
+    queryset = Estate.objects.select_related('city', 'project').all()
     serializer_class = EstateSerializer
     response_key = 'estates'
     pagination_class = LimitOffsetCustomPagination
@@ -129,10 +130,11 @@ class EstateListAPIView(CustomListAPIView):
         ),
     ],
 )
-class EstateRetrieveAPIView(RetrieveAPIView):
-    queryset = Estate.objects.select_related('project').all()
+class EstateRetrieveAPIView(CustomRetrieveAPIView):
+    queryset = Estate.objects.select_related('project').prefetch_related('project__facilities').all()
     serializer_class = EstateRetrieveSerializer
     lookup_field = 'id'
+    response_key = 'estate'
 
 
 @extend_schema(
@@ -142,10 +144,59 @@ class EstateRetrieveAPIView(RetrieveAPIView):
     methods=["GET"],
     tags=["Estate"],
 )
-class EstateImageRetrieveAPIView(CustomRetrieveImagesAPIView):
-    serializer_class = EstateImageListSerializer
+# class EstateImageRetrieveAPIView(CustomRetrieveImagesAPIView):
+#     serializer_class = EstateImageListSerializer
+#
+#     def get_queryset(self):
+#         estate_id = self.kwargs.get('id')
+#         queryset = EstateImage.objects.filter(estate_id=estate_id)
+#         return queryset
 
-    def get_queryset(self):
+
+@extend_schema(
+    summary="Получить `похожие объекты`",
+    description="Класс представления EstateRetrieveSimilarListAPIView возвращает коллекцию объектов недвижимости модели "
+                "Estate в количестве от 0 до 9 шт. Тип объектов такой же как у сравниваемого объекта, города - любые. "
+                "Возвращаются объекты схожие по цене.\n\n"
+                "Мультиязычная модель! **ACCEPT-LANGUAGE** для вывода данных на заявленном языке, "
+                "если его нет, отдача будет на языке по умолчанию **EN**. Атрибут может быть определен "
+                "браузером или переопределен фронтендом.",
+    methods=["GET"],
+    tags=["Estate"],
+    parameters=[
+        OpenApiParameter(
+            name='ACCEPT-LANGUAGE',
+            type=str,
+            location=OpenApiParameter.HEADER,
+            description='Язык, на котором должны возвращаться данные (en, ar, tr, ru).'
+        ),
+    ],
+)
+class EstateRetrieveSimilarListAPIView(CustomListAPIView):
+    queryset = Estate.objects.select_related('city', 'estate_type', 'project').all()
+    serializer_class = EstateSerializer
+    response_key = 'estates'
+
+    def get_object(self):
         estate_id = self.kwargs.get('id')
-        queryset = EstateImage.objects.filter(estate_id=estate_id)
-        return queryset
+        return Estate.objects.select_related('city', 'estate_type').get(id=estate_id)
+
+    def filter_queryset(self, queryset):
+        estate = self.get_object()
+        similar: list = (Estate.objects.select_related('city', 'estate_type').
+                         filter(estate_type=estate.estate_type)).order_by('price_usd')
+
+        if len(similar) >= 11:
+            index = list(similar).index(estate)
+            queryset = ((similar[index - 6: index - 1] if len(similar[:index]) >= 6 else similar[:index - 1])
+                        + (similar[index + 1: index + 5] if len(similar[index:]) >= 5 else similar[index + 1:]))
+            return queryset
+
+        return similar.exclude(pk=estate.id)
+
+
+# _______________________ TEMPORARY _____________________________
+
+class DataBaseAddEstateAPIView(CustomEstateCreateAPIView):
+    queryset = EstateType.objects.all()
+    serializer_class = EstateTypeSerializer

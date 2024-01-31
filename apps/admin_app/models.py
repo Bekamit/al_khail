@@ -6,8 +6,14 @@ from .managers import CustomUserManager
 
 
 class CustomUser(AbstractUser, PermissionsMixin):
+    CHOICES = (
+        ('en', _('English')),
+        ('tr', _('Turkish')),
+        ('ru', _('Russian')),
+    )
     email = models.EmailField(_('email address'), unique=True)
     username = models.CharField(_('username'), max_length=30, default='manager')
+    language = models.CharField(max_length=10, choices=CHOICES, default='en')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']

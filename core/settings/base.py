@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 import config
 from .env_reader import env
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -20,7 +21,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 PRODUCTION = env('PRODUCTION', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 THEME_PARTY_APPS = [
@@ -33,20 +33,22 @@ THEME_PARTY_APPS = [
     'django_summernote',
     'celery',
 ]
+
 THEME = [
     'modeltranslation',
     'jazzmin',
 ]
+
 APPS = [
     'apps.admin_app',
-    'apps.appeal',
+    'apps.analytics',
     'apps.city',
     'apps.company',
     'apps.estate',
     'apps.project',
     'apps.staticdata',
-    'apps.analytics',
 ]
+
 INSTALLED_APPS = [
     *THEME,
     'django.contrib.admin',
@@ -59,9 +61,7 @@ INSTALLED_APPS = [
     *APPS,
 ]
 
-
 # JAZZMIN
-
 JAZZMIN_SETTINGS = {
     'site_title': 'Bekhan Admin panel',
     'site_header': 'Admin panel',
@@ -82,7 +82,6 @@ CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua',
                         'http://localhost:8000']
 
 # REST_FRAMEWORK
-
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         "rest_framework.permissions.AllowAny",
@@ -106,11 +105,26 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "v1.SSL-off",
 }
 
+# Summernote
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+SUMMERNOTE_CONFIG = {
+    'disable_attachment': True,
+    'theme': 'bs4',
+    'width': '100%',
+    'toolbar': [
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['strikethrough', 'superscript', ]],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']]
+    ]
+}
+
 MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'apps.admin_app.middleware.custom_middleware.AdminPanelLanguageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -138,7 +152,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -173,6 +186,17 @@ MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 MODELTRANSLATION_LANGUAGES = ('en', 'ar', 'tr', 'ru')
 MODELTRANSLATION_TRANSLATION_REGISTRY = 'core.translation'
 
+LANGUAGES = [
+    ('en', _('English')),
+    ('ar', _('Arabic')),
+    ('tr', _('Turkish')),
+    ('ru', _('Russian')),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
 # STATIC (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -184,7 +208,6 @@ STATIC_ROOT = os.path.join(f'{BASE_DIR}', 'back_static')
 MEDIA_URL = '/back_media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'back_media')
 
-
 # EMAIL
 EMAIL_BACKEND = config.EMAIL_BACKEND
 EMAIL_HOST = config.EMAIL_HOST
@@ -195,6 +218,8 @@ EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
 DEFAULT_FROM_EMAIL = config.DEFAULT_FROM_EMAIL
 SERVER_EMAIL = config.SERVER_EMAIL
 
+<<<<<<< HEAD
+=======
 # Summernote
 SUMMERNOTE_THEME = 'bs4'  # Show summernote with Bootstrap4
 
@@ -210,11 +235,10 @@ SUMMERNOTE_CONFIG = {
     ]
 }
 
+>>>>>>> 7d9ce64e9e04985381be1d2bea3e7e9cc73a4594
 # Redis
 REDIS_HOST = 'redis'
 REDIS_PORT = 6379
-
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -234,7 +258,6 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_PRIVATE_NETWORK = True
 CORS_ALLOWED_ALL_CREDENTIALS = True
-
 
 CORS_ALLOW_METHODS = [
     'DELETE',

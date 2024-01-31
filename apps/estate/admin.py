@@ -1,6 +1,7 @@
 from django.utils.safestring import mark_safe
 
 from django.contrib import admin
+from tinymce.widgets import TinyMCE
 
 from service.admin import CustomModelAdmin
 from .models import EstateType, Estate, EstateImage
@@ -18,9 +19,9 @@ class EstateAdmin(CustomModelAdmin):
                     'area',
                     'estate_type',
                     'city',
-                    'is_secondary',
+                    'visits',
                     'preview')
-    search_fields = ('project__name', 'title', 'developer', 'district', 'estate_type__type_en', 'city__city_name_en')
+    search_fields = ('project__name', 'title', 'estate_type__type_en', 'city__city_name_en')
     list_filter = ('city__city_name', 'project__name', 'estate_type__type', 'is_secondary')
     fieldsets = [
         ('English', {
