@@ -6,7 +6,7 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /usr/src/app
 
-EXPOSE 8000
+EXPOSE 9000
 
 COPY requirements/work.txt ./
 

@@ -8,7 +8,7 @@ from .models import *
 
 @admin.register(City)
 class CityAdmin(CustomModelAdmin):
-    list_display = ('city_name', 'city_description', 'preview')
+    list_display = ('city_name', 'city_description_preview', 'preview')
     search_fields = ('city_name', 'city_name_ar', 'city_tr', 'city_ru')
     list_filter = ('city_name',)
     readonly_fields = ['preview']
@@ -43,4 +43,7 @@ class CityAdmin(CustomModelAdmin):
     ]
 
     def preview(self, obj):
-        return mark_safe(f'<img src="{obj.city_img.url}", style="max-height: 200px;">')
+        return mark_safe(f'<img src="{obj.city_img.url}", style="max-height: 150px;">')
+
+    def city_description_preview(self, obj):
+        return mark_safe(f'<div style="max-height: 150px; overflow: auto">{obj.city_description}</div>')
