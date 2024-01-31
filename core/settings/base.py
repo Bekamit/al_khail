@@ -63,12 +63,12 @@ INSTALLED_APPS = [
 # JAZZMIN
 
 JAZZMIN_SETTINGS = {
-    'site_title': 'Gulsdem Admin panel',
-    'site_header': 'Gulsdem Admin panel',
-    'site_brand': 'Gulsdem Admin panel',
+    'site_title': 'Bekhan Admin panel',
+    'site_header': 'Admin panel',
+    'site_brand': 'Admin panel',
     'show_sidebar': True,
     'navigation_expanded': False,
-    'hide_models': ['django_summernote',],
+    'hide_models': ['summernote',],
     'custom_css': None,
     'custom_js': None,
 }
