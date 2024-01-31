@@ -3,12 +3,9 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.contrib import messages
 
-<<<<<<< HEAD:apps/analytics/tasks.py
 from apps.analytics.models import Appeal
+
 import config
-=======
-from .models import Appeal
->>>>>>> 7d9ce64e9e04985381be1d2bea3e7e9cc73a4594:apps/appeal/tasks.py
 
 
 @celery_app.task
