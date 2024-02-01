@@ -20,6 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 PRODUCTION = env('PRODUCTION', default=False, cast=bool)
 
+if not PRODUCTION:
+    from .local import *
+else:
+    from .prod import *
+
+
 ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -28,8 +34,6 @@ THEME_PARTY_APPS = [
     'django_filters',
     'drf_spectacular',
     'solo.apps.SoloAppConfig',
-    'corsheaders',
-    'debug_toolbar',
     'django_summernote',
     'celery',
 ]
@@ -59,27 +63,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     *THEME_PARTY_APPS,
     *APPS,
+    *WORK_APPS,
 ]
 
 # JAZZMIN
 JAZZMIN_SETTINGS = {
-    'site_title': 'Bekhan Admin panel',
+    'site_title': 'Admin panel',
     'site_header': 'Admin panel',
     'site_brand': 'Admin panel',
     'show_sidebar': True,
     'navigation_expanded': False,
-    'hide_models': ['summernote', ],
+    'hide_models': [],
     'custom_css': None,
     'custom_js': None,
 }
-
-# CSRF
-CSRF_USE_SESSIONS = True
-CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua',
-                        "http://localhost:6379",
-                        "http://localhost:5173",
-                        'https://alkhail.pp.ua',
-                        'http://localhost:8000']
 
 # REST_FRAMEWORK
 REST_FRAMEWORK = {
@@ -113,6 +110,8 @@ SUMMERNOTE_CONFIG = {
     'toolbar': [
         ['style', ['bold', 'italic', 'underline', 'clear']],
         ['font', ['strikethrough', 'superscript', ]],
+        ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
         ['para', ['ul', 'ol', 'paragraph']],
         ['height', ['height']]
     ]
@@ -123,7 +122,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'apps.admin_app.middleware.custom_middleware.AdminPanelLanguageMiddleware',
+    'API_Al.apps.admin_app.middleware.custom_middleware.AdminPanelLanguageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -227,36 +226,3 @@ REDIS_PORT = 6379
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'admin_app.CustomUser'
 INTERNAL_IPS = ["127.0.0.1"]
-
-if not PRODUCTION:
-    from .local import *
-else:
-    from .prod import *
-
-# Cors
-
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_PRIVATE_NETWORK = True
-CORS_ALLOWED_ALL_CREDENTIALS = True
-
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-]
