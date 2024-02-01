@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 
 EXPOSE 9000
 
-COPY requirements/work.txt ./
+COPY requirements/prod.txt ./
 
 COPY . .
 
