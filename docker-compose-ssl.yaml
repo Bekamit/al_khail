@@ -55,7 +55,7 @@ services:
     image: jwilder/nginx-proxy:1.2
     container_name: docker_nginx
     ports:
-      - "82:82"
+      - "80:80"
     volumes:
       - ./nginx/default_location:/etc/nginx/vhost.d/default_location
       - static_volume:/usr/src/app/back_static
