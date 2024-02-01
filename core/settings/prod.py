@@ -9,6 +9,10 @@ WORK_APPS = [
     'corsheaders',
 ]
 
+MIDDLEWARE_APPS = [
+    'corsheaders.middleware.CorsMiddleware',
+]
+
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql',

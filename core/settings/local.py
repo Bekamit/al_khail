@@ -10,6 +10,10 @@ WORK_APPS = [
     'debug_toolbar',
 ]
 
+MIDDLEWARE_APPS = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

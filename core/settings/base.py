@@ -119,7 +119,6 @@ SUMMERNOTE_CONFIG = {
 
 MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'API_Al.apps.admin_app.middleware.custom_middleware.AdminPanelLanguageMiddleware',
@@ -128,7 +127,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    *MIDDLEWARE_APPS
 ]
 
 ROOT_URLCONF = 'core.urls'
