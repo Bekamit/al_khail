@@ -122,7 +122,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'API_Al.apps.admin_app.middleware.custom_middleware.AdminPanelLanguageMiddleware',
+    'apps.admin_app.middleware.custom_middleware.AdminPanelLanguageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
