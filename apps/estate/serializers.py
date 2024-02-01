@@ -1,24 +1,19 @@
 from rest_framework import serializers, exceptions
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from .models import Estate, EstateType, EstateImage
-from ..project.serializers import ProjectSerializer
+from apps.staticdata.models import DefaultValue
+from apps.project.serializers import ProjectSerializer, ProjectListSerializer
 
 
 # ------------------------ ESTATE IMAGE -------------------
 class EstateImageListSerializer(serializers.Serializer):
-    estate_id = serializers.SerializerMethodField()
-    images = serializers.ListField(child=serializers.CharField())
-
-    def get_estate_id(self, data):
-        estate_id = data.get('estate_id')
-        if not Estate.is_valid(estate_id):
-            raise exceptions.ValidationError('estate id does not exist')
-        return estate_id
+    images = serializers.StringRelatedField(many=True)
 
     class Meta:
-        model = EstateImage
-        fields = ['estate_id',
+        model = Estate
+        fields = ['id',
                   'images']
 
 
@@ -42,42 +37,6 @@ class EstateRetrieveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Estate
-        fields = ['project',
-                  'id',
-                  'title',
-                  'area',
-                  'description',
-                  'price_usd',
-                  'estate_type',
-                  'city',
-                  'is_secondary']
-
-
-class EstateSerializer(serializers.ModelSerializer):
-    estate_type = serializers.StringRelatedField()
-    city = serializers.StringRelatedField()
-    preview = serializers.SerializerMethodField()
-
-    def absolute_url(self, instance):
-        if isinstance(instance.field, models.ImageField):
-            return self.context['request'].build_absolute_uri(instance.url)
-        return None
-
-    def get_preview(self, estate):
-
-        images = estate.image.all()
-        preview_images = images.filter(img__icontains='preview')
-
-        if preview_images.exists():
-            return {'img': self.absolute_url(preview_images.first().img)}
-
-        if images.exists():
-            return {'img': self.absolute_url(images.first().img)}
-
-        return {'img': self.absolute_url(estate.default_img)} if estate.default_img else None
-
-    class Meta:
-        model = Estate
         fields = ['id',
                   'title',
                   'area',
@@ -86,4 +45,44 @@ class EstateSerializer(serializers.ModelSerializer):
                   'estate_type',
                   'city',
                   'is_secondary',
-                  'preview']
+                  'project', ]
+
+
+class EstateSerializer(serializers.ModelSerializer):
+    project = ProjectListSerializer()
+    # estate_type = serializers.StringRelatedField()
+    city = serializers.StringRelatedField()
+    images = serializers.StringRelatedField(many=True)
+
+    def absolute_url(self, path):
+        return self.context['request'].build_absolute_uri(path)
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        if images := representation.get('images'):
+            representation['images'] = [self.absolute_url(image) for image in images]
+        else:
+            default_img = DefaultValue.default_img()
+            representation['images'] = self.absolute_url(default_img.url) if default_img else []
+        return representation
+
+    # preview = serializers.SerializerMethodField()
+
+    # def absolute_url(self, instance):
+    #     if isinstance(instance.field, models.ImageField):
+    #         return self.context['request'].build_absolute_uri(instance.url)
+    #     return instance.url
+
+    # def get_preview(self, estate):
+    #     if image := estate.image.first():
+    #         return {'img': self.absolute_url(image.img)}
+    #     else:
+    #         return {'img': self.absolute_url(DefaultValue.default_img())}
+
+    class Meta:
+        model = Estate
+        fields = ['id',
+                  'price_usd',
+                  'city',
+                  'project',
+                  'images']

@@ -21,7 +21,7 @@ estate = [
         "description_ru": "Comfortable apartment with city view",
         "type_id": 1,
         "city_id": 1,
-        "is_secondary": true
+        "is_secondary": True
     },
     {
         "name": "Land Plot",
@@ -43,7 +43,7 @@ estate = [
         "description_ru": "Spacious land plot with stunning view",
         "type_id": 5,
         "city_id": 2,
-        "is_secondary": false
+        "is_secondary": False
     },
     {
         "name": "Villa",
@@ -65,7 +65,7 @@ estate = [
         "description_ru": "Elegant villa with garden and pool",
         "type_id": 2,
         "city_id": 3,
-        "is_secondary": true
+        "is_secondary": True
     },
     {
         "name": "Shop",
@@ -87,7 +87,7 @@ estate = [
         "description_ru": "Spacious shop in the city center",
         "type_id": 4,
         "city_id": 4,
-        "is_secondary": false
+        "is_secondary": False
     },
     {
         "name": "Duplex",
@@ -109,39 +109,40 @@ estate = [
         "description_ru": "Spacious duplex with modern design",
         "type_id": 3,
         "city_id": 5,
-        "is_secondary": true
+        "is_secondary": True
     }
 ]
 
-estate_types = {
+ESTATE_TYPES = [
     {
-        "type": "apartments",
+        "type_en": "apartment",
         "type_ar": "شقق",
         "type_tr": "apartmanlar",
         "type_ru": "квартира"
     },
     {
-        "type": "villa",
+        "type_en": "villa",
         "type_ar": "فيللا",
         "type_tr": "villa",
         "type_ru": "вилла"
     },
     {
-        "type": "duplex",
+        "type_en": "duplex",
         "type_ar": "دوبلكس",
         "type_tr": "duplex",
         "type_ru": "дуплекс"
     },
     {
-        "type": "shop",
+        "type_en": "shop",
         "type_ar": "متجر",
         "type_tr": "mağaza",
         "type_ru": "магазин"
     },
     {
-        "type": "land",
+        "type_en": "plot",
         "type_ar": "أرض",
         "type_tr": "arazi",
         "type_ru": "участок"
     }
-}
+]
+

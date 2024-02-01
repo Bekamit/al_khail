@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+
 
 
 class Facilities(models.Model):
@@ -13,8 +15,9 @@ class Facilities(models.Model):
         return self.type
 
     class Meta:
-        verbose_name = 'Facilities Type'
-        verbose_name_plural = 'Facilities Types'
+        app_label = 'project'
+        verbose_name = _('Facilities Type')
+        verbose_name_plural = _('Facilities Types')
 
 
 class Project(models.Model):
@@ -35,6 +38,11 @@ class Project(models.Model):
         return f'catalog/{name}/{filename}'
 
     pdf_catalog = models.FileField(upload_to=project_upload, verbose_name='PDF catalog path')
+
+    class Meta:
+        verbose_name = _('Project')
+        verbose_name_plural = _('Projects')
+
 
     def __str__(self):
         return self.name

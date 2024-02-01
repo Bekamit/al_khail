@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from solo.models import SingletonModel
 
 
@@ -11,7 +12,7 @@ class Company(SingletonModel):
     # contact_person = models.CharField(max_length=10)
 
     class Meta:
-        verbose_name_plural = 'About company'
+        verbose_name_plural = _('About company')
 
     def __str__(self):
-        return self.company_name_en
+        return self.company_name
