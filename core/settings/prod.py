@@ -5,14 +5,6 @@ SECRET_KEY = config.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config.DEBUG
 
-WORK_APPS = [
-    'corsheaders',
-]
-
-MIDDLEWARE_APPS = [
-    'corsheaders.middleware.CorsMiddleware',
-]
-
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql',

@@ -16,6 +16,7 @@ django-modeltranslation==0.18.11
 django-solo==2.1.0
 djangorestframework==3.14.0
 django-cors-headers==4.3.1
+django-debug-toolbar==4.2.0
 drf-spectacular==0.26.1
 fonttools==4.46.0
 fpdf2==2.7.7
@@ -24,6 +25,7 @@ jsonschema==4.20.0
 jsonschema-specifications==2023.11.2
 kombu==5.3.4
 packaging==23.2
+parsel==1.8.1
 Pillow==10.1.0
 prompt-toolkit==3.0.43
 psycopg2-binary==2.9.9

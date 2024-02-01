@@ -36,6 +36,8 @@ THEME_PARTY_APPS = [
     'solo.apps.SoloAppConfig',
     'django_summernote',
     'celery',
+    'corsheaders',
+    'debug_toolbar',
 ]
 
 THEME = [
@@ -63,7 +65,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     *THEME_PARTY_APPS,
     *APPS,
-    *WORK_APPS,
 ]
 
 # JAZZMIN
@@ -121,13 +122,14 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'API_Al.apps.admin_app.middleware.custom_middleware.AdminPanelLanguageMiddleware',
+    'apps.admin_app.middleware.custom_middleware.AdminPanelLanguageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    *MIDDLEWARE_APPS
+    'corsheaders.middleware.CorsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'

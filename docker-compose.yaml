@@ -2,8 +2,6 @@ version: '3'
 
 services:
   api:
-    env_file:
-      - .env.prod/
     build: .
     command: >
       sh -c "gunicorn core.wsgi:application --bind 0.0.0.0:9000"
@@ -43,8 +41,6 @@ services:
 
   nginx:
     image: nginx:latest
-    env_file:
-      - .env.prod/
     container_name: nginx_al
     ports:
       - "80:80"
