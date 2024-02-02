@@ -45,12 +45,12 @@ THEME = [
 
 APPS = [
     'apps.admin_app',
-    'apps.analytics',
     'apps.city',
     'apps.company',
     'apps.estate',
     'apps.project',
     'apps.staticdata',
+    'apps.analytics',
 ]
 
 INSTALLED_APPS = [

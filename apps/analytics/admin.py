@@ -39,8 +39,6 @@ class ReadDeleteAppealAdmin(ReadDeleteModelAdmin):
             return mark_safe(f'<a href="#">path/to/estate/{obj.estate.pk}/</a>')
 
 
-
-
 class ConsultationAdmin(admin.ModelAdmin):
     list_display = ('name', 'phone', 'city', 'at_time', 'created_at')
     readonly_fields = ('name', 'phone', 'city', 'at_time', 'created_at')
