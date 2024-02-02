@@ -3,7 +3,7 @@ import phonenumbers
 from django.utils import timezone
 from django.utils.translation import get_language_from_request
 from rest_framework import serializers
-from .models import CatalogDownloader, Appeal
+from .models import CatalogDownloader, Appeal, Consultation
 from apps.staticdata.models import Form
 from apps.estate.models import Estate
 from django.utils.translation import gettext_lazy as _
@@ -70,7 +70,7 @@ class AppealSellValidateSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=70, required=True)
     last_name = serializers.CharField(max_length=70, required=True, allow_blank=True, write_only=True)
     phone = PhoneNumberField()
-    at_time = serializers.DateTimeField(required=True)
+    at_time = serializers.DateField(required=True)
     city = serializers.CharField(max_length=70, required=True)
 
     def get_language(self):
@@ -100,7 +100,7 @@ class AppealBuyValidateSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=70, required=True)
     last_name = serializers.CharField(max_length=70, required=True, allow_blank=True, write_only=True)
     phone = PhoneNumberField()
-    at_time = serializers.DateTimeField(required=True)
+    at_time = serializers.DateField(required=True)
     city = serializers.CharField(max_length=70, required=True)
 
     def validate_estate_id(self, estate_id):
@@ -127,3 +127,9 @@ class AppealBuyValidateSerializer(serializers.Serializer):
         validated_data['lang'] = self.get_language()
         validated_data['city'] = validated_data['city'].capitalize()
         return Appeal.create_appeal(validated_data)
+
+
+class ConsultationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Consultation
+        fields = '__all__'

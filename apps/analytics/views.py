@@ -1,12 +1,14 @@
 from .models import DownloadCatalog
 from .serializers import DownloadCatalogSerializer
 from drf_spectacular.utils import extend_schema
-from .models import CatalogDownloader, Appeal
-from .serializers import CatalogDownloaderSerializer, AppealBuyValidateSerializer, AppealSellValidateSerializer
+from .models import CatalogDownloader, Appeal, Consultation
+from .serializers import CatalogDownloaderSerializer, AppealBuyValidateSerializer, AppealSellValidateSerializer, ConsultationSerializer
 from rest_framework.generics import CreateAPIView
+from .custom import CustomListCreateAPIView
 
 
-class DownloadCatalogAPIView(CreateAPIView):
+class DownloadCatalogAPIView(CustomListCreateAPIView):
+    model = 'DownloadCatalog'
     queryset = DownloadCatalog.objects.all()
     serializer_class = DownloadCatalogSerializer
 
@@ -17,7 +19,8 @@ class DownloadCatalogAPIView(CreateAPIView):
     methods=["POST"],
     tags=["Analytics"],
 )
-class CatalogDownloaderCreateAPIView(CreateAPIView):
+class CatalogDownloaderCreateAPIView(CustomListCreateAPIView):
+    model = 'CatalogDownloader'
     queryset = CatalogDownloader.objects.all()
     serializer_class = CatalogDownloaderSerializer
 
@@ -28,7 +31,8 @@ class CatalogDownloaderCreateAPIView(CreateAPIView):
     methods=["POST"],
     tags=["Analytics"],
 )
-class AppealBuyCreateAPIView(CreateAPIView):
+class AppealBuyCreateAPIView(CustomListCreateAPIView):
+    model = 'Appeal'
     queryset = Appeal.objects.all()
     serializer_class = AppealBuyValidateSerializer
 
@@ -40,6 +44,19 @@ class AppealBuyCreateAPIView(CreateAPIView):
     methods=["POST"],
     tags=["Analytics"],
 )
-class AppealSellCreateAPIView(CreateAPIView):
+class AppealSellCreateAPIView(CustomListCreateAPIView):
+    model = 'Appeal'
     queryset = Appeal.objects.all()
     serializer_class = AppealSellValidateSerializer
+
+
+@extend_schema(
+    summary="Отправить запрос на получения ответа своего вопроса",
+    description="Класс представления ConsultationAPIView получает данные с формы о вопросе клиента",
+    methods=["POST"],
+    tags=["Analytics"],
+)
+class ConsultationCreateAPIView(CustomListCreateAPIView):
+    model = 'Consultation'
+    queryset = Consultation.objects.all()
+    serializer_class = ConsultationSerializer

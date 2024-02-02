@@ -1,14 +1,25 @@
+from .models import Consultation
 from django.contrib import admin
-from apps.analytics.models import DownloadCatalog
-
-
-admin.site.register(DownloadCatalog)
 from django.utils.safestring import mark_safe
-
-from apps.analytics.models import CatalogDownloader, Appeal
+from apps.analytics.models import CatalogDownloader, Appeal, DownloadCatalog
 from service.admin import ReadDeleteModelAdmin
 
-admin.site.register(CatalogDownloader)
+
+class CatalogDownloaderAdmin(admin.ModelAdmin):
+    list_display = ('name', 'phone', 'role', 'created_at')
+    readonly_fields = ('name', 'phone', 'role', 'created_at')
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        return True
+
+
+admin.site.register(DownloadCatalog, CatalogDownloaderAdmin)
 
 
 @admin.register(Appeal)
@@ -26,3 +37,22 @@ class ReadDeleteAppealAdmin(ReadDeleteModelAdmin):
     def estate_link(self, obj):
         if obj.estate:
             return mark_safe(f'<a href="#">path/to/estate/{obj.estate.pk}/</a>')
+
+
+
+
+class ConsultationAdmin(admin.ModelAdmin):
+    list_display = ('name', 'phone', 'city', 'at_time', 'created_at')
+    readonly_fields = ('name', 'phone', 'city', 'at_time', 'created_at')
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+admin.site.register(Consultation, ConsultationAdmin)

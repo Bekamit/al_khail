@@ -7,4 +7,6 @@ urlpatterns = [
 
     path('appeal/buy/', AppealBuyCreateAPIView.as_view()),
     path('appeal/sell/', AppealSellCreateAPIView.as_view()),
+
+    path('consultation/', ConsultationCreateAPIView.as_view())
 ]
