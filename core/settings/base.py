@@ -38,6 +38,7 @@ THEME_PARTY_APPS = [
     'celery',
     'corsheaders',
     'debug_toolbar',
+    'django_resized',
 ]
 
 THEME = [
@@ -93,12 +94,6 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend'
     ],
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-    ),
     'DEFAULT_THROTTLE_RATES': {
         'anon': '100/day',
         'user': '1000/day',
@@ -236,9 +231,27 @@ SERVER_EMAIL = config.SERVER_EMAIL
 REDIS_HOST = 'redis'
 REDIS_PORT = 6379
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',  # 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://localhost:6379/1',
+        # 'OPTIONS': {
+        #     'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        # }
+    }
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'admin_app.CustomUser'
 INTERNAL_IPS = ["127.0.0.1"]
+
+DJANGORESIZED_DEFAULT_SIZE = [1180, 640]
+DJANGORESIZED_DEFAULT_SCALE = 1
+DJANGORESIZED_DEFAULT_QUALITY = 85
+DJANGORESIZED_DEFAULT_KEEP_META = False
+DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'WEBP'
+DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'WEBP': ".webp"}
+DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True

@@ -21,3 +21,5 @@ urlpatterns = [
     path('__debug__/', include(debug_toolbar.urls)),
 ]
 
+if base.DEBUG:
+    urlpatterns += static(base.MEDIA_URL, document_root=base.MEDIA_ROOT)
