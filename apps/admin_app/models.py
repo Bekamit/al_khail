@@ -13,6 +13,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(_('email address'), unique=True)
     username = models.CharField(max_length=100, unique=False, default='manager')
+    password = models.CharField(max_length=128, verbose_name='password')
     is_staff = models.BooleanField(_('staff status'), default=False)
     is_active = models.BooleanField(_('active status'), default=True)
     language = models.CharField(max_length=10, choices=CHOICES, default='en')
