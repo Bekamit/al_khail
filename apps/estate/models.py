@@ -7,6 +7,7 @@ from apps.project.models import Project
 from django.db import models
 from django.db.models import F
 from django.utils.translation import gettext_lazy as _
+from django_resized import ResizedImageField
 
 import random
 
@@ -74,7 +75,7 @@ class EstateImage(models.Model):
     def upload_to(self, filename):
         return f'estate/{self.estate.city.city_name_en}/{self.estate.id}/{filename}'
 
-    img = models.ImageField(upload_to=upload_to)
+    img = ResizedImageField(force_format='WEBP', scale=0.5, quality=75, upload_to=upload_to)
 
     def __str__(self):
         return self.img.url

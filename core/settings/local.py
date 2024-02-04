@@ -6,10 +6,6 @@ SECRET_KEY = config.SECRET_KEY
 
 DEBUG = config.DEBUG
 
-WORK_APPS = [
-    'debug_toolbar',
-]
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
