@@ -1,19 +1,11 @@
 import config
 
+
+
 SECRET_KEY = config.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config.DEBUG
-
-# ALLOWED_HOSTS = [
-#     "http://localhost:5173/",
-#     "http://localhost:6379/"
-#     "http://localhost:8000",
-#     "http://localhost:654"
-#     "http://16.171.129.40/",
-#     "https://gulsdem.pp.ua/",
-#     "http://gulsdem.pp.ua/",
-# ]
 
 DATABASES = {
    'default': {
@@ -25,6 +17,25 @@ DATABASES = {
        'PORT': config.POSTGRES_PORT,
     }
 }
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',  # 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://redis:6379/1',
+        # 'OPTIONS': {
+        #     'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        # }
+    }
+}
+
+# CSRF
+CSRF_USE_SESSIONS = True
+CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua',
+                        "http://localhost:6379",
+                        "http://localhost:5173",
+                        'https://alkhail.pp.ua',
+                        'http://localhost:8000']
+
 
 # Celery
 
@@ -38,25 +49,28 @@ CELERY_RESULT_SERIALIZER = 'json'
 
 # Cors
 
-CORS_ALLOWED_ALL_ORIGINS = True
-# CORS_ALLOW_CREDENTIALS = True
-# CORS_ALLOW_PRIVATE_NETWORK = True
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_PRIVATE_NETWORK = True
+CORS_ALLOWED_ALL_CREDENTIALS = True
 
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
 
-# CORS_ALLOW_METHODS = (
-#     "DELETE",
-#     "GET",
-#     "OPTIONS",
-#     "PATCH",
-#     "POST",
-#     "PUT",
-# )
-#
-# CORS_ALLOW_HEADERS = (
-#     "accept",
-#     "authorization",
-#     "content-type",
-#     "user-agent",
-#     "x-csrftoken",
-#     "x-requested-with",
-# )
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]

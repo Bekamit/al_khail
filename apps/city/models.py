@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
+from django_resized import ResizedImageField
 
 class City(models.Model):
     """
@@ -17,7 +17,7 @@ class City(models.Model):
         city = self.city_name_en.replace(' ', '_')
         return f'cities/{city}/{filename}'
 
-    city_img = models.ImageField(upload_to=upload_to, verbose_name='City photo path')
+    city_img = ResizedImageField(upload_to=upload_to, verbose_name='City photo path')
 
     class Meta:
         verbose_name_plural = _('Cities')

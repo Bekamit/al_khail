@@ -20,6 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 PRODUCTION = env('PRODUCTION', default=False, cast=bool)
 
+if not PRODUCTION:
+    from .local import *
+else:
+    from .prod import *
+
+
 ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -28,10 +34,17 @@ THEME_PARTY_APPS = [
     'django_filters',
     'drf_spectacular',
     'solo.apps.SoloAppConfig',
+<<<<<<< HEAD
     'corsheaders',
     'debug_toolbar',
     'tinymce',
+=======
+    'django_summernote',
+>>>>>>> 59a944afe1a2c9e930664509e136204591407634
     'celery',
+    'corsheaders',
+    'debug_toolbar',
+    'django_resized',
 ]
 
 THEME = [
@@ -63,21 +76,18 @@ INSTALLED_APPS = [
 
 # JAZZMIN
 JAZZMIN_SETTINGS = {
-    'site_title': 'Bekhan Admin panel',
+    'site_title': 'Admin panel',
     'site_header': 'Admin panel',
     'site_brand': 'Admin panel',
     'show_sidebar': True,
     'navigation_expanded': False,
+<<<<<<< HEAD
+=======
+    'hide_models': [],
+    'custom_css': None,
+>>>>>>> 59a944afe1a2c9e930664509e136204591407634
     'custom_js': None,
 }
-
-# CSRF
-CSRF_USE_SESSIONS = True
-CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua',
-                        "http://localhost:6379",
-                        "http://localhost:5173",
-                        'https://alkhail.pp.ua',
-                        'http://localhost:8000']
 
 # REST_FRAMEWORK
 REST_FRAMEWORK = {
@@ -87,12 +97,21 @@ REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ],
     'DATETIME_FORMAT': '%d.%m.%Y %H:%M:%S',
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend'
     ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '100/day',
+        'user': '1000/day',
+    },
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle',
+    ),
+    'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60 * 15,
 }
 
 SPECTACULAR_SETTINGS = {
@@ -102,9 +121,27 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "v1.SSL-off",
 }
 
+<<<<<<< HEAD
+=======
+# Summernote
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+SUMMERNOTE_CONFIG = {
+    # 'disable_attachment': True,
+    'theme': 'bs4',
+    'width': '100%',
+    'toolbar': [
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['strikethrough', 'superscript', ]],
+        ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']]
+    ]
+}
+
+>>>>>>> 59a944afe1a2c9e930664509e136204591407634
 MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'apps.admin_app.middleware.custom_middleware.AdminPanelLanguageMiddleware',
@@ -113,6 +150,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
@@ -204,6 +242,16 @@ SERVER_EMAIL = config.SERVER_EMAIL
 REDIS_HOST = 'redis'
 REDIS_PORT = 6379
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',  # 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://localhost:6379/1',
+        # 'OPTIONS': {
+        #     'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        # }
+    }
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -211,35 +259,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'admin_app.CustomUser'
 INTERNAL_IPS = ["127.0.0.1"]
 
-if not PRODUCTION:
-    from .local import *
-else:
-    from .prod import *
-
-# Cors
-
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_PRIVATE_NETWORK = True
-CORS_ALLOWED_ALL_CREDENTIALS = True
-
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-]
+DJANGORESIZED_DEFAULT_SIZE = [1180, 640]
+DJANGORESIZED_DEFAULT_SCALE = 1
+DJANGORESIZED_DEFAULT_QUALITY = 85
+DJANGORESIZED_DEFAULT_KEEP_META = False
+DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'WEBP'
+DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'WEBP': ".webp"}
+DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
