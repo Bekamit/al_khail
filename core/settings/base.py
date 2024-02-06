@@ -34,14 +34,8 @@ THEME_PARTY_APPS = [
     'django_filters',
     'drf_spectacular',
     'solo.apps.SoloAppConfig',
-<<<<<<< HEAD
     'corsheaders',
     'debug_toolbar',
-    'tinymce',
-=======
-    'django_summernote',
->>>>>>> 59a944afe1a2c9e930664509e136204591407634
-    'celery',
     'corsheaders',
     'debug_toolbar',
     'django_resized',
@@ -81,11 +75,8 @@ JAZZMIN_SETTINGS = {
     'site_brand': 'Admin panel',
     'show_sidebar': True,
     'navigation_expanded': False,
-<<<<<<< HEAD
-=======
     'hide_models': [],
     'custom_css': None,
->>>>>>> 59a944afe1a2c9e930664509e136204591407634
     'custom_js': None,
 }
 
@@ -121,25 +112,6 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "v1.SSL-off",
 }
 
-<<<<<<< HEAD
-=======
-# Summernote
-X_FRAME_OPTIONS = 'SAMEORIGIN'
-SUMMERNOTE_CONFIG = {
-    # 'disable_attachment': True,
-    'theme': 'bs4',
-    'width': '100%',
-    'toolbar': [
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['font', ['strikethrough', 'superscript', ]],
-        ['fontname', ['fontname']],
-        ['fontsize', ['fontsize']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['height', ['height']]
-    ]
-}
-
->>>>>>> 59a944afe1a2c9e930664509e136204591407634
 MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
