@@ -22,6 +22,9 @@ apps/project/migrations/__pycach
 back_media/__pycache__
 back_static/__pycache__
 ### Django ###
+
+minus_migration.py
+
 *.log
 *.pot
 *.pyc
@@ -93,7 +96,7 @@ coverage.xml
 cover/
 
 # Translations
-*.mo
+#*.mo
 
 # Django stuff:
 nginx

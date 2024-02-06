@@ -1,11 +1,7 @@
-from django.db import models
-from django.utils.translation import gettext_lazy as _
-
 from apps.city.models import City
 from apps.project.models import Project
 
 from django.db import models
-from django.db.models import F
 from django.utils.translation import gettext_lazy as _
 from django_resized import ResizedImageField
 
@@ -73,7 +69,9 @@ class EstateImage(models.Model):
     estate = models.ForeignKey(to=Estate, on_delete=models.CASCADE, related_name='images')
 
     def upload_to(self, filename):
-        return f'estate/{self.estate.city.city_name_en}/{self.estate.id}/{filename}'
+        filename = '_'.join(filename.split())
+        city = self.estate.city.city_name_en.replace(' ', '_')
+        return f'estate/{city}/{self.estate.id}/{filename}'
 
     img = ResizedImageField(force_format='WEBP', scale=0.5, quality=75, upload_to=upload_to)
 

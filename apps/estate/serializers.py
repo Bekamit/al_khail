@@ -1,8 +1,6 @@
-from rest_framework import serializers, exceptions
-from django.db import models
-from django.utils.translation import gettext_lazy as _
+from rest_framework import serializers
 
-from .models import Estate, EstateType, EstateImage
+from .models import Estate, EstateType
 from apps.staticdata.models import DefaultValue
 from apps.project.serializers import ProjectSerializer, ProjectListSerializer
 
@@ -50,7 +48,6 @@ class EstateRetrieveSerializer(serializers.ModelSerializer):
 
 class EstateSerializer(serializers.ModelSerializer):
     project = ProjectListSerializer()
-    # estate_type = serializers.StringRelatedField()
     city = serializers.StringRelatedField()
     images = serializers.StringRelatedField(many=True)
 
@@ -65,19 +62,6 @@ class EstateSerializer(serializers.ModelSerializer):
             default_img = DefaultValue.default_img()
             representation['images'] = self.absolute_url(default_img.url) if default_img else []
         return representation
-
-    # preview = serializers.SerializerMethodField()
-
-    # def absolute_url(self, instance):
-    #     if isinstance(instance.field, models.ImageField):
-    #         return self.context['request'].build_absolute_uri(instance.url)
-    #     return instance.url
-
-    # def get_preview(self, estate):
-    #     if image := estate.image.first():
-    #         return {'img': self.absolute_url(image.img)}
-    #     else:
-    #         return {'img': self.absolute_url(DefaultValue.default_img())}
 
     class Meta:
         model = Estate

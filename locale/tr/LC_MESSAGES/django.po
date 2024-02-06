@@ -176,3 +176,19 @@ msgstr "Varsayılan Değerler"
 #: .\core\settings\base.py:177
 msgid "Arabic"
 msgstr "Arapça"
+
+#: .\apps\analytics\models.py:15
+msgid "Catalog downloader"
+msgstr "Katalog indirici"
+
+#: .\apps\analytics\models.py:16
+msgid "Catalog downloaders"
+msgstr "Katalog indiriciler"
+
+#: .\apps\analytics\models.py:42
+msgid "Message from site"
+msgstr "Siteden mesaj"
+
+#: .\apps\analytics\models.py:43
+msgid "Messages from site"
+msgstr "Siteden mesajlar"

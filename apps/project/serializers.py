@@ -1,10 +1,17 @@
 from rest_framework import serializers
 
-from apps.project.models import Project
+from .models import Project, Facilities
+
+
+class FacilitiesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Facilities
+        fields = ['type',
+                  'icon']
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-    facilities = serializers.StringRelatedField(many=True, read_only=True)
+    facilities = FacilitiesSerializer(many=True)
     completion = serializers.DateField(format='%m, %Y')
 
     class Meta:
@@ -26,5 +33,4 @@ class ProjectListSerializer(serializers.ModelSerializer):
         fields = [
             'name',
             'location',
-            'pdf_catalog',
         ]

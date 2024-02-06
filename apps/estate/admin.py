@@ -2,8 +2,6 @@ from django.utils.safestring import mark_safe
 
 from django.contrib import admin
 
-# from tinymce.widgets import TinyMCE
-
 from service.admin import CustomModelAdmin
 from .models import EstateType, Estate, EstateImage
 

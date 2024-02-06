@@ -11,6 +11,7 @@ urlpatterns = [
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/redoc/", SpectacularRedocView.as_view(), name="redoc"),
     path("api/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
+    # Third apps
     # Views
     path("api/v1/", include("apps.city.urls")),
     path("api/v1/", include("apps.company.urls")),
@@ -23,3 +24,5 @@ urlpatterns = [
 
 if base.DEBUG:
     urlpatterns += static(base.MEDIA_URL, document_root=base.MEDIA_ROOT)
+    urlpatterns += static(base.STATIC_URL, document_root=base.STATIC_ROOT)
+
