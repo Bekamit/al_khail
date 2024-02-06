@@ -125,7 +125,7 @@ msgstr "Недвижимость"
 
 #: .\apps\estate\models.py:44
 msgid "Estates"
-msgstr "Недвижимость"
+msgstr "Объекты"
 
 #: .\apps\project\apps.py:8
 msgid "3. Project"

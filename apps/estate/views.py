@@ -188,8 +188,9 @@ class EstateRetrieveSimilarListAPIView(CustomListAPIView):
 
         if len(similar) >= 11:
             index = list(similar).index(estate)
-            queryset = ((similar[index - 6: index - 1] if len(similar[:index]) >= 6 else similar[:index - 1])
-                        + (similar[index + 1: index + 5] if len(similar[index:]) >= 5 else similar[index + 1:]))
+
+            queryset = ((similar[index - 6: index - 1] if len(similar[:index]) >= 6 else similar[:index])
+                        + (similar[index + 1: index + 5] if len(similar[index:]) >= 5 else similar[index:]))
             return queryset
 
         return similar.exclude(pk=estate.id)

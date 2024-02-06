@@ -30,7 +30,7 @@ THEME_PARTY_APPS = [
     'solo.apps.SoloAppConfig',
     'corsheaders',
     'debug_toolbar',
-    'django_summernote',
+    'tinymce',
     'celery',
 ]
 
@@ -68,8 +68,6 @@ JAZZMIN_SETTINGS = {
     'site_brand': 'Admin panel',
     'show_sidebar': True,
     'navigation_expanded': False,
-    'hide_models': ['summernote', ],
-    'custom_css': None,
     'custom_js': None,
 }
 
@@ -102,20 +100,6 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "Golden House API",
     "DESCRIPTION": "API for Golden House web service",
     "VERSION": "v1.SSL-off",
-}
-
-# Summernote
-X_FRAME_OPTIONS = 'SAMEORIGIN'
-SUMMERNOTE_CONFIG = {
-    # 'disable_attachment': True,
-    'theme': 'bs4',
-    'width': '100%',
-    'toolbar': [
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['font', ['strikethrough', 'superscript', ]],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['height', ['height']]
-    ]
 }
 
 MIDDLEWARE = [
@@ -197,10 +181,9 @@ LOCALE_PATHS = [
 ]
 
 # STATIC (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'back_static/'
-STATIC_ROOT = os.path.join(f'{BASE_DIR}', 'back_static')
+STATIC_URL = '/back_static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'back_static')
 
 # MEDIA (Images, PDF)
 

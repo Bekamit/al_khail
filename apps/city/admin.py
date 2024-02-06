@@ -1,5 +1,4 @@
 from django.utils.safestring import mark_safe
-from django_summernote.admin import SummernoteModelAdmin
 from django.contrib import admin
 from service.admin import CustomModelAdmin
 
