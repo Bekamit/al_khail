@@ -38,7 +38,6 @@ THEME_PARTY_APPS = [
     'celery',
     'corsheaders',
     'debug_toolbar',
-    'django_resized',
 ]
 
 THEME = [
