@@ -38,7 +38,6 @@ THEME_PARTY_APPS = [
     'debug_toolbar',
     'corsheaders',
     'debug_toolbar',
-    'django_resized',
 ]
 
 THEME = [
@@ -213,16 +212,6 @@ SERVER_EMAIL = config.SERVER_EMAIL
 # Redis
 REDIS_HOST = 'redis'
 REDIS_PORT = 6379
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',  # 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://localhost:6379/1',
-        # 'OPTIONS': {
-        #     'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        # }
-    }
-}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
