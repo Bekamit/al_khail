@@ -378,11 +378,69 @@ FACILITIES = [
 ]
 
 HEADER = {
-
+    "city_en": "city",
+    "city_ar": "مدينة",
+    "city_tr": "şehir",
+    "city_ru": "город",
+    "all_real_estates_en": "all real estates",
+    "all_real_estates_ar": "جميع العقارات",
+    "all_real_estates_tr": "tüm gayrimenkuller",
+    "all_real_estates_ru": "вся недвижимость",
+    "about_us_en": "about us",
+    "about_us_ar": "معلومات عنا",
+    "about_us_tr": "hakkımızda",
+    "about_us_ru": "о нас",
+    "place_ad_en": "place an ad",
+    "place_ad_ar": "ضع إعلانا",
+    "place_ad_tr": "reklam ver",
+    "place_ad_ru": "разместить объявление"
 }
 
 BODY = {
-
+    'main_ar': 'رئيسي', 'main_tr': 'ana sayfa', 'main_en': 'main', 'main_ru': 'основной',
+    'search_ar': 'يبحث', 'search_tr': 'aramak', 'search_en': 'search', 'search_ru': 'поиск',
+    'slogan_ar': 'ابحث عن منزل أحلامك معنا', 'slogan_tr': 'hayalinizdeki evi bizimle bulun',
+    'slogan_en': 'find your dream home with us', 'slogan_ru': 'найдите дом своей мечты вместе с нами',
+    'see_real_estates_ar': 'رؤية العقارات', 'see_real_estates_tr': 'gayrimenkulleri görmek',
+    'see_real_estates_en': 'see real estates', 'see_real_estates_ru': 'посмотреть недвижимость',
+    'city_ar': 'مدينة', 'city_tr': 'şehir', 'city_en': 'city', 'city_ru': 'город',
+    'estate_type_ar': 'نوع العقار', 'estate_type_tr': 'emlak türü', 'estate_type_en': 'estate type',
+    'estate_type_ru': 'тип недвижимости',
+    'popular_ar': 'شائع', 'popular_tr': 'popüler', 'popular_en': 'popular', 'popular_ru': 'популярные',
+    'new_add_ar': 'إضافة جديدة', 'new_add_tr': 'yeni ekleme', 'new_add_en': 'new add', 'new_add_ru': 'новые добавления',
+    'all_ar': 'الجميع', 'all_tr': 'tümü', 'all_en': 'all', 'all_ru': 'все',
+    'show_result_ar': 'أظهر النتائج', 'show_result_tr': 'sonuçları göster', 'show_result_en': 'show results',
+    'show_result_ru': 'показать результаты',
+    'we_have_ar': 'ملكية', 'we_have_tr': 'gibi şehirlerde gayrimenkulümüz var',
+    'we_have_en': 'we have real estate in cities such as',
+    'we_have_ru': 'у представляем недвижимость в таких городах, как',
+    'benefits_ar': 'فوائد البيت الذهبي', 'benefits_tr': 'altın evin faydaları',
+    'benefits_en': 'benefits of golden house', 'benefits_ru': 'преимущества компании golden house',
+    'wide_selection_ar': 'مجموعة واسعة', 'wide_selection_tr': 'geniş bir seçim',
+    'wide_selection_en': 'a wide selection', 'wide_selection_ru': 'широкий выбор',
+    'confidentiality_ar': 'سرية', 'confidentiality_tr': 'gizlilik', 'confidentiality_en': 'confidentiality',
+    'confidentiality_ru': 'конфиденциальность',
+    'exclusive_offers_ar': 'عروض حصرية', 'exclusive_offers_tr': 'özel teklifler',
+    'exclusive_offers_en': 'exlusive offers', 'exclusive_offers_ru': 'эксклюзивные предложения',
+    'feedback_ar': 'تعليق', 'feedback_tr': 'geri bildirim', 'feedback_en': 'feedback', 'feedback_ru': 'обратная связь',
+    'view_more_ar': 'عرض المزيد', 'view_more_tr': 'daha fazla göster', 'view_more_en': 'view more',
+    'view_more_ru': 'посмотреть больше',
+    'furnished_ar': 'مفروشة، مد، زود', 'furnished_tr': 'mobilyalı', 'furnished_en': 'furnished',
+    'furnished_ru': 'меблированный',
+    'completion_ar': 'انتهاء', 'completion_tr': 'tamamlama', 'completion_en': 'completion',
+    'completion_ru': 'завершение',
+    'price_at_ar': 'السعر عند', 'price_at_tr': 'fiyat', 'price_at_en': 'price at', 'price_at_ru': 'стартовая цена',
+    'catalog_ar': 'فهرس', 'catalog_tr': 'katalog', 'catalog_en': 'catalog', 'catalog_ru': 'каталог',
+    'features_and_amenities_ar': 'الميزات ووسائل الراحة', 'features_and_amenities_tr': 'özellikler ve olanaklar',
+    'features_and_amenities_en': 'features & amenities', 'features_and_amenities_ru': 'особенности и удобства',
+    'description_ar': 'وصف', 'description_tr': 'tanım', 'description_en': 'description', 'description_ru': 'описание',
+    'mission_and_history_ar': 'المهمة والتاريخ', 'mission_and_history_tr': 'misyon ve tarih',
+    'mission_and_history_en': 'mission and history', 'mission_and_history_ru': 'миссия и история',
+    'mission_ar': 'مهمة', 'mission_tr': 'misyon', 'mission_en': 'mission', 'mission_ru': 'миссия',
+    'history_ar': 'تاريخ', 'history_tr': 'tarih', 'history_en': 'history', 'history_ru': 'история',
+    'company_ar': 'شركة', 'company_tr': 'şirket', 'company_en': 'company', 'company_ru': 'компания',
+    'similar_properties_ar': 'خصائص مماثلة', 'similar_properties_tr': 'benzer özellikler',
+    'similar_properties_en': 'similar properties', 'similar_properties_ru': 'похожие объекты'
 }
 
 FORMS = {
@@ -390,7 +448,33 @@ FORMS = {
 }
 
 FOOTER = {
+    'contact_us_en': "contact us",
+    'contact_us_ar': "اتصل بنا",
+    'contact_us_tr': "bize ulaşın",
+    'contact_us_ru': "связаться с нами",
+    'cities_en': "cities",
+    'cities_ar': "مدن",
+    'cities_tr': "şehirler",
+    'cities_ru': "города",
+    'estate_types_en': "estate types",
+    'estate_types_ar': "أنواع العقارات",
+    'estate_types_tr': "emlak türleri",
+    'estate_types_ru': "типы недвижимости",
+    'pages_en': "pages",
+    'pages_ar': "الصفحات",
+    'pages_tr': "sayfalar",
+    'pages_ru': "страницы",
+}
 
+ERROR404 = {
+    'not_found_en': "not found",
+    'not_found_ar': "غير معثور عليه",
+    'not_found_tr': "bulunamadı",
+    'not_found_ru': "страница не найдена",
+    'error_description_en': "sorry, the page was not found, it may have been moved, deleted, or temporarily unavailable; check that the address you entered is correct",
+    'error_description_ar': "عذرًا، لم يتم العثور على الصفحة، ربما تم نقلها أو حذفها أو أنها غير متاحة مؤقتًا؛ تأكد من صحة العنوان الذي أدخلته.",
+    'error_description_tr': "Üzgünüz, sayfa bulunamadı, taşınmış, silinmiş veya geçici olarak kullanılamıyor olabilir; Girdiğiniz adresin doğru olup olmadığını kontrol edin.",
+    'error_description_ru': "извините, страница не найдена, возможно, она была перемещена, удалена или временно недоступна; проверьте правильность введенного вами адреса.",
 }
 
 DEFAULT_VALUES = {
@@ -400,18 +484,18 @@ DEFAULT_VALUES = {
 
 COMPANY = {
     "company_name": "Golden House",
-    "about_en": "The mission of our real estate agency is to provide high-quality services aimed at satisfying the needs of our clients in the buying, selling, and renting of real estate. We strive to create a reliable partnership based on professionalism, trust, and attention to the individual requests of each client, with the aim of ensuring successful and mutually beneficial transactions. "
-                "Our real estate company is an innovative agency specializing in the purchase, sale, and rental of real estate. We take pride in our high level of professionalism and dedication to meeting the needs of our clients. Our approach is based on careful market analysis, an individualized approach to each client, and the use of advanced technologies to ensure efficient and comfortable transactions. Our goal is to help you realize your housing dreams, providing excellent service at every stage of cooperation. "
-                "Over the past few years in the real estate market, we have successfully provided high-quality services. Our experience and expertise allow us to navigate effectively in the dynamic real estate environment, providing our clients with reliable solutions and a professional approach. Our constant commitment to quality and client satisfaction makes us a reliable partner in your housing solutions.",
-    "about_ar": "مهمة وكالتنا العقارية تتمثل في تقديم خدمات عالية الجودة تهدف إلى تلبية احتياجات عملائنا في مجال شراء وبيع وتأجير العقارات. نسعى إلى خلق شراكة موثوقة تستند إلى المهنية والثقة والاهتمام بالطلبات الفردية لكل عميل، بهدف ضمان إجراءات ناجحة ومفيدة للجميع. "
-                "شركتنا العقارية هي وكالة مبتكرة متخصصة في شراء وبيع وتأجير العقارات. نفتخر بمستوى عالٍ من المهنية والتفاني في تلبية احتياجات عملائنا. يستند نهجنا إلى تحليل دقيق للسوق والتقارب الفردي لكل عميل واستخدام التقنيات المتقدمة لضمان إجراءات فعالة ومريحة. هدفنا هو مساعدتك في تحقيق أحلامك السكنية، مع توفير خدمة ممتازة في كل مرحلة من مراحل التعاون.  "
-                "على مدى السنوات القليلة الماضية في سوق العقارات، قدمنا بنجاح خدمات عالية الجودة. يسمح لنا خبرتنا وخبرتنا بالتنقل بشكل فعال في بيئة العقارات الديناميكية، مما يوفر لعملائنا حلاً موثوقًا ونهجًا محترفًا. التفاني الدائم لدينا في الجودة ورضا العملاء يجعلنا شريكًا موثوقًا في حلول الإسكان الخاصة بك.",
-    "about_tr": "Emlak ajansımızın misyonu, müşterilerimizin gayrimenkul alım, satım ve kiralama ihtiyaçlarını karşılamaya yönelik yüksek kaliteli hizmetler sunmaktır. Her bir müşterinin bireysel taleplerine odaklanan, profesyonellik, güven ve sağlam bir ortaklık yaratma çabası içindeyiz, başarılı ve karşılıklı faydalı işlemleri sağlamak amacıyla. "
-                "Gayrimenkul şirketimiz, gayrimenkul alımı, satımı ve kiralaması konusunda uzmanlaşmış yenilikçi bir ajans. Yüksek profesyonellik seviyemiz ve müşterilerimizin ihtiyaçlarını karşılama konusundaki bağlılığımızla gurur duyuyoruz. Yaklaşımımız, piyasa analizi, her müşteriye özel bir yaklaşım ve etkili ve konforlu işlemler sağlamak için ileri teknolojilerin kullanımına dayanmaktadır. Amacımız, konut hayallerinizi gerçekleştirmenize yardımcı olmak ve işbirliğinin her aşamasında mükemmel hizmet sunmaktır. "
-                "Son birkaç yıldır gayrimenkul piyasasında başarıyla yüksek kaliteli hizmetler sunmaktayız. Deneyimimiz ve uzmanlığımız, dinamik gayrimenkul ortamında etkili bir şekilde yol almamıza ve müşterilerimize güvenilir çözümler ve profesyonel bir yaklaşım sunmamıza olanak tanır. Kaliteye ve müşteri memnuniyetine olan sürekli bağlılığımız, bizi konut çözümlerinizde güvenilir bir ortak yapmaktadır.",
-    "about_ru": "Миссия нашего агентства недвижимости заключается в предоставлении высококачественных услуг, направленных на удовлетворение потребностей наших клиентов в области купли, продажи и аренды недвижимости. Мы стремимся создать надежное партнерство, основанное на профессионализме, доверии и внимании к индивидуальным запросам каждого клиента, с целью обеспечения успешных и взаимовыгодных сделок. "
-                "Наша компания недвижимости — это инновационное агентство, специализирующееся на купле, продаже и аренде недвижимости. Мы гордимся высоким уровнем профессионализма и преданностью удовлетворению потребностей клиентов. Наш подход основан на тщательном анализе рынка, индивидуальном подходе к каждому клиенту и использовании передовых технологий для обеспечения эффективных и комфортных сделок. Наша цель — помочь вам осуществить ваши жилищные мечты, обеспечивая превосходный сервис на каждом этапе сотрудничества. "
-                "В течение последних нескольких лет на рынке недвижимости мы успешно оказываем высококачественные услуги. Наш опыт и экспертиза позволяют нам эффективно навигировать в динамичной среде недвижимости, обеспечивая наших клиентов надежными решениями и профессиональным подходом. Наша постоянная преданность качеству и удовлетворенность клиентов делают нас надежным партнером в ваших жилищных решениях.",
+    "mission_en": "The mission of our real estate agency is to provide high-quality services aimed at meeting the needs of our clients in the field of buying, selling and renting real estate. We strive to create a reliable partnership based on professionalism, trust and attention to the individual needs of each client, in order to ensure successful and mutually beneficial transactions.",
+    "mission_ar": "مهمة وكالتنا العقارية هي تقديم خدمات عالية الجودة تهدف إلى تلبية احتياجات عملائنا في مجال شراء وبيع وتأجير العقارات. نحن نسعى لإنشاء شراكة موثوقة تستند إلى الاحترافية والثقة والاهتمام بالاحتياجات الفردية لكل عميل، من أجل ضمان صفقات ناجحة ومربحة للجميع.",
+    "mission_tr": "Gayrimenkul ajansımızın misyonu, müşterilerimizin gayrimenkul satın alma, satma ve kiralamada ihtiyaçlarını karşılamayı amaçlayan yüksek kaliteli hizmetler sunmaktır. Başarılı ve karşılıklı yararlı işlemleri sağlamak amacıyla her müşterinin bireysel ihtiyaçlarına profesyonellik, güven ve dikkatle dayalı güvenilir bir ortaklık oluşturmayı hedefliyoruz.",
+    "mission_ru": "Миссия нашего агентства недвижимости заключается в предоставлении высококачественных услуг, направленных на удовлетворение потребностей наших клиентов в области купли, продажи и аренды недвижимости. Мы стремимся создать надежное партнерство, основанное на профессионализме, доверии и внимании к индивидуальным запросам каждого клиента, с целью обеспечения успешных и взаимовыгодных сделок.",
+    "history_en": "Over the past few years, we have been successfully providing high-quality services in the real estate market. Our experience and expertise allow us to effectively navigate the dynamic real estate environment, providing our clients with reliable solutions and a professional approach. Our constant dedication to quality and customer satisfaction makes us a trusted partner in your housing solutions.",
+    "history_ar": "على مدى السنوات القليلة الماضية ، قدمنا ​​بنجاح خدمات عالية الجودة في سوق العقارات. تتيح لنا خبرتنا وتخصصنا التنقل بفعالية في البيئة العقارية الديناميكية ، مما يوفر لعملائنا حلولًا موثوقة ونهجًا مهنيًا. التفاني المستمر لدينا في الجودة ورضا العملاء يجعلنا شريكًا موثوقًا في حلول السكن الخاصة بك.",
+    "history_tr": "Son birkaç yıldır gayrimenkul piyasasında başarılı bir şekilde yüksek kaliteli hizmetler sunuyoruz. Deneyimimiz ve uzmanlığımız, dinamik gayrimenkul ortamında etkili bir şekilde hareket etmemizi sağlayarak müşterilerimize güvenilir çözümler ve profesyonel bir yaklaşım sunmamıza olanak tanır. Sürekli kaliteye ve müşteri memnuniyetine olan bağlılığımız, konut çözümlerinizde güvenilir bir ortak olmamızı sağlar.",
+    "history_ru": "За последние несколько лет мы успешно предоставляем высококачественные услуги на рынке недвижимости. Наш опыт и экспертиза позволяют нам эффективно ориентироваться в динамичной среде недвижимости, обеспечивая нашим клиентам надежные решения и профессиональный подход. Наша постоянная преданность качеству и удовлетворенность клиентов делают нас надежным партнером в ваших жилищных решениях.",
+    "company_en": "Our real estate company is an innovative agency specializing in the purchase, sale and rental of real estate. We pride ourselves on our high level of professionalism and dedication to customer satisfaction. Our approach is based on thorough market analysis, an individual approach to each client and the use of advanced technologies to ensure efficient and comfortable transactions. Our goal is to help you achieve your housing dreams by providing superior service every step of the way.",
+    "company_ar": "شركتنا العقارية هي وكالة مبتكرة متخصصة في شراء وبيع وتأجير العقارات. نفتخر بمستوى عال من الاحترافية والتفاني في تحقيق رضا العملاء. يستند نهجنا إلى تحليل سوق شامل ومنهج فردي لكل عميل واستخدام التكنولوجيا المتقدمة لضمان معاملات فعالة ومريحة. هدفنا هو مساعدتك في تحقيق أحلامك السكنية من خلال تقديم خدمة متميزة في كل خطوة من الطريق.",
+    "company_tr": "Gayrimenkul şirketimiz, gayrimenkul satın alma, satış ve kiralama konularında uzmanlaşmış yenilikçi bir ajansdır. Yüksek profesyonellik seviyemiz ve müşteri memnuniyetine olan bağlılığımızla gurur duyuyoruz. Yaklaşımımız, her bir müşteriye özel bir yaklaşım ve etkili ve konforlu işlemleri sağlamak için gelişmiş teknolojilerin kullanılması temeline dayanmaktadır. Amacımız, size üstün hizmet sunarak konut hayallerinizi gerçekleştirmenize yardımcı olmaktır.",
+    "company_ru": "Наша компания недвижимости - это инновационное агентство, специализирующееся на покупке, продаже и аренде недвижимости. Мы гордимся высоким уровнем профессионализма и преданностью удовлетворению потребностей клиентов. Наш подход основан на тщательном анализе рынка, индивидуальном подходе к каждому клиенту и использовании передовых технологий для обеспечения эффективных и комфортных сделок. Наша цель - помочь вам осуществить ваши жилищные мечты, обеспечивая превосходный сервис на каждом этапе сотрудничества.",
     "phone": "+971 123 456 78",
     "email": "info@dubairealestate.com",
     "company_img": "back_static/default_img/logo.jpg",

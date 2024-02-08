@@ -12,17 +12,15 @@ urlpatterns = [
     path("api/redoc/", SpectacularRedocView.as_view(), name="redoc"),
     path("api/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
     # Third apps
+    path('__debug__/', include(debug_toolbar.urls)),
     # Views
     path("api/v1/", include("apps.city.urls")),
     path("api/v1/", include("apps.company.urls")),
     path("api/v1/", include("apps.estate.urls")),
     path("api/v1/", include("apps.staticdata.urls")),
     path("api/v1/", include("apps.analytics.urls")),
-    path('summernote/', include('django_summernote.urls')),
-    path('__debug__/', include(debug_toolbar.urls)),
 ]
 
 if base.DEBUG:
     urlpatterns += static(base.MEDIA_URL, document_root=base.MEDIA_ROOT)
     urlpatterns += static(base.STATIC_URL, document_root=base.STATIC_ROOT)
-

@@ -4,13 +4,22 @@ from django.core.files.base import File
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
-from apps.staticdata.start_content import CITIES, ESTATE_TYPES, COMPANY, DEFAULT_VALUES, FACILITIES
+from apps.staticdata.start_content import (CITIES,
+                                           ESTATE_TYPES,
+                                           COMPANY,
+                                           DEFAULT_VALUES,
+                                           FACILITIES,
+                                           HEADER,
+                                           BODY,
+                                           FORMS,
+                                           FOOTER,
+                                           ERROR404)
 
 from apps.estate.models import EstateType
 from apps.city.models import City
 from apps.company.models import Company
 from apps.project.models import Facilities
-from apps.staticdata.models import Header, Body, Form, Footer, DefaultValue
+from apps.staticdata.models import Header, Body, Form, Footer, Error404, DefaultValue
 
 
 class Command(BaseCommand):
@@ -20,6 +29,11 @@ class Command(BaseCommand):
     default_value = DefaultValue.objects.all()
     company = Company.objects.all()
     facilities = Facilities.objects.all()
+    static_content = all((Header.objects.all(),
+                          Body.objects.all(),
+                          Form.objects.all(),
+                          Footer.objects.all(),
+                          Error404.objects.all()))
 
     def add_arguments(self, parser):
         parser.add_argument('-a', '--all', action='store_true', help='Add all start content')
@@ -72,6 +86,38 @@ class Command(BaseCommand):
                 company.save()
             self.stdout.write(self.style.SUCCESS('About company created successfully'))
 
+    def get_header(self):
+        with transaction.atomic():
+            Header.objects.create(**HEADER)
+            self.stdout.write(self.style.SUCCESS('Header created successfully'))
+
+    def get_body(self):
+        with transaction.atomic():
+            Body.objects.create(**BODY)
+            self.stdout.write(self.style.SUCCESS('Body created successfully'))
+
+    def get_forms(self):
+        with transaction.atomic():
+            Form.objects.create(**FORMS)
+            self.stdout.write(self.style.SUCCESS('Forms created successfully'))
+
+    def get_footer(self):
+        with transaction.atomic():
+            Footer.objects.create(**FOOTER)
+            self.stdout.write(self.style.SUCCESS('Footer created successfully'))
+
+    def get_error404(self):
+        with transaction.atomic():
+            Error404.objects.create(**ERROR404)
+            self.stdout.write(self.style.SUCCESS('Error404 created successfully'))
+
+    def get_static_content(self):
+        self.get_header()
+        self.get_body()
+        # self.get_forms()
+        self.get_footer()
+        self.get_error404()
+
     def get_start_data(self):
         if not self.company:
             self.get_about_company()
@@ -83,6 +129,8 @@ class Command(BaseCommand):
             self.get_start_estate_type()
         if not self.facilities:
             self.get_start_facilities()
+        if not self.static_content:
+            self.get_static_content()
 
     def handle(self, *args, **options):
         if options['all']:
@@ -97,7 +145,7 @@ class Command(BaseCommand):
             if options['company']:
                 self.get_about_company()
             if options['static_content']:
-                self.stdout.write(self.style.ERROR(f'Not yet this function!'))
+                self.get_static_content()
             if options['estate_type']:
                 self.get_start_estate_type()
             if options['facilities']:

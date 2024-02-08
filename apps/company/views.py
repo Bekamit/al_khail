@@ -1,6 +1,7 @@
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 
 from service.views import CustomSingletonListAPIView
+from service.cache import CustomCache
 
 from .serializers import CompanySerializer
 from .models import Company
@@ -28,3 +29,6 @@ class AboutCompanyListAPIView(CustomSingletonListAPIView):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
     response_key = 'about_company'
+    cache_class = CustomCache
+    cache_language = '__all__'
+    cache_key = 'about_company'
