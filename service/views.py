@@ -260,7 +260,7 @@ class CustomEstateCreateAPIView(mixin.CustomCreateEstateMixin, CustomGenericAPIV
                 for penthouse in penthouses:
                     self.save_data(penthouse)
 
-                for page in range(1, 2):
+                for page in range(1, 12):
                     apartments = self.get_fake_estate_apartment(page)
                     for apartment in apartments:
                         self.save_data(apartment)

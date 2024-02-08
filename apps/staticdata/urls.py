@@ -7,4 +7,5 @@ urlpatterns = [
     path('static_data/body/', BodyAPIView.as_view()),
     path('static_data/forms/', FormsAPIView.as_view()),
     path('static_data/footer/', FooterAPIView.as_view()),
+    path('static_data/error404/', Error404APIView.as_view()),
 ]

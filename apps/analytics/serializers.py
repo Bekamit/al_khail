@@ -9,16 +9,37 @@ from apps.estate.models import Estate
 from django.utils.translation import gettext_lazy as _
 
 
-class ChoiceRoleSerializer(serializers.ModelSerializer):
-    placeholder = serializers.CharField(source='role')
-
+class Status201Serializer(serializers.ModelSerializer):
     class Meta:
         model = Form
         fields = [
-            'placeholder',
-            'agent',
-            'buyer',
-            'exploring'
+            'successfully',
+            'thanks',
+            'close',
+        ]
+
+
+class BuyFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Form
+        fields = [
+            'your_name',
+            'phone_number',
+            'your_city',
+            'date',
+            'send',
+            'submit_application',
+            'fill_form'
+        ]
+
+
+class AppealBuySerializer(serializers.ModelSerializer):
+    form = BuyFormSerializer()
+
+    class Meta:
+        model = Appeal
+        fields = [
+            'form',
         ]
 
 

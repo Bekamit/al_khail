@@ -8,7 +8,7 @@ from .models import Company
 
 
 @extend_schema(
-    summary="Получить блок описания `о компании`",
+    summary="Получить блок описания `о компании`/⏩cache_content",
     description="Класс представления AboutCompanyListAPIView возвращает коллекцию из одного описания раздела 'о компании' "
                 " модели Company "
                 "Мультиязычная модель! **ACCEPT-LANGUAGE** для вывода данных на заявленном языке, "

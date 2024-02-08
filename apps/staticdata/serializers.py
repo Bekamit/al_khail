@@ -9,7 +9,7 @@ class HeaderSerializer(serializers.ModelSerializer):
             'city',
             'all_real_estates',
             'place_ad',
-            'about_as', ]
+            'about_us', ]
 
 
 class BodySerializer(serializers.ModelSerializer):
@@ -29,10 +29,13 @@ class BodySerializer(serializers.ModelSerializer):
             'we_have',
             'benefits',
             'wide_selection',
+            'wide_selection_description',
             'confidentiality',
+            'confidentiality_description',
             'exclusive_offers',
+            'exclusive_offers_description',
             'feedback',
-            'view_more',
+            'feedback_description',
             'furnished',
             'completion',
             'price_at',
@@ -68,6 +71,8 @@ class FormSerializer(serializers.ModelSerializer):
             'submit_application',
             'fill_form',
             'sell_with_us',
+            'successfully',
+            'thanks',
             'download_catalog',
             'your_name',
             'your_email',
@@ -81,6 +86,7 @@ class FormSerializer(serializers.ModelSerializer):
             'agent',
             'buyer',
             'exploring',
+
         ]
 
 
