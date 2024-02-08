@@ -114,7 +114,7 @@ class Command(BaseCommand):
     def get_static_content(self):
         self.get_header()
         self.get_body()
-        # self.get_forms()
+        self.get_forms()
         self.get_footer()
         self.get_error404()
 

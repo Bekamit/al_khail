@@ -7,7 +7,7 @@ from drf_spectacular.utils import extend_schema, OpenApiExample, OpenApiParamete
 
 
 @extend_schema(
-    summary="Получить список городов",
+    summary="Получить список городов/⏩cache_content",
     description="Класс представления CityListAPIView возвращает коллекцию из всех городов модели City"
                 "Мультиязычная модель! **ACCEPT-LANGUAGE** для вывода данных на заявленном языке,"
                 "если его нет, отдача будет на языке по умолчанию **EN**. Атрибут может быть определен"
