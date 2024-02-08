@@ -1,7 +1,4 @@
 from django.contrib import admin
-from django.db import models
-
-from tinymce.widgets import TinyMCE
 
 
 class CustomModelAdmin(admin.ModelAdmin):
@@ -10,9 +7,10 @@ class CustomModelAdmin(admin.ModelAdmin):
             'all': ('css/admin.css',),
         }
 
-    # formfield_overrides = {
-    #     models.TextField: {'widget': TinyMCE(attrs={'cols': 80, 'rows': 30})},
-    # }
+    def not_null_fields(self, obj):
+        return all([getattr(obj, field.name) for field in obj._meta.fields if field.name != 'id'])
+    not_null_fields.boolean = True
+    not_null_fields.short_description = 'All fields are filled'
 
 
 class ReadDeleteModelAdmin(admin.ModelAdmin):

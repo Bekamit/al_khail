@@ -1,17 +1,14 @@
-import asyncio
-
-from django.db import transaction
 from rest_framework.generics import GenericAPIView
 from django.utils.translation import get_language_from_request
-from core import settings
 
-from service import mixin
+from service import mixin, cache
+from core.settings.base import MODELTRANSLATION_DEFAULT_LANGUAGE
 
 from apps.estate.models import Estate, EstateType, EstateImage
-from apps.estate.tests import ESTATE_TYPES
 from apps.project.models import Project, Facilities
 from apps.city.models import City
-from apps.city.tests import CITIES
+
+import asyncio
 import requests as req
 import aiohttp
 from random import choice, randint, uniform
@@ -23,6 +20,9 @@ from django.core.files import File
 
 class CustomGenericAPIView(GenericAPIView):
     response_key: str | None = None
+    cache_class: cache.CustomCache | None = None
+    cache_language: str | tuple | None = None
+    cache_key = str | None
 
     def get_response_key(self):
         if key := self.response_key:
@@ -32,11 +32,36 @@ class CustomGenericAPIView(GenericAPIView):
         else:
             return None
 
+    def get_cache_key(self):
+        if key := self.cache_key:
+            if not isinstance(key, str):
+                raise ValueError('`cache_key` must be str only')
+            return key
+        else:
+            return None
+
     def get_response_language(self):
         if language := get_language_from_request(self.request):
             return language.upper()
         else:
-            return settings.base.MODELTRANSLATION_DEFAULT_LANGUAGE.upper()
+            return MODELTRANSLATION_DEFAULT_LANGUAGE.upper()
+
+    def get_queryset(self):
+        if not self.cache_language and not self.cache_class:
+            return super().get_queryset()
+
+        _cache = self.cache_class(self.cache_language)
+        accept_language = self.get_response_language()
+        if accept_language.lower() in _cache.languages:
+            key = self.get_cache_key()
+            if queryset := _cache.get(key, accept_language):
+                return queryset
+            else:
+                queryset = super().get_queryset()
+                _cache.set(key, accept_language, queryset)
+                return queryset
+        else:
+            return super().get_queryset()
 
 
 class CustomListAPIView(mixin.CustomListModelMixin, CustomGenericAPIView):
@@ -46,17 +71,12 @@ class CustomListAPIView(mixin.CustomListModelMixin, CustomGenericAPIView):
 
 class CustomSingletonListAPIView(mixin.CustomSingletonListModelMixin, CustomGenericAPIView):
     def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+        return self.first_list(request, *args, **kwargs)
 
 
 class CustomRetrieveAPIView(mixin.CustomRetrieveMixin, CustomGenericAPIView):
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
-
-
-class CustomRetrieveImagesAPIView(mixin.CustomRetrieveEstateImageMixin, GenericAPIView):
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
 
 
 class CustomEstateCreateAPIView(mixin.CustomCreateEstateMixin, CustomGenericAPIView):
@@ -200,7 +220,7 @@ class CustomEstateCreateAPIView(mixin.CustomCreateEstateMixin, CustomGenericAPIV
                 p.save()
 
             estate_obj = {"title_en": estate_data.get("title"),
-                          "title_ar": "يسر GOLDEN HOUSE تقديم هذا العقار في TEST TITLE.",
+                          "title_ar": "يسر GOLDEN HOUSE تقديم هذا العقار في TITLE TEST.",
                           "title_ru": "GOLDEN HOUSE Тестовое название",
                           "project": p,
                           "area": round(estate_data.get("size") / 3.2808, 2),
@@ -240,7 +260,7 @@ class CustomEstateCreateAPIView(mixin.CustomCreateEstateMixin, CustomGenericAPIV
                 for penthouse in penthouses:
                     self.save_data(penthouse)
 
-                for page in range(1, 11):
+                for page in range(1, 2):
                     apartments = self.get_fake_estate_apartment(page)
                     for apartment in apartments:
                         self.save_data(apartment)

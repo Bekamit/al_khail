@@ -6,7 +6,7 @@ from rest_framework.generics import CreateAPIView
 
 
 @extend_schema(
-    summary="Отправить запрос при скачивании каталога",
+    summary="Отправить запрос при скачивании каталога (в работе)",
     description="Класс представления CatalogDownloaderCreateAPIView получает данные с формы при скачивании каталога проекта",
     methods=["POST"],
     tags=["Analytics"],
@@ -17,7 +17,7 @@ class CatalogDownloaderCreateAPIView(CreateAPIView):
 
 
 @extend_schema(
-    summary="Отправить запрос на покупку объекта недвижимости",
+    summary="Отправить запрос на покупку объекта недвижимости(в работе)",
     description="Класс представления AppealBuyCreateAPIView получает данные с формы о покупке объекта недвижимости ",
     methods=["POST"],
     tags=["Analytics"],
@@ -28,7 +28,7 @@ class AppealBuyCreateAPIView(CreateAPIView):
 
 
 @extend_schema(
-    summary="Отправить запрос на продажу объекта недвижимости",
+    summary="Отправить запрос на продажу объекта недвижимости(в работе)",
     description="Класс представления AppealSellCreateAPIView получает данные с формы о желании клиента"
                 " продать свой объект недвижимости",
     methods=["POST"],

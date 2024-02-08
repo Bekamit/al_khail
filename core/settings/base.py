@@ -25,7 +25,6 @@ if not PRODUCTION:
 else:
     from .prod import *
 
-
 ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -34,8 +33,6 @@ THEME_PARTY_APPS = [
     'django_filters',
     'drf_spectacular',
     'solo.apps.SoloAppConfig',
-    'corsheaders',
-    'debug_toolbar',
     'corsheaders',
     'debug_toolbar',
     'django_resized',
@@ -165,7 +162,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = 'en'
 
@@ -200,6 +196,15 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'back_static')
 MEDIA_URL = '/back_media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'back_media')
 
+# IMAGES SETTINGS
+DJANGORESIZED_DEFAULT_SIZE = [1180, 640]
+DJANGORESIZED_DEFAULT_SCALE = 1
+DJANGORESIZED_DEFAULT_QUALITY = 85
+DJANGORESIZED_DEFAULT_KEEP_META = False
+DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'WEBP'
+DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'WEBP': ".webp"}
+DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
+
 # EMAIL
 EMAIL_BACKEND = config.EMAIL_BACKEND
 EMAIL_HOST = config.EMAIL_HOST
@@ -214,13 +219,11 @@ SERVER_EMAIL = config.SERVER_EMAIL
 REDIS_HOST = 'redis'
 REDIS_PORT = 6379
 
+# Cache redis
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',  # 'django_redis.cache.RedisCache',
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
         'LOCATION': 'redis://localhost:6379/1',
-        # 'OPTIONS': {
-        #     'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        # }
     }
 }
 
@@ -230,11 +233,3 @@ CACHES = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'admin_app.CustomUser'
 INTERNAL_IPS = ["127.0.0.1"]
-
-DJANGORESIZED_DEFAULT_SIZE = [1180, 640]
-DJANGORESIZED_DEFAULT_SCALE = 1
-DJANGORESIZED_DEFAULT_QUALITY = 85
-DJANGORESIZED_DEFAULT_KEEP_META = False
-DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'WEBP'
-DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'WEBP': ".webp"}
-DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True

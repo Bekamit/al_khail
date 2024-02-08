@@ -26,28 +26,7 @@ class EstateTypeSerializer(serializers.ModelSerializer):
 
 
 # ------------------------- ESTATE -----------------------
-
-
-class EstateRetrieveSerializer(serializers.ModelSerializer):
-    project = ProjectSerializer()
-    estate_type = serializers.StringRelatedField()
-    city = serializers.StringRelatedField()
-
-    class Meta:
-        model = Estate
-        fields = ['id',
-                  'title',
-                  'area',
-                  'description',
-                  'price_usd',
-                  'estate_type',
-                  'city',
-                  'is_secondary',
-                  'project', ]
-
-
-class EstateSerializer(serializers.ModelSerializer):
-    project = ProjectListSerializer()
+class BaseEstateSerializer(serializers.ModelSerializer):
     city = serializers.StringRelatedField()
     images = serializers.StringRelatedField(many=True)
 
@@ -62,6 +41,28 @@ class EstateSerializer(serializers.ModelSerializer):
             default_img = DefaultValue.default_img()
             representation['images'] = self.absolute_url(default_img.url) if default_img else []
         return representation
+
+
+class EstateRetrieveSerializer(BaseEstateSerializer):
+    estate_type = serializers.StringRelatedField()
+    project = ProjectSerializer()
+
+    class Meta:
+        model = Estate
+        fields = ['id',
+                  'title',
+                  'area',
+                  'description',
+                  'price_usd',
+                  'estate_type',
+                  'city',
+                  'is_secondary',
+                  'images',
+                  'project', ]
+
+
+class EstateSerializer(BaseEstateSerializer):
+    project = ProjectListSerializer()
 
     class Meta:
         model = Estate
