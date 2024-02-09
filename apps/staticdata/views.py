@@ -34,21 +34,26 @@ from .serializers import (HeaderSerializer,
     ]
 )
 class AllStaticDataAPIView(APIView):
+
     def get(self, request, *args, **kwargs):
-        header = footer = Header.objects.first()
-        body = Body.objects.first()
-        form = Form.objects.first()
+        header = Header.get_solo()
+        body = Body.get_solo()
+        form = Form.get_solo()
+        footer = Footer.get_solo()
+        error = Error404.get_solo()
         header_serializer = HeaderSerializer(header)
         body_serializer = BodySerializer(body)
         form_serializer = FormSerializer(form)
         footer_serializer = FooterSerializer(footer)
+        error_serializer = Error404Serializer(error)
         data = {
             "language": get_language_from_request(request).upper(),
             "static_data": {
                 "header": header_serializer.data,
                 "body": body_serializer.data,
                 "forms": form_serializer.data,
-                "footer": footer_serializer.data
+                "footer": footer_serializer.data,
+                "error": error_serializer.data
             }
         }
         return Response(data, status=status.HTTP_200_OK)
@@ -72,7 +77,7 @@ class AllStaticDataAPIView(APIView):
     ]
 )
 class HeaderAPIView(CustomSingletonListAPIView):
-    queryset = Header.objects.all()
+    queryset = Header.get_solo()
     serializer_class = HeaderSerializer
     response_key = "header"
     cache_class = CustomCache
@@ -98,7 +103,7 @@ class HeaderAPIView(CustomSingletonListAPIView):
     ]
 )
 class BodyAPIView(CustomSingletonListAPIView):
-    queryset = Body.objects.all()
+    queryset = Body.get_solo()
     serializer_class = BodySerializer
     response_key = "body"
     cache_class = CustomCache
@@ -124,7 +129,7 @@ class BodyAPIView(CustomSingletonListAPIView):
     ]
 )
 class FormsAPIView(CustomSingletonListAPIView):
-    queryset = Form.objects.all()
+    queryset = Form.get_solo()
     serializer_class = FormSerializer
     response_key = "forms"
     cache_class = CustomCache
@@ -150,7 +155,7 @@ class FormsAPIView(CustomSingletonListAPIView):
     ]
 )
 class FooterAPIView(CustomSingletonListAPIView):
-    queryset = Footer.objects.all()
+    queryset = Footer.get_solo()
     serializer_class = FooterSerializer
     response_key = "footer"
     cache_class = CustomCache
@@ -176,7 +181,7 @@ class FooterAPIView(CustomSingletonListAPIView):
     ]
 )
 class Error404APIView(CustomSingletonListAPIView):
-    queryset = Error404.objects.all()
+    queryset = Error404.get_solo()
     serializer_class = Error404Serializer
     response_key = "error404"
     cache_class = CustomCache

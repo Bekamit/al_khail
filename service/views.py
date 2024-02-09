@@ -1,5 +1,9 @@
 from rest_framework.generics import GenericAPIView
 from django.utils.translation import get_language_from_request
+from rest_framework.serializers import Serializer
+from modeltranslation.manager import MultilingualQuerySet
+from rest_framework.response import Response
+from rest_framework import status
 
 from service import mixin, cache
 from core.settings.base import MODELTRANSLATION_DEFAULT_LANGUAGE
@@ -32,6 +36,25 @@ class CustomGenericAPIView(GenericAPIView):
         else:
             return None
 
+    def get_response_language(self):
+        if language := get_language_from_request(self.request):
+            return language.upper()
+        else:
+            return MODELTRANSLATION_DEFAULT_LANGUAGE.upper()
+
+    def get_multilanguage_response(self, serializer):
+        response_key = self.get_response_key()
+        if response_key:
+            language = self.get_response_language()
+
+            data = {
+                "language": language,
+                response_key: serializer.data
+            }
+        else:
+            data = serializer.data
+        return data
+
     def get_cache_key(self):
         if key := self.cache_key:
             if not isinstance(key, str):
@@ -39,12 +62,6 @@ class CustomGenericAPIView(GenericAPIView):
             return key
         else:
             return None
-
-    def get_response_language(self):
-        if language := get_language_from_request(self.request):
-            return language.upper()
-        else:
-            return MODELTRANSLATION_DEFAULT_LANGUAGE.upper()
 
     def get_queryset(self):
         if not self.cache_language and not self.cache_class:
@@ -62,6 +79,72 @@ class CustomGenericAPIView(GenericAPIView):
                 return queryset
         else:
             return super().get_queryset()
+
+
+class MultiSerializerGenericAPIView(CustomGenericAPIView):
+    method_get_queryset: MultilingualQuerySet | None = None
+    method_get_serializer: Serializer | None = None
+    method_post_queryset: MultilingualQuerySet | None = None
+    method_post_serializer: Serializer | None = None
+    response_queryset: MultilingualQuerySet | None = None
+    response_serializer: Serializer | None = None
+
+    def valid(self, queryset: MultilingualQuerySet):
+        if isinstance(queryset, MultilingualQuerySet):
+            queryset = queryset.all()
+        return queryset
+
+    def get_queryset(self):
+        if self.request.method == 'GET':
+            return self.valid(self.method_get_queryset)
+        if self.request.method == 'POST':
+            return self.valid(self.method_post_queryset)
+        return self.valid(self.queryset)
+
+    def get_response_queryset(self):
+        if not self.response_queryset:
+            return self.valid(self.method_get_queryset)
+        return self.valid(self.response_queryset)
+
+    def get_serializer_class(self):
+        return self.serializer_class if self.serializer_class else None
+
+    def get_serializer(self, *args, **kwargs):
+        serializer = self.serializer_class
+        if self.request.method == 'GET':
+            serializer = self.method_get_serializer
+        if self.request.method == 'POST':
+            serializer = self.method_post_serializer
+        return serializer
+
+
+class MultiSerializerListCreateAPIView(mixin.CreateModelMixin, MultiSerializerGenericAPIView):
+
+    def send_form(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer()
+        data = self.get_multilanguage_response(serializer(queryset))
+        return Response(data)
+
+    def get(self, request, *args, **kwargs):
+        return self.send_form(request, *args, **kwargs)
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer()
+        kwargs.setdefault('context', self.get_serializer_context())
+
+        serializer = serializer(**kwargs, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        headers = self.get_success_headers(serializer.data)
+        queryset = self.get_response_queryset()
+        response_serializer = self.response_serializer(queryset)
+        data = self.get_multilanguage_response(response_serializer)
+        return Response(data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
 class CustomListAPIView(mixin.CustomListModelMixin, CustomGenericAPIView):

@@ -90,10 +90,48 @@ class FormSerializer(serializers.ModelSerializer):
         ]
 
 
-class Error404Serializer(FormSerializer):
+class Error404Serializer(serializers.ModelSerializer):
     class Meta:
         model = Error404
         fields = [
             'not_found',
             'error_description',
+        ]
+
+
+class SuccessFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Form
+        fields = [
+            'successfully',
+            'thanks',
+            'close',
+        ]
+
+
+class SellFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Form
+        fields = [
+            'sell_with_us',
+            'fill_form',
+            'your_name',
+            'phone_number',
+            'your_city',
+            'date',
+            'send',
+        ]
+
+
+class BuyFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Form
+        fields = [
+            'submit_application',
+            'fill_form',
+            'your_name',
+            'phone_number',
+            'your_city',
+            'date',
+            'send',
         ]
