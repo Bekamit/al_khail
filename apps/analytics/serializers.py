@@ -3,44 +3,9 @@ from django.utils import timezone
 from django.utils.translation import get_language_from_request
 from rest_framework import serializers
 from .models import CatalogDownloader, Appeal
-from apps.staticdata.models import Form
 from apps.estate.models import Estate
 
 from django.utils.translation import gettext_lazy as _
-
-
-class Status201Serializer(serializers.ModelSerializer):
-    class Meta:
-        model = Form
-        fields = [
-            'successfully',
-            'thanks',
-            'close',
-        ]
-
-
-class BuyFormSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Form
-        fields = [
-            'your_name',
-            'phone_number',
-            'your_city',
-            'date',
-            'send',
-            'submit_application',
-            'fill_form'
-        ]
-
-
-class AppealBuySerializer(serializers.ModelSerializer):
-    form = BuyFormSerializer()
-
-    class Meta:
-        model = Appeal
-        fields = [
-            'form',
-        ]
 
 
 class CatalogDownloaderSerializer(serializers.ModelSerializer):

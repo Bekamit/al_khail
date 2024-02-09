@@ -5,8 +5,6 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_resized import ResizedImageField
 
-import random
-
 
 class EstateType(models.Model):
     """
@@ -45,7 +43,7 @@ class Estate(models.Model):
     class Meta:
         verbose_name = _('Estate')
         verbose_name_plural = _('Estates')
-        ordering = ['price_usd',]
+        ordering = ['price_usd', ]
 
     def __str__(self):
         return f'{self.pk}: {self.title}'
