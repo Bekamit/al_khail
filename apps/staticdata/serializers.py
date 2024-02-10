@@ -65,3 +65,18 @@ class FormSerializer(serializers.ModelSerializer):
                   'download', ]
 
 
+class CustomGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Form
+        fields = [
+            'your_name',
+            'your_phone',
+            'your_city',
+            'at_date',
+        ]
+
+
+class CustomPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Form
+        fields = '__all__'

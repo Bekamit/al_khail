@@ -1,16 +1,8 @@
-from .models import DownloadCatalog
-from .serializers import DownloadCatalogSerializer
 from drf_spectacular.utils import extend_schema
 from .models import CatalogDownloader, Appeal, Consultation
 from .serializers import CatalogDownloaderSerializer, AppealBuyValidateSerializer, AppealSellValidateSerializer, ConsultationSerializer
 from rest_framework.generics import CreateAPIView
 from .custom import CustomListCreateAPIView
-
-
-class DownloadCatalogAPIView(CustomListCreateAPIView):
-    model = 'DownloadCatalog'
-    queryset = DownloadCatalog.objects.all()
-    serializer_class = DownloadCatalogSerializer
 
 
 @extend_schema(

@@ -3,18 +3,6 @@ from django.utils.translation import gettext_lazy as _
 from apps.estate.models import Estate
 
 
-class DownloadCatalog(models.Model):
-    name = models.CharField(max_length=50, blank=False, null=False)
-    phone = models.IntegerField(blank=True, null=True)
-    email = models.EmailField()
-    role = models.CharField(max_length=50)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    @staticmethod
-    def create_analytics(data: dict):
-        return DownloadCatalog.objects.create(**data)
-
-
 class CatalogDownloader(models.Model):
     name = models.CharField(max_length=50, verbose_name='Name')
     email = models.EmailField(verbose_name='E-mail')
@@ -31,7 +19,7 @@ class CatalogDownloader(models.Model):
         return self.name
 
     @staticmethod
-    def create_loader(data: dict):
+    def create_downloader(data: dict):
         return CatalogDownloader.objects.create(**data)
 
 
@@ -76,5 +64,12 @@ class Consultation(models.Model):
     name = models.CharField(max_length=70, verbose_name='Name')
     phone = models.CharField(max_length=70, verbose_name='Phone number')
     city = models.CharField(max_length=100, verbose_name='City')
-    at_time = models.DateField()
+    at_date = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    @classmethod
+    def create_consultation(cls, **data):
+        return cls.objects.create(**data)
+
+    def __str__(self):
+        return f'{self.pk} -- {self.name}'

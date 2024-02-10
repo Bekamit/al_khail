@@ -1,7 +1,7 @@
 from .models import Consultation
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from apps.analytics.models import CatalogDownloader, Appeal, DownloadCatalog
+from apps.analytics.models import CatalogDownloader, Appeal
 from service.admin import ReadDeleteModelAdmin
 
 
@@ -19,7 +19,7 @@ class CatalogDownloaderAdmin(admin.ModelAdmin):
         return True
 
 
-admin.site.register(DownloadCatalog, CatalogDownloaderAdmin)
+admin.site.register(CatalogDownloader, CatalogDownloaderAdmin)
 
 
 @admin.register(Appeal)
@@ -40,8 +40,8 @@ class ReadDeleteAppealAdmin(ReadDeleteModelAdmin):
 
 
 class ConsultationAdmin(admin.ModelAdmin):
-    list_display = ('name', 'phone', 'city', 'at_time', 'created_at')
-    readonly_fields = ('name', 'phone', 'city', 'at_time', 'created_at')
+    list_display = ('name', 'phone', 'city', 'at_date', 'created_at')
+    readonly_fields = ('name', 'phone', 'city', 'at_date', 'created_at')
 
     def has_add_permission(self, request):
         return False
