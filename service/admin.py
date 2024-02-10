@@ -1,14 +1,16 @@
 from django.contrib import admin
-from django_summernote.admin import SummernoteModelAdmin
 
 
-class CustomModelAdmin(SummernoteModelAdmin, admin.ModelAdmin):
-    summernote_fields = '__all__'
-
+class CustomModelAdmin(admin.ModelAdmin):
     class Media:
         css = {
             'all': ('css/admin.css',),
         }
+
+    def not_null_fields(self, obj):
+        return all([getattr(obj, field.name) for field in obj._meta.fields if field.name != 'id'])
+    not_null_fields.boolean = True
+    not_null_fields.short_description = 'All fields are filled'
 
 
 class ReadDeleteModelAdmin(admin.ModelAdmin):
@@ -23,3 +25,6 @@ class ReadDeleteModelAdmin(admin.ModelAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         return [field.name for field in self.model._meta.fields]
+
+    def date(self, obj):
+        return f'#{obj.pk} | {obj.created_at.strftime("%Y-%m-%d, %H:%M")}'

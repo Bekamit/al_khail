@@ -4,6 +4,7 @@ from django.utils.translation import get_language_from_request
 from rest_framework import serializers
 from .models import CatalogDownloader, Appeal, Consultation
 from apps.staticdata.models import Form
+from .models import CatalogDownloader, Appeal
 from apps.estate.models import Estate
 from django.utils.translation import gettext_lazy as _
 from apps.staticdata.serializers import CustomGetSerializer
@@ -36,6 +37,7 @@ class PostStaticDataSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
 class ChoiceRoleSerializer(serializers.ModelSerializer):
     placeholder = serializers.CharField(source='role')
 
@@ -51,6 +53,9 @@ class ChoiceRoleSerializer(serializers.ModelSerializer):
 
 class CatalogDownloaderSerializer(PostStaticDataSerializer):
     class Meta(PostStaticDataSerializer.Meta):
+        ...
+class CatalogDownloaderSerializer(serializers.ModelSerializer):
+    class Meta:
         model = CatalogDownloader
         fields = ['name',
                   'phone',

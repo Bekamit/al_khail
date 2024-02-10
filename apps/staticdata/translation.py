@@ -1,58 +1,92 @@
 from modeltranslation.translator import translator, TranslationOptions
-from .models import Header, Body, Form, Footer
+from .models import Header, Body, Form, Footer, Error404
 
 
 class HeaderTranslationOptions(TranslationOptions):
-    fields = ('buy',
-              'all_properties',
+    fields = ('city',
+              'all_real_estates',
               'place_ad',
-              'contact_as',
-              'slogan',
-              'search',
-              'city',
-              'estate_type',
-              'show_result',
-              'filter',
-              'all',
-              'popular',
-              'new_add',)
+              'about_us',)
     required_languages = ('en',)
 
 
 class BodyTranslationOptions(TranslationOptions):
-    fields = ('property',
-              'about_company',
-              'why',
-              'advantages',
-              'all_properties',
+    fields = ('main',
+              'search',
+              'slogan',
+              'see_real_estates',
+              'city',
+              'estate_type',
+              'popular',
+              'new_add',
+              'all',
+              'show_result',
+              'we_have',
+              'benefits',
+              'wide_selection',
+              'wide_selection_description',
+              'confidentiality',
+              'confidentiality_description',
+              'exclusive_offers',
+              'exclusive_offers_description',
+              'feedback',
+              'feedback_description',
               'view_more',
-              'listing_details',
-              'facilities',
-              'download_catalog',
+              'furnished',
+              'completion',
+              'price_at',
+              'catalog',
+              'features_and_amenities',
               'description',
-              'you_might_like',)
+              'similar_properties',
+              'mission_and_history',
+              'mission',
+              'history',
+              'company',)
+    required_languages = ('en',)
+
+
+class FooterTranslationOptions(TranslationOptions):
+    fields = ('contact_us',
+              'cities',
+              'estate_types',
+              'pages',)
     required_languages = ('en',)
 
 
 class FormTranslationOptions(TranslationOptions):
-    fields = ('callback_form_title',
-              'sell_form_title',
-              'download_catalog_form_title',
-              'form_description',
+    fields = ('contact_us',
+              'any_question',
+              'leave_your_contacts',
+              'submit_application',
+              'fill_form',
+              'sell_with_us',
+              'successfully',
+              'thanks',
+              'download_catalog',
               'your_name',
               'your_email',
-              'your_phone',
+              'phone_number',
               'your_city',
-              'at_date',
+              'date',
               'send',
-              'role',
+              'close',
+              'download',
+              'select_role',
               'agent',
               'buyer',
-              'exploring',
-              'download',)
+              'exploring',)
+    required_languages = ('en',)
+
+
+class Error404TranslationOptions(TranslationOptions):
+    fields = ('not_found',
+              'error_description',)
     required_languages = ('en',)
 
 
 translator.register(Header, HeaderTranslationOptions)
 translator.register(Body, BodyTranslationOptions)
+translator.register(Footer, FooterTranslationOptions)
 translator.register(Form, FormTranslationOptions)
+translator.register(Error404, Error404TranslationOptions)

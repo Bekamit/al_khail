@@ -8,5 +8,7 @@ urlpatterns = [
     path('appeal/sell/', AppealSellCreateAPIView.as_view(model='Appeal'), name='appeal-sell'),
 
     path('consultation/', ConsultationCreateAPIView.as_view(model='Consultation'), name='consultation'),
+    path('appeal/buy/', AppealBuyCreateAPIView.as_view()),
+    path('appeal/sell/', AppealSellMultiSerializerListCreateAPIView.as_view()),
 ]
 

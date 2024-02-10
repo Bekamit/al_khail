@@ -5,22 +5,13 @@ from solo.models import SingletonModel
 
 
 class Header(SingletonModel):
-    buy = models.CharField(max_length=10)
-    all_properties = models.CharField(max_length=20)
+    city = models.CharField(max_length=15)
+    all_real_estates = models.CharField(max_length=30)
     place_ad = models.CharField(max_length=30)
-    contact_as = models.CharField(max_length=30)
-    slogan = models.CharField(max_length=50)
-    search = models.CharField(max_length=10)
-    city = models.CharField(max_length=10)
-    estate_type = models.CharField(max_length=20)
-    show_result = models.CharField(max_length=30)
-    filter = models.CharField(max_length=15)
-    all = models.CharField(max_length=10)
-    popular = models.CharField(max_length=15)
-    new_add = models.CharField(max_length=15)
+    about_us = models.CharField(max_length=30)
 
     def __str__(self):
-        return 'header'
+        return 'header content'
 
     class Meta:
         verbose_name = _('Header')
@@ -28,26 +19,41 @@ class Header(SingletonModel):
 
 
 class Body(SingletonModel):
-    property = models.CharField(max_length=15)
-    about_company = models.CharField(max_length=50)
-    why = models.CharField(max_length=10)
-    advantages = models.CharField(max_length=30)
-    all_properties = models.CharField(max_length=20)
+    main = models.CharField(max_length=10)
+    search = models.CharField(max_length=10)
+    slogan = models.CharField(max_length=50)
+    see_real_estates = models.CharField(max_length=30)
+    city = models.CharField(max_length=15)
+    estate_type = models.CharField(max_length=20)
+    popular = models.CharField(max_length=15)
+    new_add = models.CharField(max_length=20)
+    all = models.CharField(max_length=10)
+    show_result = models.CharField(max_length=30)
+    we_have = models.CharField(max_length=50)
+    benefits = models.CharField(max_length=50)
+    wide_selection = models.CharField(max_length=100)
+    wide_selection_description = models.CharField(max_length=200)
+    confidentiality = models.CharField(max_length=100)
+    confidentiality_description = models.CharField(max_length=200)
+    exclusive_offers = models.CharField(max_length=100)
+    exclusive_offers_description = models.CharField(max_length=200)
+    feedback = models.CharField(max_length=30)
+    feedback_description = models.CharField(max_length=200)
     view_more = models.CharField(max_length=20)
-    listing_details = models.CharField(max_length=50)
-    location = models.CharField(max_length=20)
-    price = models.CharField(max_length=15)
     furnished = models.CharField(max_length=20)
     completion = models.CharField(max_length=15)
-    estate_type = models.CharField(max_length=20)
-    facilities = models.CharField(max_length=50)
-    expand_all_photos = models.CharField(max_length=30)
-    download_catalog = models.CharField(max_length=30)
+    price_at = models.CharField(max_length=15)
+    catalog = models.CharField(max_length=30)
+    features_and_amenities = models.CharField(max_length=50)
     description = models.CharField(max_length=15)
-    you_might_like = models.CharField(max_length=50)
+    similar_properties = models.CharField(max_length=50)
+    mission_and_history = models.CharField(max_length=50)
+    mission = models.CharField(max_length=20)
+    history = models.CharField(max_length=20)
+    company = models.CharField(max_length=20)
 
     def __str__(self):
-        return 'body'
+        return 'body content'
 
     class Meta:
         verbose_name = _('Body')
@@ -55,10 +61,13 @@ class Body(SingletonModel):
 
 
 class Footer(SingletonModel):
-    ...
+    contact_us = models.CharField(max_length=30)
+    cities = models.CharField(max_length=20)
+    estate_types = models.CharField(max_length=30)
+    pages = models.CharField(max_length=10)
 
     def __str__(self):
-        return 'footer'
+        return 'footer content'
 
     class Meta:
         verbose_name = _('Footer')
@@ -66,29 +75,46 @@ class Footer(SingletonModel):
 
 
 class Form(SingletonModel):
-    callback_form_title = models.CharField(max_length=50)
-    sell_form_title = models.CharField(max_length=50)
-    download_catalog_form_title = models.CharField(max_length=50)
-    form_description = models.CharField(max_length=100)
-    sell_form_description = models.CharField(max_length=100)
+    contact_us = models.CharField(max_length=30)
+    any_question = models.CharField(max_length=50)
+    leave_your_contacts = models.CharField(max_length=100)
+    submit_application = models.CharField(max_length=50)
+    fill_form = models.CharField(max_length=100)
+    sell_with_us = models.CharField(max_length=100)
+    successfully = models.CharField(max_length=100)
+    thanks = models.CharField(max_length=100)
+    download_catalog = models.CharField(max_length=50)
     your_name = models.CharField(max_length=15)
     your_email = models.CharField(max_length=15)
-    your_phone = models.CharField(max_length=15)
+    phone_number = models.CharField(max_length=20)
     your_city = models.CharField(max_length=15)
-    at_date = models.CharField(max_length=15)
+    date = models.CharField(max_length=15)
     send = models.CharField(max_length=10)
-    role = models.CharField(max_length=30)
+    close = models.CharField(max_length=10)
+    download = models.CharField(max_length=15)
+    select_role = models.CharField(max_length=30)
     agent = models.CharField(max_length=30)
     buyer = models.CharField(max_length=30)
     exploring = models.CharField(max_length=30)
-    download = models.CharField(max_length=15)
 
     def __str__(self):
-        return 'form'
+        return 'forms content'
 
     class Meta:
         verbose_name = _('Form')
         verbose_name_plural = _('Forms static content')
+
+
+class Error404(SingletonModel):
+    not_found = models.CharField(max_length=30)
+    error_description = models.CharField(max_length=200)
+
+    def __str__(self):
+        return 'error 404 content'
+
+    class Meta:
+        verbose_name = _('Error 404')
+        verbose_name_plural = _('Error static content')
 
 
 class DefaultValue(SingletonModel):
@@ -99,7 +125,7 @@ class DefaultValue(SingletonModel):
 
     @staticmethod
     def default_img():
-        return DefaultValue.objects.first().default_image
+        return DefaultValue.get_solo().default_image
 
     class Meta:
         verbose_name = _('Default Value')

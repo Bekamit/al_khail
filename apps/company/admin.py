@@ -8,37 +8,46 @@ from .models import *
 
 @admin.register(Company)
 class CompanyAdmin(CustomModelAdmin):
-    list_display = ('company_name', 'phone', 'email', 'preview')
-    readonly_fields = ['preview']
+    list_display = ('company_name', 'phone', 'email', 'get_logo')
+    readonly_fields = ['get_logo']
 
     fieldsets = [
         ('English', {
             'fields': [
                 'company_name',
-                'about_en',
+                'mission_en',
+                'history_en',
+                'company_en',
                 'email',
                 'phone',
                 'company_img',
-                'preview'
+                'get_logo'
 
             ]
         }),
         ('Arabic', {
             'fields': [
-                'about_ar',
+                'mission_ar',
+                'history_ar',
+                'company_ar',
             ]
         }),
         ('Turkish', {
             'fields': [
-                'about_tr',
+                'mission_tr',
+                'history_tr',
+                'company_tr',
             ]
         }),
         ('Russian', {
             'fields': [
-                'about_ru',
+                'mission_ru',
+                'history_ru',
+                'company_ru',
             ]
         })
     ]
 
-    def preview(self, obj):
+    def get_logo(self, obj):
         return mark_safe(f'<img src="{obj.company_img.url}", style="max-height: 200px;">')
+    get_logo.short_description = 'logo'

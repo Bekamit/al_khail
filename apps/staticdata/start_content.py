@@ -89,45 +89,498 @@ ESTATE_TYPES = [
         "type_ar": "أرض",
         "type_tr": "arazi",
         "type_ru": "участок"
+    },
+    {
+        "type_en": "penthouse",
+        "type_ar": "بنتهاوس",
+        "type_tr": "penthouse",
+        "type_ru": "пентхаус"
     }
 ]
 
 FACILITIES = [
-    {"type_en": "balcony", "type_ar": "شرفة", "type_tr": "balkon", "type_ru": "балкон"},
-    {"type_en": "pool", "type_ar": "حمام سباحة", "type_tr": "havuz", "type_ru": "бассейн"},
-    {"type_en": "treadmills", "type_ar": "المطاحن", "type_tr": "koşu bantları", "type_ru": "беговые дорожки"},
-    {"type_en": "boutiques and shops", "type_ar": "البوتيكات والمحلات التجارية", "type_tr": "butikler ve mağazalar",
-     "type_ru": "бутики и магазины"},
-    {"type_en": "children playground", "type_ar": "ساحة لعب الأطفال", "type_tr": "çocuk oyun alanı",
-     "type_ru": "детская игровая площадка"},
-    {"type_en": "parking space", "type_ar": "أماكن لوقوف السيارات", "type_tr": "park alanı",
-     "type_ru": "парковочное место"},
-    {"type_en": "bbq area", "type_ar": "منطقة للشواء", "type_tr": "barbekü alanı", "type_ru": "зона барбекю"},
-    {"type_en": "security and video surveillance", "type_ar": "الأمن والمراقبة بالفيديو",
-     "type_tr": "güvenlik ve video gözetimi", "type_ru": "охрана и видеонаблюдение"},
-    {"type_en": "green spaces", "type_ar": "المساحات الخضراء", "type_tr": "yeşil alanlar",
-     "type_ru": "зеленые насаждения"},
-    {"type_en": "sports grounds", "type_ar": "الملاعب الرياضية", "type_tr": "spor sahaları",
-     "type_ru": "спортивные площадки"},
-    {"type_en": "tennis court", "type_ar": "ملعب تنس", "type_tr": "tenis kortu", "type_ru": "теннисный корт"},
-    {"type_en": "fitness center and gym", "type_ar": "مركز للياقة البدنية وصالة ألعاب رياضية",
-     "type_tr": "fitness merkezi ve spor salonu", "type_ru": "фитнес-центр и тренажерный зал"},
+    {
+        "type_en": "walk-in closet",
+        "type_ar": "خزانة غرفة منفصلة",
+        "type_tr": "yürüyüş dolabı",
+        "type_ru": "гардероб"
+    },
+    {
+        "type_en": "built-in kitchen appliances",
+        "type_ar": "أجهزة مطبخ مدمجة",
+        "type_tr": "yerleşik mutfak aletleri",
+        "type_ru": "встроенная кухонная техника"
+    },
+    {
+        "type_en": "children's play area",
+        "type_ar": "منطقة لعب للأطفال",
+        "type_tr": "çocuk oyun alanı",
+        "type_ru": "детская площадка"
+    },
+    {
+        "type_en": "children's pool",
+        "type_ar": "حوض سباحة للأطفال",
+        "type_tr": "çocuk havuzu",
+        "type_ru": "детский бассейн"
+    },
+    {
+        "type_en": "barbecue area",
+        "type_ar": "منطقة للشواء",
+        "type_tr": "barbekü alanı",
+        "type_ru": "место для барбекю"
+    },
+    {
+        "type_en": "built-in wardrobe",
+        "type_ar": "خزانة مدمجة",
+        "type_tr": "yerleşik gardırop",
+        "type_ru": "встроенные шкафы"
+    },
+    {
+        "type_en": "security",
+        "type_ar": "حراسة أمن",
+        "type_tr": "güvenlik",
+        "type_ru": "охрана"
+    },
+    {
+        "type_en": "covered parking",
+        "type_ar": "مواقف مغطاة للسيارات",
+        "type_tr": "kapalı otopark",
+        "type_ru": "закрытая парковка"
+    },
+    {
+        "type_en": "shared swimming pool",
+        "type_ar": "حوض سباحة مشترك",
+        "type_tr": "paylaşılan yüzme havuzu",
+        "type_ru": "общий бассейн"
+    },
+    {
+        "type_en": "shared gym",
+        "type_ar": "صالة رياضية مشتركة",
+        "type_tr": "paylaşılan spor salonu",
+        "type_ru": "общий спортзал"
+    },
+    {
+        "type_en": "balcony",
+        "type_ar": "شرفة",
+        "type_tr": "balkon",
+        "type_ru": "балкон"
+    },
+    {
+        "type_en": "pets allowed",
+        "type_ar": "مسموح بالحيوانات الأليفة",
+        "type_tr": "evcil hayvanlara izin verilir",
+        "type_ru": "разрешение на домашних животных"
+    },
+    {
+        "type_en": "central air conditioning",
+        "type_ar": "تكييف هواء مركزي",
+        "type_tr": "merkezi klima",
+        "type_ru": "кондиционеры"
+    },
+    {
+        "type_en": "sea/water view",
+        "type_ar": "إطلالة على البحر/المياه",
+        "type_tr": "deniz/su manzarası",
+        "type_ru": "вид на море/воду"
+    },
+    {
+        "type_en": "view of landmark",
+        "type_ar": "إطلالة على معلم",
+        "type_tr": "landmark manzarası",
+        "type_ru": "вид на достопримечательность"
+    },
+    {
+        "type_en": "private gym",
+        "type_ar": "نادي رياضي خاص",
+        "type_tr": "özel spor salonu",
+        "type_ru": "частный спортзал"
+    },
+    {
+        "type_en": "concierge service",
+        "type_ar": "خدمة كونسيرج",
+        "type_tr": "konserj hizmeti",
+        "type_ru": "услуги консьержа"
+    },
+    {
+        "type_en": "shared spa",
+        "type_ar": "سبا مشترك",
+        "type_tr": "paylaşılan spa",
+        "type_ru": "общий спа-салон"
+    },
+    {
+        "type_en": "cable-ready",
+        "type_ar": "جاهز لتركيب اتصال كبل تلفزيوني",
+        "type_tr": "kablo hazır",
+        "type_ru": "кабельное тв"
+    },
+    {
+        "type_en": "study",
+        "type_ar": "مكتب",
+        "type_tr": "çalışma odası",
+        "type_ru": "кабинет"
+    },
+    {
+        "type_en": "maid service",
+        "type_ar": "خدمة خادمة",
+        "type_tr": "hizmetçi hizmeti",
+        "type_ru": "услуги горничной"
+    },
+    {
+        "type_en": "private garden",
+        "type_ar": "حديقة خاصة",
+        "type_tr": "özel bahçe",
+        "type_ru": "частный сад"
+    },
+    {
+        "type_en": "maid’s room",
+        "type_ar": "غرفة للخادمة",
+        "type_tr": "hizmetçi odası",
+        "type_ru": "комната для прислуги"
+    },
+    {
+        "type_en": "private pool",
+        "type_ar": "مسبح خاص",
+        "type_tr": "özel havuz",
+        "type_ru": "частный бассейн"
+    },
+    {
+        "type_en": "fully fitted kitchen",
+        "type_ar": "مطبخ مجهز بالكامل",
+        "type_tr": "tam donanımlı mutfak",
+        "type_ru": "оборудованная кухня"
+    },
+    {
+        "type_en": "basement parking",
+        "type_ar": "موقف سيارات في القبو",
+        "type_tr": "yer altı otoparkı",
+        "type_ru": "подземная парковка"
+    },
+    {
+        "type_en": "terrace",
+        "type_ar": "تراس",
+        "type_tr": "teras",
+        "type_ru": "терраса"
+    },
+    {
+        "type_en": "gym",
+        "type_ar": "نادي رياضي",
+        "type_tr": "spor salonu",
+        "type_ru": "тренажерный зал"
+    },
+    {
+        "type_en": "fitness center",
+        "type_ar": "مركز لياقة بدنية",
+        "type_tr": "fitness merkezi",
+        "type_ru": "фитнес-центр"
+    },
+    {
+        "type_en": "basketball court",
+        "type_ar": "ملعب كرة سلة",
+        "type_tr": "basketbol sahası",
+        "type_ru": "баскетбольная площадка"
+    },
+    {
+        "type_en": "cycling tracks",
+        "type_ar": "مسارات لركوب الدراجات",
+        "type_tr": "bisiklet parkurları",
+        "type_ru": "велосипедные дорожки"
+    },
+    {
+        "type_en": "near mall",
+        "type_ar": "بالقرب من مول",
+        "type_tr": "yakın alışveriş merkezi",
+        "type_ru": "рядом торговый центр"
+    },
+    {
+        "type_en": "public parks",
+        "type_ar": "متنزهات عامة",
+        "type_tr": "halka açık parklar",
+        "type_ru": "общественные парки"
+    },
+    {
+        "type_en": "supermarket",
+        "type_ar": "سوبر ماركت",
+        "type_tr": "süpermarket",
+        "type_ru": "супермаркет"
+    },
+    {
+        "type_en": "maintenance",
+        "type_ar": "صيانة",
+        "type_tr": "bakım",
+        "type_ru": "управляющая компания"
+    },
+    {
+        "type_en": "near hospital",
+        "type_ar": "بالقرب من مستشفى",
+        "type_tr": "yakın hastane",
+        "type_ru": "рядом больница"
+    },
+    {
+        "type_en": "airport",
+        "type_ar": "مطار",
+        "type_tr": "havalimanı",
+        "type_ru": "аэропорт"
+    },
+    {
+        "type_en": "restaurant",
+        "type_ar": "مطعم",
+        "type_tr": "restoran",
+        "type_ru": "ресторан"
+    },
+    {
+        "type_en": "private jacuzzi",
+        "type_ar": "جاكوزي خاص",
+        "type_tr": "özel jakuzi",
+        "type_ru": "частный джакузи"
+    },
+    {
+        "type_en": "near metro",
+        "type_ar": "بالقرب من المترو",
+        "type_tr": "yakın metro",
+        "type_ru": "рядом с метро"
+    },
+    {
+        "type_en": "cinema",
+        "type_ar": "سينما",
+        "type_tr": "sinema",
+        "type_ru": "кинотеатр"
+    },
+    {
+        "type_en": "swimming pool",
+        "type_ar": "حوض سباحة",
+        "type_tr": "yüzme havuzu",
+        "type_ru": "бассейн"
+    },
+    {
+        "type_en": "meeting room",
+        "type_ar": "قاعة اجتماعات",
+        "type_tr": "toplantı odası",
+        "type_ru": "комната для переговоров"
+    },
+    {
+        "type_en": "spa",
+        "type_ar": "منتجع",
+        "type_tr": "spa",
+        "type_ru": "спа"
+    },
+    {
+        "type_en": "sauna",
+        "type_ar": "ساونا",
+        "type_tr": "sauna",
+        "type_ru": "сауна"
+    },
+    {
+        "type_en": "smart home",
+        "type_ar": "منزل ذكي",
+        "type_tr": "akıllı ev",
+        "type_ru": "умный дом"
+    }
 ]
 
 HEADER = {
-
+    "city_en": "city",
+    "city_ar": "مدينة",
+    "city_tr": "şehir",
+    "city_ru": "город",
+    "all_real_estates_en": "all real estates",
+    "all_real_estates_ar": "جميع العقارات",
+    "all_real_estates_tr": "tüm gayrimenkuller",
+    "all_real_estates_ru": "вся недвижимость",
+    "about_us_en": "about us",
+    "about_us_ar": "معلومات عنا",
+    "about_us_tr": "hakkımızda",
+    "about_us_ru": "о нас",
+    "place_ad_en": "place an ad",
+    "place_ad_ar": "ضع إعلانا",
+    "place_ad_tr": "reklam ver",
+    "place_ad_ru": "разместить объявление"
 }
 
 BODY = {
-
+    'main_ar': 'رئيسي', 'main_tr': 'ana sayfa', 'main_en': 'main', 'main_ru': 'основной',
+    'search_ar': 'يبحث', 'search_tr': 'aramak', 'search_en': 'search', 'search_ru': 'поиск',
+    'slogan_ar': 'ابحث عن منزل أحلامك معنا', 'slogan_tr': 'hayalinizdeki evi bizimle bulun',
+    'slogan_en': 'find your dream home with us', 'slogan_ru': 'найдите дом своей мечты вместе с нами',
+    'see_real_estates_ar': 'رؤية العقارات', 'see_real_estates_tr': 'gayrimenkulleri görmek',
+    'see_real_estates_en': 'see real estates', 'see_real_estates_ru': 'посмотреть недвижимость',
+    'city_ar': 'مدينة', 'city_tr': 'şehir', 'city_en': 'city', 'city_ru': 'город',
+    'estate_type_ar': 'نوع العقار', 'estate_type_tr': 'emlak türü', 'estate_type_en': 'estate type',
+    'estate_type_ru': 'тип недвижимости',
+    'popular_ar': 'شائع', 'popular_tr': 'popüler', 'popular_en': 'popular', 'popular_ru': 'популярные',
+    'new_add_ar': 'إضافة جديدة', 'new_add_tr': 'yeni ekleme', 'new_add_en': 'new add', 'new_add_ru': 'новые добавления',
+    'all_ar': 'الجميع', 'all_tr': 'tümü', 'all_en': 'all', 'all_ru': 'все',
+    'show_result_ar': 'أظهر النتائج', 'show_result_tr': 'sonuçları göster', 'show_result_en': 'show results',
+    'show_result_ru': 'показать результаты',
+    'we_have_ar': 'ملكية', 'we_have_tr': 'gibi şehirlerde gayrimenkulümüz var',
+    'we_have_en': 'we have real estate in cities such as',
+    'we_have_ru': 'у представляем недвижимость в таких городах, как',
+    'benefits_ar': 'فوائد البيت الذهبي', 'benefits_tr': 'altın evin faydaları',
+    'benefits_en': 'benefits of golden house', 'benefits_ru': 'преимущества компании golden house',
+    'wide_selection_ar': 'مجموعة واسعة', 'wide_selection_tr': 'geniş bir seçim',
+    'wide_selection_en': 'a wide selection', 'wide_selection_ru': 'широкий выбор',
+    'wide_selection_description_en': "exclusive offers, virtual tours, consultations with experts - everything to make the process of choosing a property convenient and exciting.",
+    'wide_selection_description_ar': "",
+    'wide_selection_description_tr': "",
+    'wide_selection_description_ru': "",
+    'confidentiality_ar': 'سرية',
+    'confidentiality_tr': 'gizlilik',
+    'confidentiality_en': 'confidentiality',
+    'confidentiality_ru': 'конфиденциальность',
+    'confidentiality_description_en': "we guarantee the confidentiality of your data and cooperate only with trusted agents and sellers.",
+    'confidentiality_description_ar': "",
+    'confidentiality_description_tr': "",
+    'confidentiality_description_ru': "",
+    'exclusive_offers_ar': 'عروض حصرية',
+    'exclusive_offers_tr': 'özel teklifler',
+    'exclusive_offers_en': 'exlusive offers',
+    'exclusive_offers_ru': 'эксклюзивные предложения',
+    'exclusive_offers_description_en': "our company offers a wide selection of real estate from exclusive apartments to country houses.",
+    'exclusive_offers_description_ar': "",
+    'exclusive_offers_description_tr': "",
+    'exclusive_offers_description_ru': "",
+    'feedback_ar': 'تعليق',
+    'feedback_tr': 'geri bildirim',
+    'feedback_en': 'feedback',
+    'feedback_ru': 'обратная связь',
+    'feedback_description_en': "if you need help managing your property, we provide rental management services, ensuring your property receives maximum value and care.",
+    'feedback_description_ar': "",
+    'feedback_description_tr': "",
+    'feedback_description_ru': "",
+    'view_more_ar': 'عرض المزيد', 'view_more_tr': 'daha fazla göster', 'view_more_en': 'view more',
+    'view_more_ru': 'посмотреть больше',
+    'furnished_ar': 'مفروشة، مد، زود', 'furnished_tr': 'mobilyalı', 'furnished_en': 'furnished',
+    'furnished_ru': 'меблированный',
+    'completion_ar': 'انتهاء', 'completion_tr': 'tamamlama', 'completion_en': 'completion',
+    'completion_ru': 'завершение',
+    'price_at_ar': 'السعر عند', 'price_at_tr': 'fiyat', 'price_at_en': 'price at', 'price_at_ru': 'стартовая цена',
+    'catalog_ar': 'فهرس', 'catalog_tr': 'katalog', 'catalog_en': 'catalog', 'catalog_ru': 'каталог',
+    'features_and_amenities_ar': 'الميزات ووسائل الراحة', 'features_and_amenities_tr': 'özellikler ve olanaklar',
+    'features_and_amenities_en': 'features & amenities', 'features_and_amenities_ru': 'особенности и удобства',
+    'description_ar': 'وصف', 'description_tr': 'tanım', 'description_en': 'description', 'description_ru': 'описание',
+    'mission_and_history_ar': 'المهمة والتاريخ', 'mission_and_history_tr': 'misyon ve tarih',
+    'mission_and_history_en': 'mission and history', 'mission_and_history_ru': 'миссия и история',
+    'mission_ar': 'مهمة', 'mission_tr': 'misyon', 'mission_en': 'mission', 'mission_ru': 'миссия',
+    'history_ar': 'تاريخ', 'history_tr': 'tarih', 'history_en': 'history', 'history_ru': 'история',
+    'company_ar': 'شركة', 'company_tr': 'şirket', 'company_en': 'company', 'company_ru': 'компания',
+    'similar_properties_ar': 'خصائص مماثلة', 'similar_properties_tr': 'benzer özellikler',
+    'similar_properties_en': 'similar properties', 'similar_properties_ru': 'похожие объекты'
 }
 
 FORMS = {
-
+    'contact_us_ar': 'اتصل بنا',
+    'contact_us_tr': 'bize ulaşın',
+    'contact_us_ru': 'связаться с нами',
+    'contact_us_en': 'contact us',
+    'any_question_ar': 'هل لديك اسئلة؟',
+    'any_question_tr': 'sormak istediğiniz bir şey var mı?',
+    'any_question_ru': 'у вас есть вопросы?',
+    'any_question_en': 'do you have any questions?',
+    'leave_your_contacts_ar': 'اترك جهات الاتصال الخاصة بك وسوف نتواصل معك',
+    'leave_your_contacts_tr': 'kişilerinizi bırakın, biz sizinle iletişime geçelim',
+    'leave_your_contacts_ru': 'оставьте свои контакты и мы свяжемся с вами',
+    'leave_your_contacts_en': 'leave your contacts and we will contact you',
+    'submit_application_ar': 'تقديم طلبك',
+    'submit_application_tr': 'başvurunuzu gönderin',
+    'submit_application_ru': 'оставить заявку',
+    'submit_application_en': 'submit your application',
+    'fill_form_ar': 'املأ من الأسفل وسيتصل بك وكيلنا قريبًا',
+    'fill_form_tr': 'aşağıdan doldurun; temsilcimiz kısa sürede sizinle iletişime geçecektir',
+    'fill_form_ru': 'заполните форму ниже и наш агент свяжется с вами в ближайшее время',
+    'fill_form_en': 'fill from below and our agent will contact you shortly',
+    'sell_with_us_ar': 'بيع شقة من خلال شركتنا!',
+    'sell_with_us_tr': 'şirketimiz aracılığıyla daire satmak!',
+    'sell_with_us_ru': 'продать квартиру через нашу компанию!',
+    'sell_with_us_en': 'sell an appartment through our company!',
+    'download_catalog_ar': 'تحميل الكتالوج',
+    'download_catalog_tr': 'kataloğu indir',
+    'download_catalog_ru': 'скачать каталог',
+    'download_catalog_en': 'download catalog',
+    'your_name_ar': 'اسمك',
+    'your_name_tr': 'adınız',
+    'your_name_ru': 'ваше имя',
+    'your_name_en': 'your name',
+    'your_email_ar': 'بريد إلكتروني',
+    'your_email_tr': 'e-posta',
+    'your_email_ru': 'e-mail',
+    'your_email_en': 'e-mail',
+    'phone_number_ar': 'رقم التليفون',
+    'phone_number_tr': 'telefon numarası',
+    'phone_number_ru': 'номер телефона',
+    'phone_number_en': 'phone number',
+    'your_city_ar': 'مدينتك',
+    'your_city_tr': 'senin şehirin',
+    'your_city_ru': 'ваш город',
+    'your_city_en': 'your city',
+    'date_ar': 'تاريخ',
+    'date_tr': 'tarih',
+    'date_ru': 'дата',
+    'date_en': 'date',
+    'send_ar': 'يرسل',
+    'send_tr': 'göndermek',
+    'send_ru': 'отправить',
+    'send_en': 'send',
+    'close_ar': 'إغلاق',
+    'close_tr': 'kapat',
+    'close_ru': 'закрыть',
+    'close_en': 'close',
+    'download_ar': 'تحميل',
+    'download_tr': 'indir',
+    'download_ru': 'скачать',
+    'download_en': 'download',
+    'select_role_ar': 'حدد الدور',
+    'select_role_tr': 'rol seçin',
+    'select_role_ru': 'выбрать роль',
+    'select_role_en': 'select role',
+    'agent_ar': 'أنا وكيل',
+    'agent_tr': 'ben emlakciyim',
+    'agent_ru': 'я агент',
+    'agent_en': "i'm an agent",
+    'buyer_ar': 'أنا مشتري محتمل',
+    'buyer_tr': 'potansiyel bir alıcıyım',
+    'buyer_ru': 'я потенциальный покупатель',
+    'buyer_en': "i'm a potential buyer",
+    'exploring_ar': 'أنا فقط أستكشف',
+    'exploring_tr': 'sadece araştırıyorum',
+    'exploring_ru': 'я просто смотрю',
+    'exploring_en': 'i just exploring',
+    'thanks_en': 'thank you for contacting us!\n our specialist will contact you soon.',
+    'thanks_ar': '',
+    'thanks_tr': '',
+    'thanks_ru': '',
+    'successfully_en': 'the application has been successfully accepted!',
+    'successfully_ar': '',
+    'successfully_tr': '',
+    'successfully_ru': '',
 }
 
 FOOTER = {
+    'contact_us_en': "contact us",
+    'contact_us_ar': "اتصل بنا",
+    'contact_us_tr': "bize ulaşın",
+    'contact_us_ru': "связаться с нами",
+    'cities_en': "cities",
+    'cities_ar': "مدن",
+    'cities_tr': "şehirler",
+    'cities_ru': "города",
+    'estate_types_en': "estate types",
+    'estate_types_ar': "أنواع العقارات",
+    'estate_types_tr': "emlak türleri",
+    'estate_types_ru': "типы недвижимости",
+    'pages_en': "pages",
+    'pages_ar': "الصفحات",
+    'pages_tr': "sayfalar",
+    'pages_ru': "страницы",
+}
 
+ERROR404 = {
+    'not_found_en': "not found",
+    'not_found_ar': "غير معثور عليه",
+    'not_found_tr': "bulunamadı",
+    'not_found_ru': "страница не найдена",
+    'error_description_en': "sorry, the page was not found, it may have been moved, deleted, or temporarily unavailable; check that the address you entered is correct",
+    'error_description_ar': "عذرًا، لم يتم العثور على الصفحة، ربما تم نقلها أو حذفها أو أنها غير متاحة مؤقتًا؛ تأكد من صحة العنوان الذي أدخلته.",
+    'error_description_tr': "Üzgünüz, sayfa bulunamadı, taşınmış, silinmiş veya geçici olarak kullanılamıyor olabilir; Girdiğiniz adresin doğru olup olmadığını kontrol edin.",
+    'error_description_ru': "извините, страница не найдена, возможно, она была перемещена, удалена или временно недоступна; проверьте правильность введенного вами адреса.",
 }
 
 DEFAULT_VALUES = {
@@ -137,30 +590,19 @@ DEFAULT_VALUES = {
 
 COMPANY = {
     "company_name": "Golden House",
-    "about_en": "Our company offers a wide range of real estate, from exclusive apartments to country houses.\n"
-                "Exclusive offers, virtual tours, consultations with experts - everything to make the process "
-                "of choosing your real estate comfortable and exciting.\n"
-                "We guarantee the confidentiality of your data and only collaborate with trusted agents and sellers.\n"
-                "If you need help in managing your real estate, we provide rental management services, "
-                "ensuring maximum value and care for your property.",
-    "about_ar": "تقدم شركتنا مجموعة واسعة من العقارات من الشقق الحصرية إلى المنازل الريفية.\n"
-                "عروض حصرية، جولات افتراضية، استشارات مع الخبراء - كل شيء لجعل عملية "
-                "اختيار العقار الخاص بك مريحة ومثيرة.\n"
-                "نحن نضمن سرية بياناتك ونتعامل فقط مع وكلاء وبائعين موثوقين.\n"
-                "إذا كنت بحاجة إلى مساعدة في إدارة عقارك، فإننا نقدم خدمات إدارة الإيجار، "
-                "مما يضمن لعقارك أقصى قيمة وعناية.",
-    "about_tr": "Şirketimiz, özel dairelerden kır evlerine kadar geniş bir emlak seçeneği sunmaktadır.\n"
-                "Özel teklifler, sanal turlar, uzman danışmanlık - Emlak seçiminizi daha rahat ve heyecanlı hale getirmek için her şey.\n"
-                "Verilerinizin gizliliğini garanti ediyor ve yalnızca güvenilir acentelerle ve satıcılarla işbirliği yapıyoruz.\n"
-                "Emlak yönetiminde yardıma ihtiyacınız varsa, kiralama yönetimi hizmetleri sunuyoruz, "
-                "mülkünüze maksimum değer ve bakım sağlıyoruz.",
-    "about_ru": "Наша компания предлагает широкий выбор недвижимости от эксклюзивных квартир до загородных домов.\n"
-                "Эксклюзивные предложения, виртуальные туры, консультации с экспертами - все, чтобы сделать процесс "
-                "Вашего выбора недвижимости удобным и увлекательным.\n"
-                "Мы гарантируем конфиденциальность ваших данных и сотрудничаем только с проверенными агентами и продавцами.\n"
-                "Если вам нужна помощь в управлении вашей недвижимостью, мы предоставляем услуги по арендному управлению, "
-                "обеспечивая вашему имуществу максимальную стоимость и уход.",
-    "phone": "+971 123 456 789",
+    "mission_en": "The mission of our real estate agency is to provide high-quality services aimed at meeting the needs of our clients in the field of buying, selling and renting real estate. We strive to create a reliable partnership based on professionalism, trust and attention to the individual needs of each client, in order to ensure successful and mutually beneficial transactions.",
+    "mission_ar": "مهمة وكالتنا العقارية هي تقديم خدمات عالية الجودة تهدف إلى تلبية احتياجات عملائنا في مجال شراء وبيع وتأجير العقارات. نحن نسعى لإنشاء شراكة موثوقة تستند إلى الاحترافية والثقة والاهتمام بالاحتياجات الفردية لكل عميل، من أجل ضمان صفقات ناجحة ومربحة للجميع.",
+    "mission_tr": "Gayrimenkul ajansımızın misyonu, müşterilerimizin gayrimenkul satın alma, satma ve kiralamada ihtiyaçlarını karşılamayı amaçlayan yüksek kaliteli hizmetler sunmaktır. Başarılı ve karşılıklı yararlı işlemleri sağlamak amacıyla her müşterinin bireysel ihtiyaçlarına profesyonellik, güven ve dikkatle dayalı güvenilir bir ortaklık oluşturmayı hedefliyoruz.",
+    "mission_ru": "Миссия нашего агентства недвижимости заключается в предоставлении высококачественных услуг, направленных на удовлетворение потребностей наших клиентов в области купли, продажи и аренды недвижимости. Мы стремимся создать надежное партнерство, основанное на профессионализме, доверии и внимании к индивидуальным запросам каждого клиента, с целью обеспечения успешных и взаимовыгодных сделок.",
+    "history_en": "Over the past few years, we have been successfully providing high-quality services in the real estate market. Our experience and expertise allow us to effectively navigate the dynamic real estate environment, providing our clients with reliable solutions and a professional approach. Our constant dedication to quality and customer satisfaction makes us a trusted partner in your housing solutions.",
+    "history_ar": "على مدى السنوات القليلة الماضية ، قدمنا ​​بنجاح خدمات عالية الجودة في سوق العقارات. تتيح لنا خبرتنا وتخصصنا التنقل بفعالية في البيئة العقارية الديناميكية ، مما يوفر لعملائنا حلولًا موثوقة ونهجًا مهنيًا. التفاني المستمر لدينا في الجودة ورضا العملاء يجعلنا شريكًا موثوقًا في حلول السكن الخاصة بك.",
+    "history_tr": "Son birkaç yıldır gayrimenkul piyasasında başarılı bir şekilde yüksek kaliteli hizmetler sunuyoruz. Deneyimimiz ve uzmanlığımız, dinamik gayrimenkul ortamında etkili bir şekilde hareket etmemizi sağlayarak müşterilerimize güvenilir çözümler ve profesyonel bir yaklaşım sunmamıza olanak tanır. Sürekli kaliteye ve müşteri memnuniyetine olan bağlılığımız, konut çözümlerinizde güvenilir bir ortak olmamızı sağlar.",
+    "history_ru": "За последние несколько лет мы успешно предоставляем высококачественные услуги на рынке недвижимости. Наш опыт и экспертиза позволяют нам эффективно ориентироваться в динамичной среде недвижимости, обеспечивая нашим клиентам надежные решения и профессиональный подход. Наша постоянная преданность качеству и удовлетворенность клиентов делают нас надежным партнером в ваших жилищных решениях.",
+    "company_en": "Our real estate company is an innovative agency specializing in the purchase, sale and rental of real estate. We pride ourselves on our high level of professionalism and dedication to customer satisfaction. Our approach is based on thorough market analysis, an individual approach to each client and the use of advanced technologies to ensure efficient and comfortable transactions. Our goal is to help you achieve your housing dreams by providing superior service every step of the way.",
+    "company_ar": "شركتنا العقارية هي وكالة مبتكرة متخصصة في شراء وبيع وتأجير العقارات. نفتخر بمستوى عال من الاحترافية والتفاني في تحقيق رضا العملاء. يستند نهجنا إلى تحليل سوق شامل ومنهج فردي لكل عميل واستخدام التكنولوجيا المتقدمة لضمان معاملات فعالة ومريحة. هدفنا هو مساعدتك في تحقيق أحلامك السكنية من خلال تقديم خدمة متميزة في كل خطوة من الطريق.",
+    "company_tr": "Gayrimenkul şirketimiz, gayrimenkul satın alma, satış ve kiralama konularında uzmanlaşmış yenilikçi bir ajansdır. Yüksek profesyonellik seviyemiz ve müşteri memnuniyetine olan bağlılığımızla gurur duyuyoruz. Yaklaşımımız, her bir müşteriye özel bir yaklaşım ve etkili ve konforlu işlemleri sağlamak için gelişmiş teknolojilerin kullanılması temeline dayanmaktadır. Amacımız, size üstün hizmet sunarak konut hayallerinizi gerçekleştirmenize yardımcı olmaktır.",
+    "company_ru": "Наша компания недвижимости - это инновационное агентство, специализирующееся на покупке, продаже и аренде недвижимости. Мы гордимся высоким уровнем профессионализма и преданностью удовлетворению потребностей клиентов. Наш подход основан на тщательном анализе рынка, индивидуальном подходе к каждому клиенту и использовании передовых технологий для обеспечения эффективных и комфортных сделок. Наша цель - помочь вам осуществить ваши жилищные мечты, обеспечивая превосходный сервис на каждом этапе сотрудничества.",
+    "phone": "+971 123 456 78",
     "email": "info@dubairealestate.com",
     "company_img": "back_static/default_img/logo.jpg",
 }

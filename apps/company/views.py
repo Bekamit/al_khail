@@ -1,13 +1,14 @@
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 
 from service.views import CustomSingletonListAPIView
+from service.cache import CustomCache
 
 from .serializers import CompanySerializer
 from .models import Company
 
 
 @extend_schema(
-    summary="Получить блок описания `о компании`",
+    summary="Получить блок описания `о компании`/⏩cache_content",
     description="Класс представления AboutCompanyListAPIView возвращает коллекцию из одного описания раздела 'о компании' "
                 " модели Company "
                 "Мультиязычная модель! **ACCEPT-LANGUAGE** для вывода данных на заявленном языке, "
@@ -28,3 +29,6 @@ class AboutCompanyListAPIView(CustomSingletonListAPIView):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
     response_key = 'about_company'
+    cache_class = CustomCache
+    cache_language = '__all__'
+    cache_key = 'about_company'

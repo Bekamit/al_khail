@@ -1,13 +1,11 @@
 import config
 
+
+
 SECRET_KEY = config.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config.DEBUG
-
-WORK_APPS = [
-    'corsheaders',
-]
 
 DATABASES = {
    'default': {
@@ -17,6 +15,16 @@ DATABASES = {
        'PASSWORD': config.POSTGRES_PASSWORD,
        'HOST': config.POSTGRES_HOST,
        'PORT': config.POSTGRES_PORT,
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',  # 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://redis:6379/1',
+        # 'OPTIONS': {
+        #     'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        # }
     }
 }
 

@@ -19,7 +19,14 @@ class CatalogDownloaderAdmin(admin.ModelAdmin):
         return True
 
 
-admin.site.register(CatalogDownloader, CatalogDownloaderAdmin)
+# admin.site.register(CatalogDownloader, CatalogDownloaderAdmin)
+
+
+@admin.register(CatalogDownloader)
+class ReadDeleteCatalogDownloaderAdmin(ReadDeleteModelAdmin):
+    list_display = ('date', 'name', 'role', 'email')
+    fields = ('name', 'email', 'phone', 'role', 'date')
+    list_filter = ('created_at', 'role',)
 
 
 @admin.register(Appeal)
@@ -30,9 +37,6 @@ class ReadDeleteAppealAdmin(ReadDeleteModelAdmin):
 
     def want_to(self, obj):
         return f'{"BUY" if obj.is_for_purchase else "SELL"}'
-
-    def date(self, obj):
-        return f'#{obj.pk} | {obj.created_at.strftime("%Y-%m-%d, %H:%M")}'
 
     def estate_link(self, obj):
         if obj.estate:
