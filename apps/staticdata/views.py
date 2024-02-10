@@ -77,7 +77,7 @@ class AllStaticDataAPIView(APIView):
     ]
 )
 class HeaderAPIView(CustomSingletonListAPIView):
-    queryset = Header.get_solo()
+    queryset = Header.objects.all()
     serializer_class = HeaderSerializer
     response_key = "header"
     cache_class = CustomCache
@@ -103,7 +103,7 @@ class HeaderAPIView(CustomSingletonListAPIView):
     ]
 )
 class BodyAPIView(CustomSingletonListAPIView):
-    queryset = Body.get_solo()
+    queryset = Body.objects.all()
     serializer_class = BodySerializer
     response_key = "body"
     cache_class = CustomCache
@@ -129,7 +129,7 @@ class BodyAPIView(CustomSingletonListAPIView):
     ]
 )
 class FormsAPIView(CustomSingletonListAPIView):
-    queryset = Form.get_solo()
+    queryset = Form.objects.all()
     serializer_class = FormSerializer
     response_key = "forms"
     cache_class = CustomCache
@@ -155,7 +155,7 @@ class FormsAPIView(CustomSingletonListAPIView):
     ]
 )
 class FooterAPIView(CustomSingletonListAPIView):
-    queryset = Footer.get_solo()
+    queryset = Footer.objects.all()
     serializer_class = FooterSerializer
     response_key = "footer"
     cache_class = CustomCache
@@ -181,7 +181,7 @@ class FooterAPIView(CustomSingletonListAPIView):
     ]
 )
 class Error404APIView(CustomSingletonListAPIView):
-    queryset = Error404.get_solo()
+    queryset = Error404.objects.all()
     serializer_class = Error404Serializer
     response_key = "error404"
     cache_class = CustomCache
