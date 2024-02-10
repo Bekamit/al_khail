@@ -36,6 +36,8 @@ class Appeal(models.Model):
     lang = models.CharField(max_length=30, verbose_name='Message Language')
     at_time = models.DateField(null=True)
     city = models.CharField(max_length=100)
+    at_time = models.DateTimeField(verbose_name='Call at time', null=True)
+    city = models.CharField(max_length=100, verbose_name='Respondent city')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Send date')
     is_send = models.BooleanField(default=True, verbose_name='Send letter')
 
