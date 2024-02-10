@@ -63,9 +63,16 @@ class CustomGenericAPIView(GenericAPIView):
         else:
             return None
 
+    def filter(self, queryset: MultilingualQuerySet):
+        if isinstance(queryset, MultilingualQuerySet):
+            queryset = queryset.first()
+        else:
+            queryset = queryset.all()
+        return queryset
+
     def get_queryset(self):
         if not self.cache_language and not self.cache_class:
-            return super().get_queryset()
+            return self.filter(super().get_queryset())
 
         _cache = self.cache_class(self.cache_language)
         accept_language = self.get_response_language()
@@ -74,11 +81,11 @@ class CustomGenericAPIView(GenericAPIView):
             if queryset := _cache.get(key, accept_language):
                 return queryset
             else:
-                queryset = super().get_queryset()
+                queryset = self.filter(super().get_queryset())
                 _cache.set(key, accept_language, queryset)
                 return queryset
         else:
-            return super().get_queryset()
+            return self.filter(super().get_queryset())
 
 
 class MultiSerializerGenericAPIView(CustomGenericAPIView):
@@ -89,22 +96,17 @@ class MultiSerializerGenericAPIView(CustomGenericAPIView):
     response_queryset: MultilingualQuerySet | None = None
     response_serializer: Serializer | None = None
 
-    def valid(self, queryset: MultilingualQuerySet):
-        if isinstance(queryset, MultilingualQuerySet):
-            queryset = queryset.all()
-        return queryset
-
     def get_queryset(self):
         if self.request.method == 'GET':
-            return self.valid(self.method_get_queryset)
+            return self.filter(self.method_get_queryset)
         if self.request.method == 'POST':
-            return self.valid(self.method_post_queryset)
-        return self.valid(self.queryset)
+            return self.filter(self.method_post_queryset)
+        return self.filter(self.queryset)
 
     def get_response_queryset(self):
         if not self.response_queryset:
-            return self.valid(self.method_get_queryset)
-        return self.valid(self.response_queryset)
+            return self.filter(self.method_get_queryset)
+        return self.filter(self.response_queryset)
 
     def get_serializer_class(self):
         return self.serializer_class if self.serializer_class else None
