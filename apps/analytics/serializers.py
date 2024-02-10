@@ -21,23 +21,6 @@ class PhoneNumberField(serializers.CharField):
             raise serializers.ValidationError('Invalid phone number format')
 
 
-class GetStaticDataSerializer(serializers.ModelSerializer):
-    form = CustomGetSerializer()
-
-    class Meta:
-        model = Consultation
-        fields = [
-            'form',
-        ]
-
-
-class PostStaticDataSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Consultation
-        fields = '__all__'
-
-
-
 class ChoiceRoleSerializer(serializers.ModelSerializer):
     placeholder = serializers.CharField(source='role')
 
@@ -51,9 +34,6 @@ class ChoiceRoleSerializer(serializers.ModelSerializer):
         ]
 
 
-class CatalogDownloaderSerializer(PostStaticDataSerializer):
-    class Meta(PostStaticDataSerializer.Meta):
-        ...
 class CatalogDownloaderSerializer(serializers.ModelSerializer):
     class Meta:
         model = CatalogDownloader
@@ -66,7 +46,7 @@ class CatalogDownloaderSerializer(serializers.ModelSerializer):
         return CatalogDownloader.create_downloader(**validated_data)
 
 
-class AppealSellValidateSerializer(PostStaticDataSerializer):
+class AppealSellValidateSerializer(serializers.Serializer):
     is_for_purchase = serializers.BooleanField(default=False)
     name = serializers.CharField(max_length=70, required=True)
     last_name = serializers.CharField(max_length=70, required=True, allow_blank=True, write_only=True)
@@ -99,7 +79,7 @@ class AppealSellValidateSerializer(PostStaticDataSerializer):
         fields = '__all__'
 
 
-class AppealBuyValidateSerializer(PostStaticDataSerializer):
+class AppealBuyValidateSerializer(serializers.Serializer):
     is_for_purchase = serializers.BooleanField(default=True)
     estate_id = serializers.CharField()
     name = serializers.CharField(max_length=70, required=True)
@@ -134,7 +114,7 @@ class AppealBuyValidateSerializer(PostStaticDataSerializer):
         return Appeal.create_appeal(validated_data)
 
 
-class ConsultationSerializer(PostStaticDataSerializer):
+class ConsultationSerializer(serializers.Serializer):
     class Meta:
         model = Consultation
         fields = '__all__'

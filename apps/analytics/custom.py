@@ -1,19 +1,19 @@
 from rest_framework import status
 from rest_framework.response import Response
 from .models import CatalogDownloader, Consultation
-from .serializers import CatalogDownloaderSerializer, ConsultationSerializer, GetStaticDataSerializer
+from .serializers import CatalogDownloaderSerializer, ConsultationSerializer
 from service.views import CustomListAPIView
 from rest_framework.generics import CreateAPIView
-from .serializers import GetStaticDataSerializer,PostStaticDataSerializer
+from .serializers import *
 
 
 class CustomListCreateAPIView(CustomListAPIView, CreateAPIView):
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
-            return GetStaticDataSerializer
+            return None
         elif self.request.method == 'POST':
-            return PostStaticDataSerializer
+            return None
         else:
             return None
 

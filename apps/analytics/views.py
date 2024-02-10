@@ -73,8 +73,9 @@ class ConsultationCreateAPIView(CustomListCreateAPIView):
     queryset = Consultation.objects.all()
     serializer_class = ConsultationSerializer
 
+
 class AppealSellMultiSerializerListCreateAPIView(MultiSerializerListCreateAPIView):
-    method_get_queryset = Form.get_solo()
+    method_get_queryset = Form.objects.all()
     method_post_queryset = Appeal.objects.all()
     method_get_serializer = SellFormSerializer
     method_post_serializer = AppealSellValidateSerializer
