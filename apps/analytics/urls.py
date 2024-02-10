@@ -2,13 +2,11 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('catalog-download/', CatalogDownloaderCreateAPIView.as_view(model='CatalogDownloader'), name='catalog-downloader'),
+    path('catalog-download/', CatalogDownloaderMultiSerializerListCreateAPIView.as_view(), name='catalog-downloader'),
 
-    path('appeal/buy/', AppealBuyCreateAPIView.as_view(model='Appeal'), name='appeal-buy'),
-    path('appeal/sell/', AppealSellCreateAPIView.as_view(model='Appeal'), name='appeal-sell'),
+    path('appeal/buy/', AppealBuyMultiSerializerListCreateAPIView.as_view(), name='appeal-buy'),
+    path('appeal/sell/', AppealSellMultiSerializerListCreateAPIView.as_view(), name='appeal-sell'),
 
-    path('consultation/', ConsultationCreateAPIView.as_view(model='Consultation'), name='consultation'),
-    path('appeal/buy/', AppealBuyCreateAPIView.as_view()),
-    path('appeal/sell/', AppealSellMultiSerializerListCreateAPIView.as_view()),
+    path('consultation/', ConsultationMultiSerializerListCreateAPIView.as_view(), name='consultation'),
 ]
 

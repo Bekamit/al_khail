@@ -43,7 +43,7 @@ class CatalogDownloaderSerializer(serializers.ModelSerializer):
                   'role']
 
     def create(self, validated_data):
-        return CatalogDownloader.create_downloader(**validated_data)
+        return CatalogDownloader.create_downloader(validated_data)
 
 
 class AppealSellValidateSerializer(serializers.Serializer):
@@ -62,11 +62,6 @@ class AppealSellValidateSerializer(serializers.Serializer):
         if last_name:
             raise serializers.ValidationError(_('Wrong format'))
         return last_name
-
-    def validate_at_time(self, time):
-        if time <= timezone.now():
-            raise serializers.ValidationError(_("at_time must be in the future"))
-        return time
 
     def create(self, validated_data):
         validated_data.pop('last_name')
@@ -102,11 +97,6 @@ class AppealBuyValidateSerializer(serializers.Serializer):
             raise serializers.ValidationError(_('Wrong format'))
         return last_name
 
-    def validate_at_time(self, time):
-        if time <= timezone.now():
-            raise serializers.ValidationError(_("at_time must be in the future"))
-        return time
-
     def create(self, validated_data):
         validated_data.pop('last_name')
         validated_data['lang'] = self.get_language()
@@ -115,6 +105,10 @@ class AppealBuyValidateSerializer(serializers.Serializer):
 
 
 class ConsultationSerializer(serializers.Serializer):
-    class Meta:
-        model = Consultation
-        fields = '__all__'
+    name = serializers.CharField(max_length=70, required=True)
+    phone = PhoneNumberField(required=True)
+    city = serializers.CharField(max_length=70, required=True)
+    at_date = serializers.DateField(required=True)
+
+    def create(self, validated_data):
+        return Consultation.create_consultation(validated_data)

@@ -36,7 +36,7 @@ class Appeal(models.Model):
     lang = models.CharField(max_length=30, verbose_name='Message Language')
     at_time = models.DateField(null=True)
     city = models.CharField(max_length=100)
-    at_time = models.DateTimeField(verbose_name='Call at time', null=True)
+    at_date = models.DateField(verbose_name='Call at time', null=True)
     city = models.CharField(max_length=100, verbose_name='Respondent city')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Send date')
     is_send = models.BooleanField(default=True, verbose_name='Send letter')
@@ -69,9 +69,9 @@ class Consultation(models.Model):
     at_date = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    @classmethod
-    def create_consultation(cls, **data):
-        return cls.objects.create(**data)
+    @staticmethod
+    def create_consultation(data: dict):
+        return Consultation.objects.create(**data)
 
     def __str__(self):
         return f'{self.pk} -- {self.name}'
