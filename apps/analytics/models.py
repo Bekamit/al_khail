@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
 from apps.estate.models import Estate
 
 
@@ -13,6 +12,7 @@ class CatalogDownloader(models.Model):
     phone = models.CharField(max_length=100, verbose_name='Phone number', null=True)
     role = models.CharField(max_length=30, verbose_name='Role')
     created_at = models.DateTimeField(auto_now_add=True)
+    city = models.CharField(max_length=100, verbose_name='City')
 
     class Meta:
         verbose_name = _('Catalog downloader')
@@ -22,7 +22,7 @@ class CatalogDownloader(models.Model):
         return self.name
 
     @staticmethod
-    def create_loader(data: dict):
+    def create_downloader(data: dict):
         return CatalogDownloader.objects.create(**data)
 
 
@@ -31,17 +31,16 @@ class Appeal(models.Model):
         Модель для оформления заявки на звонок на покупку/продажу/консультацию по обьекту недвижимости
     """
     CHOICES = [
-        ('BUY', 'BUY'),
-        ('SELL', 'SELL'),
-        ('CONSULTATION', 'CONSULTATION'),
+        ('buy', 'buy'),
+        ('sell', 'sell'),
+        ('consultation', 'consultation'),
     ]
-
     appeal_type = models.CharField(max_length=20, choices=CHOICES, verbose_name='Type of Appeal')
     estate = models.ForeignKey(Estate, on_delete=models.CASCADE, related_name='appeals', null=True)
     name = models.CharField(max_length=70, verbose_name='Name')
     phone = models.CharField(max_length=70, verbose_name='Phone number')
     lang = models.CharField(max_length=30, verbose_name='Message Language', blank=True)
-    city = models.CharField(max_length=100, verbose_name='City')
+    city = models.CharField(max_length=100, verbose_name='Respondent city')
     at_date = models.DateField(verbose_name='Call in date', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Send date')
     is_send = models.BooleanField(default=True, verbose_name='Send letter')

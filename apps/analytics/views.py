@@ -1,13 +1,18 @@
 from drf_spectacular.utils import extend_schema, OpenApiParameter
+from service.views import MultiSerializerListCreateAPIView
 
 from .models import CatalogDownloader, Appeal
 from apps.staticdata.models import Form
-from .serializers import AppealBuyValidateSerializer, AppealSellValidateSerializer
+
+from .serializers import (CatalogDownloaderSerializer,
+                          AppealBuyValidateSerializer,
+                          AppealSellValidateSerializer,
+                          ConsultationSerializer)
 from apps.staticdata.serializers import (SellFormSerializer,
                                          SuccessFormSerializer,
-                                         CatalogDownloaderFormSerializer)
-
-from service.views import MultiSerializerListCreateAPIView
+                                         BuyFormSerializer,
+                                         CatalogDownloaderFormSerializer,
+                                         ConsultationFormSerializer)
 
 
 @extend_schema(
@@ -95,8 +100,12 @@ class AppealSellMultiSerializerListCreateAPIView(MultiSerializerListCreateAPIVie
 
 
 @extend_schema(
-    summary="Отправить запрос при скачивании каталога",
-    description="Класс представления CatalogDownloaderMultiSerializerListCreateAPIView получает данные с формы при скачивании каталога проекта",
+    summary="Отправить запрос для аналитики скачивания каталога",
+    description="CatalogDownloaderMultiSerializerListCreateAPIView: \n\n "
+                "При GET запросе отправляет поля формы на указаном языке;\n\n"
+                "При POST запросе получает данные с формы для аналитики скачивания каталога;\n\n"
+                "При ошибках возвращает ошибки по полям на нужном языке; при успешной отработке формы возвращает "
+                "поля формы об успешной отработке формы и статус 201",
     methods=["GET",
              "POST"],
     tags=["Analytics"],
@@ -113,6 +122,6 @@ class CatalogDownloaderMultiSerializerListCreateAPIView(MultiSerializerListCreat
     method_get_queryset = Form.objects.all()
     method_post_queryset = CatalogDownloader.objects.all()
     method_get_serializer = CatalogDownloaderFormSerializer
-    method_post_serializer = AppealSellValidateSerializer
+    method_post_serializer = CatalogDownloaderSerializer
     response_serializer = SuccessFormSerializer
     response_key = 'form'

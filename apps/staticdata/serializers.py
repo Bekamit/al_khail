@@ -164,3 +164,17 @@ class CatalogDownloaderFormSerializer(serializers.ModelSerializer):
             "choices",
             "download",
         ]
+
+
+class ConsultationFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Form
+        fields = [
+            'any_question',
+            'leave_your_contacts',
+            'your_name',
+            'phone_number',
+            'your_city',
+            'date',
+            'send',
+        ]

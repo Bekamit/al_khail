@@ -1,6 +1,11 @@
 .gitignore
 .idea
 venv
+.MK
+MK
+.env
+env
+.env.prod
 __pycache__
 сore/__pycache__
 apps/admin_app/__pycache__
