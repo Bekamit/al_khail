@@ -6,19 +6,64 @@ from .serializers import AppealBuyValidateSerializer, AppealSellValidateSerializ
 from apps.staticdata.serializers import (SellFormSerializer,
                                          SuccessFormSerializer,
                                          CatalogDownloaderFormSerializer)
-from rest_framework.generics import CreateAPIView
+
 from service.views import MultiSerializerListCreateAPIView
 
 
 @extend_schema(
-    summary="Отправить запрос на покупку объекта недвижимости(в работе)",
-    description="Класс представления AppealBuyCreateAPIView получает данные с формы о покупке объекта недвижимости ",
-    methods=["POST"],
+    summary="Отправить запрос на консультацию",
+    description="ConsultationMultiSerializerListCreateAPIView: \n\n "
+                "При GET запросе отправляет поля формы на указаном языке;\n\n"
+                "При POST запросе получает данные клиента и его вопросов с формы;\n\n"
+                "При ошибках возвращает ошибки по полям на нужном языке; при успешной отработке формы возвращает "
+                "поля формы об успешной отработке формы и статус 201",
+    methods=["GET",
+             "POST"],
     tags=["Analytics"],
+    parameters=[
+        OpenApiParameter(
+            name='ACCEPT-LANGUAGE',
+            type=str,
+            location=OpenApiParameter.HEADER,
+            description='Язык, на котором должны возвращаться данные (en, ar, tr, ru).'
+        ),
+    ],
 )
-class AppealBuyCreateAPIView(CreateAPIView):
-    queryset = Appeal.objects.all()
-    serializer_class = AppealBuyValidateSerializer
+class ConsultationMultiSerializerListCreateAPIView(MultiSerializerListCreateAPIView):
+    method_get_queryset = Form.objects.all()
+    method_post_queryset = Appeal.objects.all()
+    method_get_serializer = ConsultationFormSerializer
+    method_post_serializer = ConsultationSerializer
+    response_serializer = SuccessFormSerializer
+    response_key = 'form'
+
+
+@extend_schema(
+    summary="Отправить запрос на покупку объекта недвижимости",
+    description="AppealBuyMultiSerializerListCreateAPIView: \n\n "
+                "При GET запросе отправляет поля формы на указаном языке;\n\n"
+                "При POST запросе получает данные с формы о желании клиента купить объект недвижимости;\n\n"
+                "При ошибках возвращает ошибки по полям на нужном языке; при успешной отработке формы возвращает "
+                "поля формы об успешной отработке формы и статус 201",
+    methods=["GET",
+             "POST"],
+    tags=["Analytics"],
+    parameters=[
+        OpenApiParameter(
+            name='ACCEPT-LANGUAGE',
+            type=str,
+            location=OpenApiParameter.HEADER,
+            description='Язык, на котором должны возвращаться данные (en, ar, tr, ru).'
+        ),
+    ],
+)
+class AppealBuyMultiSerializerListCreateAPIView(MultiSerializerListCreateAPIView):
+    method_get_queryset = Form.objects.all()
+    method_post_queryset = Appeal.objects.all()
+    method_get_serializer = BuyFormSerializer
+    method_post_serializer = AppealBuyValidateSerializer
+    response_serializer = SuccessFormSerializer
+    response_key = 'form'
 
 
 @extend_schema(

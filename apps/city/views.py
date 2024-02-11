@@ -1,4 +1,5 @@
 from service.views import CustomListAPIView, CustomRetrieveAPIView
+from service.cache import CustomCache
 
 from .serializers import CitySerializer
 from .models import City
@@ -41,15 +42,7 @@ from drf_spectacular.utils import extend_schema, OpenApiExample, OpenApiParamete
                                             "\r\n3. Altyapı: Şehir, yüksek binalar, yenilikçi ulaşım sistemleri ve "
                                             "modern eğlence komplekslerini içeren modern altyapısıyla tanınmaktadır."
                                             "\r\n4. Güvenlik: Dubai, yaşamak için en güvenli yerlerden biri olarak "
-                                            "kabul edilir; bu, sakinlere ve daimi sakinlere gönül rahatlığı sağlar."
-                                            "\r\n5. Vergi avantajları: Gelir vergisinin olmaması ve düşük vergi "
-                                            "oranları, girişimciler ve yüksek maaşlı profesyoneller için cazip faktörlerdir."
-                                            "\r\n6. Eğitim ve Sağlık Hizmetinin Kalitesi: Şehir, yüksek kalitede eğitim"
-                                            " ve sağlık hizmetleri sunarak aileler için cazip hale gelmektedir."
-                                            "\r\n7. Lüks yaşam tarzı: Dubai, çeşitli restoranlar, kültürel etkinlikler "
-                                            "ve eğlence kompleksleriyle lüks dinlenme, alışveriş ve eğlence fırsatları sunmaktadır."
-                                            "\r\n8. İklim: Dubai'nin sıcak iklimi yılın büyük bölümünde güneşli olup, "
-                                            "aktif bir yaşam tarzına ve açık havada dinlenmeye olanak sağlar.",
+                                            "kabul edilir; bu, sakinlere ve daimi sakinlere gönül rahatlığı sağlar.",
                         "city_img": "http://127.0.0.1:8000/media/cities/Dubai/dubai.jpg"
                     },
                 ]
@@ -61,6 +54,9 @@ class CityListAPIView(CustomListAPIView):
     queryset = City.objects.all()
     serializer_class = CitySerializer
     response_key = 'cities'
+    cache_class = CustomCache
+    cache_language = '__all__'
+    cache_key = 'cities'
 
 
 @extend_schema(

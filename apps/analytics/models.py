@@ -28,16 +28,21 @@ class CatalogDownloader(models.Model):
 
 class Appeal(models.Model):
     """
-        Модель для оформления заявки на звонок на покупку/продажу обьекта недвижимости
+        Модель для оформления заявки на звонок на покупку/продажу/консультацию по обьекту недвижимости
     """
+    CHOICES = [
+        ('BUY', 'BUY'),
+        ('SELL', 'SELL'),
+        ('CONSULTATION', 'CONSULTATION'),
+    ]
 
-    is_for_purchase = models.BooleanField(verbose_name='Want to buy')
-    estate = models.ForeignKey(Estate, on_delete=models.CASCADE, related_name='appel', null=True)
+    appeal_type = models.CharField(max_length=20, choices=CHOICES, verbose_name='Type of Appeal')
+    estate = models.ForeignKey(Estate, on_delete=models.CASCADE, related_name='appeals', null=True)
     name = models.CharField(max_length=70, verbose_name='Name')
     phone = models.CharField(max_length=70, verbose_name='Phone number')
-    lang = models.CharField(max_length=30, verbose_name='Message Language')
-    at_time = models.DateTimeField(verbose_name='Call at time', null=True)
-    city = models.CharField(max_length=100, verbose_name='Respondent city')
+    lang = models.CharField(max_length=30, verbose_name='Message Language', blank=True)
+    city = models.CharField(max_length=100, verbose_name='City')
+    at_date = models.DateField(verbose_name='Call in date', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Send date')
     is_send = models.BooleanField(default=True, verbose_name='Send letter')
 

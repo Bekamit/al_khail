@@ -45,8 +45,7 @@ class CustomGenericAPIView(GenericAPIView):
             return MODELTRANSLATION_DEFAULT_LANGUAGE.upper()
 
     def get_multilanguage_response(self, serializer):
-        response_key = self.get_response_key()
-        if response_key:
+        if response_key := self.get_response_key():
             language = self.get_response_language()
 
             data = {
@@ -77,6 +76,7 @@ class CustomGenericAPIView(GenericAPIView):
             return self.filter(super().get_queryset())
 
         _cache = self.cache_class(self.cache_language)
+        print(_cache.keys())
         accept_language = self.get_response_language()
         if accept_language.lower() in _cache.languages:
             key = self.get_cache_key()
