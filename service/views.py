@@ -1,3 +1,5 @@
+from time import sleep
+
 from rest_framework.generics import GenericAPIView
 from django.utils.translation import get_language_from_request
 from solo.models import SingletonModel
@@ -338,19 +340,23 @@ class CustomEstateCreateAPIView(mixin.CustomCreateEstateMixin, CustomGenericAPIV
                 villas = self.get_fake_estate_villa()
                 for villa in villas:
                     self.save_data(villa)
+                    sleep(choice((3, 8, 6, 4, 1)))
 
                 duplexes = self.get_fake_estate_duplex()
                 for duplex in duplexes:
                     self.save_data(duplex)
+                    sleep(choice((3, 8, 6, 4, 1)))
 
                 penthouses = self.get_fake_estate_penthouse()
                 for penthouse in penthouses:
                     self.save_data(penthouse)
+                    sleep(choice((3, 8, 6, 4, 1)))
 
                 for page in range(1, 12):
                     apartments = self.get_fake_estate_apartment(page)
                     for apartment in apartments:
                         self.save_data(apartment)
+                        sleep(choice((3, 8, 6, 4, 1)))
                 print("[FAKE NEWS]: All fake data created successfully")
 
         return self.create(request, *args, **kwargs)

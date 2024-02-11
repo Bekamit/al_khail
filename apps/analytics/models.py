@@ -10,9 +10,10 @@ class CatalogDownloader(models.Model):
     name = models.CharField(max_length=50, verbose_name='Name')
     email = models.EmailField(verbose_name='E-mail')
     phone = models.CharField(max_length=100, verbose_name='Phone number', null=True)
+    city = models.CharField(max_length=100, verbose_name='Respondent city')
     role = models.CharField(max_length=30, verbose_name='Role')
+    lang = models.CharField(max_length=30, verbose_name='Respondent language', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    city = models.CharField(max_length=100, verbose_name='City')
 
     class Meta:
         verbose_name = _('Catalog downloader')
@@ -35,7 +36,7 @@ class Appeal(models.Model):
         ('sell', 'sell'),
         ('consultation', 'consultation'),
     ]
-    appeal_type = models.CharField(max_length=20, choices=CHOICES, verbose_name='Type of Appeal')
+    appeal_type = models.CharField(max_length=20, choices=CHOICES, verbose_name='Type of appeal')
     estate = models.ForeignKey(Estate, on_delete=models.CASCADE, related_name='appeals', null=True)
     name = models.CharField(max_length=70, verbose_name='Name')
     phone = models.CharField(max_length=70, verbose_name='Phone number')
