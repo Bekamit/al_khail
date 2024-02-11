@@ -2,8 +2,10 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('download_catalog/', CatalogDownloaderCreateAPIView.as_view()),
+    path('catalog-download/', CatalogDownloaderMultiSerializerListCreateAPIView.as_view(), name='catalog-downloader'),
 
-    path('appeal/buy/', AppealBuyCreateAPIView.as_view()),
-    path('appeal/sell/', AppealSellMultiSerializerListCreateAPIView.as_view()),
+    path('appeal/buy/', AppealBuyMultiSerializerListCreateAPIView.as_view(), name='appeal-buy'),
+    path('appeal/sell/', AppealSellMultiSerializerListCreateAPIView.as_view(), name='appeal-sell'),
+    path('appeal/consultation/', ConsultationMultiSerializerListCreateAPIView.as_view(), name='consultation'),
 ]
+

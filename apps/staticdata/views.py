@@ -184,6 +184,6 @@ class Error404APIView(CustomSingletonListAPIView):
     queryset = Error404.objects.all()
     serializer_class = Error404Serializer
     response_key = "error404"
-    # cache_class = CustomCache
-    # cache_language = '__all__'
+    cache_class = CustomCache
+    cache_language = '__all__'
     cache_key = 'error404'

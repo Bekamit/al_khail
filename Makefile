@@ -25,3 +25,5 @@ down-ssl:
 
 recreate-ssl:
     docker-compose -f docker-compose-ssl.yaml up -d --force-recreate
+run:
+    python3 manage.py runserver
