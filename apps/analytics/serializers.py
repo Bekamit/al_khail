@@ -2,7 +2,7 @@ import phonenumbers
 from django.utils import timezone
 from django.utils.translation import get_language_from_request
 from rest_framework import serializers
-from .models import CatalogDownloader, Appeal, Consultation
+from .models import CatalogDownloader, Appeal
 from apps.staticdata.models import Form
 from .models import CatalogDownloader, Appeal
 from apps.estate.models import Estate
@@ -47,7 +47,7 @@ class CatalogDownloaderSerializer(serializers.ModelSerializer):
 
 
 class AppealSellValidateSerializer(serializers.Serializer):
-    is_for_purchase = serializers.BooleanField(default=False)
+    appeal_type = serializers.CharField(required=True)
     name = serializers.CharField(max_length=70, required=True)
     last_name = serializers.CharField(max_length=70, required=True, allow_blank=True, write_only=True)
     phone = PhoneNumberField()
@@ -67,6 +67,7 @@ class AppealSellValidateSerializer(serializers.Serializer):
         validated_data.pop('last_name')
         validated_data['lang'] = self.get_language()
         validated_data['city'] = validated_data['city'].capitalize()
+        validated_data['appeal_type'] = 'SELL'
         return Appeal.create_appeal(validated_data)
 
     class Meta:
@@ -75,7 +76,7 @@ class AppealSellValidateSerializer(serializers.Serializer):
 
 
 class AppealBuyValidateSerializer(serializers.Serializer):
-    is_for_purchase = serializers.BooleanField(default=True)
+    appeal_type = serializers.CharField(required=False)
     estate_id = serializers.CharField()
     name = serializers.CharField(max_length=70, required=True)
     last_name = serializers.CharField(max_length=70, required=True, allow_blank=True, write_only=True)
@@ -101,6 +102,7 @@ class AppealBuyValidateSerializer(serializers.Serializer):
         validated_data.pop('last_name')
         validated_data['lang'] = self.get_language()
         validated_data['city'] = validated_data['city'].capitalize()
+        validated_data['appeal_type'] = 'BUY'
         return Appeal.create_appeal(validated_data)
 
 
@@ -110,5 +112,11 @@ class ConsultationSerializer(serializers.Serializer):
     city = serializers.CharField(max_length=70, required=True)
     at_date = serializers.DateField(required=True)
 
+    def get_language(self):
+        request = self.context['request']
+        return get_language_from_request(request)
+
     def create(self, validated_data):
-        return Consultation.create_consultation(validated_data)
+        validated_data['lang'] = self.get_language()
+        validated_data['appeal_type'] = 'CONSULTATION'
+        return Appeal.create_appeal(validated_data)

@@ -1,5 +1,5 @@
 from drf_spectacular.utils import extend_schema
-from .models import CatalogDownloader, Appeal, Consultation
+from .models import CatalogDownloader, Appeal
 from .serializers import CatalogDownloaderSerializer, AppealBuyValidateSerializer, AppealSellValidateSerializer, ConsultationSerializer
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from .models import CatalogDownloader, Appeal
@@ -67,7 +67,7 @@ class AppealSellCreateAPIView(CreateAPIView):
 )
 class ConsultationCreateAPIView(CreateAPIView):
     model = 'Consultation'
-    queryset = Consultation.objects.all()
+    queryset = Appeal.objects.all()
     serializer_class = ConsultationSerializer
 
 
@@ -176,7 +176,7 @@ class CatalogDownloaderMultiSerializerListCreateAPIView(MultiSerializerListCreat
 )
 class ConsultationMultiSerializerListCreateAPIView(MultiSerializerListCreateAPIView):
     method_get_queryset = Form.objects.all()
-    method_post_queryset = Form.objects.all()
+    method_post_queryset = Appeal.objects.all()
     method_get_serializer = ConsultationFormSerializer
     method_post_serializer = ConsultationSerializer
     response_serializer = SuccessFormSerializer

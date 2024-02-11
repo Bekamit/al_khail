@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import Header, Body, Form, Footer, Error404
-from ..analytics.models import Consultation
 
 
 class HeaderSerializer(serializers.ModelSerializer):
