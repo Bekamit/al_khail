@@ -1,5 +1,7 @@
 from rest_framework.generics import GenericAPIView
 from django.utils.translation import get_language_from_request
+from solo.models import SingletonModel
+
 from rest_framework.serializers import Serializer
 from modeltranslation.manager import MultilingualQuerySet
 from rest_framework.response import Response
@@ -64,7 +66,7 @@ class CustomGenericAPIView(GenericAPIView):
             return None
 
     def filter(self, queryset: MultilingualQuerySet):
-        if isinstance(queryset, MultilingualQuerySet):
+        if issubclass(queryset.model, SingletonModel):
             queryset = queryset.first()
         else:
             queryset = queryset.all()

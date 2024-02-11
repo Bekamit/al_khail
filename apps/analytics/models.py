@@ -5,9 +5,12 @@ from apps.estate.models import Estate
 
 
 class CatalogDownloader(models.Model):
+    """
+       Модель для получения данных от пользователей, скачивающих PDF каталог проекта
+    """
     name = models.CharField(max_length=50, verbose_name='Name')
     email = models.EmailField(verbose_name='E-mail')
-    phone = models.CharField(max_length=100, verbose_name='Phone number')
+    phone = models.CharField(max_length=100, verbose_name='Phone number', null=True)
     role = models.CharField(max_length=30, verbose_name='Role')
     created_at = models.DateTimeField(auto_now_add=True)
 
