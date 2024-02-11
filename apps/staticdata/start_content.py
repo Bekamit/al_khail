@@ -103,277 +103,321 @@ FACILITIES = [
         "type_en": "walk-in closet",
         "type_ar": "خزانة غرفة منفصلة",
         "type_tr": "yürüyüş dolabı",
-        "type_ru": "гардероб"
+        "type_ru": "гардероб",
+        "icon": "back_static/icons/walk-in closet.svg"
     },
     {
         "type_en": "built-in kitchen appliances",
         "type_ar": "أجهزة مطبخ مدمجة",
         "type_tr": "yerleşik mutfak aletleri",
-        "type_ru": "встроенная кухонная техника"
+        "type_ru": "встроенная кухонная техника",
+        "icon": "back_static/icons/built-in kitchen appliances.svg"
     },
     {
         "type_en": "children's play area",
         "type_ar": "منطقة لعب للأطفال",
         "type_tr": "çocuk oyun alanı",
-        "type_ru": "детская площадка"
+        "type_ru": "детская площадка",
+        "icon": "back_static/icons/children's play area.svg"
     },
     {
         "type_en": "children's pool",
         "type_ar": "حوض سباحة للأطفال",
         "type_tr": "çocuk havuzu",
-        "type_ru": "детский бассейн"
+        "type_ru": "детский бассейн",
+        "icon": "back_static/icons/children's pool.svg"
     },
     {
         "type_en": "barbecue area",
         "type_ar": "منطقة للشواء",
         "type_tr": "barbekü alanı",
-        "type_ru": "место для барбекю"
+        "type_ru": "зона барбекю",
+        "icon": "back_static/icons/barbecue area.svg"
     },
     {
         "type_en": "built-in wardrobe",
         "type_ar": "خزانة مدمجة",
         "type_tr": "yerleşik gardırop",
-        "type_ru": "встроенные шкафы"
+        "type_ru": "встроенные шкафы",
+        "icon": "back_static/icons/built-in wardrobe.svg"
     },
     {
         "type_en": "security",
         "type_ar": "حراسة أمن",
         "type_tr": "güvenlik",
-        "type_ru": "охрана"
+        "type_ru": "охрана",
+        "icon": "back_static/icons/security.svg"
     },
     {
         "type_en": "covered parking",
         "type_ar": "مواقف مغطاة للسيارات",
         "type_tr": "kapalı otopark",
-        "type_ru": "закрытая парковка"
+        "type_ru": "закрытая парковка",
+        "icon": "back_static/icons/covered parking.svg"
     },
     {
         "type_en": "shared swimming pool",
         "type_ar": "حوض سباحة مشترك",
         "type_tr": "paylaşılan yüzme havuzu",
-        "type_ru": "общий бассейн"
+        "type_ru": "общий бассейн",
+        "icon": "back_static/icons/shared swimming pool.svg"
     },
     {
         "type_en": "shared gym",
         "type_ar": "صالة رياضية مشتركة",
         "type_tr": "paylaşılan spor salonu",
-        "type_ru": "общий спортзал"
+        "type_ru": "общий спортзал",
+        "icon": "back_static/icons/shared gym.svg"
     },
     {
         "type_en": "balcony",
         "type_ar": "شرفة",
         "type_tr": "balkon",
-        "type_ru": "балкон"
+        "type_ru": "балкон",
+        "icon": "back_static/icons/balcony.svg"
     },
     {
         "type_en": "pets allowed",
         "type_ar": "مسموح بالحيوانات الأليفة",
         "type_tr": "evcil hayvanlara izin verilir",
-        "type_ru": "разрешение на домашних животных"
+        "type_ru": "разрешение на домашних животных",
+        "icon": "back_static/icons/pets allowed.svg"
     },
     {
         "type_en": "central air conditioning",
         "type_ar": "تكييف هواء مركزي",
         "type_tr": "merkezi klima",
-        "type_ru": "кондиционеры"
+        "type_ru": "кондиционеры",
+        "icon": "back_static/icons/central air conditioning.svg"
     },
     {
         "type_en": "sea/water view",
         "type_ar": "إطلالة على البحر/المياه",
         "type_tr": "deniz/su manzarası",
-        "type_ru": "вид на море/воду"
+        "type_ru": "вид на море/воду",
+        "icon": "back_static/icons/water view.svg"
     },
     {
         "type_en": "view of landmark",
         "type_ar": "إطلالة على معلم",
         "type_tr": "landmark manzarası",
-        "type_ru": "вид на достопримечательность"
+        "type_ru": "вид на достопримечательность",
+        "icon": "back_static/icons/view of landmark.svg"
     },
     {
         "type_en": "private gym",
         "type_ar": "نادي رياضي خاص",
         "type_tr": "özel spor salonu",
-        "type_ru": "частный спортзал"
+        "type_ru": "частный спортзал",
+        "icon": "back_static/icons/private gym.svg"
     },
     {
         "type_en": "concierge service",
         "type_ar": "خدمة كونسيرج",
         "type_tr": "konserj hizmeti",
-        "type_ru": "услуги консьержа"
+        "type_ru": "услуги консьержа",
+        "icon": "back_static/icons/concierge service.svg"
     },
     {
         "type_en": "shared spa",
         "type_ar": "سبا مشترك",
         "type_tr": "paylaşılan spa",
-        "type_ru": "общий спа-салон"
+        "type_ru": "общий спа-салон",
+        "icon": "back_static/icons/shared spa.svg"
     },
     {
         "type_en": "cable-ready",
         "type_ar": "جاهز لتركيب اتصال كبل تلفزيوني",
         "type_tr": "kablo hazır",
-        "type_ru": "кабельное тв"
+        "type_ru": "кабельное тв",
+        "icon": "back_static/icons/cable-ready.svg"
     },
     {
         "type_en": "study",
         "type_ar": "مكتب",
         "type_tr": "çalışma odası",
-        "type_ru": "кабинет"
+        "type_ru": "кабинет",
+        "icon": "back_static/icons/study.svg"
     },
     {
         "type_en": "maid service",
         "type_ar": "خدمة خادمة",
         "type_tr": "hizmetçi hizmeti",
-        "type_ru": "услуги горничной"
+        "type_ru": "услуги горничной",
+        "icon": "back_static/icons/maid service.svg"
     },
     {
         "type_en": "private garden",
         "type_ar": "حديقة خاصة",
         "type_tr": "özel bahçe",
-        "type_ru": "частный сад"
+        "type_ru": "собственный сад",
+        "icon": "back_static/icons/private garden.svg"
     },
     {
         "type_en": "maid’s room",
         "type_ar": "غرفة للخادمة",
         "type_tr": "hizmetçi odası",
-        "type_ru": "комната для прислуги"
+        "type_ru": "комната для прислуги",
+        "icon": "back_static/icons/maid’s room.svg"
     },
     {
         "type_en": "private pool",
         "type_ar": "مسبح خاص",
         "type_tr": "özel havuz",
-        "type_ru": "частный бассейн"
+        "type_ru": "частный бассейн",
+        "icon": "back_static/icons/private pool.svg"
     },
     {
         "type_en": "fully fitted kitchen",
         "type_ar": "مطبخ مجهز بالكامل",
         "type_tr": "tam donanımlı mutfak",
-        "type_ru": "оборудованная кухня"
+        "type_ru": "оборудованная кухня",
+        "icon": "back_static/icons/fully fitted kitchen.svg"
     },
     {
         "type_en": "basement parking",
         "type_ar": "موقف سيارات في القبو",
         "type_tr": "yer altı otoparkı",
-        "type_ru": "подземная парковка"
+        "type_ru": "подземная парковка",
+        "icon": "back_static/icons/basement parking.svg"
     },
     {
         "type_en": "terrace",
         "type_ar": "تراس",
         "type_tr": "teras",
-        "type_ru": "терраса"
+        "type_ru": "терраса",
+        "icon": "back_static/icons/terrace.svg"
     },
     {
         "type_en": "gym",
         "type_ar": "نادي رياضي",
         "type_tr": "spor salonu",
-        "type_ru": "тренажерный зал"
+        "type_ru": "тренажерный зал",
+        "icon": "back_static/icons/gym.svg"
     },
     {
         "type_en": "fitness center",
         "type_ar": "مركز لياقة بدنية",
         "type_tr": "fitness merkezi",
-        "type_ru": "фитнес-центр"
+        "type_ru": "фитнес-центр",
+        "icon": "back_static/icons/fitness center.svg"
     },
     {
         "type_en": "basketball court",
         "type_ar": "ملعب كرة سلة",
         "type_tr": "basketbol sahası",
-        "type_ru": "баскетбольная площадка"
+        "type_ru": "баскетбольная площадка",
+        "icon": "back_static/icons/basketball court.svg"
     },
     {
         "type_en": "cycling tracks",
         "type_ar": "مسارات لركوب الدراجات",
         "type_tr": "bisiklet parkurları",
-        "type_ru": "велосипедные дорожки"
+        "type_ru": "велосипедные дорожки",
+        "icon": "back_static/icons/cycling tracks.svg"
     },
     {
         "type_en": "near mall",
         "type_ar": "بالقرب من مول",
         "type_tr": "yakın alışveriş merkezi",
-        "type_ru": "рядом торговый центр"
+        "type_ru": "рядом торговый центр",
+        "icon": "back_static/icons/near mall.svg"
     },
     {
         "type_en": "public parks",
         "type_ar": "متنزهات عامة",
         "type_tr": "halka açık parklar",
-        "type_ru": "общественные парки"
+        "type_ru": "общественные парки",
+        "icon": "back_static/icons/public parks.svg"
     },
     {
         "type_en": "supermarket",
         "type_ar": "سوبر ماركت",
         "type_tr": "süpermarket",
-        "type_ru": "супермаркет"
+        "type_ru": "супермаркет",
+        "icon": "back_static/icons/supermarket.svg"
     },
     {
         "type_en": "maintenance",
         "type_ar": "صيانة",
         "type_tr": "bakım",
-        "type_ru": "управляющая компания"
+        "type_ru": "управляющая компания",
+        "icon": "back_static/icons/maintenance.svg"
     },
     {
         "type_en": "near hospital",
         "type_ar": "بالقرب من مستشفى",
         "type_tr": "yakın hastane",
-        "type_ru": "рядом больница"
+        "type_ru": "рядом больница",
+        "icon": "back_static/icons/near hospital.svg"
     },
     {
         "type_en": "airport",
         "type_ar": "مطار",
         "type_tr": "havalimanı",
-        "type_ru": "аэропорт"
+        "type_ru": "аэропорт",
+        "icon": "back_static/icons/airport.svg"
     },
     {
         "type_en": "restaurant",
         "type_ar": "مطعم",
         "type_tr": "restoran",
-        "type_ru": "ресторан"
+        "type_ru": "ресторан",
+        "icon": "back_static/icons/restaurant.svg"
     },
     {
         "type_en": "private jacuzzi",
         "type_ar": "جاكوزي خاص",
         "type_tr": "özel jakuzi",
-        "type_ru": "частный джакузи"
+        "type_ru": "частный джакузи",
+        "icon": "back_static/icons/private jacuzzi.svg"
     },
     {
         "type_en": "near metro",
         "type_ar": "بالقرب من المترو",
         "type_tr": "yakın metro",
-        "type_ru": "рядом с метро"
+        "type_ru": "рядом с метро",
+        "icon": "back_static/icons/near metro.svg"
     },
     {
         "type_en": "cinema",
         "type_ar": "سينما",
         "type_tr": "sinema",
-        "type_ru": "кинотеатр"
+        "type_ru": "кинотеатр",
+        "icon": "back_static/icons/cinema.svg"
     },
     {
         "type_en": "swimming pool",
         "type_ar": "حوض سباحة",
         "type_tr": "yüzme havuzu",
-        "type_ru": "бассейн"
+        "type_ru": "бассейн",
+        "icon": "back_static/icons/pool.svg"
     },
     {
         "type_en": "meeting room",
         "type_ar": "قاعة اجتماعات",
         "type_tr": "toplantı odası",
-        "type_ru": "комната для переговоров"
+        "type_ru": "комната для переговоров",
     },
     {
         "type_en": "spa",
         "type_ar": "منتجع",
         "type_tr": "spa",
-        "type_ru": "спа"
+        "type_ru": "спа",
+        "icon": "back_static/icons/shared spa.svg"
     },
     {
         "type_en": "sauna",
         "type_ar": "ساونا",
         "type_tr": "sauna",
-        "type_ru": "сауна"
+        "type_ru": "сауна",
+        "icon": "back_static/icons/shared spa.svg"
     },
     {
         "type_en": "smart home",
         "type_ar": "منزل ذكي",
         "type_tr": "akıllı ev",
-        "type_ru": "умный дом"
+        "type_ru": "умный дом",
     }
 ]
 
@@ -418,34 +462,34 @@ BODY = {
     'benefits_en': 'benefits of golden house', 'benefits_ru': 'преимущества компании golden house',
     'wide_selection_ar': 'مجموعة واسعة', 'wide_selection_tr': 'geniş bir seçim',
     'wide_selection_en': 'a wide selection', 'wide_selection_ru': 'широкий выбор',
-    'wide_selection_description_en': "exclusive offers, virtual tours, consultations with experts - everything to make the process of choosing a property convenient and exciting.",
-    'wide_selection_description_ar': "",
-    'wide_selection_description_tr': "",
-    'wide_selection_description_ru': "",
+    'wide_selection_description_en': "exclusive offers, virtual tours, consultations with experts - everything to make the process of choosing a property convenient and exciting",
+    'wide_selection_description_ar': "تقدم شركتنا مجموعة واسعة من العقارات بدءًا من الشقق الحصرية وحتى المنازل الريفية",
+    'wide_selection_description_tr': "şirketimiz seçkin dairelerden kır evlerine kadar geniş bir gayrimenkul yelpazesi sunuyor",
+    'wide_selection_description_ru': "эксклюзивные предложения, виртуальные туры, консультации с экспертами - все, чтобы сделать процесс вашего выбора недвижимости удобным и увлекательным",
     'confidentiality_ar': 'سرية',
     'confidentiality_tr': 'gizlilik',
     'confidentiality_en': 'confidentiality',
     'confidentiality_ru': 'конфиденциальность',
-    'confidentiality_description_en': "we guarantee the confidentiality of your data and cooperate only with trusted agents and sellers.",
-    'confidentiality_description_ar': "",
-    'confidentiality_description_tr': "",
-    'confidentiality_description_ru': "",
+    'confidentiality_description_en': "we guarantee the confidentiality of your data and cooperate only with trusted agents and sellers",
+    'confidentiality_description_ar': "نحن نضمن سرية بياناتك ونتعاون فقط مع الوكلاء والبائعين الموثوق بهم",
+    'confidentiality_description_tr': "verilerinizin gizliliğini garanti ediyoruz ve yalnızca güvenilir acenteler ve satıcılarla işbirliği yapıyoruz",
+    'confidentiality_description_ru': "мы гарантируем конфиденциальность ваших данных и сотрудничаем только с проверенными агентами и продавцами",
     'exclusive_offers_ar': 'عروض حصرية',
     'exclusive_offers_tr': 'özel teklifler',
     'exclusive_offers_en': 'exlusive offers',
     'exclusive_offers_ru': 'эксклюзивные предложения',
     'exclusive_offers_description_en': "our company offers a wide selection of real estate from exclusive apartments to country houses.",
-    'exclusive_offers_description_ar': "",
-    'exclusive_offers_description_tr': "",
-    'exclusive_offers_description_ru': "",
+    'exclusive_offers_description_ar': "عروض حصرية وجولات افتراضية واستشارات مع الخبراء - كل شيء لجعل عملية اختيار العقار مريحة ومثيرة",
+    'exclusive_offers_description_tr': "özel teklifler, sanal turlar, uzmanlarla istişareler - mülk seçme sürecini rahat ve heyecan verici hale getirecek her şey",
+    'exclusive_offers_description_ru': "наша компания предлагает широкий выбор недвижимости от эксклюзивных квартир до загородных домов",
     'feedback_ar': 'تعليق',
     'feedback_tr': 'geri bildirim',
     'feedback_en': 'feedback',
     'feedback_ru': 'обратная связь',
-    'feedback_description_en': "if you need help managing your property, we provide rental management services, ensuring your property receives maximum value and care.",
-    'feedback_description_ar': "",
-    'feedback_description_tr': "",
-    'feedback_description_ru': "",
+    'feedback_description_en': "if you need help managing your property, we provide rental management services, ensuring your property receives maximum value and care",
+    'feedback_description_ar': "إذا كنت بحاجة إلى مساعدة في إدارة الممتلكات الخاصة بك، فنحن نقدم خدمات إدارة الإيجار، مما يضمن حصول الممتلكات الخاصة بك على أقصى قدر من القيمة والرعاية",
+    'feedback_description_tr': "mülkünüzü yönetme konusunda yardıma ihtiyacınız varsa, mülkünüzün maksimum değer ve özen görmesini sağlayarak kiralama yönetimi hizmetleri sağlıyoruz",
+    'feedback_description_ru': "если вам нужна помощь в управлении вашей недвижимостью, мы предоставляем услуги по арендному управлению, обеспечивая вашему имуществу максимальную стоимость и уход",
     'view_more_ar': 'عرض المزيد', 'view_more_tr': 'daha fazla göster', 'view_more_en': 'view more',
     'view_more_ru': 'посмотреть больше',
     'furnished_ar': 'مفروشة، مد، زود', 'furnished_tr': 'mobilyalı', 'furnished_en': 'furnished',
@@ -544,13 +588,13 @@ FORMS = {
     'exploring_ru': 'я просто смотрю',
     'exploring_en': 'i just exploring',
     'thanks_en': 'thank you for contacting us!\n our specialist will contact you soon.',
-    'thanks_ar': '',
-    'thanks_tr': '',
-    'thanks_ru': '',
+    'thanks_ar': 'شكرا لتواصلك معنا!\n سيرغب متخصصنا بالاتصال بك قريبًا',
+    'thanks_tr': 'bize başvurduğunuz için teşekkür ederiz!\n uzmanımız yakında sizinle iletişime geçecek',
+    'thanks_ru': 'спасибо, что обратились к нам!\n наш специалист скоро свяжется с вами',
     'successfully_en': 'the application has been successfully accepted!',
-    'successfully_ar': '',
-    'successfully_tr': '',
-    'successfully_ru': '',
+    'successfully_ar': 'تم قبول الطلب بنجاح!',
+    'successfully_tr': 'başvuru başarıyla kabul edildi!',
+    'successfully_ru': 'ваша заявка успешно принята!',
 }
 
 FOOTER = {

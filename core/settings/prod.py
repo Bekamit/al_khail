@@ -1,30 +1,25 @@
 import config
 
-
-
 SECRET_KEY = config.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config.DEBUG
 
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': config.POSTGRES_DB,
-       'USER': config.POSTGRES_USER,
-       'PASSWORD': config.POSTGRES_PASSWORD,
-       'HOST': config.POSTGRES_HOST,
-       'PORT': config.POSTGRES_PORT,
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config.POSTGRES_DB,
+        'USER': config.POSTGRES_USER,
+        'PASSWORD': config.POSTGRES_PASSWORD,
+        'HOST': config.POSTGRES_HOST,
+        'PORT': config.POSTGRES_PORT,
     }
 }
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',  # 'django_redis.cache.RedisCache',
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
         'LOCATION': 'redis://redis:6379/1',
-        # 'OPTIONS': {
-        #     'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        # }
     }
 }
 
@@ -36,7 +31,6 @@ CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua',
                         'https://alkhail.pp.ua',
                         'http://localhost:8000']
 
-
 # Celery
 
 CELERY_BROKER_URL = 'redis://redis:6379/0'
@@ -45,7 +39,6 @@ CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-
 
 # Cors
 

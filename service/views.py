@@ -1,5 +1,9 @@
+from time import sleep
+
 from rest_framework.generics import GenericAPIView
 from django.utils.translation import get_language_from_request
+from solo.models import SingletonModel
+
 from rest_framework.serializers import Serializer
 from modeltranslation.manager import MultilingualQuerySet
 from rest_framework.response import Response
@@ -43,8 +47,7 @@ class CustomGenericAPIView(GenericAPIView):
             return MODELTRANSLATION_DEFAULT_LANGUAGE.upper()
 
     def get_multilanguage_response(self, serializer):
-        response_key = self.get_response_key()
-        if response_key:
+        if response_key := self.get_response_key():
             language = self.get_response_language()
 
             data = {
@@ -64,7 +67,7 @@ class CustomGenericAPIView(GenericAPIView):
             return None
 
     def filter(self, queryset: MultilingualQuerySet):
-        if isinstance(queryset, MultilingualQuerySet):
+        if issubclass(queryset.model, SingletonModel):
             queryset = queryset.first()
         else:
             queryset = queryset.all()
@@ -75,6 +78,7 @@ class CustomGenericAPIView(GenericAPIView):
             return self.filter(super().get_queryset())
 
         _cache = self.cache_class(self.cache_language)
+        print(_cache.keys())
         accept_language = self.get_response_language()
         if accept_language.lower() in _cache.languages:
             key = self.get_cache_key()
@@ -336,19 +340,23 @@ class CustomEstateCreateAPIView(mixin.CustomCreateEstateMixin, CustomGenericAPIV
                 villas = self.get_fake_estate_villa()
                 for villa in villas:
                     self.save_data(villa)
+                    sleep(choice((3, 8, 6, 4, 1)))
 
                 duplexes = self.get_fake_estate_duplex()
                 for duplex in duplexes:
                     self.save_data(duplex)
+                    sleep(choice((3, 8, 6, 4, 1)))
 
                 penthouses = self.get_fake_estate_penthouse()
                 for penthouse in penthouses:
                     self.save_data(penthouse)
+                    sleep(choice((3, 8, 6, 4, 1)))
 
                 for page in range(1, 12):
                     apartments = self.get_fake_estate_apartment(page)
                     for apartment in apartments:
                         self.save_data(apartment)
+                        sleep(choice((3, 8, 6, 4, 1)))
                 print("[FAKE NEWS]: All fake data created successfully")
 
         return self.create(request, *args, **kwargs)

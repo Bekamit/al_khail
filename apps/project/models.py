@@ -8,7 +8,7 @@ class Facilities(models.Model):
     def icon_upload(self, filename):
         return f'facilities/{self.type_en}/{filename}'
 
-    icon = models.ImageField(upload_to=icon_upload, null=True, blank=True, verbose_name='Icon path')
+    icon = models.FileField(upload_to=icon_upload, null=True, blank=True, verbose_name='Icon path')
 
     def __str__(self):
         return self.type
