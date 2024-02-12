@@ -45,7 +45,7 @@ class ProjectTypeAdmin(admin.ModelAdmin):
 class FacilitiesAdmin(CustomModelAdmin):
     form = ProjectAdminForm
     list_display = ('type',
-                    'facilities_icon',)
+                    'facility_icons',)
     search_fields = ('type',)
     fieldsets = [
         ('English', {
@@ -71,5 +71,5 @@ class FacilitiesAdmin(CustomModelAdmin):
         })
     ]
 
-    def facilities_icon(self, obj):
+    def facility_icons(self, obj):
         return mark_safe(f'<img src="{obj.icon.url}", style="max-height: 30px;">')

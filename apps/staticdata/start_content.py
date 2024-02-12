@@ -633,7 +633,7 @@ DEFAULT_VALUES = {
 }
 
 COMPANY = {
-    "company_name": "Golden House",
+    "company_name": "Golden Property",
     "mission_en": "The mission of our real estate agency is to provide high-quality services aimed at meeting the needs of our clients in the field of buying, selling and renting real estate. We strive to create a reliable partnership based on professionalism, trust and attention to the individual needs of each client, in order to ensure successful and mutually beneficial transactions.",
     "mission_ar": "مهمة وكالتنا العقارية هي تقديم خدمات عالية الجودة تهدف إلى تلبية احتياجات عملائنا في مجال شراء وبيع وتأجير العقارات. نحن نسعى لإنشاء شراكة موثوقة تستند إلى الاحترافية والثقة والاهتمام بالاحتياجات الفردية لكل عميل، من أجل ضمان صفقات ناجحة ومربحة للجميع.",
     "mission_tr": "Gayrimenkul ajansımızın misyonu, müşterilerimizin gayrimenkul satın alma, satma ve kiralamada ihtiyaçlarını karşılamayı amaçlayan yüksek kaliteli hizmetler sunmaktır. Başarılı ve karşılıklı yararlı işlemleri sağlamak amacıyla her müşterinin bireysel ihtiyaçlarına profesyonellik, güven ve dikkatle dayalı güvenilir bir ortaklık oluşturmayı hedefliyoruz.",
@@ -647,6 +647,6 @@ COMPANY = {
     "company_tr": "Gayrimenkul şirketimiz, gayrimenkul satın alma, satış ve kiralama konularında uzmanlaşmış yenilikçi bir ajansdır. Yüksek profesyonellik seviyemiz ve müşteri memnuniyetine olan bağlılığımızla gurur duyuyoruz. Yaklaşımımız, her bir müşteriye özel bir yaklaşım ve etkili ve konforlu işlemleri sağlamak için gelişmiş teknolojilerin kullanılması temeline dayanmaktadır. Amacımız, size üstün hizmet sunarak konut hayallerinizi gerçekleştirmenize yardımcı olmaktır.",
     "company_ru": "Наша компания недвижимости - это инновационное агентство, специализирующееся на покупке, продаже и аренде недвижимости. Мы гордимся высоким уровнем профессионализма и преданностью удовлетворению потребностей клиентов. Наш подход основан на тщательном анализе рынка, индивидуальном подходе к каждому клиенту и использовании передовых технологий для обеспечения эффективных и комфортных сделок. Наша цель - помочь вам осуществить ваши жилищные мечты, обеспечивая превосходный сервис на каждом этапе сотрудничества.",
     "phone": "+971 123 456 78",
-    "email": "info@dubairealestate.com",
+    "email": "goldenhoussee@gmail.com",
     "company_img": "back_static/default_img/logo.jpg",
 }
