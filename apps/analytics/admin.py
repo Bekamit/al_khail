@@ -7,17 +7,17 @@ from service.admin import ReadDeleteModelAdmin
 @admin.register(CatalogDownloader)
 class ReadDeleteCatalogDownloaderAdmin(ReadDeleteModelAdmin):
     list_display = ('date', 'name', 'role', 'email')
-    fields = ('name', 'email', 'phone', 'role', 'date')
+    fields = ('name', 'email', 'phone', 'lang', 'role', 'date')
     list_filter = ('created_at', 'role',)
 
 
 @admin.register(Appeal)
-class AppealAdmin(admin.ModelAdmin):
-    list_display = ('created_at', 'name', 'want_to', 'estate_link', 'phone', 'is_send')
+class AppealAdmin(ReadDeleteModelAdmin):
+    list_display = ('date', 'name', 'want_to', 'estate_link', 'phone', 'is_send')
     list_filter = ('created_at', 'lang', 'appeal_type', 'estate')
 
     def want_to(self, obj):
-        return obj.appeal_type if obj.appeal_type in ['BUY', 'SELL', 'CONSULTATION'] else 'Unknown'
+        return obj.appeal_type if obj.appeal_type in ['buy', 'sell', 'consultation'] else 'Unknown'
 
     def estate_link(self, obj):
         if obj.estate:
