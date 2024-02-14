@@ -3,12 +3,18 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Facilities(models.Model):
+    """
+        FacilitiesModel():
+        collection of types of facilities of the Project objects
+        add/edit/delete by administrator
+    """
     type = models.CharField(unique=True, max_length=50, verbose_name='Type of facilities')
 
     def icon_upload(self, filename):
+        filename = '_'.join(filename.split())
         return f'facilities/{self.type_en}/{filename}'
 
-    icon = models.ImageField(upload_to=icon_upload, null=True, blank=True, verbose_name='Icon path')
+    icon = models.FileField(upload_to=icon_upload, null=True, blank=True, verbose_name='Icon path')
 
     def __str__(self):
         return self.type
@@ -28,7 +34,6 @@ class Project(models.Model):
     name = models.CharField(max_length=100, verbose_name='Project name [En]', unique=True)
     facilities = models.ManyToManyField(to=Facilities, verbose_name='Project facilities', related_name='project')
     location = models.CharField(max_length=100, verbose_name='Location [En]')
-    developer = models.CharField(null=True, blank=True, max_length=100, verbose_name='Developer [En]')
     completion = models.DateField(null=True, blank=True, verbose_name='Completion date')
     is_furnished = models.BooleanField(verbose_name='With furniture')
 

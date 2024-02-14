@@ -1,5 +1,16 @@
 from django.core.cache import cache
-from core.settings.base import MODELTRANSLATION_LANGUAGES
+from core.settings.base import MODELTRANSLATION_LANGUAGES, CACHES
+
+import redis
+import re
+
+
+class CustomStrictRedis(redis.StrictRedis):
+    def __init__(self, url: str):
+        pattern = r'redis://(.*?):(\d+?)/(\d+)'
+        if match := re.match(pattern, url):
+            host, port, db = list(match.groups())
+            super().__init__(host=host, port=port, db=db)
 
 
 class CustomCache:
@@ -29,3 +40,13 @@ class CustomCache:
 
     def set(self, key, language, queryset):
         cache.set(f'{key}_{language}', queryset)
+
+    def keys(self) -> list[str]:
+        redis_url = CACHES.get('default').get('LOCATION')
+        r = CustomStrictRedis(redis_url)
+        return [key.decode('utf-8').split(':')[-1] for key in r.keys() if b'throttle' not in key]
+
+    def clear(self):
+        if keys := self.keys():
+            for key in keys:
+                cache.delete(key)

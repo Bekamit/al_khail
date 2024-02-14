@@ -90,23 +90,6 @@ class FormSerializer(serializers.ModelSerializer):
         ]
 
 
-class CustomGetSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Form
-        fields = [
-            'your_name',
-            'your_phone',
-            'your_city',
-            'at_date',
-        ]
-
-
-class CustomPostSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Form
-        fields = '__all__'
-
-
 class Error404Serializer(serializers.ModelSerializer):
     class Meta:
         model = Error404
@@ -155,16 +138,25 @@ class BuyFormSerializer(serializers.ModelSerializer):
 
 
 class CatalogDownloaderFormSerializer(serializers.ModelSerializer):
+    choices = serializers.SerializerMethodField()
+
+    def get_choices(self, form):
+        return {
+            "agent": form.agent,
+            "buyer": form.buyer,
+            "explorer": form.exploring
+        }
+
     class Meta:
         model = Form
         fields = [
-            'submit_application',
-            'fill_form',
-            'your_name',
-            'your_email',
-            'phone_number',
-            'select_role',
-            'your_city',
+            "download_catalog",
+            "your_name",
+            "your_email",
+            "phone_number",
+            "select_role",
+            "choices",
+            "download",
         ]
 
 
@@ -172,10 +164,11 @@ class ConsultationFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = Form
         fields = [
-            'submit_application',
-            'fill_form',
+            'any_question',
+            'leave_your_contacts',
             'your_name',
             'phone_number',
             'your_city',
             'date',
+            'send',
         ]

@@ -80,8 +80,8 @@ class HeaderAPIView(CustomSingletonListAPIView):
     queryset = Header.objects.all()
     serializer_class = HeaderSerializer
     response_key = "header"
-    # cache_class = CustomCache
-    # cache_language = '__all__'
+    cache_class = CustomCache
+    cache_language = '__all__'
     cache_key = 'header'
 
 
@@ -106,8 +106,8 @@ class BodyAPIView(CustomSingletonListAPIView):
     queryset = Body.objects.all()
     serializer_class = BodySerializer
     response_key = "body"
-    # cache_class = CustomCache
-    # cache_language = '__all__'
+    cache_class = CustomCache
+    cache_language = '__all__'
     cache_key = 'body'
 
 
@@ -132,8 +132,8 @@ class FormsAPIView(CustomSingletonListAPIView):
     queryset = Form.objects.all()
     serializer_class = FormSerializer
     response_key = "forms"
-    # cache_class = CustomCache
-    # cache_language = '__all__'
+    cache_class = CustomCache
+    cache_language = '__all__'
     cache_key = 'forms'
 
 

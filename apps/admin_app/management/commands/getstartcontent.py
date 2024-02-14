@@ -64,7 +64,15 @@ class Command(BaseCommand):
     def get_start_facilities(self):
         with transaction.atomic():
             for facilities_data in FACILITIES:
-                Facilities.objects.get_or_create(**facilities_data)
+                try:
+                    icon_path = facilities_data.pop("icon")
+                    f, _ = Facilities.objects.get_or_create(**facilities_data)
+                    with open(icon_path, 'rb') as icon_file:
+                        icon = icon_file.read()
+                        f.icon.save(icon_path.split('/')[-1], File(BytesIO(icon)))
+                        f.save()
+                except Exception:
+                    pass
         self.stdout.write(self.style.SUCCESS('Facilities created successfully'))
 
     def get_default_image(self):

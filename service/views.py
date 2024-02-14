@@ -1,5 +1,9 @@
+from time import sleep
+
 from rest_framework.generics import GenericAPIView
 from django.utils.translation import get_language_from_request
+from solo.models import SingletonModel
+
 from rest_framework.serializers import Serializer
 from modeltranslation.manager import MultilingualQuerySet
 from rest_framework.response import Response
@@ -29,12 +33,10 @@ class CustomGenericAPIView(GenericAPIView):
     cache_key = str | None
 
     def get_response_key(self):
-        if key := self.response_key:
-            if not isinstance(key, str):
-                raise ValueError('`response_key` must be str only')
-            return key
+        if isinstance(self.response_key, str):
+            return self.response_key
         else:
-            return None
+            raise ValueError('`response_key` must be str only')
 
     def get_response_language(self):
         if language := get_language_from_request(self.request):
@@ -43,8 +45,7 @@ class CustomGenericAPIView(GenericAPIView):
             return MODELTRANSLATION_DEFAULT_LANGUAGE.upper()
 
     def get_multilanguage_response(self, serializer):
-        response_key = self.get_response_key()
-        if response_key:
+        if response_key := self.get_response_key():
             language = self.get_response_language()
 
             data = {
@@ -56,15 +57,13 @@ class CustomGenericAPIView(GenericAPIView):
         return data
 
     def get_cache_key(self):
-        if key := self.cache_key:
-            if not isinstance(key, str):
-                raise ValueError('`cache_key` must be str only')
-            return key
+        if isinstance(self.cache_key, str):
+            return self.cache_key
         else:
-            return None
+            raise ValueError('`cache_key` must be str only')
 
     def filter(self, queryset: MultilingualQuerySet):
-        if isinstance(queryset, MultilingualQuerySet):
+        if issubclass(queryset.model, SingletonModel):
             queryset = queryset.first()
         else:
             queryset = queryset.all()
@@ -162,6 +161,9 @@ class CustomSingletonListAPIView(mixin.CustomSingletonListModelMixin, CustomGene
 class CustomRetrieveAPIView(mixin.CustomRetrieveMixin, CustomGenericAPIView):
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
+
+
+# ---------------------- TEMPORARY ------------------------------
 
 
 class CustomEstateCreateAPIView(mixin.CustomCreateEstateMixin, CustomGenericAPIView):
@@ -286,7 +288,6 @@ class CustomEstateCreateAPIView(mixin.CustomCreateEstateMixin, CustomGenericAPIV
         project = {
             "name": estate_data.get('subcommunity'),
             "location": estate_data.get('location'),
-            "developer": "null",
             "completion": self.random_date(),
             "is_furnished": estate_data.get('furnished'),
         }

@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib import admin
 from django.core.validators import FileExtensionValidator
+from django.utils.safestring import mark_safe
 
 from service.admin import CustomModelAdmin
 from apps.project.models import Project, Facilities
@@ -30,7 +31,6 @@ class ProjectTypeAdmin(admin.ModelAdmin):
         'name',
         'facilities',
         'location',
-        'developer',
         'completion',
         'is_furnished',
         'pdf_catalog',
@@ -44,7 +44,7 @@ class ProjectTypeAdmin(admin.ModelAdmin):
 class FacilitiesAdmin(CustomModelAdmin):
     form = ProjectAdminForm
     list_display = ('type',
-                    'icon',)
+                    'facility_icons',)
     search_fields = ('type',)
     fieldsets = [
         ('English', {
@@ -69,3 +69,6 @@ class FacilitiesAdmin(CustomModelAdmin):
             ],
         })
     ]
+
+    def facility_icons(self, obj):
+        return mark_safe(f'<img src="{obj.icon.url}", style="max-height: 30px;">')

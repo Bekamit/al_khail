@@ -20,7 +20,6 @@ class ProjectSerializer(serializers.ModelSerializer):
             'name',
             'facilities',
             'location',
-            'developer',
             'completion',
             'is_furnished',
             'pdf_catalog',
