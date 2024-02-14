@@ -33,12 +33,10 @@ class CustomGenericAPIView(GenericAPIView):
     cache_key = str | None
 
     def get_response_key(self):
-        if key := self.response_key:
-            if not isinstance(key, str):
-                raise ValueError('`response_key` must be str only')
-            return key
+        if isinstance(self.response_key, str):
+            return self.response_key
         else:
-            return None
+            raise ValueError('`response_key` must be str only')
 
     def get_response_language(self):
         if language := get_language_from_request(self.request):
@@ -59,12 +57,10 @@ class CustomGenericAPIView(GenericAPIView):
         return data
 
     def get_cache_key(self):
-        if key := self.cache_key:
-            if not isinstance(key, str):
-                raise ValueError('`cache_key` must be str only')
-            return key
+        if isinstance(self.cache_key, str):
+            return self.cache_key
         else:
-            return None
+            raise ValueError('`cache_key` must be str only')
 
     def filter(self, queryset: MultilingualQuerySet):
         if issubclass(queryset.model, SingletonModel):
@@ -165,6 +161,9 @@ class CustomSingletonListAPIView(mixin.CustomSingletonListModelMixin, CustomGene
 class CustomRetrieveAPIView(mixin.CustomRetrieveMixin, CustomGenericAPIView):
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
+
+
+# ---------------------- TEMPORARY ------------------------------
 
 
 class CustomEstateCreateAPIView(mixin.CustomCreateEstateMixin, CustomGenericAPIView):
@@ -289,7 +288,6 @@ class CustomEstateCreateAPIView(mixin.CustomCreateEstateMixin, CustomGenericAPIV
         project = {
             "name": estate_data.get('subcommunity'),
             "location": estate_data.get('location'),
-            "developer": "null",
             "completion": self.random_date(),
             "is_furnished": estate_data.get('furnished'),
         }
@@ -339,23 +337,19 @@ class CustomEstateCreateAPIView(mixin.CustomCreateEstateMixin, CustomGenericAPIV
                 villas = self.get_fake_estate_villa()
                 for villa in villas:
                     self.save_data(villa)
-                    sleep(choice((3, 8, 6, 4, 1)))
 
                 duplexes = self.get_fake_estate_duplex()
                 for duplex in duplexes:
                     self.save_data(duplex)
-                    sleep(choice((3, 8, 6, 4, 1)))
 
                 penthouses = self.get_fake_estate_penthouse()
                 for penthouse in penthouses:
                     self.save_data(penthouse)
-                    sleep(choice((3, 8, 6, 4, 1)))
 
                 for page in range(1, 12):
                     apartments = self.get_fake_estate_apartment(page)
                     for apartment in apartments:
                         self.save_data(apartment)
-                        sleep(choice((3, 8, 6, 4, 1)))
                 print("[FAKE NEWS]: All fake data created successfully")
 
         return self.create(request, *args, **kwargs)

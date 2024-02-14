@@ -137,21 +137,15 @@ class BuyFormSerializer(serializers.ModelSerializer):
         ]
 
 
-class ChoicesDownloaderCatalogSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Form
-        fields = [
-            "agent",
-            "buyer",
-            "exploring",
-        ]
-
-
 class CatalogDownloaderFormSerializer(serializers.ModelSerializer):
     choices = serializers.SerializerMethodField()
 
     def get_choices(self, form):
-        return ChoicesDownloaderCatalogSerializer(form.get_solo()).data
+        return {
+            "agent": form.agent,
+            "buyer": form.buyer,
+            "explorer": form.exploring
+        }
 
     class Meta:
         model = Form
