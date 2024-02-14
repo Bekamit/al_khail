@@ -1,13 +1,10 @@
 import phonenumbers
-from django.utils import timezone
 from django.utils.translation import get_language_from_request
 from rest_framework import serializers
-from .models import CatalogDownloader, Appeal
 from apps.staticdata.models import Form
 from .models import CatalogDownloader, Appeal
 from apps.estate.models import Estate
 from django.utils.translation import gettext_lazy as _
-from apps.staticdata.serializers import CustomGetSerializer
 
 
 class PhoneNumberField(serializers.CharField):
