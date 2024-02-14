@@ -10,7 +10,7 @@ class CatalogDownloader(models.Model):
     name = models.CharField(max_length=50, verbose_name='Name')
     email = models.EmailField(verbose_name='E-mail')
     phone = models.CharField(max_length=100, verbose_name='Phone number', null=True)
-    # estate = models.ForeignKey(to=Estate, related_name='catalog', verbose_name='Estate interest', on_delete=models.CASCADE)
+    estate = models.ForeignKey(to=Estate, related_name='catalog', verbose_name='Estate interest', on_delete=models.CASCADE)
     role = models.CharField(max_length=30, verbose_name='Role')
     lang = models.CharField(max_length=30, verbose_name='Respondent language', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -11,6 +11,7 @@ from rest_framework.exceptions import ValidationError
 import phonenumbers
 from .models import CatalogDownloader, Appeal
 from apps.estate.models import Estate
+from django.core.validators import validate_email
 
 
 class PhoneNumberField(serializers.CharField):
@@ -78,12 +79,22 @@ class ConsultationSerializer(BaseAppealSerializer):
 
 
 class CatalogDownloaderSerializer(serializers.ModelSerializer):
+    phone = PhoneNumberField(required=True)
+
     class Meta:
         model = CatalogDownloader
         fields = ['name',
                   'phone',
                   'email',
-                  'role']
+                  'role',
+                  'estate']
+
+    def validate_email(self, email):
+        try:
+            validate_email(email)
+        except ValidationError:
+            raise serializers.ValidationError(_('Invalid email address'))
+        return email
 
     def create(self, validated_data):
         return CatalogDownloader.create_downloader(validated_data)
