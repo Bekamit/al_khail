@@ -34,7 +34,6 @@ class Project(models.Model):
     name = models.CharField(max_length=100, verbose_name='Project name [En]', unique=True)
     facilities = models.ManyToManyField(to=Facilities, verbose_name='Project facilities', related_name='project')
     location = models.CharField(max_length=100, verbose_name='Location [En]')
-    developer = models.CharField(null=True, blank=True, max_length=100, verbose_name='Developer [En]')
     completion = models.DateField(null=True, blank=True, verbose_name='Completion date')
     is_furnished = models.BooleanField(verbose_name='With furniture')
 

@@ -105,7 +105,7 @@ REST_FRAMEWORK = {
 SPECTACULAR_SETTINGS = {
     'COMPONENT_SPLIT_REQUEST': True,
     "TITLE": "Golden House API",
-    "DESCRIPTION": "API for Golden House web service",
+    "DESCRIPTION": "API for Golden Property web service",
     "VERSION": "v1.SSL-off",
 }
 
@@ -218,14 +218,6 @@ SERVER_EMAIL = config.SERVER_EMAIL
 # Redis
 REDIS_HOST = 'redis'
 REDIS_PORT = 6379
-
-# Cache redis
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://localhost:6379/1',
-    }
-}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

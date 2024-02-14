@@ -55,6 +55,8 @@ class CustomRetrieveMixin(RetrieveModelMixin):
         return Response(data)
 
 
+# ---------------------- TEMPORARY ------------------------------
+
 class CustomCreateEstateMixin(CreateModelMixin):
     def create(self, request, *args, **kwargs):
         if kwargs.get('password') == 12345:
