@@ -78,23 +78,25 @@ class ConsultationSerializer(BaseAppealSerializer):
     appeal_type = serializers.CharField(max_length=20, default='consultation')
 
 
-class CatalogDownloaderSerializer(serializers.ModelSerializer):
+class CatalogDownloaderSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=50, required=True)
     phone = PhoneNumberField(required=True)
+    email = serializers.EmailField(required=True)
+    role = serializers.CharField(max_length=30, required=True)
+    estate_id = serializers.CharField()
 
-    class Meta:
-        model = CatalogDownloader
-        fields = ['name',
-                  'phone',
-                  'email',
-                  'role',
-                  'estate']
+    def get_language(self):
+        request = self.context['request']
+        return get_language_from_request(request)
 
-    def validate_email(self, email):
-        try:
-            validate_email(email)
-        except ValidationError:
-            raise serializers.ValidationError(_('Invalid email address'))
-        return email
+    def validate_estate_id(self, estate_id):
+        if not Estate.is_valid(estate_id):
+            raise serializers.ValidationError(_('Estate id does not exist'))
+        return estate_id
+
+    def reformat(self, validated_data):
+        validated_data['lang'] = self.get_language()
 
     def create(self, validated_data):
+        self.reformat(validated_data)
         return CatalogDownloader.create_downloader(validated_data)
