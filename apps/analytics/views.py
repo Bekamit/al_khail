@@ -1,5 +1,6 @@
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from service.views import MultiSerializerListCreateAPIView
+from service.cache import CustomCache
 
 from .models import CatalogDownloader, Appeal
 from apps.staticdata.models import Form
@@ -16,7 +17,7 @@ from apps.staticdata.serializers import (SellFormSerializer,
 
 
 @extend_schema(
-    summary="Отправить запрос на консультацию",
+    summary="Отправить запрос на консультацию/⏩cache_content",
     description="ConsultationMultiSerializerListCreateAPIView: \n\n "
                 "При GET запросе отправляет поля формы на указаном языке;\n\n"
                 "При POST запросе получает данные клиента и его вопросов с формы;\n\n"
@@ -41,10 +42,13 @@ class ConsultationMultiSerializerListCreateAPIView(MultiSerializerListCreateAPIV
     method_post_serializer = ConsultationSerializer
     response_serializer = SuccessFormSerializer
     response_key = 'form'
+    cache_class = CustomCache
+    cache_language = '__all__'
+    cache_key = 'forms'
 
 
 @extend_schema(
-    summary="Отправить запрос на покупку объекта недвижимости",
+    summary="Отправить запрос на покупку объекта недвижимости/⏩cache_content",
     description="AppealBuyMultiSerializerListCreateAPIView: \n\n "
                 "При GET запросе отправляет поля формы на указаном языке;\n\n"
                 "При POST запросе получает данные с формы о желании клиента купить объект недвижимости;\n\n"
@@ -69,10 +73,13 @@ class AppealBuyMultiSerializerListCreateAPIView(MultiSerializerListCreateAPIView
     method_post_serializer = AppealBuyValidateSerializer
     response_serializer = SuccessFormSerializer
     response_key = 'form'
+    cache_class = CustomCache
+    cache_language = '__all__'
+    cache_key = 'forms'
 
 
 @extend_schema(
-    summary="Отправить запрос на продажу объекта недвижимости",
+    summary="Отправить запрос на продажу объекта недвижимости/⏩cache_content",
     description="AppealSellMultiSerializerListCreateAPIView: \n\n "
                 "При GET запросе отправляет поля формы на указаном языке;\n\n"
                 "При POST запросе получает данные с формы о желании клиента продать свой объект недвижимости;\n\n"
@@ -97,10 +104,13 @@ class AppealSellMultiSerializerListCreateAPIView(MultiSerializerListCreateAPIVie
     method_post_serializer = AppealSellValidateSerializer
     response_serializer = SuccessFormSerializer
     response_key = 'form'
+    cache_class = CustomCache
+    cache_language = '__all__'
+    cache_key = 'forms'
 
 
 @extend_schema(
-    summary="Отправить запрос для аналитики скачивания каталога",
+    summary="Отправить запрос для аналитики скачивания каталога/⏩cache_content",
     description="CatalogDownloaderMultiSerializerListCreateAPIView: \n\n "
                 "При GET запросе отправляет поля формы на указаном языке;\n\n"
                 "При POST запросе получает данные с формы для аналитики скачивания каталога;\n\n"
@@ -125,3 +135,6 @@ class CatalogDownloaderMultiSerializerListCreateAPIView(MultiSerializerListCreat
     method_post_serializer = CatalogDownloaderSerializer
     response_serializer = SuccessFormSerializer
     response_key = 'form'
+    cache_class = CustomCache
+    cache_language = '__all__'
+    cache_key = 'forms'

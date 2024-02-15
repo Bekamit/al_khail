@@ -99,7 +99,7 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.AnonRateThrottle',
         'rest_framework.throttling.UserRateThrottle',
     ),
-    'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60 * 15,
+    'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60 * 30,
 }
 
 SPECTACULAR_SETTINGS = {
