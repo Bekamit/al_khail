@@ -36,6 +36,7 @@ THEME_PARTY_APPS = [
     'corsheaders',
     'debug_toolbar',
     'django_resized',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 THEME = [
@@ -190,6 +191,7 @@ LOCALE_PATHS = [
 
 STATIC_URL = '/back_static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'back_static')
+# STATICFILES_DIRS = ((os.path.join(BASE_DIR, 'static')), )
 
 # MEDIA (Images, PDF)
 
@@ -219,13 +221,6 @@ SERVER_EMAIL = config.SERVER_EMAIL
 REDIS_HOST = 'redis'
 REDIS_PORT = 6379
 
-# Cache redis
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://localhost:6379/1',
-    }
-}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

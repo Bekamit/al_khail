@@ -4,6 +4,7 @@ from apps.project.models import Project
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_resized import ResizedImageField
+from django_cleanup import cleanup
 
 
 class EstateType(models.Model):
@@ -57,6 +58,7 @@ class Estate(models.Model):
         self.save(update_fields=['visits'])
 
 
+@cleanup.select
 class EstateImage(models.Model):
     """
     EstateImageModel:
