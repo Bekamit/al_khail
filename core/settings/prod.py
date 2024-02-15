@@ -5,6 +5,7 @@ SECRET_KEY = config.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config.DEBUG
 
+# DB
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -16,6 +17,7 @@ DATABASES = {
     }
 }
 
+# CACHE
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',

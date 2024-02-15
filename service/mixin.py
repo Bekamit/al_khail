@@ -3,6 +3,7 @@ from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, CreateMode
 from rest_framework.response import Response
 
 from apps.estate.models import Estate
+from apps.estate.tasks import plus_popular
 
 
 class CustomListModelMixin(ListModelMixin):
@@ -47,12 +48,14 @@ class CustomRetrieveMixin(RetrieveModelMixin):
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         if isinstance(instance, Estate):
-            instance.visits_counter()
+            plus_popular.delay(instance.id)
 
         serializer = self.get_serializer(instance)
         data = self.get_multilanguage_response(serializer)
         return Response(data)
 
+
+# ---------------------- TEMPORARY ------------------------------
 
 class CustomCreateEstateMixin(CreateModelMixin):
     def create(self, request, *args, **kwargs):

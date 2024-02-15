@@ -45,3 +45,8 @@ class CustomCache:
         redis_url = CACHES.get('default').get('LOCATION')
         r = CustomStrictRedis(redis_url)
         return [key.decode('utf-8').split(':')[-1] for key in r.keys() if b'throttle' not in key]
+
+    def clear(self):
+        if keys := self.keys():
+            for key in keys:
+                cache.delete(key)
