@@ -95,17 +95,32 @@ class MultiSerializerGenericAPIView(CustomGenericAPIView):
     response_queryset: MultilingualQuerySet | None = None
     response_serializer: Serializer | None = None
 
+    def get_cache_or_queryset(self, queryset):
+        if self.cache_class and self.cache_language:
+            _cache = self.cache_class(self.cache_language)
+            accept_language = self.get_response_language()
+            if accept_language.lower() in _cache.languages:
+                key = self.get_cache_key()
+                if cache_queryset := _cache.get(key, accept_language):
+                    return cache_queryset
+                else:
+                    queryset = self.filter(queryset)
+                    _cache.set(key, accept_language, queryset)
+                    return queryset
+        else:
+            return self.filter(queryset)
+
     def get_queryset(self):
         if self.request.method == 'GET':
-            return self.filter(self.method_get_queryset)
+            return self.get_cache_or_queryset(self.method_get_queryset)
         if self.request.method == 'POST':
             return self.filter(self.method_post_queryset)
         return self.filter(self.queryset)
 
     def get_response_queryset(self):
         if not self.response_queryset:
-            return self.filter(self.method_get_queryset)
-        return self.filter(self.response_queryset)
+            return self.get_cache_or_queryset(self.method_get_queryset)
+        return self.get_cache_or_queryset(self.response_queryset)
 
     def get_serializer_class(self):
         return self.serializer_class if self.serializer_class else None
@@ -306,8 +321,8 @@ class CustomEstateCreateAPIView(mixin.CustomCreateEstateMixin, CustomGenericAPIV
                 p.save()
 
             estate_obj = {"title_en": estate_data.get("title"),
-                          "title_ar": "يسر GOLDEN HOUSE تقديم هذا العقار في TITLE TEST.",
-                          "title_ru": "GOLDEN HOUSE Тестовое название",
+                          "title_ar": "يسر GOLDEN PROPERTY تقديم هذا العقار في TITLE TEST.",
+                          "title_ru": "GOLDEN PROPERTY Тестовое название",
                           "project": p,
                           "area": round(estate_data.get("size") / 3.2808, 2),
                           "description_en": description_en,
