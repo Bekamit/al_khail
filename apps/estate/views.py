@@ -36,7 +36,7 @@ from .serializers import (EstateSerializer,
 class EstateTypeListAPIView(CustomListAPIView):
     queryset = EstateType.objects.all()
     serializer_class = EstateTypeSerializer
-    response_key = 'estate types'
+    response_key = 'estate_types'
     cache_class = CustomCache
     cache_language = '__all__'
     cache_key = 'estate_types'

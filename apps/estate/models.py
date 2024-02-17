@@ -23,6 +23,14 @@ class EstateType(models.Model):
         return self.type
 
 
+class EstatManager(models.Manager):
+    """
+    Return queryset of Estates witch `is_active` == True
+    """
+    def get_queryset(self):
+        return super().get_queryset().filter(is_active=True)
+
+
 class Estate(models.Model):
     """
     EstateModel(MultilanguageModel):
@@ -39,11 +47,14 @@ class Estate(models.Model):
     is_secondary = models.BooleanField(default=False, verbose_name='Secondary estate')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='Create date')
     visits = models.IntegerField(default=0, verbose_name='Visits')
+    is_active = models.BooleanField(default=False, verbose_name='In show')
+
+    objects = EstatManager()
 
     class Meta:
         verbose_name = _('Estate')
         verbose_name_plural = _('Estates')
-        ordering = ['price_usd', ]
+        ordering = ['price_usd',]
 
     def __str__(self):
         return f'{self.pk}: {self.title}'
