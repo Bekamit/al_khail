@@ -158,8 +158,8 @@ class FooterAPIView(CustomSingletonListAPIView):
     queryset = Footer.objects.all()
     serializer_class = FooterSerializer
     response_key = "footer"
-    # cache_class = CustomCache
-    # cache_language = '__all__'
+    cache_class = CustomCache
+    cache_language = '__all__'
     cache_key = 'footer'
 
 

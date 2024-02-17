@@ -13,14 +13,19 @@ class EstateImageInline(admin.TabularInline):
 
 @admin.register(Estate)
 class EstateAdmin(CustomModelAdmin):
-    list_display = ('title',
+    list_display = ('id',
+                    'title',
                     'project',
                     'area',
                     'estate_type',
                     'city',
                     'visits',
-                    'preview')
-    search_fields = ('project__name', 'title', 'estate_type__type_en', 'city__city_name_en')
+                    'preview',
+                    'test_to_show',
+                    'is_active',)
+    list_editable = ['is_active']
+    actions = ['in_show']
+    search_fields = ('project__name', 'title_en', 'estate_type__type_en', 'city__city_name_en')
     list_filter = ('city__city_name', 'project__name', 'estate_type__type', 'is_secondary')
     fieldsets = [
         ('English', {
@@ -58,6 +63,18 @@ class EstateAdmin(CustomModelAdmin):
 
     def preview(self, obj):
         return mark_safe(f'<button class="btn btn-primary" style=margin-left: 15px;">look up</button>')
+
+    def in_show(self, request, queryset):
+        queryset.update(is_active=not queryset.first().is_active)
+
+    in_show.short_description = "Add/pop from site"
+
+    def has_photo(self, obj):
+        return obj.images.all().count() > 1
+
+    def test_to_show(self, obj):
+        return mark_safe(f"<small>{'✅' if self.not_null_fields(obj) else '⛔'} All fields</small><br>"
+                         f"<small>{'✅' if self.has_photo(obj) else '⛔'} All photos</small>")
 
 
 @admin.register(EstateType)
