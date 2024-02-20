@@ -2,20 +2,21 @@ from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 
+from service.cache import CustomCache
+from service.pagination import LimitOffsetCustomPagination
 from service.views import (CustomListAPIView,
                            CustomEstateCreateAPIView,
                            CustomRetrieveAPIView)
 
 from .filters import EstateFilterSet
 from .models import Estate, EstateType
-from service.pagination import LimitOffsetCustomPagination
 from .serializers import (EstateSerializer,
                           EstateRetrieveSerializer,
                           EstateTypeSerializer)
 
 
 @extend_schema(
-    summary="Получить список типов недвижимости",
+    summary="Получить список типов недвижимости/⏩cache_content",
     description="Класс представления EstateTypeListAPIView возвращает коллекцию из всех типов недвижимости модели "
                 "EstateType "
                 "Мультиязычная модель! **ACCEPT-LANGUAGE** для вывода данных на заявленном языке, "
@@ -35,7 +36,10 @@ from .serializers import (EstateSerializer,
 class EstateTypeListAPIView(CustomListAPIView):
     queryset = EstateType.objects.all()
     serializer_class = EstateTypeSerializer
-    response_key = 'estate types'
+    response_key = 'estate_types'
+    cache_class = CustomCache
+    cache_language = '__all__'
+    cache_key = 'estate_types'
 
 
 @extend_schema(
@@ -108,8 +112,11 @@ class EstateListAPIView(CustomListAPIView):
     response_key = 'estates'
     pagination_class = LimitOffsetCustomPagination
     filter_backends = [SearchFilter, DjangoFilterBackend]
-    search_fields = ['project__name', 'project__location', 'description', 'title']
+    search_fields = ['project__name', 'project__location', 'description_en']
     filterset_class = EstateFilterSet
+    # cache_class = CustomCache
+    # cache_language = '__all__'
+    # cache_key = 'estate'
 
 
 @extend_schema(

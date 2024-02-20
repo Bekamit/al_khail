@@ -24,6 +24,14 @@ class EstateType(models.Model):
         return self.type
 
 
+class EstatManager(models.Manager):
+    """
+    Return queryset of Estates witch `is_active` == True
+    """
+    def get_queryset(self):
+        return super().get_queryset().filter(is_active=True)
+
+
 class Estate(models.Model):
     """
     EstateModel(MultilanguageModel):
@@ -44,7 +52,7 @@ class Estate(models.Model):
     class Meta:
         verbose_name = _('Estate')
         verbose_name_plural = _('Estates')
-        ordering = ['price_usd', ]
+        ordering = ['price_usd',]
 
     def __str__(self):
         return f'{self.pk}: {self.title}'
