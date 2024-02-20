@@ -45,6 +45,7 @@ class BaseAppealSerializer(serializers.Serializer):
         today = timezone.now().date()
         if date == today - timezone.timedelta(days=1):
             raise ValidationError(_('You can choice only future'))
+        return date
 
     def reformat(self, validated_data):
         validated_data.pop('last_name')
