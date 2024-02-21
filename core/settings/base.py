@@ -36,6 +36,7 @@ THEME_PARTY_APPS = [
     'corsheaders',
     'debug_toolbar',
     'django_resized',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 THEME = [
@@ -99,13 +100,13 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.AnonRateThrottle',
         'rest_framework.throttling.UserRateThrottle',
     ),
-    'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60 * 30,
+    'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60 * 15,
 }
 
 SPECTACULAR_SETTINGS = {
     'COMPONENT_SPLIT_REQUEST': True,
     "TITLE": "Golden House API",
-    "DESCRIPTION": "API for Golden Property web service",
+    "DESCRIPTION": "API for Golden House web service",
     "VERSION": "v1.SSL-off",
 }
 
@@ -190,6 +191,7 @@ LOCALE_PATHS = [
 
 STATIC_URL = '/back_static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'back_static')
+# STATICFILES_DIRS = ((os.path.join(BASE_DIR, 'static')), )
 
 # MEDIA (Images, PDF)
 
@@ -218,6 +220,7 @@ SERVER_EMAIL = config.SERVER_EMAIL
 # Redis
 REDIS_HOST = 'redis'
 REDIS_PORT = 6379
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

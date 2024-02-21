@@ -54,3 +54,7 @@ uritemplate==4.1.1
 vine==5.1.0
 wcwidth==0.2.12
 django-resized==1.0.2
+django-cleanup==8.1.0
+sorl-thumbnail==11.05.2
+easy-thumbnails==2.8.5
+aiohttp==3.9.3

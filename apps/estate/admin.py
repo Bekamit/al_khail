@@ -21,9 +21,8 @@ class EstateAdmin(CustomModelAdmin):
                     'city',
                     'visits',
                     'preview',
-                    'test_to_show',
-                    'is_active',)
-    list_editable = ['is_active']
+                    'test_to_show',)
+    # list_editable = ['is_active']
     actions = ['in_show']
     search_fields = ('project__name', 'title_en', 'estate_type__type_en', 'city__city_name_en')
     list_filter = ('city__city_name', 'project__name', 'estate_type__type', 'is_secondary')

@@ -1,6 +1,6 @@
 from decouple import config
 
-
+PRODUCTION = config('PRODUCTION', cast=bool)
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG')
 
