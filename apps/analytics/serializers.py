@@ -92,7 +92,7 @@ class CatalogDownloaderSerializer(serializers.Serializer):
     phone = PhoneNumberField(required=True)
     email = serializers.EmailField(required=True)
     role = serializers.CharField(max_length=30, required=True)
-    estate_id = serializers.CharField()
+    estate_id = serializers.CharField(required=True)
 
     def get_language(self):
         request = self.context['request']
@@ -108,4 +108,5 @@ class CatalogDownloaderSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         self.reformat(validated_data)
+        print(validated_data)
         return CatalogDownloader.create_downloader(validated_data)

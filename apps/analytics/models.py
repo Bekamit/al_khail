@@ -23,9 +23,9 @@ class CatalogDownloader(models.Model):
     def __str__(self):
         return self.name
 
-    @staticmethod
-    def create_downloader(data: dict):
-        return CatalogDownloader.objects.create(**data)
+    @classmethod
+    def create_downloader(cls, data: dict):
+        return cls.objects.create(**data)
 
 
 class Appeal(models.Model):
@@ -44,6 +44,10 @@ class Appeal(models.Model):
     date = models.DateField(verbose_name='date of call back')
     lang = models.CharField(max_length=30, verbose_name='Message Language', blank=True)
     city = models.CharField(max_length=100, verbose_name='Respondent city')
+<<<<<<< apps/analytics/models.py
+    at_date = models.DateField(verbose_name='Call in date', null=True)
+=======
+>>>>>>> apps/analytics/models.py
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Send date')
     is_send = models.BooleanField(default=True, verbose_name='Send letter')
 
@@ -54,9 +58,9 @@ class Appeal(models.Model):
     def __str__(self):
         return f'{self.pk}'
 
-    @staticmethod
-    def create_appeal(data: dict):
-        return Appeal.objects.create(**data)
+    @classmethod
+    def create_appeal(cls, data: dict):
+        return cls.objects.create(**data)
 
     def send_error(self):
         self.is_send = False

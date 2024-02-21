@@ -82,7 +82,7 @@ class EstateTypeListAPIView(CustomListAPIView):
             name='search',
             type=str,
             location=OpenApiParameter.QUERY,
-            description='Поиск по location, developer & project.name на английском языке только!'
+            description='Поиск по location & project.name,  на английском языке только!'
         ),
         OpenApiParameter(
             name='limit',
@@ -107,7 +107,7 @@ class EstateTypeListAPIView(CustomListAPIView):
     ],
 )
 class EstateListAPIView(CustomListAPIView):
-    queryset = Estate.objects.prefetch_related('images').select_related('city', 'project').all()
+    queryset = Estate.objects.prefetch_related('images').select_related('city', 'project').filter(is_active=True)
     serializer_class = EstateSerializer
     response_key = 'estates'
     pagination_class = LimitOffsetCustomPagination
@@ -137,7 +137,7 @@ class EstateListAPIView(CustomListAPIView):
     ],
 )
 class EstateRetrieveAPIView(CustomRetrieveAPIView):
-    queryset = Estate.objects.prefetch_related('images').select_related('project', 'estate_type').all()
+    queryset = Estate.objects.prefetch_related('images').select_related('project', 'estate_type').filter(is_active=True)
     serializer_class = EstateRetrieveSerializer
     lookup_field = 'id'
     response_key = 'estate'
@@ -173,16 +173,18 @@ class EstateRetrieveSimilarListAPIView(CustomListAPIView):
 
     def filter_queryset(self, queryset):
         estate = self.get_object()
-        similar: list = (Estate.objects.prefetch_related('images').select_related('project', 'city', 'estate_type').
-                         filter(estate_type=estate.estate_type))
+        if estate.is_active:
+            similar: list = (Estate.objects.prefetch_related('images').select_related('project', 'city', 'estate_type').
+                             filter(estate_type=estate.estate_type, is_active=True))
 
-        if len(similar) >= 11:
-            index = list(similar).index(estate)
-            queryset = ((similar[index - 6: index - 1] if len(similar[:index]) >= 6 else similar[:index])
-                        + (similar[index + 1: index + 5] if len(similar[index:]) >= 5 else similar[index:]))
-            return queryset
+            if len(similar) >= 11:
+                index = list(similar).index(estate)
+                queryset = ((similar[index - 6: index - 1] if len(similar[:index]) >= 6 else similar[:index])
+                            + (similar[index + 1: index + 5] if len(similar[index:]) >= 5 else similar[index:]))
+                return queryset
 
-        return similar.exclude(pk=estate.id)
+            return similar.exclude(pk=estate.id)
+        return []
 
 
 # _______________________ TEMPORARY _____________________________

@@ -23,14 +23,6 @@ class EstateType(models.Model):
         return self.type
 
 
-class EstatManager(models.Manager):
-    """
-    Return queryset of Estates witch `is_active` == True
-    """
-    def get_queryset(self):
-        return super().get_queryset().filter(is_active=True)
-
-
 class Estate(models.Model):
     """
     EstateModel(MultilanguageModel):
@@ -49,8 +41,11 @@ class Estate(models.Model):
     visits = models.IntegerField(default=0, verbose_name='Visits')
     is_active = models.BooleanField(default=False, verbose_name='In show')
 
+<<<<<<< apps/estate/models.py
+=======
     # objects = EstatManager()
 
+>>>>>>> apps/estate/models.py
     class Meta:
         verbose_name = _('Estate')
         verbose_name_plural = _('Estates')
@@ -59,9 +54,9 @@ class Estate(models.Model):
     def __str__(self):
         return f'{self.pk}: {self.title}'
 
-    @staticmethod
-    def is_valid(estate_id):
-        return Estate.objects.filter(id=estate_id).exists()
+    @classmethod
+    def is_valid(cls, estate_id):
+        return cls.objects.filter(id=estate_id).exists()
 
     def visits_counter(self):
         self.visits = models.F('visits') + 1
