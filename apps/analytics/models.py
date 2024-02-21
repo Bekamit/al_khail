@@ -1,3 +1,4 @@
+from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from apps.estate.models import Estate
@@ -40,9 +41,13 @@ class Appeal(models.Model):
     estate = models.ForeignKey(Estate, on_delete=models.CASCADE, related_name='appeals', null=True)
     name = models.CharField(max_length=70, verbose_name='Name')
     phone = models.CharField(max_length=70, verbose_name='Phone number')
+    date = models.DateField(verbose_name='date of call back')
     lang = models.CharField(max_length=30, verbose_name='Message Language', blank=True)
     city = models.CharField(max_length=100, verbose_name='Respondent city')
+<<<<<<< apps/analytics/models.py
     at_date = models.DateField(verbose_name='Call in date', null=True)
+=======
+>>>>>>> apps/analytics/models.py
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Send date')
     is_send = models.BooleanField(default=True, verbose_name='Send letter')
 

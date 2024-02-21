@@ -41,6 +41,11 @@ class Estate(models.Model):
     visits = models.IntegerField(default=0, verbose_name='Visits')
     is_active = models.BooleanField(default=False, verbose_name='In show')
 
+<<<<<<< apps/estate/models.py
+=======
+    # objects = EstatManager()
+
+>>>>>>> apps/estate/models.py
     class Meta:
         verbose_name = _('Estate')
         verbose_name_plural = _('Estates')
