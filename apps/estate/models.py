@@ -4,7 +4,6 @@ from apps.project.models import Project
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_resized import ResizedImageField
-from django_cleanup import cleanup
 
 
 class EstateType(models.Model):
@@ -24,14 +23,6 @@ class EstateType(models.Model):
         return self.type
 
 
-class EstatManager(models.Manager):
-    """
-    Return queryset of Estates witch `is_active` == True
-    """
-    def get_queryset(self):
-        return super().get_queryset().filter(is_active=True)
-
-
 class Estate(models.Model):
     """
     EstateModel(MultilanguageModel):
@@ -48,6 +39,8 @@ class Estate(models.Model):
     is_secondary = models.BooleanField(default=False, verbose_name='Secondary estate')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='Create date')
     visits = models.IntegerField(default=0, verbose_name='Visits')
+    is_active = models.BooleanField(default=False, verbose_name='In show')
+
 
     class Meta:
         verbose_name = _('Estate')
@@ -57,16 +50,15 @@ class Estate(models.Model):
     def __str__(self):
         return f'{self.pk}: {self.title}'
 
-    @staticmethod
-    def is_valid(estate_id):
-        return Estate.objects.filter(id=estate_id).exists()
+    @classmethod
+    def is_valid(cls, estate_id):
+        return cls.objects.filter(id=estate_id).exists()
 
     def visits_counter(self):
         self.visits = models.F('visits') + 1
         self.save(update_fields=['visits'])
 
 
-@cleanup.select
 class EstateImage(models.Model):
     """
     EstateImageModel:

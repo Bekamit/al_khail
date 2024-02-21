@@ -11,7 +11,7 @@ class Facilities(models.Model):
     type = models.CharField(unique=True, max_length=50, verbose_name='Type of facilities')
 
     def icon_upload(self, filename):
-        filename = '_'.join(filename.split())
+        filename = filename.replace(' ', '_')
         return f'facilities/{self.type_en}/{filename}'
 
     icon = models.FileField(upload_to=icon_upload, null=True, blank=True, verbose_name='Icon path')
@@ -38,8 +38,8 @@ class Project(models.Model):
     is_furnished = models.BooleanField(verbose_name='With furniture')
 
     def project_upload(self, filename):
-        name = '_'.join(self.name.split())
-        filename = '_'.join(filename.split())
+        name = self.name.replace(' ', '_')
+        filename = filename.replace(' ', '_')
         return f'catalog/{name}/{filename}'
 
     pdf_catalog = models.FileField(upload_to=project_upload, verbose_name='PDF catalog path')

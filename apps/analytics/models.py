@@ -1,3 +1,4 @@
+from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from apps.estate.models import Estate
@@ -22,9 +23,9 @@ class CatalogDownloader(models.Model):
     def __str__(self):
         return self.name
 
-    @staticmethod
-    def create_downloader(data: dict):
-        return CatalogDownloader.objects.create(**data)
+    @classmethod
+    def create_downloader(cls, data: dict):
+        return cls.objects.create(**data)
 
 
 class Appeal(models.Model):
@@ -40,9 +41,10 @@ class Appeal(models.Model):
     estate = models.ForeignKey(Estate, on_delete=models.CASCADE, related_name='appeals', null=True)
     name = models.CharField(max_length=70, verbose_name='Name')
     phone = models.CharField(max_length=70, verbose_name='Phone number')
+    date = models.DateField(verbose_name='date of call back')
     lang = models.CharField(max_length=30, verbose_name='Message Language', blank=True)
     city = models.CharField(max_length=100, verbose_name='Respondent city')
-    at_date = models.DateField(verbose_name='Call in date', null=True, blank=True)
+    at_date = models.DateField(verbose_name='Call in date', null=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Send date')
     is_send = models.BooleanField(default=True, verbose_name='Send letter')
 
@@ -53,9 +55,9 @@ class Appeal(models.Model):
     def __str__(self):
         return f'{self.pk}'
 
-    @staticmethod
-    def create_appeal(data: dict):
-        return Appeal.objects.create(**data)
+    @classmethod
+    def create_appeal(cls, data: dict):
+        return cls.objects.create(**data)
 
     def send_error(self):
         self.is_send = False
