@@ -1,6 +1,4 @@
 import os
-# from apps.users.models import *
-from django.core.management import call_command
 
 
 apps = ['admin_app', 'analytics', 'city', 'company', 'estate', 'project', 'staticdata']

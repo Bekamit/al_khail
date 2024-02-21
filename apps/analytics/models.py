@@ -37,7 +37,7 @@ class Appeal(models.Model):
         ('sell', 'sell'),
         ('consultation', 'consultation'),
     ]
-    appeal_type = models.CharField(max_length=20, choices=CHOICES, verbose_name='Type of appeal')
+    appeal_type = models.CharField(max_length=125, choices=CHOICES, verbose_name='Type of appeal', default=CHOICES[2])
     estate = models.ForeignKey(Estate, on_delete=models.CASCADE, related_name='appeals', null=True)
     name = models.CharField(max_length=70, verbose_name='Name')
     phone = models.CharField(max_length=70, verbose_name='Phone number')
