@@ -5,48 +5,42 @@
     <title>Appeal Email Template</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Montserrat', sans-serif;
             color: #333;
+            display: flex;
+            flex-direction: column;
+            background-color: red;
+            gap: 8px;
         }
-
         h1 {
-            color: #007BFF;
+            color: #C6A15B;
+            font-weight: 700;
         }
 
         p {
             margin-bottom: 10px;
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 24px;
+            font-weight: 600;
         }
 
         strong {
-            text-decoration: underline;
-            text-decoration-color: #007BFF;
-            text-decoration-style: solid;
-            font-weight: lighter;
+            font-weight: 400;
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
     <h1>New message from site!</h1>
-    {% if instance.is_for_purchase == True %}
-        <p>Appeal id: <strong>{{ instance.id }}</strong></p>
+    <p>Appeal Type: <strong>{{ instance.appeal_type }}</strong></p>
+    <p>Appeal id: <strong>{{ instance.id }}</strong></p>
+    {% if instance.estate_id is not None %}
         <p>Estate id: <strong>{{ instance.estate_id }}</strong></p>
-        <p>is for purcahse: <strong>{{ instance.is_for_purchase }}</strong></p>
-        <p>Name: <strong>{{ instance.name }}</strong></p>
-        <p>Phone: <strong>{{ instance.phone }}</strong></p>
-        <p>Language: <strong>{{ instance.lang }}</strong></p>
-        <p>At time: <strong>{{ instance.at_time }}</strong></p>
-        <p>City: <strong>{{ instance.city }}</strong></p>
-        <p>Created at: <strong>{{ instance.created_at }}</strong></p>
-    {% else %}
-        <p>Appeal id: <strong>{{ instance.id }}</strong></p>
-        <p>Name: <strong>{{ instance.name }}</strong></p>
-        <p>Phone: <strong>{{ instance.phone }}</strong></p>
-        <p>Language: <strong>{{ instance.lang }}</strong></p>
-        <p>At time: <strong>{{ instance.at_time }}</strong></p>
-        <p>Created at: <strong>{{ instance.created_at }}</strong></p>
     {% endif %}
+    <p>Name: <strong>{{ instance.name }}</strong></p>
+    <p>Phone: <strong>{{ instance.phone }}</strong></p>
+    <p>Language: <strong>{{ instance.lang }}</strong></p>
+    <p>At date: <strong>{{ instance.date }}</strong></p>
+    <p>City: <strong>{{ instance.city }}</strong></p>
+    <p>Created at: <strong>{{ instance.created_at }}</strong></p>
 </body>
 </html>

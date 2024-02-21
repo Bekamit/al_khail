@@ -30,7 +30,7 @@ class BaseAppealSerializer(serializers.Serializer):
     last_name = serializers.CharField(max_length=70, required=True, allow_blank=True, write_only=True)
     phone = PhoneNumberField(required=True)
     city = serializers.CharField(max_length=70, required=True)
-    at_date = serializers.DateField(required=True)
+    date = serializers.DateField(required=True)
 
     def get_language(self):
         request = self.context['request']
@@ -45,6 +45,7 @@ class BaseAppealSerializer(serializers.Serializer):
         today = timezone.now().date()
         if date == today - timezone.timedelta(days=1):
             raise ValidationError(_('You can choice only future'))
+        return date
 
     def reformat(self, validated_data):
         validated_data.pop('last_name')
@@ -66,12 +67,20 @@ class AppealSellValidateSerializer(BaseAppealSerializer):
 
 class AppealBuyValidateSerializer(BaseAppealSerializer):
     appeal_type = serializers.CharField(max_length=20, default='buy')
-    estate_id = serializers.CharField()
+    estate_id = serializers.CharField(required=True)
 
     def validate_estate_id(self, estate_id):
         if not Estate.is_valid(estate_id):
             raise serializers.ValidationError(_('estate id does not exist'))
         return estate_id
+
+    def reformat(self, validated_data):
+        validated_data.pop('last_name')
+        validated_data['lang'] = self.get_language()
+
+    def create(self, validated_data):
+        self.reformat(validated_data)
+        return Appeal.create_appeal(validated_data)
 
 
 class ConsultationSerializer(BaseAppealSerializer):
