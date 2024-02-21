@@ -45,6 +45,7 @@ class BaseAppealSerializer(serializers.Serializer):
         today = timezone.now().date()
         if date == today - timezone.timedelta(days=1):
             raise ValidationError(_('You can choice only future'))
+        return date
 
     def reformat(self, validated_data):
         validated_data.pop('last_name')
@@ -83,7 +84,7 @@ class CatalogDownloaderSerializer(serializers.Serializer):
     phone = PhoneNumberField(required=True)
     email = serializers.EmailField(required=True)
     role = serializers.CharField(max_length=30, required=True)
-    estate_id = serializers.CharField()
+    estate_id = serializers.CharField(required=True)
 
     def get_language(self):
         request = self.context['request']
@@ -99,4 +100,5 @@ class CatalogDownloaderSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         self.reformat(validated_data)
+        print(validated_data)
         return CatalogDownloader.create_downloader(validated_data)
