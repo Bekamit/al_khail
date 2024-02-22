@@ -2,7 +2,6 @@ import config
 from .base import BASE_DIR
 
 SECRET_KEY = config.SECRET_KEY
-
 DEBUG = config.DEBUG
 
 DATABASES = {

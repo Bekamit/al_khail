@@ -36,6 +36,7 @@ THEME_PARTY_APPS = [
     'corsheaders',
     'debug_toolbar',
     'django_resized',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 THEME = [
