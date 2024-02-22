@@ -45,4 +45,6 @@ class CityAdmin(CustomModelAdmin):
         return mark_safe(f'<img src="{obj.city_img.url}", style="max-height: 150px;">')
 
     def city_description_preview(self, obj):
-        return mark_safe(f'<div style="max-height: 150px; overflow: auto">{obj.city_description}</div>')
+        return mark_safe(f'<div style="max-height: 150px; white-space: pre-line">{obj.city_description}</div>')
+
+    city_description_preview.short_description = 'City description'

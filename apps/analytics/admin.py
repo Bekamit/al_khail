@@ -6,9 +6,14 @@ from service.admin import ReadDeleteModelAdmin
 
 @admin.register(CatalogDownloader)
 class ReadDeleteCatalogDownloaderAdmin(ReadDeleteModelAdmin):
-    list_display = ('date', 'name', 'role', 'email')
-    fields = ('name', 'email', 'phone', 'lang', 'role', 'date')
-    list_filter = ('created_at', 'role',)
+    list_display = ('date', 'name', 'role', 'estate_project', 'email')
+    fields = ('name', 'email', 'phone', 'estate', 'lang', 'role', 'created_at')
+    list_filter = ('created_at', 'role', 'estate__project__name',)
+
+    def estate_project(self, obj):
+        return obj.estate.project.name
+
+    estate_project.short_description = 'Project'
 
 
 @admin.register(Appeal)

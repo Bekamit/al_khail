@@ -1,6 +1,6 @@
-from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
 from apps.estate.models import Estate
 
 
@@ -32,16 +32,10 @@ class Appeal(models.Model):
     """
         Модель для оформления заявки на звонок на покупку/продажу/консультацию по обьекту недвижимости
     """
-    CHOICES = [
-        ('buy', 'buy'),
-        ('sell', 'sell'),
-        ('consultation', 'consultation'),
-    ]
-    appeal_type = models.CharField(max_length=20, choices=CHOICES, verbose_name='Type of appeal')
+    appeal_type = models.CharField(max_length=20, verbose_name='Type of appeal')
     estate = models.ForeignKey(Estate, on_delete=models.CASCADE, related_name='appeals', null=True)
     name = models.CharField(max_length=70, verbose_name='Name')
     phone = models.CharField(max_length=70, verbose_name='Phone number')
-    date = models.DateField(verbose_name='date of call back')
     lang = models.CharField(max_length=30, verbose_name='Message Language', blank=True)
     city = models.CharField(max_length=100, verbose_name='Respondent city')
     at_date = models.DateField(verbose_name='Call in date', null=True)
