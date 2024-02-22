@@ -4,7 +4,7 @@ services:
   api:
     build: .
     command: >
-      sh -c "gunicorn core.wsgi:application --bind 0.0.0.0:9000"
+      sh -c "gunicorn core.wsgi:application --bind 0.0.0.0:9000 --timeout 36000"
     ports:
       - '9000:9000'
     restart: unless-stopped
