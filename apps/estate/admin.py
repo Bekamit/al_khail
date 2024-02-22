@@ -1,4 +1,5 @@
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
 
 from django.contrib import admin
 
@@ -67,14 +68,14 @@ class EstateAdmin(CustomModelAdmin):
     def in_show(self, request, queryset):
         queryset.update(is_active=not queryset.first().is_active)
 
-    in_show.short_description = "Add/pop from site"
+    in_show.short_description = _("Add/pop from site")
 
     def has_photo(self, obj):
-        return obj.images.all().count() > 1
+        return obj.images.all().count()
 
     def test_to_show(self, obj):
         return mark_safe(f"<small>{'✅' if self.not_null_fields(obj) else '⛔'} All fields</small><br>"
-                         f"<small>{'✅' if self.has_photo(obj) else '⛔'} All photos</small>")
+                         f"<small>{'✅' if self.has_photo(obj) else '⛔'} All photos: {self.has_photo(obj)}</small>")
 
 
 @admin.register(EstateType)

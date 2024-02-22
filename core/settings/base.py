@@ -104,7 +104,7 @@ REST_FRAMEWORK = {
 
 SPECTACULAR_SETTINGS = {
     'COMPONENT_SPLIT_REQUEST': True,
-    "TITLE": "Golden House API",
+    "TITLE": "Golden Property API",
     "DESCRIPTION": "API for Golden Property web service",
     "VERSION": "v1.SSL-off",
 }
