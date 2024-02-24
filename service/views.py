@@ -26,17 +26,23 @@ from io import BytesIO
 from django.core.files import File
 
 
-class CustomGenericAPIView(GenericAPIView):
+class KeysMeta(type):
+    """
+    metaclass Keys validate class attributes `cache_key` & `response_key` in Generic subclasses
+    """
+    def __new__(cls, name, bases, dct):
+        for attr_name, attr_value in dct.items():
+            if attr_name.endswith('key') and attr_value is not None:
+                if not isinstance(attr_value, str):
+                    raise ValueError(f'`{name}.{attr_name}` must be str only!')
+        return super().__new__(cls, name, bases, dct)
+
+
+class CustomGenericAPIView(GenericAPIView, metaclass=KeysMeta):
     response_key: str | None = None
     cache_class: cache.CustomCache | None = None
     cache_language: str | tuple | None = None
-    cache_key = str | None
-
-    def get_response_key(self):
-        if isinstance(self.response_key, str):
-            return self.response_key
-        else:
-            raise ValueError('`response_key` must be str only')
+    cache_key: str | None = None
 
     def get_response_language(self):
         if language := get_language_from_request(self.request):
@@ -45,22 +51,16 @@ class CustomGenericAPIView(GenericAPIView):
             return MODELTRANSLATION_DEFAULT_LANGUAGE.upper()
 
     def get_multilanguage_response(self, serializer):
-        if response_key := self.get_response_key():
+        if self.response_key:
             language = self.get_response_language()
 
             data = {
                 "language": language,
-                response_key: serializer.data
+                self.response_key: serializer.data
             }
         else:
             data = serializer.data
         return data
-
-    def get_cache_key(self):
-        if isinstance(self.cache_key, str):
-            return self.cache_key
-        else:
-            raise ValueError('`cache_key` must be str only')
 
     def filter(self, queryset: MultilingualQuerySet):
         if issubclass(queryset.model, SingletonModel):
@@ -76,12 +76,11 @@ class CustomGenericAPIView(GenericAPIView):
         _cache = self.cache_class(self.cache_language)
         accept_language = self.get_response_language()
         if accept_language.lower() in _cache.languages:
-            key = self.get_cache_key()
-            if queryset := _cache.get(key, accept_language):
+            if queryset := _cache.get(self.cache_key, accept_language):
                 return queryset
             else:
                 queryset = self.filter(super().get_queryset())
-                _cache.set(key, accept_language, queryset)
+                _cache.set(self.cache_key, accept_language, queryset)
                 return queryset
         else:
             return self.filter(super().get_queryset())
@@ -100,12 +99,11 @@ class MultiSerializerGenericAPIView(CustomGenericAPIView):
             _cache = self.cache_class(self.cache_language)
             accept_language = self.get_response_language()
             if accept_language.lower() in _cache.languages:
-                key = self.get_cache_key()
-                if cache_queryset := _cache.get(key, accept_language):
+                if cache_queryset := _cache.get(self.cache_key, accept_language):
                     return cache_queryset
                 else:
                     queryset = self.filter(queryset)
-                    _cache.set(key, accept_language, queryset)
+                    _cache.set(self.cache_key, accept_language, queryset)
                     return queryset
         else:
             return self.filter(queryset)

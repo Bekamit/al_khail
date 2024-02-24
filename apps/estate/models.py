@@ -44,7 +44,7 @@ class Estate(models.Model):
     class Meta:
         verbose_name = _('Estate')
         verbose_name_plural = _('Estates')
-        ordering = ['price_usd',]
+        ordering = ['price_usd', ]
 
     def __str__(self):
         return f'{self.pk}: {self.title}'

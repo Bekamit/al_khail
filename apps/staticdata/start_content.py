@@ -649,6 +649,6 @@ COMPANY = {
     "company_tr": "Gayrimenkul şirketimiz, gayrimenkul satın alma, satış ve kiralama konularında uzmanlaşmış yenilikçi bir ajansdır. Yüksek profesyonellik seviyemiz ve müşteri memnuniyetine olan bağlılığımızla gurur duyuyoruz. Yaklaşımımız, her bir müşteriye özel bir yaklaşım ve etkili ve konforlu işlemleri sağlamak için gelişmiş teknolojilerin kullanılması temeline dayanmaktadır. Amacımız, size üstün hizmet sunarak konut hayallerinizi gerçekleştirmenize yardımcı olmaktır.",
     "company_ru": "Наша компания недвижимости - это инновационное агентство, специализирующееся на покупке, продаже и аренде недвижимости. Мы гордимся высоким уровнем профессионализма и преданностью удовлетворению потребностей клиентов. Наш подход основан на тщательном анализе рынка, индивидуальном подходе к каждому клиенту и использовании передовых технологий для обеспечения эффективных и комфортных сделок. Наша цель - помочь вам осуществить ваши жилищные мечты, обеспечивая превосходный сервис на каждом этапе сотрудничества.",
     "phone": "+971 123 456 78",
-    "email": "goldenhoussee@gmail.com",
+    "email": "golden.property84@gmail.com",
     "company_img": "back_static/default_img/logo.jpg",
 }
