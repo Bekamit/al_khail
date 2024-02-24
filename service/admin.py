@@ -8,7 +8,8 @@ class CustomModelAdmin(admin.ModelAdmin):
         }
 
     def not_null_fields(self, obj):
-        return all([getattr(obj, field.name) for field in obj._meta.fields if field.name != 'id'])
+        return all([getattr(obj, field.name) for field in obj._meta.fields])
+
     not_null_fields.boolean = True
     not_null_fields.short_description = 'All fields are filled'
 

@@ -191,6 +191,7 @@ LOCALE_PATHS = [
 
 STATIC_URL = '/back_static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'back_static')
+# STATICFILES_DIRS = ((os.path.join(BASE_DIR, 'back_static')),)
 
 # MEDIA (Images, PDF)
 

@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <title>Appeal Email Template</title>
     <style>
-        body {
+        .wrapper {
             font-family: 'Montserrat', sans-serif;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            background-color: red;
-            gap: 8px;
+            color: #c7baba;
+            background-color: #242424;
+            padding: 50px;
         }
+
         h1 {
             color: #C6A15B;
             font-weight: 700;
@@ -27,20 +26,63 @@
             font-weight: 400;
             font-size: 24px;
         }
+
+        a:hover {
+            color: blue;
+        }
+
+        .footer {
+                font-size: x-small;
+                text-align: center;
+                padding-top: 15px;
+                letter-spacing: 0.1em;
+                border-top: 1px solid;
+        }
+
+        .person, .contacts, .appeal, .link, .call_back {
+            display: flex;
+            font-size: 24px;
+            padding: 15px;
+        }
+
+        .name, .phone, .city, .pk {
+            padding-right: 15px;
+        }
+
+        .link a, .footer a {
+            color: #C6A15B;
+        }
+
+        .create {
+            font-size: 16px;
+            padding: 25px 100px 25px 0px;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
+<div class="wrapper">
     <h1>New message from site!</h1>
-    <p>Appeal Type: <strong>{{ instance.appeal_type }}</strong></p>
-    <p>Appeal id: <strong>{{ instance.id }}</strong></p>
+    <div class="appeal">
+        <div class="pk"># {{ instance.id }}</div>
+        <div class="type">appeal type: {{ instance.appeal_type }}</div>
+    </div>
     {% if instance.estate_id is not None %}
-        <p>Estate id: <strong>{{ instance.estate_id }}</strong></p>
+    <div class="link">estate object link: <a href="#" >path/to/estate/{{ instance.estate_id }}</a></div>
     {% endif %}
-    <p>Name: <strong>{{ instance.name }}</strong></p>
-    <p>Phone: <strong>{{ instance.phone }}</strong></p>
-    <p>Language: <strong>{{ instance.lang }}</strong></p>
-    <p>At date: <strong>{{ instance.date }}</strong></p>
-    <p>City: <strong>{{ instance.city }}</strong></p>
-    <p>Created at: <strong>{{ instance.created_at }}</strong></p>
+    <div class="person">
+        <div class="name">mr. {{ instance.name }} </div>
+        <div class="language">language: {{ instance.lang }}</div>
+    </div>
+    <div class="contacts">
+        <div class="phone">📞 tel: {{ instance.phone }}</div>
+        <div class="city">city: {{ instance.city }}</div>
+    </div>
+    <div class="call_back">
+        <div class="date">📆 call back at: {{ instance.at_date }}</div>
+    </div>
+    <div class="create">message created at: {{ instance.created_at }}</div>
+    <div class="footer">created by <a href="https://t.me/dmitriymikhailov">students</a> from GEEKS PRO project, 2024</div>
+</div>
 </body>
 </html>
