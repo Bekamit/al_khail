@@ -8,36 +8,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-28 17:50+0300\n"
+"POT-Creation-Date: 2024-02-22 15:33+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
 #: .\apps\admin_app\apps.py:8
 msgid "1. Settings"
 msgstr "1. الإعدادات"
 
-#: .\apps\admin_app\managers.py:20
-msgid "Superuser must have is_staff=True."
-msgstr "يجب أن يكون المستخدم الخاص هو is_staff=True."
+#: .\apps\admin_app\managers.py:7
+msgid "The Email field must be set"
+msgstr ""
 
-#: .\apps\admin_app\managers.py:22
-msgid "Superuser must have is_superuser=True."
-msgstr "يجب أن يكون المستخدم الخاص هو is_superuser=True."
-
-#: .\apps\admin_app\models.py:10 .\core\settings\base.py:176
+#: .\apps\admin_app\models.py:9 .\core\settings\base.py:179
 msgid "English"
 msgstr "الإنجليزية"
 
-#: .\apps\admin_app\models.py:11 .\core\settings\base.py:178
+#: .\apps\admin_app\models.py:10 .\core\settings\base.py:181
 msgid "Turkish"
 msgstr "التركية"
 
-#: .\apps\admin_app\models.py:12 .\core\settings\base.py:179
+#: .\apps\admin_app\models.py:11 .\core\settings\base.py:182
 msgid "Russian"
 msgstr "الروسية"
 
@@ -45,39 +43,67 @@ msgstr "الروسية"
 msgid "email address"
 msgstr "عنوان البريد الإلكتروني"
 
-#: .\apps\admin_app\models.py:15
-msgid "username"
-msgstr "اسم المستخدم"
+#: .\apps\admin_app\models.py:17
+msgid "staff status"
+msgstr ""
+
+#: .\apps\admin_app\models.py:18
+msgid "active status"
+msgstr ""
 
 #: .\apps\analytics\apps.py:8
 msgid "2. Analytics"
 msgstr "2. التحليلات"
 
-#: .\apps\analytics\serializers.py:39
+#: .\apps\analytics\models.py:20
+msgid "Catalog downloader"
+msgstr ""
+
+#: .\apps\analytics\models.py:21
+msgid "Catalog downloaders"
+msgstr ""
+
+#: .\apps\analytics\models.py:46
+msgid "Message from site"
+msgstr ""
+
+#: .\apps\analytics\models.py:47
+msgid "Messages from site"
+msgstr ""
+
+#: .\apps\analytics\serializers.py:19
 msgid "Invalid phone number"
 msgstr "رقم الهاتف غير صالح"
 
-#: .\apps\analytics\serializers.py:42
+#: .\apps\analytics\serializers.py:22
 msgid "Invalid phone number format"
 msgstr "تنسيق رقم الهاتف غير صالح"
 
-#: .\apps\analytics\serializers.py:59 .\apps\analytics\serializers.py:94
+#: .\apps\analytics\serializers.py:38
 msgid "Wrong format"
 msgstr "تنسيق خاطئ"
 
-#: .\apps\analytics\serializers.py:64 .\apps\analytics\serializers.py:99
-msgid "at_time must be in the future"
-msgstr "يجب أن يكون at_time في المستقبل"
+#: .\apps\analytics\serializers.py:44
+msgid "You can choice only future"
+msgstr "يمكنك اختيار المستقبل فقط"
 
-#: .\apps\analytics\serializers.py:85 .\apps\estate\serializers.py:18
+#: .\apps\analytics\serializers.py:68
 msgid "estate id does not exist"
+msgstr "معرف العقار غير موجود"
+
+#: .\apps\analytics\serializers.py:93
+msgid "Invalid role: must be an `agent`, `buyer` or `explorer`"
+msgstr "دور غير صالح: يجب أن يكون `وكيلً` أو `مشتريًا` أو `مستكشفًا."
+
+#: .\apps\analytics\serializers.py:98
+msgid "Estate id does not exist"
 msgstr "معرف العقار غير موجود"
 
 #: .\apps\city\apps.py:8
 msgid "5. City"
 msgstr "5. المدينة"
 
-#: .\apps\city\models.py:21
+#: .\apps\city\models.py:24
 msgid "Cities"
 msgstr "المدن"
 
@@ -85,30 +111,33 @@ msgstr "المدن"
 msgid "6. Company"
 msgstr "6. الشركة"
 
-#: .\apps\company\models.py:15
-#, fuzzy
+#: .\apps\company\models.py:17
 msgid "About company"
 msgstr "الشركة"
+
+#: .\apps\estate\admin.py:71
+msgid "Add/pop from site"
+msgstr "إضافة/البوب من الموقع"
 
 #: .\apps\estate\apps.py:8
 msgid "4. Estate"
 msgstr "4. العقار"
 
-#: .\apps\estate\models.py:18
+#: .\apps\estate\models.py:19
 #, fuzzy
 msgid "Estate Type"
 msgstr "العقار"
 
-#: .\apps\estate\models.py:19
+#: .\apps\estate\models.py:20
 msgid "Estate Types"
 msgstr "أنواع العقارات"
 
-#: .\apps\estate\models.py:43
+#: .\apps\estate\models.py:45
 #, fuzzy
 msgid "Estate"
 msgstr "العقار"
 
-#: .\apps\estate\models.py:44
+#: .\apps\estate\models.py:46
 #, fuzzy
 msgid "Estates"
 msgstr "العقار"
@@ -117,20 +146,19 @@ msgstr "العقار"
 msgid "3. Project"
 msgstr "3. المشروع"
 
-#: .\apps\project\models.py:19
+#: .\apps\project\models.py:24
 msgid "Facilities Type"
 msgstr "نوع المرافق"
 
-#: .\apps\project\models.py:20
+#: .\apps\project\models.py:25
 msgid "Facilities Types"
 msgstr "أنواع المرافق"
 
-#: .\apps\project\models.py:43
-#, fuzzy
+#: .\apps\project\models.py:48
 msgid "Project"
 msgstr "المشروع"
 
-#: .\apps\project\models.py:44
+#: .\apps\project\models.py:49
 #, fuzzy
 msgid "Projects"
 msgstr "المشروعات"
@@ -139,51 +167,54 @@ msgstr "المشروعات"
 msgid "7. Static content"
 msgstr "7. المحتوى الثابت"
 
-#: .\apps\staticdata\models.py:26
+#: .\apps\staticdata\models.py:17
 msgid "Header"
 msgstr "الرأس"
 
-#: .\apps\staticdata\models.py:27
-#, fuzzy
+#: .\apps\staticdata\models.py:18
 msgid "Header static content"
 msgstr "المحتوى الثابت للرأس"
 
-#: .\apps\staticdata\models.py:53
+#: .\apps\staticdata\models.py:59
 msgid "Body"
 msgstr "الجسم"
 
-#: .\apps\staticdata\models.py:54
-#, fuzzy
+#: .\apps\staticdata\models.py:60
 msgid "Body static content"
 msgstr "المحتوى الثابت للجسم"
 
-#: .\apps\staticdata\models.py:64
+#: .\apps\staticdata\models.py:73
 msgid "Footer"
 msgstr "التذييل"
 
-#: .\apps\staticdata\models.py:65
-#, fuzzy
+#: .\apps\staticdata\models.py:74
 msgid "Footer static content"
 msgstr "المحتوى الثابت للتذييل"
 
-#: .\apps\staticdata\models.py:90
+#: .\apps\staticdata\models.py:104
 msgid "Form"
 msgstr "النموذج"
 
-#: .\apps\staticdata\models.py:91
-#, fuzzy
+#: .\apps\staticdata\models.py:105
 msgid "Forms static content"
 msgstr "المحتوى الثابت للنماذج"
 
-#: .\apps\staticdata\models.py:105
+#: .\apps\staticdata\models.py:116
+msgid "Error 404"
+msgstr "خطأ 404"
+
+#: .\apps\staticdata\models.py:117
+msgid "Error static content"
+msgstr "المحتوى الثابت للنماذج"
+
+#: .\apps\staticdata\models.py:131
 msgid "Default Value"
 msgstr "القيمة الافتراضية"
 
-#: .\apps\staticdata\models.py:106
+#: .\apps\staticdata\models.py:132
 msgid "Default Values"
 msgstr "القيم الافتراضية"
 
-#: .\core\settings\base.py:177
+#: .\core\settings\base.py:180
 msgid "Arabic"
 msgstr "العربية"
-

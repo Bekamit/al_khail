@@ -29,6 +29,7 @@ back_static/__pycache__
 ### Django ###
 
 minus_migration.py
+delete_migrations.py
 
 *.log
 *.pot

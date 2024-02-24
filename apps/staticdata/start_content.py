@@ -48,11 +48,13 @@ CITIES = [
         "city_name_ar": "المزايا",
         "city_name_tr": "Dubai",
         "city_name_ru": "Дубай",
-        "city_description_en": "Historic city known for its Ottoman architecture and silk production.",
-        "city_description_ar": "مدينة تاريخية مشهورة بعمارتها العثمانية وإنتاجها للحرير.",
-        "city_description_tr": "نمط حياة فاخر: تقدم دبي فرصًا فاخرة للترفيه، التسوق والترفيه، مع العديد من المطاعم والفعاليات الثقافية والمجمعات الترفيهية. الظروف المناخية: يكون مناخ دبي دافئًا ومشمسًا لمعظم أيام السنة، مما يعزز نمط حياة نشط والاستمتاع بالهواء الطلق.",
+        "city_description_en": "Luxury Lifestyle: Dubai offers luxurious opportunities for relaxation, shopping, and entertainment, with plenty of restaurants, cultural events, and entertainment complexes.\n\n"
+                               "Climate Conditions: Dubai's warm climate is sunny for much of the year, encouraging an active lifestyle and outdoor relaxation.",
+        "city_description_ar": "نمط حياة فاخر: تقدم دبي فرصًا فاخرة للترفيه، التسوق والترفيه، مع العديد من المطاعم والفعاليات الثقافية والمجمعات الترفيهية. الظروف المناخية: يكون مناخ دبي دافئًا ومشمسًا لمعظم أيام السنة، مما يعزز نمط حياة نشط والاستمتاع بالهواء الطلق.",
+        "city_description_tr": "Yaşam Tarzı Lüksü: Dubai, birçok restoran, kültürel etkinlik ve eğlence kompleksiyle birlikte, dinlenme, alışveriş ve eğlence için lüks olanaklar sunar.\n\n"
+                               "İklim Koşulları: Dubai'nin sıcak iklimi çoğu yılın büyük bir kısmında güneşlidir, bu da aktif bir yaşam tarzını ve açık havada dinlenmeyi teşvik eder.",
         "city_description_ru": "Люксовый образ жизни: Дубай предлагает роскошные возможности для отдыха, шопинга и "
-                               "развлечений, с множеством ресторанов, культурных событий и развлекательных комплексов. "
+                               "развлечений, с множеством ресторанов, культурных событий и развлекательных комплексов.\n\n"
                                "Климатические условия: Теплый климат Дубая солнечен в течение большей части года, что "
                                "способствует активному образу жизни и отдыху на свежем воздухе.",
         "city_img": "back_static/cities/dubai.jpeg"

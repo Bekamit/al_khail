@@ -1,17 +1,14 @@
-import phonenumbers
 from django.utils import timezone
 from django.utils.translation import get_language_from_request
 from django.utils.translation import gettext_lazy as _
+
 from rest_framework import serializers
-from apps.staticdata.models import Form
-from .models import CatalogDownloader, Appeal
-from apps.estate.models import Estate
-from django.utils.translation import gettext_lazy as _
 from rest_framework.exceptions import ValidationError
+
 import phonenumbers
+
 from .models import CatalogDownloader, Appeal
 from apps.estate.models import Estate
-from django.core.validators import validate_email
 
 
 class PhoneNumberField(serializers.CharField):
@@ -30,7 +27,7 @@ class BaseAppealSerializer(serializers.Serializer):
     last_name = serializers.CharField(max_length=70, required=True, allow_blank=True, write_only=True)
     phone = PhoneNumberField(required=True)
     city = serializers.CharField(max_length=70, required=True)
-    date = serializers.DateField(required=True)
+    at_date = serializers.DateField(required=True)
 
     def get_language(self):
         request = self.context['request']
@@ -53,16 +50,13 @@ class BaseAppealSerializer(serializers.Serializer):
         validated_data['city'] = validated_data['city'].capitalize()
 
     def create(self, validated_data):
+        print(validated_data)
         self.reformat(validated_data)
         return Appeal.create_appeal(validated_data)
 
 
 class AppealSellValidateSerializer(BaseAppealSerializer):
     appeal_type = serializers.CharField(max_length=20, default='sell')
-
-    class Meta:
-        model = Appeal
-        fields = '__all__'
 
 
 class AppealBuyValidateSerializer(BaseAppealSerializer):
@@ -73,10 +67,6 @@ class AppealBuyValidateSerializer(BaseAppealSerializer):
         if not Estate.is_valid(estate_id):
             raise serializers.ValidationError(_('estate id does not exist'))
         return estate_id
-
-    def reformat(self, validated_data):
-        validated_data.pop('last_name')
-        validated_data['lang'] = self.get_language()
 
     def create(self, validated_data):
         self.reformat(validated_data)
@@ -92,11 +82,16 @@ class CatalogDownloaderSerializer(serializers.Serializer):
     phone = PhoneNumberField(required=True)
     email = serializers.EmailField(required=True)
     role = serializers.CharField(max_length=30, required=True)
-    estate_id = serializers.CharField(required=True)
+    estate_id = serializers.CharField(max_length=20, required=True)
 
     def get_language(self):
         request = self.context['request']
         return get_language_from_request(request)
+
+    def validate_role(self, role):
+        if role not in ['agent', 'buyer', 'explorer']:
+            raise serializers.ValidationError(_('Invalid role: must be an `agent`, `buyer` or `explorer`'))
+        return role
 
     def validate_estate_id(self, estate_id):
         if not Estate.is_valid(estate_id):
@@ -108,5 +103,4 @@ class CatalogDownloaderSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         self.reformat(validated_data)
-        print(validated_data)
         return CatalogDownloader.create_downloader(validated_data)
