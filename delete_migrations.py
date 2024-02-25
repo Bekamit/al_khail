@@ -1,6 +1,5 @@
 import os
 
-
 apps = ['admin_app', 'analytics', 'city', 'company', 'estate', 'project', 'staticdata']
 
 sql_file = './db.sqlite3'
