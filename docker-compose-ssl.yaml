@@ -5,7 +5,7 @@ services:
   api:
     build: .
     command: >
-      sh -c "gunicorn core.wsgi:application --bind 0.0.0.0:9000"
+      sh -c "gunicorn core.wsgi:application --bind 0.0.0.0:9000 --timeout 36000"
     ports:
       - '9000:9000'
     restart: unless-stopped
@@ -90,13 +90,6 @@ services:
     depends_on:
       - api
       - redis
-
-  cors-container:
-    restart: always
-    ports:
-      - 3000:3000
-    container_name: cors-container
-    image: saschabrockel/cors-container:latest
 
 volumes:
   postgres_data:

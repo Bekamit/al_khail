@@ -15,7 +15,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=100, unique=False, default='manager')
     password = models.CharField(max_length=128, verbose_name='password')
     is_staff = models.BooleanField(_('staff status'), default=False)
-    is_active = models.BooleanField(_('active status'), default=True)
+    is_superuser = models.BooleanField(_('superuser status'), default=False)
     language = models.CharField(max_length=10, choices=CHOICES, default='en')
 
     USERNAME_FIELD = 'email'
@@ -23,5 +23,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
 
+    def is_active(self):
+        return self.is_superuser
+
     def __str__(self):
         return self.email
+
+    class Meta:
+        verbose_name = _('User')
+        verbose_name_plural = _('Users')

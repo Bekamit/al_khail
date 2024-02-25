@@ -18,12 +18,12 @@ from django.utils.translation import gettext_lazy as _
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-PRODUCTION = env('PRODUCTION', default=False, cast=bool)
+PRODUCTION = False  # env('PRODUCTION', cast=bool, default=False)
 
-if not PRODUCTION:
-    from .local import *
-else:
+if PRODUCTION:
     from .prod import *
+else:
+    from .local import *
 
 ALLOWED_HOSTS = ['*']
 
