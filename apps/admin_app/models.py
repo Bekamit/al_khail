@@ -23,8 +23,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
 
-    def is_active(self):
-        return self.is_superuser
+    # def is_active(self):
+    #     return self.is_superuser
 
     def __str__(self):
         return self.email
