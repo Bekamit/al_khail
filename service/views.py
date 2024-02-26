@@ -1,3 +1,4 @@
+import logging
 from time import sleep
 
 from rest_framework.generics import GenericAPIView
@@ -186,7 +187,10 @@ class CustomEstateCreateAPIView(mixin.CustomCreateEstateMixin, CustomGenericAPIV
         r = req.get(url=f"https://api.axcapital.ae/api/v2/property/dubai/buy/apartment-for-sale/?limit=50&page={page}")
         response = r.json()
         data: dict = response.get("data")
-        return data.get("results") if data.get('next') else {}
+        try:
+            return data.get("results") if data.get('next') else {}
+        except Exception as e:
+            logging.log("No next page", e)
 
     def get_fake_estate_duplex(self) -> dict:
         r = req.get(url="https://api.axcapital.ae/api/v2/property/dubai/buy/duplex-for-sale/?limit=10&page=1")
