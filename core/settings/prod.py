@@ -35,7 +35,8 @@ CACHES = {
 
 # CSRF
 CSRF_USE_SESSIONS = True
-CSRF_TRUSTED_ORIGINS = ['https://gulsdem.pp.ua',
+CSRF_TRUSTED_ORIGINS = ['http://209.38.228.54/',
+			'http://209.38.228.54:80/',
                         "http://localhost:6379",
                         "http://localhost:5173",
                         'https://alkhail.pp.ua',
@@ -53,27 +54,3 @@ CELERY_RESULT_SERIALIZER = 'json'
 # Cors
 
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_PRIVATE_NETWORK = True
-CORS_ALLOWED_ALL_CREDENTIALS = True
-
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-]
